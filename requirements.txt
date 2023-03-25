@@ -1,10 +1,9 @@
 line-bot-sdk
 flask
-gunicorn
+gunicorn==19.7.1
 openai
 requests
 numpy
 pandas
 tensorflow
 pytorch
-gunicorn==19.7.1
