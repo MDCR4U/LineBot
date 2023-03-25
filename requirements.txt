@@ -1,0 +1,9 @@
+line-bot-sdk
+flask
+gunicorn
+openai
+requests
+numpy
+pandas
+tensorflow
+pytorch
