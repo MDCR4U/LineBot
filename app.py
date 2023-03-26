@@ -2,7 +2,7 @@
 #搭配Flask使用 LINE BOT SDK
 #https://qiu-yan-ming.gitbook.io/python-chatbot/shi-yong-line-bot-sdk
 #LINE BOT SDK Github
-​#1 使用pip安裝 LINE BOT SDK
+# 1 使用pip安裝 LINE BOT SDK
 #pip3 install line-bot-sdk
 
 #deploy hook https://api.render.com/deploy/srv-cgftbvm4daddcg1ea0k0?key=0o-gtqaF06g
