@@ -36,7 +36,6 @@ multidict==6.0.4
 oauthlib==3.2.2
 openai==0.27.2
 openpyxl==3.1.2
-pandas-stubs==1.5.3.230304
 protobuf==4.22.1
 psycopg2==2.9.5
 pyaes==1.6.1
