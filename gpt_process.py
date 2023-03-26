@@ -6,7 +6,7 @@ from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
 
 # 设置OpenAI API密钥
-openai.api_key = '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' #os.environ["OPENAI_API_KEY"]
+#openai.api_key = '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' #os.environ["OPENAI_API_KEY"]
 #ImagemapSendMessage(組圖訊息)
 def gpt_process():
     # 定义要发送给OpenAI的prompt
