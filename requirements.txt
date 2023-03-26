@@ -33,7 +33,6 @@ Jinja2==3.1.2
 line-bot-sdk==2.4.2
 MarkupSafe==2.1.2
 multidict==6.0.4
-numpy==1.24.2
 oauthlib==3.2.2
 openai==0.27.2
 openai-cli==0.0.3
