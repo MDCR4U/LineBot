@@ -2,15 +2,19 @@
 #搭配Flask使用 LINE BOT SDK
 #https://qiu-yan-ming.gitbook.io/python-chatbot/shi-yong-line-bot-sdk
 #LINE BOT SDK Github
-
-#1 使用pip安裝 LINE BOT SDK
+​#1 使用pip安裝 LINE BOT SDK
 #pip3 install line-bot-sdk
 
-# restart fly io  machine
-#PS D:\linebot> fly machine restart e784ed2ec22558            
-#Restarting machine e784ed2ec22558
-##No health checks found
-#Machine e784ed2ec22558 restarted successfully!
+#deploy hook https://api.render.com/deploy/srv-cgftbvm4daddcg1ea0k0?key=0o-gtqaF06g
+
+
+#deploy setting :
+# build command : $ pip install -r requirement , when fail by pip upgrade 
+# change to :  pip install --upgrade pip  for upgrade
+
+# error : Bash: gunicorn: command not found requirement 20.1.0 ==> 19.7.1
+#  ==> ref to : https://community.render.com/t/bash-gunicorn-command-not-found/1485/7
+
 
  
 
@@ -85,7 +89,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     else:
         message = TextSendMessage(text=msg)
-        line_bot_api.reply_message(event.reply_token, message)
+        line_bot_api.reply_message(event.reply_token, "您是說 : " + message + "嗎?")
 
 @handler.add(PostbackEvent)
 def handle_message(event):
@@ -99,7 +103,7 @@ def welcome(event):
     profile = line_bot_api.get_group_member_profile(gid, uid)
     name = profile.display_name
     message = TextSendMessage(text=f'{name}歡迎加入')
-    line_bot_api.reply_message(event.reply_token, message)
+    line_bot_api.reply_message(event.reply_token, message + 'MDC make Rich for You')
         
         
 import os
