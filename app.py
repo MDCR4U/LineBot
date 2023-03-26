@@ -87,8 +87,8 @@ def handle_message(event):
         message = function_list()
         line_bot_api.reply_message(event.reply_token, message)
     else:
-        message = TextSendMessage(text=msg)
-        line_bot_api.reply_message(event.reply_token, "您是說 : " + message + "嗎?")
+        message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
+        line_bot_api.reply_message(event.reply_token,  message )
 
 @handler.add(PostbackEvent)
 def handle_message(event):
@@ -101,8 +101,8 @@ def welcome(event):
     gid = event.source.group_id
     profile = line_bot_api.get_group_member_profile(gid, uid)
     name = profile.display_name
-    message = TextSendMessage(text=f'{name}歡迎加入')
-    line_bot_api.reply_message(event.reply_token, message + 'MDC make Rich for You')
+    message = TextSendMessage(text=f'{name}歡迎加入'  + 'MDC make Rich for You')
+    line_bot_api.reply_message(event.reply_token, message)
         
         
 import os
