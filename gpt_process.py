@@ -10,13 +10,30 @@ openai.api_key = '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' #os.envir
 #ImagemapSendMessage(組圖訊息)
 def gpt_process():
     # 定义要发送给OpenAI的prompt
-    prompt = "Hello, can you please help me?"
+    prompt = "請列舉出糖尿病患者的飲食禁忌："
+    prompt = "請列舉出MyDAILYCHOICE 公司的產品項目："
 
-    # 调用OpenAI API并打印响应
-    response = openai.Completion.create(engine="davinci", prompt=prompt, max_tokens=60)
-    print(response.choices[0].text)
+    # 設定要求模型輸出的最大字數
+    max_tokens = 256
+
+    # 設定輸出結果的格式
+    model_engine = "text-davinci-002"
+
+    # 使用 OpenAI API 輸出模型預測的結果
+    output = openai.Completion.create(
+    engine=model_engine,
+    prompt=prompt,
+    max_tokens=max_tokens,
+    temperature=0.5,
+    n=1,
+    stop=None,
+    )
+
+# 從輸出結果中取得模型預測的文本內容
+    result = output.choices[0].text.strip()
+
     
-    return response.choices[0].text
+    return output.choices[0].text
 
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
 def buttons_message():
