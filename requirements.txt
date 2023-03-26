@@ -35,7 +35,6 @@ MarkupSafe==2.1.2
 multidict==6.0.4
 oauthlib==3.2.2
 openai==0.27.2
-openai-cli==0.0.3
 openpyxl==3.1.2
 pandas==1.5.3
 pandas-stubs==1.5.3.230304
