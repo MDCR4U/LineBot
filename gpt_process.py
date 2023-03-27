@@ -8,7 +8,8 @@ from linebot.models import *
 
 # 设置OpenAI API密钥
 #openai.api_key = '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' #os.environ["OPENAI_API_KEY"]
-api_key = os.environ['OPENAI_API_KEY']
+#api_key = os.environ['OPENAI_API_KEY']
+api_key = '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'
 openai.api_key = api_key
 #ImagemapSendMessage(組圖訊息)
 def gpt_process():
