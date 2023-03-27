@@ -68,11 +68,12 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+
     msg = event.message.text
-    print ('*' + event.message + '**') 
-    if msg == 'gpt':
-       gpt_response = gptapi()
-       message = TextSendMessage(text="GPT response : " + gpt_response )
+    print ('*' + event.message.text + '**') 
+    if msg[0:4] == '/gpt':
+       #gpt_response = gptapi()
+       message = TextSendMessage(text="GPT response : ??????"  )
        line_bot_api.reply_message(event.reply_token, message) 
     elif 'gpt' in msg:
        #gpt_response = gptapi()
