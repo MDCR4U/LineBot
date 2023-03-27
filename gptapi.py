@@ -10,7 +10,7 @@ from linebot.models import *
 def gptapi():
     # 设置OpenAI API密钥
 # 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
-    api_key = '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'  #os.environ['OPENAI_API_KEY']
+    api_key = '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'  #os.environ['OPENAI_API_KEY']
     print(api_key)
     openai.api_key = api_key
 # 撰寫輸入的提示語句
