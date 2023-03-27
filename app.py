@@ -75,8 +75,9 @@ def handle_message(event):
        message = TextSendMessage(text="GPT response : " + gpt_response )
        line_bot_api.reply_message(event.reply_token, message) 
     elif 'gpt' in msg:
-       gpt_response = gptapi()
-       message = TextSendMessage(text="GPT 回應 : " + gpt_response )
+       #gpt_response = gptapi()
+       #message = TextSendMessage(text="GPT 回應 : " + gpt_response )
+       message = TextSendMessage(text="GPT Auto : " + gpt_response )
        line_bot_api.reply_message(event.reply_token, message) 
 
     elif '最新合作廠商' in msg:
