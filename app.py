@@ -69,7 +69,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
-    print ('*' + message + '*') 
+    print ('*' + event.message + '*') 
     if msg == 'gpt':
        gpt_response = gptapi()
        message = TextSendMessage(text="GPT response : " + gpt_response )
