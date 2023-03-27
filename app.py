@@ -32,7 +32,7 @@ from linebot.models import *
 from message import *
 from new import *
 from Function import *
-from gpt_process import *
+from gptapi import *
 #======這裡是呼叫的檔案內容=====
 
 #======python的函數庫==========
@@ -69,8 +69,14 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     msg = event.message.text
+    print ('*' + msg + '*') 
     if msg == 'gpt':
-       gpt_response = gpt_process()
+       gpt_response = gptapi()
+       message = TextSendMessage(text="GPT response : " + gpt_response )
+       line_bot_api.reply_message(event.reply_token, message) 
+    elif 'gpt' in msg:
+       gpt_response = gptapi()
+       message = TextSendMessage(text="GPT 回應 : " + gpt_response )
        line_bot_api.reply_message(event.reply_token, message) 
 
     elif '最新合作廠商' in msg:
