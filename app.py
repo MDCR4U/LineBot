@@ -70,10 +70,15 @@ def callback():
 def handle_message(event):
 
     msg = event.message.text
-    print ('*' + event.message.text + '**') 
-    if msg[0:4] == '/gpt':
-       #gpt_response = gptapi()
-       message = TextSendMessage(text="GPT response : ??????"  )
+    
+    # first 4 char 
+    # last 5 char string[-5:])
+    # string.upper
+    # string.lower
+    if msg[0:4] == '/gpt':   
+       print ('\n** link function to get gpt response' + '**') 
+       gpt_response = gptapi()
+       message = TextSendMessage(text='GPT response : ' + gpt_response  )
        line_bot_api.reply_message(event.reply_token, message) 
     elif 'gpt' in msg:
        #gpt_response = gptapi()
