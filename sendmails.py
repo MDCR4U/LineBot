@@ -35,12 +35,15 @@ def send_mail():
 # 讀取寄件者資訊
     current_dir = os.getcwd()
     print("目前的目錄為：", current_dir)
+    wssmtp = ""
     with open("smtp.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)  # 跳過表頭
         smtp_list = [row for row in reader]
-    smtp_count = len(smtp_list)    
-    return smtp_list
+    smtp_count = len(smtp_list)   
+    
+    #wssmtp = ',$'.join(list  for list in smtp_list) 
+    #return wssmtp
 # 讀取郵件發送記錄
     try:
         with open("mail_counter.log", "r", encoding="utf-8") as f:
@@ -148,7 +151,7 @@ def send_mail():
         sent_list.append(f"{to_addr},{subject}")
         with open("SEND.LOG", "a", encoding="utf-8") as f:
             f.write(f"{i+1} , {datetime.datetime.now()},  {to_addr},{subject}\n")
-            wssenddetail = wssenddetail + str(i+1)  + ",  " + datetime.datetime.now() + " " + to_addr  
+            wssenddetail = wssenddetail + str(i+1)  + ",  " + datetime.datetime.now() + " " + to_addr   + "\n"
         print(f"第 {i+1} 封郵件發送成功")
     # 更新郵件smtp記錄
         with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
