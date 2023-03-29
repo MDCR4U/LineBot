@@ -1,5 +1,5 @@
 # for upload file
-#import urllib.request
+import urllib.request
 #
 import os 
 import csv
@@ -13,12 +13,18 @@ from email.mime.multipart import MIMEMultipart
 from flask import Flask
 #app = Flask(__name__)
 #@app.route('/')
+ #================= for send mail =================
+import datetime
+import smtplib
+import time
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 def send_mail():
-# 讀取寄件者資訊
     url = 'https://mdcgenius.tw/smtp.csv'
     file_name = 'smtp.csv'
+
     urllib.request.urlretrieve(url, file_name)
-   
+# 讀取寄件者資訊
     with open("SMTP.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)  # 跳過表頭
@@ -124,8 +130,10 @@ def send_mail():
         except Exception as e:
             print(f"第 {i+1} 封郵件發送失敗：{e}")
             return(f"第 {i+1} 封郵件發送失敗：{e}  \n + {wssenddetail}")
-            
-         
+
+        if wssendcounter == 5:    
+            return("測試發送五封 完成 \n" + wssenddetail)
+        
     # 記錄已發送的郵件
         sent_list.append(f"{to_addr},{subject}")
         with open("SEND.LOG", "a", encoding="utf-8") as f:
