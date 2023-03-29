@@ -100,7 +100,7 @@ def handle_message(event):
         print("call send_mails")
         sendlog = send_mail()
         print (sendlog)
-        message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
+        message = TextSendMessage(text= "發送紀錄:\n================ " + sendlog  + "\n===========================?")
         line_bot_api.reply_message(event.reply_token, message)
 
     elif '最新合作廠商' in msg:
