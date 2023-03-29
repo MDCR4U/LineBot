@@ -96,7 +96,9 @@ def handle_message(event):
     #   message = TextSendMessage(text="GPT Auto : " + msg )
     #   line_bot_api.reply_message(event.reply_token, message) 
     if '/mail' in msg:
+        print("call send_mails")
         sendlog = send_mail()
+        print ("SendLOG = " +sendlog)
         message = TextSendMessage(text= sendlog)
         line_bot_api.reply_message(event.reply_token, message)
 

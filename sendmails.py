@@ -28,11 +28,13 @@ def send_mail():
     file_path = "smtp.csv"
 
     if os.path.isfile(file_path):
-        return ("檔案存在。")
+        print ("檔案存在。")
     else:
-        return ("檔案不存在。")
+        print ("檔案不存在。")
     
 # 讀取寄件者資訊
+    current_dir = os.getcwd()
+    print("目前的目錄為：", current_dir)
     with open("SMTP.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)  # 跳過表頭
