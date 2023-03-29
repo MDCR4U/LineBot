@@ -96,13 +96,14 @@ def handle_message(event):
     #   message = TextSendMessage(text="GPT Auto : " + msg )
     #   line_bot_api.reply_message(event.reply_token, message) 
     if '/mail' in msg:
+        print("==========================================================")
         print("call send_mails")
         sendlog = send_mail()
         print (sendlog)
-        message = TextSendMessage(text= sendlog)
+        message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
         line_bot_api.reply_message(event.reply_token, message)
 
-    if '最新合作廠商' in msg:
+    elif '最新合作廠商' in msg:
         message = imagemap_message()
         line_bot_api.reply_message(event.reply_token, message)
     elif '最新活動訊息' in msg:
