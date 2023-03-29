@@ -78,8 +78,10 @@ def handle_message(event):
 
     msg = event.message.text
     print("event type :" + event.type)
+    print ("event source\n==================================================================")
     print(event.source)
     print (msg)
+    print ("event source\n==================================================================")
 
     # first 4 char 
     # last 5 char string[-5:])
@@ -100,8 +102,8 @@ def handle_message(event):
         print("call send_mails")
         sendlog = send_mail()
         print (sendlog)
-        message = TextSendMessage(text= "發送紀錄:\n================ " + sendlog  + "\n===========================?")
-        line_bot_api.reply_message(event.reply_token, message)
+        #message = TextSendMessage(text= "發送紀錄:\n================ " + sendlog  + "\n===========================?")
+        #line_bot_api.reply_message(event.reply_token, message)
 
     elif '最新合作廠商' in msg:
         message = imagemap_message()
