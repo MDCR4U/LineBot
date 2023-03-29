@@ -28,9 +28,9 @@ def send_mail():
     file_path = "smtp.csv"
 
     if os.path.isfile(file_path):
-        print("檔案存在。")
+        return ("檔案存在。")
     else:
-        print("檔案不存在。")
+        return ("檔案不存在。")
     
 # 讀取寄件者資訊
     with open("SMTP.csv", "r", encoding="utf-8") as f:
