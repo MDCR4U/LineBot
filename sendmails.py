@@ -40,7 +40,7 @@ def send_mail():
         next(reader)  # 跳過表頭
         smtp_list = [row for row in reader]
     smtp_count = len(smtp_list)    
-
+    return smtp_list
 # 讀取郵件發送記錄
     try:
         with open("mail_counter.log", "r", encoding="utf-8") as f:
