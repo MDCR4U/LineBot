@@ -82,7 +82,7 @@ def handle_message(event):
     usr =event.source.user_id
     print("user id = " + usr )
     msg = event.message.text
-    message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr)
+    message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr
     line_bot_api.push_message(usr, message)
     print("event type :" + event.type)
     print ("event source\n==================================================================")
@@ -107,10 +107,10 @@ def handle_message(event):
     if '/mail' in msg:
         print("==========================================================")
         print("call send_mails")
-        sendlog = send_mail()
-        print (sendlog)
-        message = TextSendMessage(text= "您是說 : " + sendlog + "嗎?")
-        line_bot_api.push_message(usr, message)
+        #sendlog = send_mail()
+        #print (sendlog)
+        ##message = TextSendMessage(text= "您是說 : " + sendlog + "嗎?")
+        #line_bot_api.push_message(usr, message)
         #message = TextSendMessage(text= "發送紀錄:\n================ " + sendlog  + "\n===========================?")
         #line_bot_api.reply_message(event.reply_token, message)
 
