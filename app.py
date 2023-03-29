@@ -82,7 +82,7 @@ def handle_message(event):
     usr =event.source.user_id
     print("user id = " + usr )
     msg = event.message.text
-    message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr
+    message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr)
     line_bot_api.push_message(usr, message)
     print("event type :" + event.type)
     print ("event source\n==================================================================")
