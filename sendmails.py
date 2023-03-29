@@ -35,7 +35,7 @@ def send_mail():
 # 讀取寄件者資訊
     current_dir = os.getcwd()
     print("目前的目錄為：", current_dir)
-    with open("SMTP.csv", "r", encoding="utf-8") as f:
+    with open("smtp.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)  # 跳過表頭
         smtp_list = [row for row in reader]
