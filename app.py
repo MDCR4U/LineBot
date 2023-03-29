@@ -76,7 +76,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     print("handle start here ")
-    usr =event.source.userId
+    usr =event.source.user_id
     msg = event.message.text
     message = TextSendMessage(text= "您是說 : " + msg  + "嗎?")
     line_bot_api.push_message(usr, message)
