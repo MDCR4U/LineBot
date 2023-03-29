@@ -15,6 +15,9 @@
 #  ==> ref to : https://community.render.com/t/bash-gunicorn-command-not-found/1485/7
 #https://www.youtube.com/watch?v=OBGaCULCZzg
 
+
+#https://engineering.linecorp.com/zh-hant/blog/line-bot-guideline-3/
+
  #================= for send mail =================
 import datetime
 import smtplib
@@ -77,8 +80,9 @@ def callback():
 def handle_message(event):
     print("handle start here ")
     usr =event.source.user_id
+    print("user id = " + usr )
     msg = event.message.text
-    message = TextSendMessage(text= "您是說 : " + msg  + "嗎?")
+    message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr)
     line_bot_api.push_message(usr, message)
     print("event type :" + event.type)
     print ("event source\n==================================================================")
