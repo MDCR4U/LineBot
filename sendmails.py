@@ -15,6 +15,10 @@ from flask import Flask
 #@app.route('/')
 def send_mail():
 # 讀取寄件者資訊
+    url = 'https://mdcgenius.tw/smtp.csv'
+    file_name = 'smtp.csv'
+    urllib.request.urlretrieve(url, file_name)
+   
     with open("SMTP.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)  # 跳過表頭
