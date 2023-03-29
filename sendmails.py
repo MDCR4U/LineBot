@@ -22,8 +22,16 @@ from email.mime.multipart import MIMEMultipart
 def send_mail():
     url = 'https://mdcgenius.tw/smtp.csv'
     file_name = 'smtp.csv'
-
     urllib.request.urlretrieve(url, file_name)
+    print ("Get smtp complete")
+
+    file_path = "smtp.csv"
+
+    if os.path.isfile(file_path):
+        print("檔案存在。")
+    else:
+        print("檔案不存在。")
+    
 # 讀取寄件者資訊
     with open("SMTP.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
