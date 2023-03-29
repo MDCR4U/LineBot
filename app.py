@@ -75,8 +75,11 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-
+    print("handle start here ")
+    usr =event.message.userid
     msg = event.message.text
+    message = TextSendMessage(text= "您是說 : " + msg  + "嗎?")
+    line_bot_api.push_message(usr, message)
     print("event type :" + event.type)
     print ("event source\n==================================================================")
     print(event.source)
@@ -102,6 +105,8 @@ def handle_message(event):
         print("call send_mails")
         sendlog = send_mail()
         print (sendlog)
+        message = TextSendMessage(text= "您是說 : " + sendlog + "嗎?")
+        line_bot_api.push_message(usr, message)
         #message = TextSendMessage(text= "發送紀錄:\n================ " + sendlog  + "\n===========================?")
         #line_bot_api.reply_message(event.reply_token, message)
 
