@@ -78,7 +78,8 @@ def handle_message(event):
 
     msg = event.message.text
     print("event type :" + event.type)
-    print("event source:" + event.source)
+    print(event.source)
+    print (msg)
 
     # first 4 char 
     # last 5 char string[-5:])
