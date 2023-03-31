@@ -108,11 +108,12 @@ def handle_message(event):
         print("==========================================================")
         print("call send_mails")
         sendlog = send_mail()
+        print ("send mail return")
         print (sendlog)
         message = TextSendMessage(text= "完成信件發送 : " + sendlog + "\n==========================")
         #line_bot_api.push_message(usr, message)
-        message = TextSendMessage(text= "發送紀錄:\n================ " + sendlog  + "\n===========================?")
         line_bot_api.reply_message(event.reply_token, message)
+        line_bot_api.push_message(usr, message)
     elif '/loadsmtp' in msg:
         loadsts = loadfile('smtp.csv')   
         message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")

@@ -70,7 +70,7 @@ def send_mail():
            content = f.read()
     else:
         print(f'{body_file} does not exist')
-        return('找不到信件發送內容')    
+        return('找不到信件發送內容@')    
  # 讀取 主旨
     subject_file = 'subject.txt'
     if os.path.exists(subject_file):
