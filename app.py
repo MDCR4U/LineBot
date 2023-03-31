@@ -81,14 +81,14 @@ def handle_message(event):
     print("handle start here ")
     usr =event.source.user_id
     print("user id = " + usr )
-    #msg = event.message.text
+    msg = event.message.text
     #message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr)
     #line_bot_api.push_message(usr, message)
-    print("event type :" + event.type)
-    print ("event source\n==================================================================")
-    print(event.source)
-    print (msg)
-    print ("event source\n==================================================================")
+    #print("event type :" + event.type)
+    #print ("event source\n==================================================================")
+    #print(event.source)
+    #print (msg)
+    #print ("event source\n==================================================================")
 
     # first 4 char 
     # last 5 char string[-5:])
@@ -113,7 +113,22 @@ def handle_message(event):
         #line_bot_api.push_message(usr, message)
         message = TextSendMessage(text= "發送紀錄:\n================ " + sendlog  + "\n===========================?")
         line_bot_api.reply_message(event.reply_token, message)
-
+    elif '/loadsmtp' in msg:
+        loadsts = loadfile('smtp.csv')   
+        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
+        line_bot_api.reply_message(event.reply_token, message)        
+    elif '/loadmail' in msg:
+        loadsts = loadfile('mail.csv')   
+        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
+        line_bot_api.reply_message(event.reply_token, message)    
+    elif '/loadsubject' in msg:
+        loadsts = loadfile('subject.txt')   
+        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
+        line_bot_api.reply_message(event.reply_token, message)  
+    elif '/loadbody' in msg:
+        loadsts = loadfile('body.txt')   
+        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
+        line_bot_api.reply_message(event.reply_token, message)              
     elif '最新合作廠商' in msg:
         message = imagemap_message()
         line_bot_api.reply_message(event.reply_token, message)
