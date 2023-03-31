@@ -80,10 +80,7 @@ def send_mail():
         print(f'{subject_file} does not exist')
         return('找不到發送主旨')    
 
-    print (subject)
-    print(content)  
-     
-
+ 
 # 開始發送郵件
     for i, row in enumerate(rows):
         if i % batch_size == 0:
@@ -93,7 +90,7 @@ def send_mail():
             time.sleep(5)  # 每發送一批次的郵件等待 10 秒
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
- 
+        print ("i = " + str(i))
         
         to_addr = row[0]
        
@@ -148,7 +145,7 @@ def send_mail():
                 wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             return(f"第 {i+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
 
-        if wssendcounter == 10 :
+        if wssendcounter == 2 :
             print(f"第 {i+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")  
             wssenddetail = wssenddetail + str(i+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
             return("測試發送 10 封 完成 \n" + wssenddetail)
