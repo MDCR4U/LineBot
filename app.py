@@ -105,6 +105,8 @@ def handle_message(event):
     #   #message = TextSendMessage(text="GPT 回應 : " + gpt_response )
     #   message = TextSendMessage(text="GPT Auto : " + msg )
     #   line_bot_api.reply_message(event.reply_token, message) 
+
+    print ('msg = ' + msg)
     if '/mail' in msg:
         print("==========================================================")
         print("call send_mails")
