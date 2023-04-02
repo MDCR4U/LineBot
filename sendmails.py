@@ -104,11 +104,12 @@ def send_mail():
  
 
 # 開始發送郵件
-    for i, row in enumerate(rows):
-        if i % batch_size == 0:
+    for j, row in enumerate(rows):
+        print ("第 " + J + " 筆")
+        if j % batch_size == 0:
             # 切換到下一個發件人賬戶
             smtp_idx = (smtp_idx + 1) % len(smtp_list)
-            print(" CHANGE SMTP SLEEP 10   "  )
+            print(" j = " + j + " CHANGE SMTP SLEEP 5  "  )
             time.sleep(5)  # 每發送一批次的郵件等待 10 秒
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
@@ -162,23 +163,23 @@ def send_mail():
             server.quit()
             wssendcounter = wssendcounter + 1
         except Exception as e:
-            print(f"第 {i+1} 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
+            print(f"第 {j+1} 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
             if 'Authentication unsuccessful' in e:
                 wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
-            return(f"第 {i+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
+            return(f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
 
         if wssendcounter == 3 :
-            print(f"第 {i+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")  
-            wssenddetail = wssenddetail + str(i+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
+            print(f"第 {+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")  
+            wssenddetail = wssenddetail + str(j+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
             return("測試發送 3 封 完成 \n" + wssenddetail)
         
     # 記錄已發送的郵件
         sent_list.append(f"{to_addr},{subject}")
         with open("SEND.LOG", "a", encoding="utf-8") as f:
-            f.write(f"{i+1} , {datetime.datetime.now()},  {to_addr},{subject}\n")
+            f.write(f"{j+1} , {datetime.datetime.now()},  {to_addr},{subject}\n")
             now = datetime.datetime.now()
             wssenddetail = wssenddetail + str(i+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
-        print(f"第 {i+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")
+        print(f"第 {j+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")
     # 更新郵件smtp記錄
         with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
             f.write(str(smtp_idx))        
@@ -186,7 +187,7 @@ def send_mail():
         counter += 1
         with open("mail_counter.log", "w", encoding="utf-8") as f:
             f.write(str(counter))
-        print (" sleep 3 for next send")
+        print (" j = " + j + " sleep 3 for next send")
         time.sleep(3)
 
     print(  " return from email \n" + wssenddetail)
