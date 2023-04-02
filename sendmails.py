@@ -106,13 +106,13 @@ def send_mail():
 # 開始發送郵件
     loopidx = 0
     for j, row in enumerate(rows):
-        print (" looping loopidx = " + str(loopidx) + row[0]) 
+        print ("looping loopidx = " + str(j) + row[0]) 
         if j % batch_size == 0:
             # 切換到下一個發件人賬戶
             smtp_idx = (smtp_idx + 1) % len(smtp_list)
-            print(" j = " + str(j )+ " CHANGE SMTP SLEEP 5  "  )
-            time.sleep(5)  # 每發送一批次的郵件等待 10 秒
-        print(" j = " + str(j )  )    
+            print("   j = " + str(j )+ " CHANGE SMTP  "  )
+            time.sleep(2)  # 每發送一批次的郵件等待 10 秒
+        print("   loopidx  = " + str(loopidx )  )    
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
  
@@ -169,7 +169,7 @@ def send_mail():
             if 'Authentication unsuccessful' in e:
                 wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             return(f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
-        
+        print (" loopidx " + str(loopidx) +"  send complete  ")    
         loopidx = loopidx + 1
 
         if loopidx  == 3 :
@@ -177,7 +177,7 @@ def send_mail():
             wssenddetail = wssenddetail + str(loopidx)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
             return("測試發送 3 封 完成 \n" + wssenddetail)
 
-        print (" loopidx send complete  ")    
+       
     # 記錄已發送的郵件
         sent_list.append(f"{to_addr},{subject}")
         with open("SEND.LOG", "a", encoding="utf-8") as f:
@@ -254,6 +254,12 @@ def check_url_file(wsurl):
         print(f'File {filename} does not exist')
         wsreturn = 'File  : ' + filename + ' does not exist'
         return wsreturn 
- 
+def initcounter()   :
+    with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
+            f.write(str(0))        
+    # 更新郵件發送記錄
+    with open("mail_counter.log", "w", encoding="utf-8") as f:
+            f.write(str(0))
+       
 #if __name__ == '__main__':
 #    app.run()
