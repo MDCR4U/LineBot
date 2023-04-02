@@ -189,7 +189,7 @@ def send_mail():
         counter += 1
         with open("mail_counter.log", "w", encoding="utf-8") as f:
             f.write(str(counter))
-        print (" j = " + j + " sleep 3 for next send")
+        print (" j = " + str(j) + " sleep 3 for next send")
         time.sleep(3)
 
     print(  " return from email \n" + wssenddetail)
