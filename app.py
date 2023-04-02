@@ -22,6 +22,7 @@
 import datetime
 import smtplib
 import time
+ 
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from sendmails import *
@@ -110,7 +111,7 @@ def handle_message(event):
     print ('msg = ' + msg)
     if '/mail' in msg:
         
-        print("call send_mails")
+        print("call send_mails : " + datetime.now.strftime("%m/%d/%Y, %H:%M:%S") )
         sendlog = send_mail()
         print("=======================================================================================")
         print ("send mail return")
@@ -156,7 +157,7 @@ def handle_message(event):
     else:
         message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
-
+    print("aaaaaaaaaaaaaaaaaaa" + + datetime.now.strftime("%m/%d/%Y, %H:%M:%S"))
 @handler.add(PostbackEvent)
 def handle_message(event):
     print(event.postback.data)
