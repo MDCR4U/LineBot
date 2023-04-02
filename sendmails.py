@@ -62,7 +62,8 @@ def send_mail():
    
     wssendcounter = 0
     wssenddetail = ""
- 
+
+#getbody 
     # 檢查 發送內容
     uid = 'mdcr4ugpt'
     url = "http://mdcgenius.tw/" + uid + "/body.txt"
@@ -80,7 +81,9 @@ def send_mail():
     file.close()
     
 
-    
+
+#getsubject 
+
      # 檢查 主旨
      
     url = "http://mdcgenius.tw/" + uid + "/subject.txt"
@@ -164,10 +167,10 @@ def send_mail():
                 wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             return(f"第 {i+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
 
-        if wssendcounter == 10 :
+        if wssendcounter == 3 :
             print(f"第 {i+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")  
             wssenddetail = wssenddetail + str(i+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
-            return("測試發送 10 封 完成 \n" + wssenddetail)
+            return("測試發送 3 封 完成 \n" + wssenddetail)
         
     # 記錄已發送的郵件
         sent_list.append(f"{to_addr},{subject}")
@@ -183,9 +186,10 @@ def send_mail():
         counter += 1
         with open("mail_counter.log", "w", encoding="utf-8") as f:
             f.write(str(counter))
-        #print (" sleep 5 for next send")
+        print (" sleep 3 for next send")
         time.sleep(3)
 
+    print(  " return from email \n" + wssenddetail)
     return("郵件發送完成  \n" + wssenddetail)
 def loadfile(file_name):
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
