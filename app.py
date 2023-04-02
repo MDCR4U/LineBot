@@ -62,7 +62,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 
 line_user_id = ''
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/call013", methods=['POST'])
+@app.route("/call014", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
    
@@ -73,8 +73,11 @@ def callback():
     app.logger.info("Request body: " + body)
     # handle webhook body
     try:
+        print("entry handler \n\################################")
         handler.handle(body, signature)
+        print("handler finish")
     except InvalidSignatureError:
+        print("error handler \n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
         abort(9400)
     return 'OK'
 
@@ -125,8 +128,8 @@ def handle_message(event):
         message = TextSendMessage(text= "=========\n完成信件發送 : " + sendlog + "\n==========================")
         #line_bot_api.push_message(usr, message)
         print("reply tokem" +event.reply_token)
-        line_bot_api.reply_message(event.reply_token, message)
-        #line_bot_api.push_message(usr, message)
+        #line_bot_api.reply_message(event.reply_token, message)
+        line_bot_api.push_message(usr, message)
     elif '/init' in msg:
         initcounter()   
         message = TextSendMessage(text= "完成信件發送 : initial counter complete =====")
