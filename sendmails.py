@@ -63,24 +63,43 @@ def send_mail():
     wssendcounter = 0
     wssenddetail = ""
  
-# 讀取 發送內容
-    body_file = 'body.txt'
-    if os.path.exists(body_file):
-        with open(body_file, 'r', encoding='utf-8') as f:
-           content = f.read()
-    else:
-        print(f'{body_file} does not exist')
-        return('找不到信件發送內容@')    
- # 讀取 主旨
-    subject_file = 'subject.txt'
-    if os.path.exists(subject_file):
-        with open(subject_file, 'r', encoding='utf-8') as f:
-           subject = f.read()
-    else:
-        print(f'{subject_file} does not exist')
-        return('找不到發送主旨')    
+    # 檢查 發送內容
+    uid = 'mdcr4ugpt'
+    url = "http://mdcgenius.tw/" + uid + "/body.txt"
+    wschkfile = check_url_file(url)
+    if wschkfile != '' :
+        return wschkfile
+     # 讀取文件內容
+    file = urllib.request.urlopen(url)
+    content = ''
+    wsbody  = file.readline()
+    while wsbody:
+        content  = content + wsbody.decode('utf-8') 
+        wsbody  = file.readline()
+    # 關閉 URL
+    file.close()
+    
 
+    
+     # 檢查 主旨
+     
+    url = "http://mdcgenius.tw/" + uid + "/subject.txt"
+     
+    wschkfile = check_url_file(url)
+    if wschkfile != '' :
+        return wschkfile
+     # 讀取文件內容
+    file = urllib.request.urlopen(url)
+    wsubject = ''
+    wsubject  = file.readline()
+    subject = wsubject.decode('utf-8') 
+  
+    # 關閉 URL
+     
+   
  
+ 
+
 # 開始發送郵件
     for i, row in enumerate(rows):
         if i % batch_size == 0:
@@ -90,14 +109,14 @@ def send_mail():
             time.sleep(5)  # 每發送一批次的郵件等待 10 秒
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
-        print ("i = " + str(i))
+ 
         
         to_addr = row[0]
        
         cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
         #print(cc_addrs)
         #subject = smtp_username +"臉書優質紛絲團，邀請您 按讚支持"
-        content =  "陌生開發優質粉絲團，人員募集中\n歡迎加入\n分享陌開心法及免費工具\n邀起您加入我們 請開啟網址 https://www.facebook.com/profile.php?id=100065188140659 按讚留言 獲取更多的資訊\n www.mydailychoice.com"
+        #content =  "陌生開發優質粉絲團，人員募集中\n歡迎加入\n分享陌開心法及免費工具\n邀起您加入我們 請開啟網址 https://www.facebook.com/profile.php?id=100065188140659 按讚留言 獲取更多的資訊\n www.mydailychoice.com"
     # 準備發送郵件
         message = MIMEMultipart()
         #message["From"] = smtp_list
@@ -145,7 +164,7 @@ def send_mail():
                 wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             return(f"第 {i+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
 
-        if wssendcounter == 2 :
+        if wssendcounter == 10 :
             print(f"第 {i+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")  
             wssenddetail = wssenddetail + str(i+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
             return("測試發送 10 封 完成 \n" + wssenddetail)
@@ -173,12 +192,55 @@ def loadfile(file_name):
    #ythonCopy code
 
 
+    url = 'https://mdcgenius.tw/mdcr4ugpt/' + file_name + '.csv'
+     
+    filename = file_name + '.csv'
+    urllib.request.urlretrieve(url, filename)
+    print("\n" + filename + "上傳完成")
+   #url 是要下載的檔案的 URL，
+   # file_name 則是下載後要儲存的檔案名稱和路徑
+   # （如果只指定檔案名稱，則預設儲存到目前的資料夾中）。 urlretrieve() 函式會從指定的 URL 下載檔案，並將其儲存在 file_name 指定的位置。   
+
+   #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
+   #ythonCopy code
+
+
     url = 'https://mdcgenius.tw/mdcr4ugpt/' + file_name 
      
     filename = file_name  
     urllib.request.urlretrieve(url, filename)
     print("\n" + filename + "上傳完成")
-    return ("\n" + filename + "上傳完成")
+   #url 是要下載的檔案的 URL，
+   # file_name 則是下載後要儲存的檔案名稱和路徑
+   # （如果只指定檔案名稱，則預設儲存到目前的資料夾中）。 urlretrieve() 函式會從指定的 URL 下載檔案，並將其儲存在 file_name 指定的位置。   
+def check_url_file(wsurl):
+     
+    url = wsurl #'http://www.example.com/filename.txt'
+    
+    # 使用 urlretrieve() 下載文件
+    wsreturn = ''
+    
+    try:
+        filename, headers = urllib.request.urlretrieve(url)
+        
+    except urllib.error.HTTPError as e:
+        print('1.HTTPError:', e.code, url)
+        wsreturn  = 'HTTPError:' +  str(e.code) + " " + url
+        return wsreturn
+    except urllib.error.URLError as e:
+        print('URLError:', e.reason, url)
+        wsreturn = 'URLError:' +  e.reason + " " +  url
+        return wsreturn 
+    return ''    
+
+    # 檢查文件是否存在
+    if os.path.exists(filename):
+        print(f'File {filename} exists')
+        return  ''
+    else:
+        print(f'File {filename} does not exist')
+        wsreturn = 'File  : ' + filename + ' does not exist'
+        return wsreturn 
  
 #if __name__ == '__main__':
 #    app.run()

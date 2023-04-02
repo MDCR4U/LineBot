@@ -63,6 +63,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     signature = request.headers['X-Line-Signature']
     # get request body as text
     body = request.get_data(as_text=True)
@@ -182,7 +183,7 @@ def welcome(event):
    # file_name 則是下載後要儲存的檔案名稱和路徑
    # （如果只指定檔案名稱，則預設儲存到目前的資料夾中）。 urlretrieve() 函式會從指定的 URL 下載檔案，並將其儲存在 file_name 指定的位置。   
 
-import os
+ 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
