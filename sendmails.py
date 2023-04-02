@@ -195,7 +195,7 @@ def send_mail(lineid,wmsg):
         if loopidx  == targetno :
             print(f"{targetno} emails complete ")  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
-            return("發送 " + targetno + "  完成 \n" + wssenddetail)
+            return("發送 " + str(targetno) + "  完成 \n" + wssenddetail)
 
        
     # 記錄已發送的郵件
