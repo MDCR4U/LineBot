@@ -62,7 +62,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 
 line_user_id = ''
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/call012", methods=['POST'])
+@app.route("/call013", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
    
@@ -75,7 +75,7 @@ def callback():
     try:
         handler.handle(body, signature)
     except InvalidSignatureError:
-        abort(400)
+        abort(9400)
     return 'OK'
 
 
