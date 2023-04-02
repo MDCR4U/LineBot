@@ -74,7 +74,6 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
- 
     except InvalidSignatureError:
         abort(400)
     return 'OK'
@@ -122,7 +121,7 @@ def handle_message(event):
         sendlog = send_mail(usr,msg)
         print ("send mail return")
         print (sendlog)
-        print ("send reply message")
+        print ("send reply message reply token  ==>" +event.reply_token)
         message = TextSendMessage(text= "=========\n完成信件發送 : " + sendlog + "\n==========================")
         #line_bot_api.push_message(usr, message)
         print("reply tokem" +event.reply_token)
