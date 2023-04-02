@@ -15,8 +15,17 @@ from flask import Flask
 #@app.route('/')
  #================= for send mail =================
  
-def send_mail(lineid):
+def send_mail(lineid,wmsg):
+    '/smail'
+    wstarget = wmsg[6:]
+    if (wstarget.isdigit()):
+        targetno = int(wstarget)
+        print("要求發送筆數" + str(wstarget))
+    else : 
+        targetno = 0
+        return("發送信件數 錯誤 結束作業")   
     
+
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)
     if  'not found ' in wssts :
@@ -185,10 +194,10 @@ def send_mail(lineid):
         print (" loopidx " + str(loopidx) +"  send complete  ")    
         loopidx = loopidx + 1
 
-        if loopidx  == 3 :
-            print(f"Test 3 emails complete ")  
+        if loopidx  == targetno :
+            print(f"{targetno} emails complete ")  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
-            return("測試發送 3 封 完成 \n" + wssenddetail)
+            return("發送 " + targetno + "  完成 \n" + wssenddetail)
 
        
     # 記錄已發送的郵件
@@ -196,7 +205,7 @@ def send_mail(lineid):
         with open("SEND.LOG", "a", encoding="utf-8") as f:
             f.write(f"{loopidx} , {datetime.datetime.now()},  {to_addr},{subject}\n")
             now = datetime.datetime.now()
-            wssenddetail = wssenddetail + str(loopidx)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
+            wssenddetail = wssenddetail + str(loopidx)  + ",  "  + " " + smtp_username + "=> " + to_addr   + "\n"
         
         print(f"第 {j+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")
     # 更新郵件smtp記錄
