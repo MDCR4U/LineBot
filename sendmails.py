@@ -19,7 +19,7 @@ def send_mail():
     smtp_server = "smtp.office365.com"
     smtp_port = 587
 
-
+    print("send mail start ")
     with open("smtp.csv", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         next(reader)  # 跳過表頭
@@ -106,7 +106,7 @@ def send_mail():
 # 開始發送郵件
     loopidx = 0
     for j, row in enumerate(rows):
-        print ("loopidx = " + str(loopidx)) 
+        print (" looping loopidx = " + str(loopidx) + row[0]) 
         if j % batch_size == 0:
             # 切換到下一個發件人賬戶
             smtp_idx = (smtp_idx + 1) % len(smtp_list)
@@ -165,22 +165,25 @@ def send_mail():
             server.quit()
             wssendcounter = wssendcounter + 1
         except Exception as e:
-            print(f"第 {j+1} 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
+            print(f"第 {loopidx } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
             if 'Authentication unsuccessful' in e:
                 wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             return(f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
+        
         loopidx = loopidx + 1
+
         if loopidx  == 3 :
             print(f"Test 3 emails complete ")  
-            wssenddetail = wssenddetail + str(j+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
+            wssenddetail = wssenddetail + str(loopidx)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
             return("測試發送 3 封 完成 \n" + wssenddetail)
-        
+
+        print (" loopidx send complete  ")    
     # 記錄已發送的郵件
         sent_list.append(f"{to_addr},{subject}")
         with open("SEND.LOG", "a", encoding="utf-8") as f:
-            f.write(f"{j+1} , {datetime.datetime.now()},  {to_addr},{subject}\n")
+            f.write(f"{loopidx} , {datetime.datetime.now()},  {to_addr},{subject}\n")
             now = datetime.datetime.now()
-            wssenddetail = wssenddetail + str(j+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
+            wssenddetail = wssenddetail + str(loopidx)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
         
         print(f"第 {j+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")
     # 更新郵件smtp記錄
