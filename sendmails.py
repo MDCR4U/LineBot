@@ -15,7 +15,20 @@ from flask import Flask
 #@app.route('/')
  #================= for send mail =================
  
-def send_mail():
+def send_mail(lineid):
+    
+    print("LINE @ id = " + lineid)
+    wssts = check_line_id(lineid)
+    if  'not found ' in wssts :
+        return (wssts)
+     
+
+
+    #https://github.com/MDCR4U/LineBot/blob/main/mail.csv
+    github_id ="MDCR4U"
+    github_prj="LineBot"
+    githubutl="https://github.com/" + github_id + "/" + github_prj + "blob/main/"
+    
     smtp_server = "smtp.office365.com"
     smtp_port = 587
 
@@ -174,7 +187,7 @@ def send_mail():
 
         if loopidx  == 3 :
             print(f"Test 3 emails complete ")  
-            wssenddetail = wssenddetail + str(loopidx)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
+            wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
             return("測試發送 3 封 完成 \n" + wssenddetail)
 
        
@@ -245,7 +258,7 @@ def check_url_file(wsurl):
         wsreturn = 'URLError:' +  e.reason + " " +  url
         return wsreturn 
     return ''    
-
+def file_exsit(filename):
     # 檢查文件是否存在
     if os.path.exists(filename):
         print(f'File {filename} exists')
@@ -260,6 +273,26 @@ def initcounter()   :
     # 更新郵件發送記錄
     with open("mail_counter.log", "w", encoding="utf-8") as f:
             f.write(str(0))
+
+def check_line_id(lineid) :
+    url = "http://mdcgenius.tw/authids.txt"
+     
+    wschkfile = check_url_file(url)
+    if wschkfile != '' :
+        return ("授權記錄檔案 authids.txt not found ") 
+     # 讀取文件內容
+    file = urllib.request.urlopen(url)
+    wauthid = ''
+    wauthid  = file.read()
+    wauthid  = wauthid.decode('utf-8')     
+    print ( wauthid)
+    if  lineid  in wauthid :
+        print('授權成功')
+        return ('')
+    if  lineid  not in wauthid : 
+        print('授權錯誤')
+        return ('授權紀錄檔 not found ,請洽 群組館理員')
+
        
 #if __name__ == '__main__':
 #    app.run()

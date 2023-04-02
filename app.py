@@ -60,11 +60,13 @@ line_bot_api = LineBotApi('gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh
 handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 #@app.route("/")
 
+line_user_id = ''
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/call007", methods=['POST'])
+@app.route("/call008", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
-    print("aaaaaaaaaaa  call back aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+   
+#   print("aaaaaaaaaaa  call back aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     signature = request.headers['X-Line-Signature']
     # get request body as text
     body = request.get_data(as_text=True)
@@ -72,7 +74,7 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
-        print(" return from handler.handle")
+ 
     except InvalidSignatureError:
         abort(400)
     return 'OK'
@@ -83,6 +85,7 @@ def callback():
 def handle_message(event):
     print("handle start here ")
     usr =event.source.user_id
+    line_user_id = usr
     print("user id = " + usr )
     msg = event.message.text
     #message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr)
@@ -116,7 +119,7 @@ def handle_message(event):
         now = datetime.now() # current date and time
         print("call send_mails : " )
         print(now.strftime("%m/%d/%Y, %H:%M:%S") + " start send message")
-        sendlog = send_mail()
+        sendlog = send_mail(usr)
         print ("send mail return")
         print (sendlog)
         print ("send reply message")
@@ -167,7 +170,7 @@ def handle_message(event):
         message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
      
-    print( "leave ")
+    print( "\n==============================\nleave\n============================= ")
 
 @handler.add(PostbackEvent)
 def handle_message(event):
