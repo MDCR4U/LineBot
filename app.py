@@ -61,7 +61,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 #@app.route("/")
 
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/call005", methods=['POST'])
+@app.route("/call006", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
     print("aaaaaaaaaaa  call back aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
@@ -115,13 +115,14 @@ def handle_message(event):
 
         now = datetime.now() # current date and time
         print("call send_mails : " )
-        print(now.strftime("%m/%d/%Y, %H:%M:%S") )
+        print(now.strftime("%m/%d/%Y, %H:%M:%S") + " start send message")
         sendlog = send_mail()
-        print("=======================================================================================")
         print ("send mail return")
         print (sendlog)
+        print ("send reply message")
         message = TextSendMessage(text= "=========\n完成信件發送 : " + sendlog + "\n==========================")
         #line_bot_api.push_message(usr, message)
+        print("reply tokem" +event.reply_token)
         line_bot_api.reply_message(event.reply_token, message)
         #line_bot_api.push_message(usr, message)
     elif '/init' in msg:
