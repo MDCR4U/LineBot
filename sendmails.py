@@ -126,18 +126,17 @@ def send_mail(lineid,wmsg):
  
 
 # 開始發送郵件
-    loopidx = 0
+    loopidx = -1 
     for j, row in enumerate(rows):
         print ("looping loopidx = " + str(j) + row[0]) 
-        if j % batch_size == 0:
-            # 切換到下一個發件人賬戶
-            smtp_idx = (smtp_idx + 1) % len(smtp_list)
-#            print("   j = " + str(j )+ " CHANGE SMTP  "  )
-            time.sleep(2)  # 每發送一批次的郵件等待 10 秒
-#        print("   loopidx  = " + str(loopidx )  )    
+        smtp_idx = smtp_idx + 1
+        if smtp_idx = len (smtp_list) :
+           smtp_idx  = 0
+        else :
+            smtp_idx = smtp_idx + 1
+
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
- 
         
         to_addr = row[0]
        
@@ -149,7 +148,6 @@ def send_mail(lineid,wmsg):
         message = MIMEMultipart()
         #message["From"] = smtp_list
         message["From"] =    smtp_sender + "<" + smtp_username +">"  
-               
         message["To"] = to_addr  
     
     #if cc_addrs:
@@ -216,7 +214,7 @@ def send_mail(lineid,wmsg):
         with open("mail_counter.log", "w", encoding="utf-8") as f:
             f.write(str(counter))
         print (" j = " + str(j) + " sleep 3 for next send")
-        time.sleep(3)
+        time.sleep(1)
 
     print(  " return from email \n" + wssenddetail)
     return("郵件發送完成  \n" + wssenddetail)
