@@ -17,14 +17,14 @@ from flask import Flask
  
 def send_mail(lineid,wmsg):
     '/smail'
-    wstarget = wmsg[6:]
-    if (wstarget.isdigit()):
-        targetno = int(wstarget)
-        print("要求發送筆數" + str(wstarget))
-    else : 
-        targetno = 0
-        return("發送信件數 錯誤 結束作業")   
-    
+    #wstarget = wmsg[6:]
+    #if (wstarget.isdigit()):
+    #    targetno = int(wstarget)
+    #    print("要求發送筆數" + str(wstarget))
+    #else : 
+    #    targetno = 0
+    #    return("發送信件數 錯誤 結束作業")   
+    targetno = 3 
 
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)
@@ -132,9 +132,9 @@ def send_mail(lineid,wmsg):
         if j % batch_size == 0:
             # 切換到下一個發件人賬戶
             smtp_idx = (smtp_idx + 1) % len(smtp_list)
-            print("   j = " + str(j )+ " CHANGE SMTP  "  )
+#            print("   j = " + str(j )+ " CHANGE SMTP  "  )
             time.sleep(2)  # 每發送一批次的郵件等待 10 秒
-        print("   loopidx  = " + str(loopidx )  )    
+#        print("   loopidx  = " + str(loopidx )  )    
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
  
@@ -174,7 +174,7 @@ def send_mail(lineid,wmsg):
         try:
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
-            time.sleep(1)
+#            time.sleep(1)
             wk_addr="$$$$$"
             server.login(smtp_username,       smtp_password)
             time.sleep(1)
