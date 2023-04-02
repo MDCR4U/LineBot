@@ -104,8 +104,9 @@ def send_mail():
  
 
 # 開始發送郵件
+    loopidx = 0
     for j, row in enumerate(rows):
-         
+        print ("loopidx = " + str(loopidx)) 
         if j % batch_size == 0:
             # 切換到下一個發件人賬戶
             smtp_idx = (smtp_idx + 1) % len(smtp_list)
@@ -168,8 +169,8 @@ def send_mail():
             if 'Authentication unsuccessful' in e:
                 wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             return(f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
-
-        if wssendcounter == 3 :
+        loopidx = loopidx + 1
+        if loopidx  == 3 :
             print(f"Test 3 emails complete ")  
             wssenddetail = wssenddetail + str(j+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
             return("測試發送 3 封 完成 \n" + wssenddetail)
