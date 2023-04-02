@@ -111,7 +111,7 @@ def send_mail():
             smtp_idx = (smtp_idx + 1) % len(smtp_list)
             print(" j = " + str(j )+ " CHANGE SMTP SLEEP 5  "  )
             time.sleep(5)  # 每發送一批次的郵件等待 10 秒
-        print(" j = " + j   )    
+        print(" j = " + str(j )  )    
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
  
