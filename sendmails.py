@@ -109,7 +109,7 @@ def send_mail():
         if j % batch_size == 0:
             # 切換到下一個發件人賬戶
             smtp_idx = (smtp_idx + 1) % len(smtp_list)
-            print(" j = " + j + " CHANGE SMTP SLEEP 5  "  )
+            print(" j = " + str(j )+ " CHANGE SMTP SLEEP 5  "  )
             time.sleep(5)  # 每發送一批次的郵件等待 10 秒
         print(" j = " + j   )    
         smtp_username = smtp_list[smtp_idx][0]
