@@ -63,7 +63,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
-    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    print("aaaaaaaaaaa  call back aaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     signature = request.headers['X-Line-Signature']
     # get request body as text
     body = request.get_data(as_text=True)
@@ -109,12 +109,13 @@ def handle_message(event):
 
     print ('msg = ' + msg)
     if '/mail' in msg:
-        print("==========================================================")
+        
         print("call send_mails")
         sendlog = send_mail()
+        print("=======================================================================================")
         print ("send mail return")
         print (sendlog)
-        message = TextSendMessage(text= "完成信件發送 : " + sendlog + "\n==========================")
+        message = TextSendMessage(text= "=========\n完成信件發送 : " + sendlog + "\n==========================")
         #line_bot_api.push_message(usr, message)
         line_bot_api.reply_message(event.reply_token, message)
         line_bot_api.push_message(usr, message)
@@ -126,14 +127,14 @@ def handle_message(event):
         loadsts = loadfile('mail.csv')   
         message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
         line_bot_api.reply_message(event.reply_token, message)    
-    elif '/loadsubject' in msg:
-        loadsts = loadfile('subject.txt')   
-        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
-        line_bot_api.reply_message(event.reply_token, message)  
-    elif '/loadbody' in msg:
-        loadsts = loadfile('body.txt')   
-        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
-        line_bot_api.reply_message(event.reply_token, message)              
+#    elif '/loadsubject' in msg:
+#        loadsts = loadfile('subject.txt')   
+#        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
+#        line_bot_api.reply_message(event.reply_token, message)  
+#    elif '/loadbody' in msg:
+#        loadsts = loadfile('body.txt')   
+#        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
+#        line_bot_api.reply_message(event.reply_token, message)              
     elif '最新合作廠商' in msg:
         message = imagemap_message()
         line_bot_api.reply_message(event.reply_token, message)
