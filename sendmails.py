@@ -150,10 +150,10 @@ def send_mail():
         try:
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
-            time.sleep(3)
+            time.sleep(1)
             wk_addr="$$$$$"
             server.login(smtp_username,       smtp_password)
-            time.sleep(3)
+            time.sleep(1)
 
             wk_addr = to_addr 
             #print(f"準備發送第 {i+1} 封郵件 {to_addr}") # {smtp_list[smtp_idx][4]}  {to_addr}")
@@ -169,7 +169,7 @@ def send_mail():
             return(f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
 
         if wssendcounter == 3 :
-            print(f"第 {+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")  
+            print(f"Test 3 emails complete ")  
             wssenddetail = wssenddetail + str(j+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
             return("測試發送 3 封 完成 \n" + wssenddetail)
         
@@ -179,6 +179,7 @@ def send_mail():
             f.write(f"{j+1} , {datetime.datetime.now()},  {to_addr},{subject}\n")
             now = datetime.datetime.now()
             wssenddetail = wssenddetail + str(i+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
+        
         print(f"第 {j+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")
     # 更新郵件smtp記錄
         with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
@@ -192,6 +193,8 @@ def send_mail():
 
     print(  " return from email \n" + wssenddetail)
     return("郵件發送完成  \n" + wssenddetail)
+
+
 def loadfile(file_name):
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
