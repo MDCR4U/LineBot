@@ -114,7 +114,8 @@ def handle_message(event):
         from datetime import datetime
 
         now = datetime.now() # current date and time
-        print("call send_mails : " + now.strftime("%m/%d/%Y, %H:%M:%S") )
+        print("call send_mails : " )
+        print(now.strftime("%m/%d/%Y, %H:%M:%S") )
         sendlog = send_mail()
         print("=======================================================================================")
         print ("send mail return")
@@ -161,8 +162,8 @@ def handle_message(event):
         message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
     now = datetime.now() # current date and time        
-    print("aaaaaaaaaaaaaaaaaaa" + + now.strftime("%m/%d/%Y, %H:%M:%S"))
-    
+    print( now.strftime("%m/%d/%Y, %H:%M:%S"))
+
 @handler.add(PostbackEvent)
 def handle_message(event):
     print(event.postback.data)
