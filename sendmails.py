@@ -179,7 +179,7 @@ def send_mail():
         with open("SEND.LOG", "a", encoding="utf-8") as f:
             f.write(f"{j+1} , {datetime.datetime.now()},  {to_addr},{subject}\n")
             now = datetime.datetime.now()
-            wssenddetail = wssenddetail + str(i+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
+            wssenddetail = wssenddetail + str(j+1)  + ",  " +  now.strftime("%m/%d/%Y, %H:%M:%S")  + " " + smtp_username + "===> " + to_addr   + "\n"
         
         print(f"第 {j+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")
     # 更新郵件smtp記錄
