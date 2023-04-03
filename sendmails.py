@@ -17,14 +17,17 @@ from flask import Flask
  
 def send_mail(lineid,wmsg):
     
+    print("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   wmsg  = " + wmsg)
+    print("\n LINEID " + lineid)
     wstarget = wmsg[6:]
     if (wstarget.isdigit()):
         targetno = int(wstarget)
         print("要求發送筆數" + str(wstarget))
     else : 
         targetno = 0
+        print("invalid target no ")
         return("發送信件數 錯誤 結束作業")   
-    print("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   targetn0 = " + targetno)
+    print("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   targetno = " + targetno)
 
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)
