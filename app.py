@@ -140,6 +140,8 @@ def handle_message(event):
         #print("reply tokem" +event.reply_token)
         #line_bot_api.reply_message(event.reply_token, message)
         #line_bot_api.push_message(usr, message)
+
+
     if '/init' in msg:
         initcounter()   
         message = TextSendMessage(text= "完成信件發送 : initial counter complete =====")
@@ -152,33 +154,26 @@ def handle_message(event):
         loadsts = loadfile('mail.csv')   
         message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
         line_bot_api.reply_message(event.reply_token, message)    
-#    elif '/loadsubject' in msg:
-#        loadsts = loadfile('subject.txt')   
-#        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
-#        line_bot_api.reply_message(event.reply_token, message)  
-#    elif '/loadbody' in msg:
-#        loadsts = loadfile('body.txt')   
-#        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
-#        line_bot_api.reply_message(event.reply_token, message)              
-    elif '最新合作廠商' in msg:
-        message = imagemap_message()
-        line_bot_api.reply_message(event.reply_token, message)
-    elif '最新活動訊息' in msg:
-        message = buttons_message()
-        line_bot_api.reply_message(event.reply_token, message)
-    elif '註冊會員' in msg:
-        message = Confirm_Template()
-        line_bot_api.reply_message(event.reply_token, message)
-    elif '旋轉木馬' in msg:
-        message = Carousel_Template()
-        line_bot_api.reply_message(event.reply_token, message)
-    elif '圖片畫廊' in msg:
-        message = test()
-        line_bot_api.reply_message(event.reply_token, message)
-    elif '功能列表' in msg:
-        message = function_list()
-        line_bot_api.reply_message(event.reply_token, message)
-    else:
+             
+    #elif '最新合作廠商' in msg:
+    #    message = imagemap_message()
+    #    line_bot_api.reply_message(event.reply_token, message)
+    #elif '最新活動訊息' in msg:
+    #    message = buttons_message()
+    #    line_bot_api.reply_message(event.reply_token, message)
+    #elif '註冊會員' in msg:
+    #    message = Confirm_Template()
+    #    line_bot_api.reply_message(event.reply_token, message)
+    #elif '旋轉木馬' in msg:
+    #    message = Carousel_Template()
+    #    line_bot_api.reply_message(event.reply_token, message)
+    #elif '圖片畫廊' in msg:
+    #    message = test()
+    #    line_bot_api.reply_message(event.reply_token, message)
+    #elif '功能列表' in msg:
+    #    message = function_list()
+    #    line_bot_api.reply_message(event.reply_token, message)
+    #else:
         message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
      
