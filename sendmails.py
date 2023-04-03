@@ -15,7 +15,7 @@ from flask import Flask
 #@app.route('/')
  #================= for send mail =================
  
-def send_mail(lineid):
+def send_mail(lineid,wmsg):
     
     wstarget = wmsg[6:]
     if (wstarget.isdigit()):
