@@ -24,7 +24,7 @@ def send_mail(lineid,wmsg):
     else : 
         targetno = 0
         return("發送信件數 錯誤 結束作業")   
-    #targetno = 5
+    print("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   targetn0 = " + targetno)
 
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)
@@ -128,7 +128,7 @@ def send_mail(lineid,wmsg):
 # 開始發送郵件
     loopidx = -1 
     for j, row in enumerate(rows):
-        print ("looping loopidx = " + str(j) + row[0]) 
+        print ("looping loopidx = " + str(j) )   #+ row[0]) 
         smtp_idx = smtp_idx + 1
         if smtp_idx == len (smtp_list) :
            smtp_idx  = 0
