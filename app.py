@@ -79,6 +79,8 @@ def callback():
     except InvalidSignatureError:
         print("error handler \n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
         abort(9400)
+
+    print("call back return")
     return 'OK'
 
 
@@ -131,7 +133,7 @@ def handle_message(event):
     #    sendlog = "manual test message"
         print ("send reply message ")
     #    print(sendlog)
-        print(Event.reply_token)
+        
         #message = TextSendMessage(text= "完成信件發送 : " + sendlog )
         #line_bot_api.reply_message(event.reply_token, message)  
         print ('return OK')   
