@@ -20,6 +20,7 @@ def send_mail(lineid,wmsg):
     print("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   wmsg  = " + wmsg)
     print("\n LINEID " + lineid)
     wstarget = wmsg[6:]
+    print("wstarget :" + wstarget)
     if (wstarget.isdigit()):
         targetno = int(wstarget)
         print("要求發送筆數" + str(wstarget))

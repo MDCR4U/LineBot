@@ -126,11 +126,11 @@ def handle_message(event):
         print("call send_mails : " )
         print(now.strftime("%m/%d/%Y, %H:%M:%S") + " start send message")
         sendlog = send_mail(usr,msg)
-    #    print ("send mail return")
-    #    print (sendlog)
+        print ("send mail return")
+        print (sendlog)
     #    sendlog = "manual test message"
         print ("send reply message ")
-        print(sendlog)
+    #    print(sendlog)
         print(Event.reply_token)
         #message = TextSendMessage(text= "完成信件發送 : " + sendlog )
         #line_bot_api.reply_message(event.reply_token, message)  
@@ -140,7 +140,7 @@ def handle_message(event):
         #print("reply tokem" +event.reply_token)
         #line_bot_api.reply_message(event.reply_token, message)
         #line_bot_api.push_message(usr, message)
-    elif '/init' in msg:
+    if '/init' in msg:
         initcounter()   
         message = TextSendMessage(text= "完成信件發送 : initial counter complete =====")
         line_bot_api.reply_message(event.reply_token, message)            
@@ -182,7 +182,7 @@ def handle_message(event):
         message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
      
-    print( "\n==============================\nleave\n============================= ")
+    
 
 @handler.add(PostbackEvent)
 def handle_message(event):
