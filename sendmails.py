@@ -130,8 +130,9 @@ def send_mail(lineid,wmsg):
 
 # 開始發送郵件
     loopidx = -1 
-    for j, row in enumerate(rows):
-        print ("looping loopidx = " + str(j) )   #+ row[0]) 
+    print (str(len(smtp_list)))
+    for j, row in enumerate(rows):    #rows : mail.csv
+        print ("smtp_idx = " + str(smtp_idx) )   #+ row[0]) 
         smtp_idx = smtp_idx + 1
         if smtp_idx == len (smtp_list) :
            smtp_idx  = 0
