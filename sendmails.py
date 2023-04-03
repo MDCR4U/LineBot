@@ -15,16 +15,16 @@ from flask import Flask
 #@app.route('/')
  #================= for send mail =================
  
-def send_mail(lineid,wmsg):
-    '/smail'
-    #wstarget = wmsg[6:]
-    #if (wstarget.isdigit()):
-    #    targetno = int(wstarget)
-    #    print("要求發送筆數" + str(wstarget))
-    #else : 
-    #    targetno = 0
-    #    return("發送信件數 錯誤 結束作業")   
-    targetno = 3 
+def send_mail(lineid):
+    
+    wstarget = wmsg[6:]
+    if (wstarget.isdigit()):
+        targetno = int(wstarget)
+        print("要求發送筆數" + str(wstarget))
+    else : 
+        targetno = 0
+        return("發送信件數 錯誤 結束作業")   
+    #targetno = 5
 
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)

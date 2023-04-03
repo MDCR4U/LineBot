@@ -124,11 +124,11 @@ def handle_message(event):
         now = datetime.now() # current date and time
         print("call send_mails : " )
         print(now.strftime("%m/%d/%Y, %H:%M:%S") + " start send message")
-    #    sendlog = send_mail(usr,msg)
+        sendlog = send_mail(usr,msg)
     #    print ("send mail return")
     #    print (sendlog)
-        sendlog = "manual test message"
-        print ("send reply message reply token  ==>" +event.reply_token)
+    #    sendlog = "manual test message"
+    #    print ("send reply message reply token  ==>" +event.reply_token)
         message = TextSendMessage(text= "=========\n完成信件發送 : " + sendlog + "\n==========================")
         line_bot_api.reply_message(event.reply_token, message)            
         #line_bot_api.push_message(usr, message)
