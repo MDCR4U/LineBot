@@ -62,7 +62,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 
 line_user_id = ''
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/call014", methods=['POST'])
+@app.route("/call015", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
    
@@ -114,22 +114,27 @@ def handle_message(event):
     #   line_bot_api.reply_message(event.reply_token, message) 
 
     print ('msg = ' + msg)
+    #if '/smail' in msg :
+    #     message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
+    #    line_bot_api.reply_message(event.reply_token,  message )
     if '/smail' in msg:
-        
+    
         from datetime import datetime
 
         now = datetime.now() # current date and time
         print("call send_mails : " )
         print(now.strftime("%m/%d/%Y, %H:%M:%S") + " start send message")
-        sendlog = send_mail(usr,msg)
-        print ("send mail return")
-        print (sendlog)
+    #    sendlog = send_mail(usr,msg)
+    #    print ("send mail return")
+    #    print (sendlog)
+        sendlog = "manual test message"
         print ("send reply message reply token  ==>" +event.reply_token)
         message = TextSendMessage(text= "=========\n完成信件發送 : " + sendlog + "\n==========================")
+        line_bot_api.reply_message(event.reply_token, message)            
         #line_bot_api.push_message(usr, message)
-        print("reply tokem" +event.reply_token)
+        #print("reply tokem" +event.reply_token)
         #line_bot_api.reply_message(event.reply_token, message)
-        line_bot_api.push_message(usr, message)
+        #line_bot_api.push_message(usr, message)
     elif '/init' in msg:
         initcounter()   
         message = TextSendMessage(text= "完成信件發送 : initial counter complete =====")
