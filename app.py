@@ -128,9 +128,10 @@ def handle_message(event):
     #    print ("send mail return")
     #    print (sendlog)
     #    sendlog = "manual test message"
-    #    print ("send reply message reply token  ==>" +event.reply_token)
+        print ("send reply message ")
         message = TextSendMessage(text= "=========\n完成信件發送 : " + sendlog + "\n==========================")
-        line_bot_api.reply_message(event.reply_token, message)            
+        line_bot_api.reply_message(event.reply_token, message)     
+        return       
         #line_bot_api.push_message(usr, message)
         #print("reply tokem" +event.reply_token)
         #line_bot_api.reply_message(event.reply_token, message)
