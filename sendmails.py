@@ -27,7 +27,7 @@ def send_mail(lineid,wmsg):
         targetno = 0
         print("invalid target no ")
         return("發送信件數 錯誤 結束作業")   
-    print("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   targetno = " + targetno)
+    print("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   targetno = " + str( targetno))
 
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)
