@@ -135,7 +135,7 @@ def send_mail(lineid,wmsg):
     for j, row in enumerate(rows):    #rows : mail.csv
         print ("\n============== smtp_idx = " + str(smtp_idx) )   #+ row[0]) 
          
-        if smtp_idx == len (smtp_list) :
+        if smtp_idx > len (smtp_list) :
            print("smtp idx reach max reset")
            smtp_idx  = 0
         else :
