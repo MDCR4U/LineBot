@@ -147,7 +147,11 @@ def handle_message(event):
         #line_bot_api.push_message(usr, message)
 
     print ("not mail ")
-    if '/init' in msg:
+    if '/main' in msg:
+        wsmenu = '目錄:\n/S001:最新合作廠商\n/S002:最新活動訊息\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:圖片畫廊\n/S006:功能列表'
+        message = TextSendMessage(text= wsmenu)
+        line_bot_api.reply_message(event.reply_token, message) 
+    elif '/init' in msg:
         initcounter()   
         message = TextSendMessage(text= "完成信件發送 : initial counter complete =====")
         line_bot_api.reply_message(event.reply_token, message)            
@@ -159,28 +163,31 @@ def handle_message(event):
         loadsts = loadfile('mail.csv')   
         message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
         line_bot_api.reply_message(event.reply_token, message)    
-             
+        '/S001:最新合作廠商\n/S002:最新活動訊息\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:圖片畫廊\n/S006:'
     #elif '最新合作廠商' in msg:
-    #    message = imagemap_message()
-    #    line_bot_api.reply_message(event.reply_token, message)
+    elif '/S001' in msg:        
+        message = imagemap_message()
+        line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
-    #    message = buttons_message()
-    #    line_bot_api.reply_message(event.reply_token, message)
+    elif '/S002' in msg:
+        message = buttons_message()
+        line_bot_api.reply_message(event.reply_token, message)
     #elif '註冊會員' in msg:
-    #    message = Confirm_Template()
-    #    line_bot_api.reply_message(event.reply_token, message)
+    elif '/S003' in msg:
+        message = Confirm_Template()
+        line_bot_api.reply_message(event.reply_token, message)
     #elif '旋轉木馬' in msg:
-    #    message = Carousel_Template()
-    #    line_bot_api.reply_message(event.reply_token, message)
+    elif 'S004' in msg:        
+        message = Carousel_Template()
+        line_bot_api.reply_message(event.reply_token, message)
     #elif '圖片畫廊' in msg:
-    #    message = test()
-    #    line_bot_api.reply_message(event.reply_token, message)
+    elif '/S005' in msg:
+        message = test()
+        line_bot_api.reply_message(event.reply_token, message)
     #elif '功能列表' in msg:
-    #    message = function_list()
-    #    line_bot_api.reply_message(event.reply_token, message)
-    #else:
-
-
+    elif 'S006' in msg:        
+        message = function_list()
+        line_bot_api.reply_message(event.reply_token, message)
     else :
         print ("reply aaaaaa")
         wsmsg = test_func(msg)
