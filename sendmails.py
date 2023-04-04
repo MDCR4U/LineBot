@@ -141,11 +141,12 @@ def send_mail(lineid,wmsg):
             smtp_idx = smtp_idx + 1
         print("**" + str(smtp_idx) + " - " + str(len(smtp_list)) + "**" )
         smtp_username = smtp_list[smtp_idx][0]
+        print("user name " + smtp_username)
         smtp_password = smtp_list[smtp_idx][1]
         
         to_addr = row[0]
        
-        cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
+        #cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
         #print(cc_addrs)
         #subject = smtp_username +"臉書優質紛絲團，邀請您 按讚支持"
         #content =  "陌生開發優質粉絲團，人員募集中\n歡迎加入\n分享陌開心法及免費工具\n邀起您加入我們 請開啟網址 https://www.facebook.com/profile.php?id=100065188140659 按讚留言 獲取更多的資訊\n www.mydailychoice.com"
@@ -210,7 +211,8 @@ def send_mail(lineid,wmsg):
             now = datetime.datetime.now()
             wssenddetail = wssenddetail + str(loopidx)  + ",  "  + " " + smtp_username + "=> " + to_addr   + "\n"
         
-        print(f"第 {j+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")
+    #    print(f"第 {j+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")
+
     # 更新郵件smtp記錄
         with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
             f.write(str(smtp_idx))        
@@ -297,9 +299,9 @@ def check_line_id(lineid) :
     wauthid = ''
     wauthid  = file.read()
     wauthid  = wauthid.decode('utf-8')     
-    print ( wauthid)
+#    print ( wauthid)
     if  lineid  in wauthid :
-        print('授權成功')
+#        print('授權成功')
         return ('')
     if  lineid  not in wauthid : 
         print('授權錯誤')
