@@ -307,6 +307,10 @@ def check_line_id(lineid) :
         print('授權錯誤')
         return ('授權紀錄檔 not found ,請洽 群組館理員')
 
-       
+def test_func(msg):
+    wmsg = "1234 " + msg + "#######"
+    print(" return data = " + wmsg)
+    return (wmsg )
+ 
 #if __name__ == '__main__':
 #    app.run()

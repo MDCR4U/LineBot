@@ -176,8 +176,11 @@ def handle_message(event):
     #    message = function_list()
     #    line_bot_api.reply_message(event.reply_token, message)
     #else:
+        wsmsg = test_func(msg)
+        print("return from text_func : " + wsmsg)
         message = TextSendMessage(text= "您是說 : " +msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
+        return 'OK'
      
     
 
