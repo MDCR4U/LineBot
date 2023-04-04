@@ -76,7 +76,7 @@ def callback():
     try:
         print("entry handler \n\################################")
         handler.handle(body, signature)
-    #    print("handler finish")
+        print("handler finish")
     except InvalidSignatureError:
         print("error handler \n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
         abort(400)
@@ -93,7 +93,7 @@ def handle_message(event):
     line_user_id = usr
     print("user id = " + usr )
     msg = event.message.text
-    print("\n\n")
+    #print("\n")
     #message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr)
     #line_bot_api.push_message(usr, message)
     #print("event type :" + event.type)
@@ -129,7 +129,7 @@ def handle_message(event):
         print("call send_mails : " )
         print(now.strftime("%m/%d/%Y, %H:%M:%S") + " start send message")
         sendlog = send_mail(usr,msg)
-        print ("send mail return")
+#        print ("send mail return")
         print (sendlog)
     #    sendlog = "manual test message"
         print ("send reply message ")
@@ -137,8 +137,8 @@ def handle_message(event):
         
         message = TextSendMessage(text= "完成信件發送 : ")
         line_bot_api.reply_message(event.reply_token, message)  
-        print ('return OK')   
-        return      ('OK')
+        print ('send mail return OK')   
+        return 'OK'
         #line_bot_api.push_message(usr, message)
         #print("reply tokem" +event.reply_token)
         #line_bot_api.reply_message(event.reply_token, message)
