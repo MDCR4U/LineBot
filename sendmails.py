@@ -139,7 +139,7 @@ def send_mail(lineid,wmsg):
            smtp_idx  = 0
         else :
             smtp_idx = smtp_idx + 1
-
+        print("**" + str(smtp_idx) + " - " + str(len(smtp_list)) + "**" )
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
         
