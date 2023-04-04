@@ -79,10 +79,10 @@ def callback():
     #    print("handler finish")
     except InvalidSignatureError:
         print("error handler \n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
-        abort(9400)
+        abort(400)
 
     #print("call back return")
-    return 'OK'
+    #return 'OK'
 
 
 # 處理訊息
