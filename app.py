@@ -93,7 +93,7 @@ def handle_message(event):
     line_user_id = usr
     print("user id = " + usr )
     msg = event.message.text
-    print("\n\n\n\n\n\n\n\n\n")
+    print("\n\n")
     #message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr)
     #line_bot_api.push_message(usr, message)
     #print("event type :" + event.type)
@@ -181,9 +181,10 @@ def handle_message(event):
 
     print ("reply aaaaaa")
     wsmsg = test_func(msg)
-    print("return from text_func : " + wsmsg)
+    #print("return from text_func : " + wsmsg)
     message = TextSendMessage(text= "您是說 : " + wsmsg + "嗎?")
     line_bot_api.reply_message(event.reply_token,  message )
+    print(' call back return OK')
     return 'OK'
      
     
