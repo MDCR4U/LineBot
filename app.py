@@ -61,6 +61,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 #@app.route("/")
 
 line_user_id = ''
+
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/r4u005", methods=['POST'])
 def callback():
@@ -75,13 +76,13 @@ def callback():
     try:
         print("entry handler \n\################################")
         handler.handle(body, signature)
-        print("handler finish")
+    #    print("handler finish")
     except InvalidSignatureError:
         print("error handler \n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
         abort(9400)
 
-    print("call back return")
-    return 'OK'
+    #print("call back return")
+    #return 'OK'
 
 
 # 處理訊息
@@ -180,7 +181,7 @@ def handle_message(event):
 
     print ("reply aaaaaa")
     wsmsg = test_func(msg)
-    #print("return from text_func : " + wsmsg)
+    print("return from text_func : " + wsmsg)
     message = TextSendMessage(text= "您是說 : " + wsmsg + "嗎?")
     line_bot_api.reply_message(event.reply_token,  message )
     return 'OK'
