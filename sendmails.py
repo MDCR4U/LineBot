@@ -133,9 +133,8 @@ def send_mail(lineid,wmsg):
     loopidx = -1 
     print (str(len(smtp_list)))
     for j, row in enumerate(rows):    #rows : mail.csv
-        print ("\n============== smtp_idx = " + str(smtp_idx) )   #+ row[0]) 
          
-        if smtp_idx > len (smtp_list) :
+        if smtp_idx >= len (smtp_list) :
            print("smtp idx reach max reset")
            smtp_idx  = 0
         else :
@@ -195,7 +194,7 @@ def send_mail(lineid,wmsg):
             if 'Authentication unsuccessful' in e:
                 wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             return(f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
-        print (" loopidx " + str(loopidx) +"  send complete  ")    
+         
         loopidx = loopidx + 1
 
         if loopidx  == targetno :
@@ -219,8 +218,8 @@ def send_mail(lineid,wmsg):
         counter += 1
         with open("mail_counter.log", "w", encoding="utf-8") as f:
             f.write(str(counter))
-        print (" j = " + str(j) + " sleep 3 for next send")
-        time.sleep(1)
+        #print (" j = " + str(j) + " sleep 3 for next send")
+        time.sleep(0.5)
 
     print(  " return from email \n" + wssenddetail)
     return("郵件發送完成  \n" + wssenddetail)
