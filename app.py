@@ -137,10 +137,10 @@ def handle_message(event):
         print ("send reply message ")
     #    print(sendlog)
         
-        message = TextSendMessage(text= "完成信件發送 : ")
+        message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         line_bot_api.reply_message(event.reply_token, message)  
-        print ('send mail return OK')   
-        return 'OK'
+        return 
+    
         #line_bot_api.push_message(usr, message)
         #print("reply tokem" +event.reply_token)
         #line_bot_api.reply_message(event.reply_token, message)
@@ -151,11 +151,11 @@ def handle_message(event):
         initcounter()   
         message = TextSendMessage(text= "完成信件發送 : initial counter complete =====")
         line_bot_api.reply_message(event.reply_token, message)            
-    if '/loadsmtp' in msg:
+    elif '/loadsmtp' in msg:
         loadsts = loadfile('smtp.csv')   
         message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
         line_bot_api.reply_message(event.reply_token, message)        
-    if '/loadmail' in msg:
+    elif '/loadmail' in msg:
         loadsts = loadfile('mail.csv')   
         message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
         line_bot_api.reply_message(event.reply_token, message)    
@@ -181,13 +181,14 @@ def handle_message(event):
     #else:
 
 
-    print ("reply aaaaaa")
-    wsmsg = test_func(msg)
-    #print("return from text_func : " + wsmsg)
-    message = TextSendMessage(text= "您是說 : " + wsmsg + "嗎?")
-    line_bot_api.reply_message(event.reply_token,  message )
-    #print(' call back return OK')
-    #return 'OK'
+    else :
+        print ("reply aaaaaa")
+        wsmsg = test_func(msg)
+        #print("return from text_func : " + wsmsg)
+        message = TextSendMessage(text= "您是說 : " + wsmsg + "嗎?")
+        line_bot_api.reply_message(event.reply_token,  message )
+        #print(' call back return OK')
+        #return 'OK'
      
     
 
