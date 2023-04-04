@@ -149,6 +149,8 @@ def handle_message(event):
     print ("not mail ")
     if '/main' in msg:
         wsmenu = '目錄:\n/S001:最新合作廠商\n/S002:最新活動訊息\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:圖片畫廊\n/S006:功能列表'
+        wsmenu = wsmenu + '\n測試發送郵件:/TSTMAIL:service@mdcr4u.com.tw 說明 (/TSTMAIL=> 指令 +":" + "收件者信箱")'
+        wsmenu = wsmenu + '\n批次發送信件:/SMAIL:8  說明(SMAIL=> 指令 + ":" + 發送數量'
         message = TextSendMessage(text= wsmenu)
         line_bot_api.reply_message(event.reply_token, message) 
     elif '/init' in msg:
