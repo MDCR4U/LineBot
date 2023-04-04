@@ -82,7 +82,7 @@ def callback():
         abort(9400)
 
     #print("call back return")
-    #return 'OK'
+    return 'OK'
 
 
 # 處理訊息
