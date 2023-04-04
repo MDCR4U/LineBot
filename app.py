@@ -143,7 +143,7 @@ def handle_message(event):
         #line_bot_api.reply_message(event.reply_token, message)
         #line_bot_api.push_message(usr, message)
 
-
+    print ("not mail ")
     if '/init' in msg:
         initcounter()   
         message = TextSendMessage(text= "完成信件發送 : initial counter complete =====")
@@ -176,11 +176,12 @@ def handle_message(event):
     #    message = function_list()
     #    line_bot_api.reply_message(event.reply_token, message)
     #else:
-        wsmsg = test_func(msg)
-        #print("return from text_func : " + wsmsg)
-        message = TextSendMessage(text= "您是說 : " + wsmsg + "嗎?")
-        line_bot_api.reply_message(event.reply_token,  message )
-        return 'OK'
+    print ("reply aaaaaa")
+    wsmsg = test_func(msg)
+    #print("return from text_func : " + wsmsg)
+    message = TextSendMessage(text= "您是說 : " + wsmsg + "嗎?")
+    line_bot_api.reply_message(event.reply_token,  message )
+    return 'OK'
      
     
 
