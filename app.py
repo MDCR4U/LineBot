@@ -80,7 +80,9 @@ def callback():
     except InvalidSignatureError:
         print("error handler \n&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&")
         abort(400)
+    
 
+    return 'OK'  #ok(200)
     #print("call back return")
     #return 'OK'
 
