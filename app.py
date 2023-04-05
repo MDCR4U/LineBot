@@ -131,22 +131,22 @@ def handle_message(event):
         #line_bot_api.push_message(usr, message)
 
     if '/main' in msg:
-        wsmenu = '目錄:\n/S001:最新合作廠商\n/S002:最新活動訊息\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:圖片畫廊\n/S006:功能列表'
+        wsmenu = '目錄:\n 指令   命令內容\n==============\n/S001:最新合作廠商\n/S002:最新活動訊息\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:圖片畫廊\n/S006:功能列表'
         wsmenu = wsmenu + '\n/TSTMAIL:service@mdcr4u.com.tw \n 發送測試信件說明\n /TSTMAIL=> 指令 +":" + "收件者信箱")'
         wsmenu = wsmenu + '\n/SMAIL:8  \n  批量發送信件說明\n SMAIL=> 指令 + ":" + 發送數量'
         message = TextSendMessage(text= wsmenu)
         line_bot_api.reply_message(event.reply_token, message) 
     elif '/init' in msg:
         initcounter()   
-        message = TextSendMessage(text= "完成信件發送 : initial counter complete =====")
+        message = TextSendMessage(text= "完成信件處理 : initial counter complete =====")
         line_bot_api.reply_message(event.reply_token, message)            
     elif '/loadsmtp' in msg:
         loadsts = loadfile('smtp.csv')   
-        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
+        message = TextSendMessage(text= "完成信件處理 : " + loadsts+ "\n==========================")
         line_bot_api.reply_message(event.reply_token, message)        
     elif '/loadmail' in msg:
         loadsts = loadfile('mail.csv')   
-        message = TextSendMessage(text= "完成信件發送 : " + loadsts+ "\n==========================")
+        message = TextSendMessage(text= "完成信件處理 : " + loadsts+ "\n==========================")
         line_bot_api.reply_message(event.reply_token, message)    
         '/S001:最新合作廠商\n/S002:最新活動訊息\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:圖片畫廊\n/S006:'
     #elif '最新合作廠商' in msg:
@@ -195,7 +195,8 @@ def welcome(event):
     gid = event.source.group_id
     profile = line_bot_api.get_group_member_profile(gid, uid)
     name = profile.display_name
-    message = TextSendMessage(text=f'{name}歡迎加入'  + 'MDC make Rich for You')
+
+    message = TextSendMessage(text=f'{name}歡迎加入 MDC 富裕與您同在請輸入 /MAIN 顯示功能表')
     line_bot_api.reply_message(event.reply_token, message)
         
 #def loadfile():
