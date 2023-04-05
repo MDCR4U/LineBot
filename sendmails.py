@@ -17,18 +17,18 @@ from flask import Flask
  
 def send_mail(lineid,wmsg):
     
-    print("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   wmsg  = " + wmsg)
-    print("\n LINEID " + lineid)
-    wstarget = wmsg[6:]
-    print("wstarget :" + wstarget)
+    #print("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   wmsg  = " + wmsg)
+    #print("\n LINEID " + lineid)
+    wstarget = wmsg[7:]
+    #print("wstarget :" + wstarget)
     if (wstarget.isdigit()):
         targetno = int(wstarget)
-        print("要求發送筆數" + str(wstarget))
+        #print("要求發送筆數" + str(wstarget))
     else : 
         targetno = 0
-        print("invalid target no ")
-        return("發送信件數 錯誤 結束作業")   
-    print("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   targetno = " + str( targetno))
+    #        print("invalid target no ")
+        return("發送信件格式 錯誤\n正確格式==>/SMAIL:nnnn\n 結束作業")   
+    #print("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   targetno = " + str( targetno))
 
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)
@@ -308,8 +308,8 @@ def check_line_id(lineid) :
         return ('授權紀錄檔 not found ,請洽 群組館理員')
 
 def test_func(msg):
-    wmsg = "1234 " + msg + "#######"
-    print(" return data = " + wmsg)
+    wmsg =  "我跟你說一樣的 : " + msg 
+    
     return (wmsg )
  
 #if __name__ == '__main__':
