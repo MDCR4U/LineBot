@@ -5,7 +5,7 @@ from linebot.models import *
 
 #ImagemapSendMessage(組圖訊息)
 def imagemap_message():
-    background_url="https://ibb.co/y0H2W4H"  #https://ibb.co/0BZHztf"
+    background_url="https://i.ibb.co/gSB39J2/BfTFVDN.jpg"  #https://ibb.co/0BZHztf"
     url_top_left = "https://www.youtube.com/watch?v=0kOpOqHuiGo"
     url_top_right = "https://www.youtube.com/watch?v=XFvgYYHvcfE"
     url_left_down ="https://www.youtube.com/watch?v=iOu5DwEQaJE"
@@ -14,7 +14,8 @@ def imagemap_message():
     print(background_url)
     message = ImagemapSendMessage(
         #base_url="https://i.imgur.com/BfTFVDN.jpg",    #顯示的圖片 2000 * 2000
-        base_url="https://i.ibb.co/mJfp6Nf/background.png" , 
+        base_url="https://i.ibb.co/gSB39J2/BfTFVDN.jpg" , 
+        
         #base_url="https://upload.cc/i1/2023/04/05/ieMoEl.jpg",
         alt_text='主畫面',
         base_size=BaseSize(height=2000, width=2000),
