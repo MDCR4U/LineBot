@@ -5,35 +5,35 @@ from linebot.models import *
 
 def image_carousel_message1():
     message = TemplateSendMessage(
-        alt_text='圖片旋轉木馬',
+        alt_text='我們的產品',
         template=ImageCarouselTemplate(
             columns=[
                 ImageCarouselColumn(
-                    image_url="https://i.imgur.com/uKYgfVs.jpg",
+                    image_url="https://i.ibb.co/kh0bzyX/Daily-Spray.jpg",
                     action=URITemplateAction(
-                        label="新鮮水果",
-                        uri="http://img.juimg.com/tuku/yulantu/110709/222-110F91G31375.jpg"
+                        label="營養噴劑",
+                        uri="https://mydailychoice.com/shop?selected_brands=2&ref=lifefree"
                     )
                 ),
                 ImageCarouselColumn(
-                    image_url="https://i.imgur.com/QOcAvjt.jpg",
+                    image_url="https://i.ibb.co/54BG4j1/mantra.jpg",
                     action=URITemplateAction(
-                        label="新鮮蔬菜",
-                        uri="https://cdn.101mediaimage.com/img/file/1410464751urhp5.jpg"
+                        label="精油系列",
+                        uri="https://mydailychoice.com/shop?selected_brands=3&ref=lifefree"
                     )
                 ),
                 ImageCarouselColumn(
-                    image_url="https://i.imgur.com/Np7eFyj.jpg",
+                    image_url="https://i.ibb.co/1MKhZpW/Cosmikology.jpg",
                     action=URITemplateAction(
-                        label="可愛狗狗",
-                        uri="http://imgm.cnmo-img.com.cn/appimg/screenpic/big/674/673928.JPG"
+                        label="美妝系列",
+                        uri="https://mydailychoice.com/shop?selected_brands=5&ref=lifefree"
                     )
                 ),
                 ImageCarouselColumn(
-                    image_url="https://i.imgur.com/QRIa5Dz.jpg",
+                    image_url="https://i.ibb.co/Sx0Tw7M/hlt.jpg",
                     action=URITemplateAction(
-                        label="可愛貓咪",
-                        uri="https://m-miya.net/wp-content/uploads/2014/07/0-065-1.min_.jpg"
+                        label="高品質旅遊",
+                        uri="https://mydailychoice.com/shop?selected_brands=4&ref=lifefree"
                     )
                 )
             ]
