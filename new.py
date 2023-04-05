@@ -9,7 +9,7 @@ def image_carousel_message1():
         template=ImageCarouselTemplate(
             columns=[
                 ImageCarouselColumn(
-                    image_url="https://i.ibb.co/kh0bzyX/Daily-Spray.jpg",
+                    image_url="https://i.imgur.com/uKYgfVs.jpg",
                     action=URITemplateAction(
                         label="新鮮水果",
                         uri="http://img.juimg.com/tuku/yulantu/110709/222-110F91G31375.jpg"
