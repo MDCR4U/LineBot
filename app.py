@@ -131,7 +131,7 @@ def handle_message(event):
         #line_bot_api.push_message(usr, message)
 
     if '/main' in msg:
-        wsmenu = '目錄:\n 指令   命令內容\n==============\n/S001:圖片展示\n/S002:最新活動訊息\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:圖片畫廊\n/S006:功能列表'
+        wsmenu = '目錄:\n 指令   命令內容\n==============\n/S001:圖片展示\n/S002:旅遊現金抵用券\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:圖片畫廊\n/S006:功能列表'
         wsmenu = wsmenu + '\n/TSTMAIL:service@mdcr4u.com.tw \n 發送測試信件說明\n /TSTMAIL=> 指令 +":" + "收件者信箱")'
         wsmenu = wsmenu + '\n/SMAIL:8  \n  批量發送信件說明\n SMAIL=> 指令 + ":" + 發送數量'
         message = TextSendMessage(text= wsmenu)

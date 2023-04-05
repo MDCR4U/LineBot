@@ -66,8 +66,8 @@ def buttons_message():
         alt_text='好消息來囉～',
         template=ButtonsTemplate(
             thumbnail_image_url="https://pic2.zhimg.com/v2-de4b8114e8408d5265503c8b41f59f85_b.jpg",
-            title="是否要進行抽獎活動？",
-            text="輸入生日後即獲得抽獎機會",
+            title="是否要獲得旅遊補助金活動？",
+            text="輸入生日可獲得生日驚喜禮得機會",
             actions=[
                 DatetimePickerTemplateAction(
                     label="請選擇生日",
@@ -78,12 +78,12 @@ def buttons_message():
                     min='1930-01-01'
                 ),
                 MessageTemplateAction(
-                    label="看抽獎品項",
-                    text="有哪些抽獎品項呢？"
+                    label="索取百元美金旅遊補助金",
+                    text="開啟網站\nhttps://mydailychoice.com/shop?selected_brands=7&ref=lifefree\n百元美金旅遊補助等著您"
                 ),
                 URITemplateAction(
                     label="免費註冊享回饋",
-                    uri="https://tw.shop.com/nbts/create-myaccount.xhtml?returnurl=https%3A%2F%2Ftw.shop.com%2F"
+                    uri="https://mydailychoice.com/lifefree"
                 )
             ]
         )
