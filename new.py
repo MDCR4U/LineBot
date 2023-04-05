@@ -3,13 +3,13 @@ from linebot import (LineBotApi, WebhookHandler)
 from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
 
-def image_carousel_message1X():
+def image_carousel_message1():
     message = TemplateSendMessage(
         alt_text='圖片旋轉木馬',
         template=ImageCarouselTemplate(
             columns=[
                 ImageCarouselColumn(
-                    image_url="https://i.imgur.com/uKYgfVs.jpg",
+                    image_url="https://i.ibb.co/kh0bzyX/Daily-Spray.jpg",
                     action=URITemplateAction(
                         label="新鮮水果",
                         uri="http://img.juimg.com/tuku/yulantu/110709/222-110F91G31375.jpg"
