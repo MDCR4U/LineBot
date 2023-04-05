@@ -5,42 +5,50 @@ from linebot.models import *
 
 #ImagemapSendMessage(組圖訊息)
 def imagemap_message():
+    background_url="https://mdcgenius.tw/image/background.png"
+    url_top_left = "https://www.youtube.com/watch?v=0kOpOqHuiGo"
+    url_top_right = "https://www.youtube.com/watch?v=XFvgYYHvcfE"
+    url_left_down ="https://www.youtube.com/watch?v=iOu5DwEQaJE"
+    url_right_down1 = "https://www.youtube.com/watch?v=R9cx3kgwWD0"
+    url_right_down2 ="https://www.youtube.com/watch?v=DAlIup87Aso&t=26s"
+
     message = ImagemapSendMessage(
-        base_url="https://i.imgur.com/BfTFVDN.jpg",
+        base_url=background_url,      #顯示的圖片 2000 * 2000
         alt_text='最新的合作廠商有誰呢？',
         base_size=BaseSize(height=2000, width=2000),
-        actions=[
+        actions=[                                       # 依據顯示 的圖片  做切割處理動作 
             URIImagemapAction(
-                #家樂福
-                link_uri="https://tw.shop.com/search/%E5%AE%B6%E6%A8%82%E7%A6%8F",
+                #後疫情
+                link_uri=url_top_left ,
                 area=ImagemapArea(
-                    x=0, y=0, width=1000, height=1000
+                    x=0, y=0, width=1000, height=1000                               #左上
                 )
             ),
-            URIImagemapAction(
-                #生活市集
-                link_uri="https://tw.shop.com/search/%E7%94%9F%E6%B4%BB%E5%B8%82%E9%9B%86",
+            URIImagemapAction(                                                     #右上
+                #協槓人生
+                link_uri=url_top_right,
                 area=ImagemapArea(
                     x=1000, y=0, width=1000, height=1000
                 )
             ),
-            URIImagemapAction(
-                #阿瘦皮鞋
-                link_uri="https://tw.shop.com/search/%E9%98%BF%E7%98%A6%E7%9A%AE%E9%9E%8B",
+            URIImagemapAction(                                                     #左下
+                #創業團隊
+                link_uri=url_left_down,
                 area=ImagemapArea(
                     x=0, y=1000, width=1000, height=1000
                 )
             ),
+                    
             URIImagemapAction(
-                #塔吉特千層蛋糕
-                link_uri="https://tw.shop.com/search/%E5%A1%94%E5%90%89%E7%89%B9",
+               #改變自己
+                link_uri=url_right_down1,
                 area=ImagemapArea(
                     x=1000, y=1000, width=1000, height=500
                 )
             ),
             URIImagemapAction(
-                #亞尼克生乳捲
-                link_uri="https://tw.shop.com/search/%E4%BA%9E%E5%B0%BC%E5%85%8B",
+                #財富密碼
+                link_uri=url_right_down2,
                 area=ImagemapArea(
                     x=1000, y=1500, width=1000, height=500
                 )
