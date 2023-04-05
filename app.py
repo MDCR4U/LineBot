@@ -174,10 +174,26 @@ def handle_message(event):
         message = function_list()
         line_bot_api.reply_message(event.reply_token, message)
     else :
-        #print ("reply aaaaaa")
-        wsmsg = test_func(msg)
-        #print("return from text_func : " + wsmsg)
-        message = TextSendMessage(text= "您是說 : " + wsmsg + "嗎?")
+        user_id = event.source.user_id
+        user_type = event.source.type
+    
+        if user_type == "user":
+            if user_id.startswith("U"):
+            # 手機版的 LINE
+                reply_text = "您是使用手機版的 LINE"
+            else:
+                # 電腦版的 LINE
+                reply_text = "您是使用電腦版的 LINE"
+        else:
+            # 群組或聊天室
+            reply_text = "您是在群組或聊天室中"
+
+        #line_bot_api.reply_message(
+        #    event.reply_token,
+        #    TextSendMessage(text=reply_text)
+        
+        print(reply_text)
+        message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
         #print(' call back return OK')
         #return 'OK'
