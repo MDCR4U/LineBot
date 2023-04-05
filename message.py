@@ -11,9 +11,9 @@ def imagemap_message():
     url_left_down ="https://www.youtube.com/watch?v=iOu5DwEQaJE"
     url_right_down1 = "https://www.youtube.com/watch?v=R9cx3kgwWD0"
     url_right_down2 ="https://www.youtube.com/watch?v=DAlIup87Aso&t=26s"
-
+    print(background_url)
     message = ImagemapSendMessage(
-        base_url=background_url,      #顯示的圖片 2000 * 2000
+        base_url="https://mdcgenius.tw/image/background.jpg",      #顯示的圖片 2000 * 2000
         alt_text='主畫面',
         base_size=BaseSize(height=2000, width=2000),
         actions=[                                       # 依據顯示 的圖片  做切割處理動作 
