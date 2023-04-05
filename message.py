@@ -182,7 +182,7 @@ def Carousel_Template():
     return message
 
 #TemplateSendMessage - ImageCarouselTemplate(圖片旋轉木馬)
-def image_carousel_message1():
+def image_carousel_message1_z():
     message = TemplateSendMessage(
         alt_text='我們的產品',
         template=ImageCarouselTemplate(

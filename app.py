@@ -167,7 +167,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     #elif '圖片畫廊' in msg:
     elif '/S005' in msg:
-        message = image_carousel_message1# test()
+        message = image_carousel_message1 # test()
         line_bot_api.reply_message(event.reply_token, message)
     #elif '功能列表' in msg:
     elif 'S006' in msg:        
