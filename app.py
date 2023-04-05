@@ -63,7 +63,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 line_user_id = ''
 
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/r4u011", methods=['POST'])
+@app.route("/r4u012", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
    
@@ -167,7 +167,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     #elif '圖片畫廊' in msg:
     elif '/S005' in msg:
-        message = image_carousel_message1 # test()
+        message = image_carousel_message1() # test()
         line_bot_api.reply_message(event.reply_token, message)
     #elif '功能列表' in msg:
     elif 'S006' in msg:        
