@@ -112,7 +112,7 @@ def handle_message(event):
 
     message_text = msg
     if message_text.startswith('#'):
-        openai.api_key = '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' #os.environ['OPENAI_API_KEY']
+        openai.api_key = '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' #os.environ['OPENAI_API_KEY']
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
             prompt=message_text[1:],
