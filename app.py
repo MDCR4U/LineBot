@@ -63,7 +63,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 line_user_id = ''
 
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/r4u012", methods=['POST'])
+@app.route("/r4u013", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
    
@@ -124,6 +124,7 @@ def handle_message(event):
             prompt=msg[1:],
             max_tokens=100
         ).choices[0].text
+        print("response ======" + gpt_response)
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=gpt_response)
