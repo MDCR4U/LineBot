@@ -121,13 +121,13 @@ def handle_message(event):
         openai.api_key = wkey.decode('utf-8') 
         print(openai.api_key + msg)
         file.close()
-        #gpt_response = openai.Completion.create(
-        #    engine='text-davinci-003',
-        #    prompt=msg[1:],
-        #    temperature=0.5,
-        #    n=1,
-        #    max_tokens=200
-        #).choices[0].text
+        gpt_response = openai.Completion.create(
+            engine='text-davinci-003',
+            prompt=msg[1:],
+            temperature=0.5,
+            n=1,
+            max_tokens=200
+        ).choices[0].text
 
         gpt_response ="abcdefgh"
         print("Line BOT reply ======>" + gpt_response)
