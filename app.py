@@ -122,7 +122,7 @@ def handle_message(event):
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
             prompt=msg[1:],
-            max_tokens=4096
+            max_tokens=4000
         ).choices[0].text
         print("response ======" + gpt_response)
         line_bot_api.reply_message(
