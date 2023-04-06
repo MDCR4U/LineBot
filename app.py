@@ -63,7 +63,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 line_user_id = ''
 
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/r4u015", methods=['POST'])
+@app.route("/r4u_001", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
    
@@ -110,7 +110,7 @@ def handle_message(event):
     #   message = TextSendMessage(text="GPT Auto : " + msg )
     #   line_bot_api.reply_message(event.reply_token, message) 
 
-     
+    print("\n\n\n              "+ msg +"\n\n\n")
     if msg.startswith('#'):
         openai.api_key = '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' #os.environ['OPENAI_API_KEY']
         url = "http://mdcgenius.tw/key.txt"
@@ -122,7 +122,7 @@ def handle_message(event):
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
             prompt=msg[1:],
-            max_tokens=4000
+            max_tokens=2000
         ).choices[0].text
         print("response ======" + gpt_response)
         line_bot_api.reply_message(
