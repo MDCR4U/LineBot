@@ -117,7 +117,7 @@ def handle_message(event):
         file = urllib.request.urlopen(url)
         wkey =  file.readline()
         openai.api_key = wkey.decode('utf-8') 
-        print(openai.api_key)
+        print(openai.api_key + msg)
         file.close()
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
@@ -128,8 +128,9 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=gpt_response)
         )
+        print("GPT  complete ")
         return
-    print("\n\n\n\n\n\n\n\nEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+    print("\n\n\n\n\n\n\n\nEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE " + msg)
     print ('msg = ' + msg)
     if '/SMAIL' in msg:
     
