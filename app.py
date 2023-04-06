@@ -126,23 +126,24 @@ def handle_message(event):
             prompt=msg[1:],
             temperature=0.5,
             n=1,
-            max_tokens=2000
+            max_tokens=200
         ).choices[0].text
 
-        print("Line BOT reply ==xxxxxx====" + gpt_response)
+        
         
         #line_bot_api.reply_message(
         #    event.reply_token,
         #    TextSendMessage(text="line bot reply gpt \n" + gpt_response)
         #)
-        print("line bot reply gpt \n" + gpt_response)
+        print("Line BOT reply ==xxxxxx====" + gpt_response)
+
         #line_bot_api.push_message(
         #    usr,
         #    TextSendMessage(text=msg +"\n" + gpt_response)            
         #)
         return 
-    print("Line BOT reply ======GPT  complete ")
-    return 
+     
+ 
     if '/SMAIL' in msg:
         from datetime import datetime
         now = datetime.now() # current date and time
