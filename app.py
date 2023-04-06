@@ -63,7 +63,7 @@ handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 line_user_id = ''
 
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/r4u014", methods=['POST'])
+@app.route("/r4u015", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
    
@@ -122,7 +122,7 @@ def handle_message(event):
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
             prompt=msg[1:],
-            max_tokens=500
+            max_tokens=4096
         ).choices[0].text
         print("response ======" + gpt_response)
         line_bot_api.reply_message(
