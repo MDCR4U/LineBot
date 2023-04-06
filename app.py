@@ -131,10 +131,11 @@ def handle_message(event):
 
         print("Line BOT reply ==xxxxxx====" + gpt_response)
         
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="line bot reply gpt \n" + gpt_response)
-        )
+        #line_bot_api.reply_message(
+        #    event.reply_token,
+        #    TextSendMessage(text="line bot reply gpt \n" + gpt_response)
+        #)
+        print("line bot reply gpt \n" + gpt_response)
         #line_bot_api.push_message(
         #    usr,
         #    TextSendMessage(text=msg +"\n" + gpt_response)            
