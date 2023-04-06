@@ -73,12 +73,13 @@ def callback():
     app.logger.info("Request body: " + body)
     # handle webhook body
     try:
+        print("Handle event")
         handler.handle(body, signature)
-        print("control on def callback")
+        print("control return to   callback")
     except InvalidSignatureError:
         abort(400)
     
-
+    print("call back return")
     return 'OK'  #ok(200)
 
 
@@ -123,19 +124,25 @@ def handle_message(event):
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
             prompt=msg[1:],
+            temperature=0.5,
+            n=1,
             max_tokens=2000
         ).choices[0].text
+
         print("Line BOT reply ==xxxxxx====" + gpt_response)
-        #line_bot_api.reply_message(
-        #    event.reply_token,
-        #    TextSendMessage(text=gpt_response)
-        #)
-        line_bot_api.push_message(
-            usr,
-            TextSendMessage(text=msg +"\n" + gpt_response)            
+        
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=gpt_response)
         )
-        print("GPT  complete ")
-    elif '/SMAIL' in msg:
+        #line_bot_api.push_message(
+        #    usr,
+        #    TextSendMessage(text=msg +"\n" + gpt_response)            
+        #)
+        print("Line BOT reply ======GPT  complete ")
+        return
+    
+    if '/SMAIL' in msg:
         from datetime import datetime
         now = datetime.now() # current date and time
         sendlog = send_mail(usr,msg)
