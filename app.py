@@ -70,6 +70,7 @@ def callback():
     signature = request.headers['X-Line-Signature']
     # get request body as text
     body = request.get_data(as_text=True)
+    print("body = " + body)
     app.logger.info("Request body: " + body)
     # handle webhook body
     try:
@@ -129,7 +130,7 @@ def handle_message(event):
             max_tokens=200
         ).choices[0].text
 
-        gpt_response ="abcdefgh"
+        gpt_response =gpt_response[0:20]
         print("Line BOT reply ======>" + gpt_response)
         line_bot_api.reply_message(
             event.reply_token,
