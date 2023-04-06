@@ -112,7 +112,7 @@ def handle_message(event):
     #   message = TextSendMessage(text="GPT Auto : " + msg )
     #   line_bot_api.reply_message(event.reply_token, message) 
 
-    print("\n\n\n   handle START===>           "+ msg +"\n\n\n")
+    print("\n   handle START===>           "+ msg +"\n")
     if msg.startswith('#'):
         openai.api_key = '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' #os.environ['OPENAI_API_KEY']
         url = "http://mdcgenius.tw/key.txt"
@@ -130,12 +130,12 @@ def handle_message(event):
         ).choices[0].text
 
         
-        
-        #line_bot_api.reply_message(
-        #    event.reply_token,
-        #    TextSendMessage(text="line bot reply gpt \n" + gpt_response)
-        #)
-        print("Line BOT reply ==xxxxxx====" + gpt_response)
+        print("Line BOT reply ======>" + gpt_response)
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text="line bot reply gpt \n" + gpt_response)
+        )
+        #print("Line BOT reply ==xxxxxx====" + gpt_response)
 
         #line_bot_api.push_message(
         #    usr,
