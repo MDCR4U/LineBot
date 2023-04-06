@@ -113,6 +113,11 @@ def handle_message(event):
     message_text = msg
     if message_text.startswith('#'):
         openai.api_key = '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' #os.environ['OPENAI_API_KEY']
+        url = "http://mdcgenius.tw/key.txt"
+        file = urllib.request.urlopen(url)
+        openai.api_key = file.readline()
+        print(openai.api_key)
+        file.close()
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
             prompt=message_text[1:],
