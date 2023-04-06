@@ -133,15 +133,15 @@ def handle_message(event):
         
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=gpt_response)
+            TextSendMessage(text="line bot reply gpt \n" + gpt_response)
         )
         #line_bot_api.push_message(
         #    usr,
         #    TextSendMessage(text=msg +"\n" + gpt_response)            
         #)
-        print("Line BOT reply ======GPT  complete ")
-        return
-    
+        return 
+    print("Line BOT reply ======GPT  complete ")
+    return 
     if '/SMAIL' in msg:
         from datetime import datetime
         now = datetime.now() # current date and time
