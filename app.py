@@ -124,36 +124,30 @@ def handle_message(event):
             prompt=msg[1:],
             max_tokens=2000
         ).choices[0].text
-        print("Line BOT reply ======" + gpt_response)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=gpt_response)
+        print("Line BOT reply ==xxxxxx====" + gpt_response)
+        #line_bot_api.reply_message(
+        #    event.reply_token,
+        #    TextSendMessage(text=gpt_response)
+        #)
+        line_bot_api.push_message(
+            usr,
+            TextSendMessage(text=msg +"\n" + gpt_response)            
         )
         print("GPT  complete ")
-        return
-    print("\n\n\n\n\n\n\n\nEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE " + msg)
-    print ('msg = ' + msg)
-    if '/SMAIL' in msg:
-    
+    elif '/SMAIL' in msg:
         from datetime import datetime
-
         now = datetime.now() # current date and time
-    #    print(now.strftime("%m/%d/%Y, %H:%M:%S") + " start send message")
         sendlog = send_mail(usr,msg)
-    #    print (sendlog)
-    #    sendlog = "manual test message"
-        
         message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         print("Line BOT reply ======  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         line_bot_api.reply_message(event.reply_token, message)  
-        return 
-    
+           
         #line_bot_api.push_message(usr, message)
         #print("reply tokem" +event.reply_token)
         #line_bot_api.reply_message(event.reply_token, message)
         #line_bot_api.push_message(usr, message)
-    print("Line BOT reply ======  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb    " + msg)
-    if '/main' in msg:
+        print("Line BOT reply ===complete ===  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb    " + msg)
+    elif '/main' in msg:
         wsmenu = '目錄:\n 指令   命令內容\n==============\n/S001:圖片展示\n/S002:旅遊現金抵用券\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:我們的產品\n/S006:功能列表'
         wsmenu = wsmenu + '\n/TSTMAIL:service@mdcr4u.com.tw \n 發送測試信件說明\n /TSTMAIL=> 指令 +":" + "收件者信箱")'
         wsmenu = wsmenu + '\n/SMAIL:8  \n  批量發送信件說明\n SMAIL=> 指令 + ":" + 發送數量'
@@ -218,8 +212,8 @@ def handle_message(event):
         print(reply_text)
         message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
-        #print(' call back return OK')
-        #return 'OK'
+    print(' call back return OK')
+    
      
     
 
