@@ -110,8 +110,8 @@ def handle_message(event):
     #   message = TextSendMessage(text="GPT Auto : " + msg )
     #   line_bot_api.reply_message(event.reply_token, message) 
 
-    message_text = msg
-    if message_text.startswith('#'):
+     
+    if msg.startswith('#'):
         openai.api_key = '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' #os.environ['OPENAI_API_KEY']
         url = "http://mdcgenius.tw/key.txt"
         file = urllib.request.urlopen(url)
@@ -121,7 +121,7 @@ def handle_message(event):
         file.close()
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
-            prompt=message_text[1:],
+            prompt=msg[1:],
             max_tokens=100
         ).choices[0].text
         line_bot_api.reply_message(
@@ -129,7 +129,7 @@ def handle_message(event):
             TextSendMessage(text=gpt_response)
         )
         return
-
+    print("\n\n\n\n\n\n\n\nEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
     print ('msg = ' + msg)
     if '/SMAIL' in msg:
     
