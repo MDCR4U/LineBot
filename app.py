@@ -74,6 +74,7 @@ def callback():
     # handle webhook body
     try:
         handler.handle(body, signature)
+        print("control on def callback")
     except InvalidSignatureError:
         abort(400)
     
@@ -110,7 +111,7 @@ def handle_message(event):
     #   message = TextSendMessage(text="GPT Auto : " + msg )
     #   line_bot_api.reply_message(event.reply_token, message) 
 
-    print("\n\n\n              "+ msg +"\n\n\n")
+    print("\n\n\n   handle START===>           "+ msg +"\n\n\n")
     if msg.startswith('#'):
         openai.api_key = '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' #os.environ['OPENAI_API_KEY']
         url = "http://mdcgenius.tw/key.txt"
@@ -187,9 +188,9 @@ def handle_message(event):
         message = image_carousel_message1() # test()
         line_bot_api.reply_message(event.reply_token, message)
     #elif '功能列表' in msg:
-    elif 'S006' in msg:        
-        message = function_list()
-        line_bot_api.reply_message(event.reply_token, message)
+    #elif 'S006' in msg:        
+    #    message = function_list()
+    #    line_bot_api.reply_message(event.reply_token, message)
     else :
         user_id = event.source.user_id
         user_type = event.source.type
