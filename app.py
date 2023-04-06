@@ -110,6 +110,19 @@ def handle_message(event):
     #   message = TextSendMessage(text="GPT Auto : " + msg )
     #   line_bot_api.reply_message(event.reply_token, message) 
 
+    message_text = msg
+    if message_text.startswith('#'):
+        gpt_response = openai.Completion.create(
+            engine='text-davinci-003',
+            prompt=message_text[1:],
+            max_tokens=100
+        ).choices[0].text
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=gpt_response)
+        )
+        return
+
     print ('msg = ' + msg)
     if '/SMAIL' in msg:
     
