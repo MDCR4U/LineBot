@@ -84,7 +84,7 @@ github_prj = line[12:].strip()
 line = file.readline().strip('\n')   #line1 githubproject
 #line=line.strip('\n')
 ftpurl= line[12:].strip()
-ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
+#ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
 print(ftpurl)
 file.close()
 
@@ -93,6 +93,7 @@ file.close()
  
 # download key file
 url = ftpurl #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
+url = ftpurl + "key.txt"
 filename = 'key.txt'
 print(url + "-" + filename)
 urllib.request.urlretrieve(url, filename)
@@ -102,15 +103,15 @@ print("========================= " + url )
 file = open('key.txt','r',encoding="utf-8")
 line = file.readline().strip('\n')                 #line_access_token = ''
 line_access_token =line[17:].strip()
-print(line+"*" + line_access_token + "#")
+print("*" + line_access_token + "#")
 
 line = file.readline().strip('\n')                #line_channel_secret = ''
 line_channel_secret = line[17:].strip()
-print(line+"*\n" + line_channel_secret + "#")
+print("*" + line_channel_secret + "#")
 
 line = file.readline().strip('\n')                #gpt_token
 gpt_token = line[17:].strip()
-print(line+"*" + gpt_token + "#")
+print("*" + gpt_token + "#")
 
 
 # Channel Access Token 
@@ -265,9 +266,9 @@ def handle_message(event):
             reply_text = "您是在群組或聊天室中"
 
              
-            print(reply_text)
-            message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
-            line_bot_api.reply_message(event.reply_token,  message )
+        print(reply_text)
+        message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
+        line_bot_api.reply_message(event.reply_token,  message )
 
     print(' call back return OK')
     
