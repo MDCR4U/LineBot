@@ -72,11 +72,11 @@ github_id ="MDCR4U"
 github_prj="LineBot"
 
 file = open('config.txt','r',encoding="utf-8")
-line = file.readline().strip('\n')    #line1 githubid
+line = file.readline().decode('utf-8') .strip('\n')    #line1 githubid
 #line=line.strip('\n')
 github_id = line[12:].strip()         # 去除  頭尾 space
 
-line = file.readline().strip('\n')   #line1 githubproject
+line = file.readline().decode('utf-8') .strip('\n')   #line1 githubproject
 #line=line.strip('\n')
 github_prj = line[12:].strip()
 file.close()
@@ -87,12 +87,12 @@ githuburl="https://github.com/" + github_id + "/" + github_prj + "/blob/main/"
 #取得 系統 KEY 
 url = githuburl + "key.txt"
 print("========================= " + url )
-file = urllib.request.urlopen(url,encoding="utf-8")
-line = file.readline().strip('\n')                 #line_access_token = ''
+file = urllib.request.urlopen(url)
+line = file.readline().decode('utf-8') .strip('\n')                 #line_access_token = ''
 line_access_token =line[17:].strip()
-line = file.readline().strip('\n')                #line_channel_secret = ''
+line = file.readline().decode('utf-8') .strip('\n')                #line_channel_secret = ''
 line_channel_secret = line[17:].strip()
-line = file.readline().strip('\n')                #gpt_token
+line = file.readline().decode('utf-8') .strip('\n')                #gpt_token
 gpt_token = line[17:].strip()
 print ("=====================================\n" + line_channel_secret +"\n" + gpt_token + "\n" + line_access_token + "\n======================") 
 
