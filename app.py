@@ -84,6 +84,7 @@ github_prj = line[12:].strip()
 line = file.readline().strip('\n')   #line1 githubproject
 #line=line.strip('\n')
 ftpurl= line[12:].strip()
+print(ftpurl)
 file.close()
 
  
@@ -98,15 +99,17 @@ urllib.request.urlretrieve(url, filename)
 print("========================= " + url )
 file = open('key.txt','r',encoding="utf-8")
 line = file.readline().strip('\n')                 #line_access_token = ''
-print(line+"*")
 line_access_token =line[17:].strip()
+print(line+"*" + line_access_token + "#")
+
 line = file.readline().strip('\n')                #line_channel_secret = ''
-print(line+"*")
 line_channel_secret = line[17:].strip()
+print(line+"*\n" + line_channel_secret + "#")
+
 line = file.readline().strip('\n')                #gpt_token
-print(line+"*")
 gpt_token = line[17:].strip()
-print ("=====================================\n" + line_channel_secret +"*\n" + gpt_token + "*\n" + line_access_token + "*\n======================") 
+print(line+"*" + gpt_token + "#")
+
 
 # Channel Access Token 
 line_bot_api = LineBotApi(line_access_token)
