@@ -290,7 +290,7 @@ def initcounter()   :
 def check_line_id(ftpurl ,lineid):
      
     url = ftpurl + "authids.txt"
-    filename = 'key.txt'
+    filename = 'authids.txt'
     print("check_line_id " + url + "-" + filename)
     urllib.request.urlretrieve(url, filename)
     with open("authids.txt", "r", encoding="utf-8") as f:
