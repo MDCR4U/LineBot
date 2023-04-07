@@ -23,6 +23,7 @@ import datetime
 import smtplib
 import time
 import sys
+import urllib.request
  
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -80,21 +81,25 @@ line = file.readline().strip('\n')   #line1 githubproject
 #line=line.strip('\n')
 github_prj = line[12:].strip()
 file.close()
+
 print ("=====================================\n" + github_id +"\n" + github_prj  + "\n======================") 
 
 githuburl="https://github.com/" + github_id + "/" + github_prj + "/blob/main/"
-
-#取得 系統 KEY 
+# download key file
 url = githuburl + "key.txt"
+filename = 'key.txt'
+urllib.request.urlretrieve(url, filename)
+#取得 系統 KEY 
+
 print("========================= " + url )
-file = urllib.request.urlopen(url)
-line = file.readline().decode('utf-8').strip('\n')                 #line_access_token = ''
+file = open('key.txt','r',encoding="utf-8")
+line = file.readline().strip('\n')                 #line_access_token = ''
 print(line+"*")
 line_access_token =line[17:].strip()
-line = file.readline().decode('utf-8').strip('\n')                #line_channel_secret = ''
+line = file.readline().strip('\n')                #line_channel_secret = ''
 print(line+"*")
 line_channel_secret = line[17:].strip()
-line = file.readline().decode('utf-8').strip('\n')                #gpt_token
+line = file.readline().strip('\n')                #gpt_token
 print(line+"*")
 gpt_token = line[17:].strip()
 print ("=====================================\n" + line_channel_secret +"*\n" + gpt_token + "*\n" + line_access_token + "*\n======================") 
