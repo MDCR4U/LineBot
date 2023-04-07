@@ -55,13 +55,50 @@ import time
 
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
-# Channel Access Token
-line_bot_api = LineBotApi('gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU=')
-# Channel Secret
-handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
-#@app.route("/")
 
+line_access_token = ''
+line_channel_secret = ''
+gpt_token = ''
+# Channel Access Token
+#line_bot_api = LineBotApi('gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU=')
+# Channel Secret
+#handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
+ 
 line_user_id = ''
+
+#https://github.com/MDCR4U/LineBot/blob/main/mail.csv
+#讀取 config.sys 取得 information 
+github_id ="MDCR4U"
+github_prj="LineBot"
+
+file = open('config.txt','r')
+line = file.readline().strip('\n')    #line1 githubid
+#line=line.strip('\n')
+github_id = line[12:].strip()         # 去除  頭尾 space
+
+line = file.readline().strip('\n')   #line1 githubproject
+#line=line.strip('\n')
+github_prj = line[12:].strip()
+file.close()
+ 
+
+githuburl="https://github.com/" + github_id + "/" + github_prj + "blob/main/"
+print ("=====================================\n" + github_id +"\n" + github_prj + "\n" + githuburl + "\n======================")
+#取得 系統 KEY 
+url = githuburl + "key.txt"
+file = urllib.request.urlopen(url)
+line = file.readline().strip('\n')                 #line_access_token = ''
+line_access_token =line[17:].strip()
+line = file.readline().strip('\n')                #line_channel_secret = ''
+line_channel_secret = line[17:].strip()
+line = file.readline().strip('\n')                #gpt_token
+gpt_token = line[17:].strip()
+print ("=====================================\n" + line_channel_secret +"\n" + gpt_token + "\n" + line_access_token + "\n======================") 
+
+# Channel Access Token 
+line_bot_api = LineBotApi(line_access_token)
+# Channel Secret
+handler = WebhookHandler(line_channel_secret)
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/r4u_002", methods=['POST'])
@@ -90,32 +127,25 @@ def callback():
 def handle_message(event):
     usr =event.source.user_id
     line_user_id = usr
+    print("\n===================\n"+ line_user_id + "\n======================")
     msg = event.message.text
  
     # first 4 char 
     # last 5 char string[-5:])
     # string.upper
     # string.lower
-    #if msg[0:4] == '/gpt':   
-    #   print ('\n** link function to get gpt response' + '**') 
-    #   gpt_response = gptapi()
-    #   message = TextSendMessage(text='GPT response : ' + gpt_response  )
-    #   line_bot_api.reply_message(event.reply_token, message) 
-    #elif 'gpt' in msg:
-    #   #gpt_response = gptapi()
-    #   #message = TextSendMessage(text="GPT 回應 : " + gpt_response )
-    #   message = TextSendMessage(text="GPT Auto : " + msg )
-    #   line_bot_api.reply_message(event.reply_token, message) 
+  
 
     print("\n   handle START===>           "+ msg +"\n")
     if msg.startswith('#'):
-        openai.api_key = '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' #os.environ['OPENAI_API_KEY']
-        url = "http://mdcgenius.tw/key.txt"
-        file = urllib.request.urlopen(url)
-        wkey =  file.readline()
-        openai.api_key = wkey.decode('utf-8') 
+#        url=githubutl +  "key.txt"
+#        url = "http://mdcgenius.tw/key.txt"
+#        file = urllib.request.urlopen(url)
+#        wkey =  file.readline()
+#        openai.api_key = wkey.decode('utf-8') 
+        openai.api_key = gpt_token.decode('utf-8') 
         print(openai.api_key + msg)
-        file.close()
+        #file.close()
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
             prompt=msg[1:],
