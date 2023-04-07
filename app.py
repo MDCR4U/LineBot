@@ -115,9 +115,9 @@ print("*" + gpt_token + "#")
 
 
 # Channel Access Token 
-#line_bot_api = LineBotApi(line_access_token)
+line_bot_api = LineBotApi(line_access_token)
 # Channel Secret
-#handler = WebhookHandler(line_channel_secret)
+handler = WebhookHandler(line_channel_secret)
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/r4u_003", methods=['POST'])
