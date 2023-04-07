@@ -287,8 +287,21 @@ def initcounter()   :
     # 更新郵件發送記錄
     with open("mail_counter.log", "w", encoding="utf-8") as f:
             f.write(str(0))
-
-def check_line_id(lineid) :
+def check_line_id(ftpurl ,lineid):
+     
+    url = ftpurl + "authids.txt"
+    filename = 'key.txt'
+    print("check_line_id " + url + "-" + filename)
+    urllib.request.urlretrieve(url, filename)
+    with open("authids.txt", "r", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        next(reader)  # 跳過表頭
+        ids = [row for row in reader]
+    for j, row in enumerate(ids): 
+        if   lineid in ids[j]:
+             return(ids[j][34:])  
+    return (" ")    
+def check_line_idx(lineid) :
     url = "http://mdcgenius.tw/authids.txt"
      
     wschkfile = check_url_file(url)
@@ -300,6 +313,8 @@ def check_line_id(lineid) :
     wauthid  = file.read()
     wauthid  = wauthid.decode('utf-8')     
 #    print ( wauthid)
+
+
     if  lineid  in wauthid :
 #        print('授權成功')
         return ('')

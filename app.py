@@ -56,23 +56,20 @@ import time
 
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
-
+#Global Variable
 line_access_token = ''
 line_channel_secret = ''
 ftpurl = ''
 gpt_token = ''
-# Channel Access Token
 line_bot_api = LineBotApi('gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU=')
-# Channel Secret
 handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
- 
 line_user_id = ''
-
-#https://github.com/MDCR4U/LineBot/blob/main/mail.csv
-#讀取 config.sys 取得 information 
 github_id ="MDCR4U"
 github_prj="LineBot"
+userFolder= ''
+sendmail_auth = 'N'
 
+#讀取 config.sys 取得 information  
 file = open('config.txt','r',encoding="utf-8")
 line = file.readline().strip('\n')    #line1 githubid
 #line=line.strip('\n')
@@ -146,6 +143,9 @@ def callback():
 def handle_message(event):
     usr =event.source.user_id
     line_user_id = usr
+    userFolder = check_line_id(ftpurl ,line_user_id)
+    print("USER Folder " + userFolder)
+    return()
     print("\n===================\n"+ line_user_id + "\n======================")
     msg = event.message.text
  
@@ -186,8 +186,10 @@ def handle_message(event):
             #print("Exception Value:", exc_value)
             #print("Traceback Object:", exc_traceback)
     elif '/SMAIL' in msg:
+        
         from datetime import datetime
         now = datetime.now() # current date and time
+        #增加 user folder
         sendlog = send_mail(usr,msg)
         message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         #print("Line BOT reply ======  aaaaaaaaaaaaaaaaaaaa")
