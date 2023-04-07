@@ -22,6 +22,7 @@
 import datetime
 import smtplib
 import time
+import sys
  
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -132,10 +133,16 @@ def handle_message(event):
 
         gpt_response =gpt_response[0:20]
         print("Line BOT reply ======>" + gpt_response)
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text="line bot reply gpt \n" + gpt_response)
-        )
+        try :
+            line_bot_api.reply_message(
+                event.reply_token,
+                TextSendMessage(text="line bot reply gpt \n" + gpt_response)
+            )
+        except:
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            print("Exception Type:", exc_type)
+            print("Exception Value:", exc_value)
+            print("Traceback Object:", exc_traceback)
         #print("Line BOT reply ==xxxxxx====" + gpt_response)
 
         #line_bot_api.push_message(
