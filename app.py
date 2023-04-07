@@ -59,6 +59,7 @@ static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
 
 line_access_token = ''
 line_channel_secret = ''
+ftpurl = ''
 gpt_token = ''
 # Channel Access Token
 line_bot_api = LineBotApi('gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU=')
@@ -80,22 +81,22 @@ github_id = line[12:].strip()         # 去除  頭尾 space
 line = file.readline().strip('\n')   #line1 githubproject
 #line=line.strip('\n')
 github_prj = line[12:].strip()
+line = file.readline().strip('\n')   #line1 githubproject
+#line=line.strip('\n')
+ftpurl= line[12:].strip()
 file.close()
 
-print ("=====================================\n" + github_id +"\n" + github_prj  + "\n======================") 
+ 
 
-githuburl="https://github.com/" + github_id + "/" + github_prj + "/blob/main/"
+ 
 # download key file
-url = 'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
+url = ftpurl + "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
 filename = 'key.txt'
 urllib.request.urlretrieve(url, filename)
 #取得 系統 KEY 
 
 print("========================= " + url )
 file = open('key.txt','r',encoding="utf-8")
-xx=file.read()
-print("##" + xx + "##")
-
 line = file.readline().strip('\n')                 #line_access_token = ''
 print(line+"*")
 line_access_token =line[17:].strip()
@@ -108,9 +109,9 @@ gpt_token = line[17:].strip()
 print ("=====================================\n" + line_channel_secret +"*\n" + gpt_token + "*\n" + line_access_token + "*\n======================") 
 
 # Channel Access Token 
-#line_bot_api = LineBotApi(line_access_token)
+line_bot_api = LineBotApi(line_access_token)
 # Channel Secret
-#handler = WebhookHandler(line_channel_secret)
+handler = WebhookHandler(line_channel_secret)
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/r4u_003", methods=['POST'])
