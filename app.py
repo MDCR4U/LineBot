@@ -82,7 +82,7 @@ github_prj = line[12:].strip()
 file.close()
 print ("=====================================\n" + github_id +"\n" + github_prj  + "\n======================") 
 
-githuburl="https://github.com/" + github_id + "/" + github_prj + "blob/main/"
+githuburl="https://github.com/" + github_id + "/" + github_prj + "/blob/main/"
 
 #取得 系統 KEY 
 url = githuburl + "key.txt"
