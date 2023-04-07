@@ -86,7 +86,7 @@ print ("=====================================\n" + github_id +"\n" + github_prj 
 
 githuburl="https://github.com/" + github_id + "/" + github_prj + "/blob/main/"
 # download key file
-url = githuburl + "key.txt"
+url = 'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
 filename = 'key.txt'
 urllib.request.urlretrieve(url, filename)
 #取得 系統 KEY 
