@@ -133,8 +133,8 @@ def handle_message(event):
             )
         except:
             exc_type, exc_value, exc_traceback = sys.exc_info()
-            print("Exception Type:", exc_type)
-            print("Exception Value:", exc_value)
+            print("Exception Type:===>", exc_type)
+            #print("Exception Value:", exc_value)
             #print("Traceback Object:", exc_traceback)
         #print("Line BOT reply ==xxxxxx====" + gpt_response)
 
@@ -220,7 +220,7 @@ def handle_message(event):
             print(reply_text)
             message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
             line_bot_api.reply_message(event.reply_token,  message )
-            
+
     print(' call back return OK')
     
      
