@@ -84,6 +84,7 @@ github_prj = line[12:].strip()
 line = file.readline().strip('\n')   #line1 githubproject
 #line=line.strip('\n')
 ftpurl= line[12:].strip()
+ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
 print(ftpurl)
 file.close()
 
@@ -91,7 +92,7 @@ file.close()
 
  
 # download key file
-url = ftpurl + "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
+url = ftpurl #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
 filename = 'key.txt'
 print(url + "-" + filename)
 urllib.request.urlretrieve(url, filename)
