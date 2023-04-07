@@ -287,17 +287,36 @@ def initcounter()   :
     # 更新郵件發送記錄
     with open("mail_counter.log", "w", encoding="utf-8") as f:
             f.write(str(0))
+
+
 def check_line_id(ftpurl ,lineid):
      
     url = ftpurl + "authids.txt"
+# 讀取文件內容
+    file = urllib.request.urlopen(url)
+    line = file.readline()
+    while line:
+        wslineid = line.decode('utf-8')
+        print(wslineid)
+        if   lineid in wslineid:
+             return(wslineid[34:])  
+        line = file.readline()
+    return("not found")    
+
+
     filename = 'authids.txt'
     print("check_line_id " + url + "-" + filename)
+    print(" line id : " + lineid)
     urllib.request.urlretrieve(url, filename)
+
     with open("authids.txt", "r", encoding="utf-8") as f:
         reader = csv.reader(f)
-        next(reader)  # 跳過表頭
         ids = [row for row in reader]
+
+    print(ids + " " + str(len(ids)  ))
+    
     for j, row in enumerate(ids): 
+        print(ids[j])
         if   lineid in ids[j]:
              return(ids[j][34:])  
     return (" ")    
