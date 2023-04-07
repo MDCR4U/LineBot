@@ -1,0 +1,2 @@
+githubid  = MDCR4U
+githubprj = LineBot
