@@ -71,17 +71,17 @@ def callback():
     signature = request.headers['X-Line-Signature']
     # get request body as text
     body = request.get_data(as_text=True)
-    print("body = " + body)
+    #print("body = " + body)
     app.logger.info("Request body: " + body)
     # handle webhook body
     try:
-        print("Handle event " + body)
+#        print("Handle event " + body)
         handler.handle(body, signature)
-        print("control return to   callback")
+#        print("control return to   callback")
     except InvalidSignatureError:
         abort(400)
     
-    print("call back return")
+#    print("call back return")
     return 'OK'  #ok(200)
 
 
@@ -91,14 +91,7 @@ def handle_message(event):
     usr =event.source.user_id
     line_user_id = usr
     msg = event.message.text
-    #message = TextSendMessage(text= "您是說 : " + msg  + "嗎?(pushed)\n" + usr)
-    #line_bot_api.push_message(usr, message)
-    #print("event type :" + event.type)
-    #print ("event source\n==================================================================")
-    #print(event.source)
-    #print (msg)
-    #print ("event source\n==================================================================")
-
+ 
     # first 4 char 
     # last 5 char string[-5:])
     # string.upper
@@ -142,29 +135,29 @@ def handle_message(event):
             exc_type, exc_value, exc_traceback = sys.exc_info()
             print("Exception Type:", exc_type)
             print("Exception Value:", exc_value)
-            print("Traceback Object:", exc_traceback)
+            #print("Traceback Object:", exc_traceback)
         #print("Line BOT reply ==xxxxxx====" + gpt_response)
 
         #line_bot_api.push_message(
         #    usr,
         #    TextSendMessage(text=msg +"\n" + gpt_response)            
         #)
-        return 
+        #return 
      
  
-    if '/SMAIL' in msg:
+    elif '/SMAIL' in msg:
         from datetime import datetime
         now = datetime.now() # current date and time
         sendlog = send_mail(usr,msg)
         message = TextSendMessage(text= "完成信件發送 : " + sendlog)
-        print("Line BOT reply ======  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+        #print("Line BOT reply ======  aaaaaaaaaaaaaaaaaaaa")
         line_bot_api.reply_message(event.reply_token, message)  
            
         #line_bot_api.push_message(usr, message)
         #print("reply tokem" +event.reply_token)
         #line_bot_api.reply_message(event.reply_token, message)
         #line_bot_api.push_message(usr, message)
-        print("Line BOT reply ===complete ===  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb    " + msg)
+        #print("Line BOT reply ===complete ===  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb    " + msg)
     elif '/main' in msg:
         wsmenu = '目錄:\n 指令   命令內容\n==============\n/S001:圖片展示\n/S002:旅遊現金抵用券\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:我們的產品\n/S006:功能列表'
         wsmenu = wsmenu + '\n/TSTMAIL:service@mdcr4u.com.tw \n 發送測試信件說明\n /TSTMAIL=> 指令 +":" + "收件者信箱")'
@@ -223,13 +216,11 @@ def handle_message(event):
             # 群組或聊天室
             reply_text = "您是在群組或聊天室中"
 
-        #line_bot_api.reply_message(
-        #    event.reply_token,
-        #    TextSendMessage(text=reply_text)
-        
-        print(reply_text)
-        message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
-        line_bot_api.reply_message(event.reply_token,  message )
+             
+            print(reply_text)
+            message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
+            line_bot_api.reply_message(event.reply_token,  message )
+            
     print(' call back return OK')
     
      
