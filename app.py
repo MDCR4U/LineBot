@@ -88,13 +88,16 @@ githuburl="https://github.com/" + github_id + "/" + github_prj + "/blob/main/"
 url = githuburl + "key.txt"
 print("========================= " + url )
 file = urllib.request.urlopen(url)
-line = file.readline().decode('utf-8') .strip('\n')                 #line_access_token = ''
+line = file.readline().decode('utf-8').strip('\n')                 #line_access_token = ''
+print(line+"*")
 line_access_token =line[17:].strip()
-line = file.readline().decode('utf-8') .strip('\n')                #line_channel_secret = ''
+line = file.readline().decode('utf-8').strip('\n')                #line_channel_secret = ''
+print(line+"*")
 line_channel_secret = line[17:].strip()
-line = file.readline().decode('utf-8') .strip('\n')                #gpt_token
+line = file.readline().decode('utf-8').strip('\n')                #gpt_token
+print(line+"*")
 gpt_token = line[17:].strip()
-print ("=====================================\n" + line_channel_secret +"\n" + gpt_token + "\n" + line_access_token + "\n======================") 
+print ("=====================================\n" + line_channel_secret +"*\n" + gpt_token + "*\n" + line_access_token + "*\n======================") 
 
 # Channel Access Token 
 line_bot_api = LineBotApi(line_access_token)
