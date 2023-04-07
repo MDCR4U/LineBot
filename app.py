@@ -71,7 +71,7 @@ line_user_id = ''
 github_id ="MDCR4U"
 github_prj="LineBot"
 
-file = open('config.txt','r')
+file = open('config.txt','r',encoding="utf-8")
 line = file.readline().strip('\n')    #line1 githubid
 #line=line.strip('\n')
 github_id = line[12:].strip()         # 去除  頭尾 space
@@ -87,7 +87,7 @@ githuburl="https://github.com/" + github_id + "/" + github_prj + "/blob/main/"
 #取得 系統 KEY 
 url = githuburl + "key.txt"
 print("========================= " + url )
-file = urllib.request.urlopen(url)
+file = urllib.request.urlopen(url,encoding="utf-8")
 line = file.readline().strip('\n')                 #line_access_token = ''
 line_access_token =line[17:].strip()
 line = file.readline().strip('\n')                #line_channel_secret = ''
