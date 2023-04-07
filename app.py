@@ -86,6 +86,7 @@ githuburl="https://github.com/" + github_id + "/" + github_prj + "blob/main/"
 print ("=====================================\n" + github_id +"\n" + github_prj + "\n" + githuburl + "\n======================")
 #取得 系統 KEY 
 url = githuburl + "key.txt"
+print("========================= " + url )
 file = urllib.request.urlopen(url)
 line = file.readline().strip('\n')                 #line_access_token = ''
 line_access_token =line[17:].strip()
