@@ -72,11 +72,11 @@ github_id ="MDCR4U"
 github_prj="LineBot"
 
 file = open('config.txt','r',encoding="utf-8")
-line = file.readline().decode('utf-8') .strip('\n')    #line1 githubid
+line = file.readline().strip('\n')    #line1 githubid
 #line=line.strip('\n')
 github_id = line[12:].strip()         # 去除  頭尾 space
 
-line = file.readline().decode('utf-8') .strip('\n')   #line1 githubproject
+line = file.readline().strip('\n')   #line1 githubproject
 #line=line.strip('\n')
 github_prj = line[12:].strip()
 file.close()
