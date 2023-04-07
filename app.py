@@ -115,15 +115,15 @@ print("*" + gpt_token + "#")
 
 
 # Channel Access Token 
-line_bot_api = LineBotApi(line_access_token)
+#line_bot_api = LineBotApi(line_access_token)
 # Channel Secret
-handler = WebhookHandler(line_channel_secret)
+#handler = WebhookHandler(line_channel_secret)
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/r4u_003", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
-   
+    print("CALL BACK PROCESS")
     signature = request.headers['X-Line-Signature']
     # get request body as text
     body = request.get_data(as_text=True)
@@ -131,7 +131,7 @@ def callback():
     app.logger.info("Request body: " + body)
     # handle webhook body
     try:
-#        print("Handle event " + body)
+        print("Handle event " + body)
         handler.handle(body, signature)
 #        print("control return to   callback")
     except InvalidSignatureError:
@@ -185,15 +185,6 @@ def handle_message(event):
             print("Exception Type:===>", exc_type)
             #print("Exception Value:", exc_value)
             #print("Traceback Object:", exc_traceback)
-        #print("Line BOT reply ==xxxxxx====" + gpt_response)
-
-        #line_bot_api.push_message(
-        #    usr,
-        #    TextSendMessage(text=msg +"\n" + gpt_response)            
-        #)
-        #return 
-     
- 
     elif '/SMAIL' in msg:
         from datetime import datetime
         now = datetime.now() # current date and time
@@ -253,7 +244,7 @@ def handle_message(event):
     else :
         user_id = event.source.user_id
         user_type = event.source.type
-    
+        print("echo message " + user_id)
         if user_type == "user":
             if user_id.startswith("U"):
             # 手機版的 LINE
