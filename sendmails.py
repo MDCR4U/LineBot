@@ -67,7 +67,7 @@ def send_mail(lineid,wmsg,userFolder):
     response.close()                                                                    # 關閉 URL
     smtp_count = len(smtp_list)   
     print (smtp_count)
-    return ("smtp = " + smtp_list)
+    return ("smtp = " + smtp_list[])
 
 
     
@@ -317,10 +317,11 @@ def check_line_id(ftpurl ,lineid):
     line = file.readline()
     while line:
         wslineid = line.decode('utf-8').strip('\n')
-        print("authids - " + wslineid)
-        if   lineid in wslineid:
-             print("check_line_id return " + wslineid[34:] +"##")
-             return(wslineid[34:])  
+        xx = wslineid.split("#", 2)
+        print("authids - " + xx[0] + "-" + xx[1] + "*")
+        if   lineid = xx[0]:
+             print("check_line_id return " +xx[1] +"##")
+             return(xx[1])  
         line = file.readline()
     print("check_line_id return space")    
     return("")    
