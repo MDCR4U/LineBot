@@ -43,7 +43,7 @@ def send_mail(lineid,wmsg,userFolder):
         return("發送信件格式 錯誤\n正確格式==>/SMAIL:nnnn\n 結束作業 :" + wstarget)   
      
     print("LINE @ id = " + lineid)
-    wssts = check_line_id(lineid)
+    wssts = check_line_id(wsftpflr,lineid)
     if   wssts == ''  :
         print('使用者 ' + lineid + ' 發送信件功能未啟動')
         return ('使用者 ' + lineid + ' 發送信件功能未啟動')
