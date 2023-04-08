@@ -32,7 +32,7 @@ def send_mail(lineid,wmsg,userFolder):
 
 
     #print("\n LINEID " + lineid)
-    wstarget = wmsg[7:]
+    wstarget = wmsg[6:]
     #print("wstarget :" + wstarget)
     if (wstarget.isdigit()):
         targetno = int(wstarget)
@@ -45,6 +45,7 @@ def send_mail(lineid,wmsg,userFolder):
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)
     if   wssts == ''  :
+        print('使用者 ' + lineid + ' 發送信件功能未啟動')
         return ('使用者 ' + lineid + ' 發送信件功能未啟動')
      
 
