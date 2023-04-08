@@ -320,7 +320,7 @@ def check_line_id(ftpurl ,lineid):
         wslineid = line.decode('utf-8').strip('\n')
         xx = wslineid.split("#", 2)
         print("authids - " + xx[0] + "-" + xx[1] + "*")
-        if   lineid = xx[0]:
+        if   lineid == xx[0]:
              print("check_line_id return " +xx[1] +"##")
              return(xx[1])  
         line = file.readline()
