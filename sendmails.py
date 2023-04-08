@@ -33,14 +33,14 @@ def send_mail(lineid,wmsg,userFolder):
 
     #print("\n LINEID " + lineid)
     wstarget = wmsg[6:]
-    #print("wstarget :" + wstarget)
+    print("wstarget :" + wstarget +"*")
     if (wstarget.isdigit()):
         targetno = int(wstarget)
         #print("要求發送筆數" + str(wstarget))
     else : 
         targetno = 0
     #        print("invalid target no ")
-        return("發送信件格式 錯誤\n正確格式==>/SMAIL:nnnn\n 結束作業 :" + wstarget)   
+        return("發送信件格式 錯誤\n正確格式==>/SMAIL:nnnn\n 結束作業 :" + wstarget +"*")   
      
     print("LINE @ id = " + lineid)
     wssts = check_line_id(wsftpflr,lineid)
