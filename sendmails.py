@@ -316,7 +316,7 @@ def check_line_id(ftpurl ,lineid):
     file = urllib.request.urlopen(url)
     line = file.readline()
     while line:
-        wslineid = line.decode('utf-8')
+        wslineid = line.decode('utf-8').strip('\n')
         print("authids - " + wslineid)
         if   lineid in wslineid:
              print("check_line_id return " + wslineid)
