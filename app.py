@@ -72,7 +72,6 @@ sendmail_auth = 'N'
 #讀取 config.sys 取得 information  
 file = open('config.txt','r',encoding="utf-8")
 line = file.readline().strip('\n')    #line1 githubid
-#line=line.strip('\n')
 github_id = line[12:].strip()         # 去除  頭尾 space
 
 line = file.readline().strip('\n')   #line1 githubproject
@@ -81,7 +80,6 @@ github_prj = line[12:].strip()
 line = file.readline().strip('\n')   #line1 githubproject
 #line=line.strip('\n')
 ftpurl= line[12:].strip()
-#ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
 print(ftpurl)
 file.close()
 
@@ -100,15 +98,13 @@ print("========================= " + url )
 file = open('key.txt','r',encoding="utf-8")
 line = file.readline().strip('\n')                 #line_access_token = ''
 line_access_token =line[17:].strip()
-print("*" + line_access_token + "#")
+
 
 line = file.readline().strip('\n')                #line_channel_secret = ''
 line_channel_secret = line[17:].strip()
-print("*" + line_channel_secret + "#")
 
 line = file.readline().strip('\n')                #gpt_token
 gpt_token = line[17:].strip()
-print("*" + gpt_token + "#")
 
 
 # Channel Access Token 
@@ -120,7 +116,7 @@ handler = WebhookHandler(line_channel_secret)
 @app.route("/r4u_003", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
-    print("CALL BACK PROCESS")
+    print("start CALL BACK PROCESS")
     signature = request.headers['X-Line-Signature']
     # get request body as text
     body = request.get_data(as_text=True)
@@ -143,12 +139,11 @@ def callback():
 def handle_message(event):
     usr =event.source.user_id
     line_user_id = usr
+    print("\n====handle_message=========\n"+ line_user_id)
     userFolder = check_line_id(ftpurl ,line_user_id)
     print("USER Folder " + userFolder)
-    return()
-    print("\n===================\n"+ line_user_id + "\n======================")
     msg = event.message.text
- 
+    print("\n====handle_message=========\n"+ msg)
     # first 4 char 
     # last 5 char string[-5:])
     # string.upper
@@ -186,11 +181,13 @@ def handle_message(event):
             #print("Exception Value:", exc_value)
             #print("Traceback Object:", exc_traceback)
     elif '/SMAIL' in msg:
-        
+        if userFolder == '' :
+            message = TextSendMessage(text= "找不到 發送信件的授權資料，請記住您的代碼 " + usr +"\n與 系統管理員聯絡申請授權 " )
+            line_bot_api.reply_message(event.reply_token, message)              
         from datetime import datetime
         now = datetime.now() # current date and time
         #增加 user folder
-        sendlog = send_mail(usr,msg)
+        sendlog = send_mail(usr,msg,userFolder)
         message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         #print("Line BOT reply ======  aaaaaaaaaaaaaaaaaaaa")
         line_bot_api.reply_message(event.reply_token, message)  
