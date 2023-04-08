@@ -318,10 +318,12 @@ def check_line_id(ftpurl ,lineid):
     line = file.readline()
     while line:
         wslineid = line.decode('utf-8')
-        print(wslineid)
+        print("authids - " + wslineid)
         if   lineid in wslineid:
+             print("check_line_id return " + wslineid)
              return(wslineid[34:])  
         line = file.readline()
+    print("check_line_id return space")    
     return("")    
 
 
