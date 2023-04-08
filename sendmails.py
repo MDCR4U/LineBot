@@ -33,7 +33,7 @@ def send_mail(lineid,wmsg,userFolder):
 
     #print("\n LINEID " + lineid)
     wstarget = wmsg[7:]
-    print("wstarget :" + wstarget +"*")
+    print("wstarget :*" + wstarget +"*")
     if (wstarget.isdigit()):
         targetno = int(wstarget)
         #print("要求發送筆數" + str(wstarget))
