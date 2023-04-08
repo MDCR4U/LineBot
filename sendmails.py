@@ -67,7 +67,8 @@ def send_mail(lineid,wmsg,userFolder):
     response.close()                                                                    # 關閉 URL
     smtp_count = len(smtp_list)   
     print (smtp_count)
-    return ("smtp = " + smtp_list[])
+    my_string = ' '.join(smtp_list)
+    return ("smtp = " + my_string )
 
 
     
