@@ -90,11 +90,11 @@ file.close()
 url = ftpurl #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
 url = ftpurl + "key.txt"
 filename = 'key.txt'
-print(url + "-" + filename)
+#print(url + "-" + filename)
 urllib.request.urlretrieve(url, filename)
 #取得 系統 KEY 
 
-print("========================= " + url )
+#print("========================= " + url )
 file = open('key.txt','r',encoding="utf-8")
 line = file.readline().strip('\n')                 #line_access_token = ''
 line_access_token =line[17:].strip()

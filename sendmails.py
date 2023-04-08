@@ -27,7 +27,7 @@ def send_mail(lineid,wmsg,userFolder):
     #line=line.strip('\n')
     wsftpflr= line[12:].strip()
     #ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
-    print(wsftpflr+ " send mail folder")
+    #print(wsftpflr+ " send mail folder")
     file.close()
 
 
@@ -40,7 +40,7 @@ def send_mail(lineid,wmsg,userFolder):
     else : 
         targetno = 0
     #        print("invalid target no ")
-        return("發送信件格式 錯誤\n正確格式==>/SMAIL:nnnn\n 結束作業")   
+        return("發送信件格式 錯誤\n正確格式==>/SMAIL:nnnn\n 結束作業 :" + wstarget)   
      
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)
