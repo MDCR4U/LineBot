@@ -15,9 +15,22 @@ from flask import Flask
 #@app.route('/')
  #================= for send mail =================
  
-def send_mail(lineid,wmsg):
-    
-    #print("\n@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@   wmsg  = " + wmsg)
+def send_mail(lineid,wmsg,userFolder):
+    wsftpflr = '' 
+    print("\n@@@@@ send mail folder @@@@@@@@@@@@@@@@@@@@  = " + userFolder)
+
+#讀取 config.sys 取得 information  ftp folder
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+    #ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
+    print(wsftpflr+ " send mail folder")
+    file.close()
+
+
     #print("\n LINEID " + lineid)
     wstarget = wmsg[7:]
     #print("wstarget :" + wstarget)
@@ -28,28 +41,36 @@ def send_mail(lineid,wmsg):
         targetno = 0
     #        print("invalid target no ")
         return("發送信件格式 錯誤\n正確格式==>/SMAIL:nnnn\n 結束作業")   
-    #print("\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   targetno = " + str( targetno))
-
+     
     print("LINE @ id = " + lineid)
     wssts = check_line_id(lineid)
-    if  'not found ' in wssts :
-        return (wssts)
+    if   wssts == ''  :
+        return ('使用者 ' + lineid + ' 發送信件功能未啟動')
      
 
 
     #https://github.com/MDCR4U/LineBot/blob/main/mail.csv
-    github_id ="MDCR4U"
-    github_prj="LineBot"
-    githubutl="https://github.com/" + github_id + "/" + github_prj + "blob/main/"
     
     smtp_server = "smtp.office365.com"
     smtp_port = 587
 
     print("send mail start ")
-    with open("smtp.csv", "r", encoding="utf-8") as f:
-        reader = csv.reader(f)
-        next(reader)  # 跳過表頭
-        smtp_list = [row for row in reader]
+     
+    url = wsftpflr + userFolder + "\smtp.csv"
+    print("smtp.csv folder " + url  )
+    # 開啟 URL
+    response = urllib.request.urlopen(url)
+    # 讀取 CSV 檔案
+    reader = csv.reader(response.read().decode('utf-8').splitlines())
+    # 跳過表頭
+    next(reader)
+    # 轉換為列表
+    smtp_list = [row for row in reader]
+# 關閉 URL
+    response.close()
+    return ("smtp = " + smtp_list)
+
+
     smtp_count = len(smtp_list)   
     
     #wssmtp = ',$'.join(list  for list in smtp_list) 
@@ -301,7 +322,7 @@ def check_line_id(ftpurl ,lineid):
         if   lineid in wslineid:
              return(wslineid[34:])  
         line = file.readline()
-    return("not found")    
+    return("")    
 
 
     filename = 'authids.txt'
