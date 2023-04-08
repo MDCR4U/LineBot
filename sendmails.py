@@ -57,7 +57,7 @@ def send_mail(lineid,wmsg,userFolder):
 
     print("send mail start ")
      
-    url = wsftpflr + userFolder + "/smtp.csv"
+    url = wsftpflr + userFolder.strip('\n') + "/smtp.csv"
     print("smtp.csv folder " + url  )
    
     response = urllib.request.urlopen(url)                                              # 開啟 URL
