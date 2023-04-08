@@ -17,7 +17,7 @@ from flask import Flask
  
 def send_mail(lineid,wmsg,userFolder):
     wsftpflr = '' 
-    print("\n@@@@@ send mail folder @@@@@@@@@@@@@@@@@@@@  = " + userFolder)
+    print("\n@@@@@ send mail folder @@@@@@@@@@@@@@@@@@@@  = " + userFolder +"@@@")
 
 #讀取 config.sys 取得 information  ftp folder
     file = open('config.txt','r',encoding="utf-8")
@@ -319,7 +319,7 @@ def check_line_id(ftpurl ,lineid):
         wslineid = line.decode('utf-8').strip('\n')
         print("authids - " + wslineid)
         if   lineid in wslineid:
-             print("check_line_id return " + wslineid)
+             print("check_line_id return " + wslineid[34:] +"##")
              return(wslineid[34:])  
         line = file.readline()
     print("check_line_id return space")    

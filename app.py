@@ -144,7 +144,7 @@ def handle_message(event):
     line_user_id = usr
     print("\n====handle_message=========\n"+ line_user_id)
     userFolder = check_line_id(ftpurl ,line_user_id)
-    print("USER Folder " + userFolder)
+    print("USER Folder " + userFolder + "*")
     msg = event.message.text
     print("\n====handle_message=========\n"+ msg)
     # first 4 char 
