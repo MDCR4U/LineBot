@@ -78,9 +78,9 @@ line = file.readline().strip('\n')   #line1 githubproject
 #line=line.strip('\n')
 github_prj = line[12:].strip()
 line = file.readline().strip('\n')   #line1 githubproject
-#line=line.strip('\n')
+line=line.strip('\n')
 ftpurl= line[12:].strip()
-print(ftpurl)
+print(ftpurl + "*")
 file.close()
 
  
@@ -90,8 +90,9 @@ file.close()
 url = ftpurl #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
 url = ftpurl + "key.txt"
 filename = 'key.txt'
-url = 'https://mdcgenius.000webhostapp.com/key.txt' 
+#url = 'https://mdcgenius.000webhostapp.com/key.txt' 
 #print(url + "-" + filename)
+print("#####################" + url + "######################")
 urllib.request.urlretrieve(url, filename)
 #取得 系統 KEY 
 
