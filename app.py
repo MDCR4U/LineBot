@@ -90,6 +90,7 @@ file.close()
 url = ftpurl #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
 url = ftpurl + "key.txt"
 filename = 'key.txt'
+url = 'https://mdcgenius.000webhostapp.com/key.txt' 
 #print(url + "-" + filename)
 urllib.request.urlretrieve(url, filename)
 #取得 系統 KEY 
