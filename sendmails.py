@@ -33,7 +33,7 @@ def send_mail(lineid,wmsg,userFolder):
 
     #print("\n LINEID " + lineid)
     wstarget = wmsg[7:]
-    print("wstarget :*" + wstarget +"*")
+     
     if (wstarget.isdigit()):
         targetno = int(wstarget)
         #print("要求發送筆數" + str(wstarget))
@@ -57,22 +57,20 @@ def send_mail(lineid,wmsg,userFolder):
 
     print("send mail start ")
      
-    url = wsftpflr + userFolder + "\smtp.csv"
+    url = wsftpflr + userFolder + "/smtp.csv"
     print("smtp.csv folder " + url  )
-    # 開啟 URL
-    response = urllib.request.urlopen(url)
-    # 讀取 CSV 檔案
-    reader = csv.reader(response.read().decode('utf-8').splitlines())
-    # 跳過表頭
-    next(reader)
-    # 轉換為列表
-    smtp_list = [row for row in reader]
-# 關閉 URL
-    response.close()
+   
+    response = urllib.request.urlopen(url)                                              # 開啟 URL
+    reader = csv.reader(response.read().decode('utf-8').splitlines())                   # 讀取 CSV 檔案
+    next(reader)                                                                        # 跳過表頭
+    smtp_list = [row for row in reader]                                                 # 轉換為列表
+    response.close()                                                                    # 關閉 URL
+    smtp_count = len(smtp_list)   
+    print (smtp_count)
     return ("smtp = " + smtp_list)
 
 
-    smtp_count = len(smtp_list)   
+    
     
     #wssmtp = ',$'.join(list  for list in smtp_list) 
     #return wssmtp
