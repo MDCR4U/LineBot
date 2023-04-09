@@ -55,45 +55,70 @@ def send_mail(lineid,wmsg,userFolder):
     smtp_server = "smtp.office365.com"
     smtp_port = 587
 
-    print("send mail start ")
+    print("=====send mail start ")
      
-    url = wsftpflr + userFolder.strip('\n') + "/smtp.csv"
-    print("smtp.csv folder " + url  )
-   
-    response = urllib.request.urlopen(url)                                              # 開啟 URL
-    reader = csv.reader(response.read().decode('utf-8').splitlines())                   # 讀取 CSV 檔案
-    next(reader)                                                                        # 跳過表頭
-    smtp_list = [row for row in reader]                                                 # 轉換為列表
-    response.close()                                                                    # 關閉 URL
-    smtp_count = len(smtp_list)   
-    print (smtp_count)
-    my_string = ' '.join(smtp_list)
-    return ("smtp = " + my_string )
-
-
+    url = wsftpflr + userFolder.strip('\n') + "_smtp.csv"
+    print("====smtp.csv folder " + url  )
     
+    try:
+        response = urllib.request.urlopen(url)                                              # 開啟 URL
+        reader = csv.reader(response.read().decode('utf-8').splitlines())                   # 讀取 CSV 檔案
+        next(reader)                                                                        # 跳過表頭
+        smtp_list = [row for row in reader]                                                 # 轉換為列表
+        response.close()                                                                    # 關閉 URL
+        smtp_count = len(smtp_list)   
+    except :
+        return ("寄件者資料 讀取錯誤 \n " + URL)
+
+    print ("====smtp_count = " + smtp_count)
     
-    #wssmtp = ',$'.join(list  for list in smtp_list) 
-    #return wssmtp
+
 # 讀取郵件發送記錄
+    url = wsftpflr + userFolder.strip('\n') +  '_mail_counter.log'
+    print ('=======' + url )
     try:
-        with open("mail_counter.log", "r", encoding="utf-8") as f:
-            counter = int(f.readline())
-    except FileNotFoundError:
+        with urllib.request.urlopen(url) as response:
+            content = response.read().decode('utf-8')
+            counter = int(content.strip())
+    except urllib.error.URLError:
         counter = 0
+   
+    #try:
+    #    with open("mail_counter.log", "r", encoding="utf-8") as f:
+    ##        counter = int(f.readline())
+    #except FileNotFoundError:
+    #    counter = 0
 # 讀取SMTP發送記錄
+    url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
+    print ('=======' + url )
     try:
-        with open("smtp_send_counter.log", "r", encoding="utf-8") as f:
-            smtp_idx  = int(f.readline())
-    except FileNotFoundError:
-        smtp_idx  = 0        
+        with urllib.request.urlopen(url) as response:
+            smtp_idx = response.read().decode('utf-8')
+            smtp_idx = int(content.strip())
+    except urllib.error.URLError:
+        smtp_idx = 0
+   #try:
+    #    with open("smtp_send_counter.log", "r", encoding="utf-8") as f:
+    #        smtp_idx  = int(f.readline())
+    #except FileNotFoundError:
+    #    smtp_idx  = 0        
 
 
 # 讀取收件人列表
-    with open("mail.csv", "r", encoding="utf-8") as f:
-        reader = csv.reader(f)
-        next(reader)  # 跳過表頭
-        rows = [row for i, row in enumerate(reader) if i >= counter]
+    url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
+    n = counter                                                 # 要跳過的行數
+
+    try:
+        with urllib.request.urlopen(url) as response:
+            reader = csv.reader(response.read().decode('utf-8').splitlines())
+            rows = [row for i, row in enumerate(reader) if i >= n]
+    except urllib.error.URLError:
+        return ("收件者資料讀取錯誤 : " + url )
+    #    rows = []
+    #with open("mail.csv", "r", encoding="utf-8") as f:
+    #    reader = csv.reader(f)
+    #    next(reader)  # 跳過表頭
+    #    rows = [row for i, row in enumerate(reader) if i >= counter]
 # 設置發件人的初始賬戶信息
      
     smtp_username = smtp_list[smtp_idx][0]
@@ -112,20 +137,23 @@ def send_mail(lineid,wmsg,userFolder):
 
 #getbody 
     # 檢查 發送內容
-    uid = 'mdcr4ugpt'
-    url = "http://mdcgenius.tw/" + uid + "/body.txt"
-    wschkfile = check_url_file(url)
-    if wschkfile != '' :
-        return wschkfile
-     # 讀取文件內容
-    file = urllib.request.urlopen(url)
-    content = ''
-    wsbody  = file.readline()
-    while wsbody:
-        content  = content + wsbody.decode('utf-8') 
+    #uid = 'mdcr4ugpt'
+    url = wsftpflr + userFolder.strip('\n') + '_body.txt'
+    #wschkfile = check_url_file(url)
+    ##if wschkfile != '' :
+    #    return wschkfile
+    # # 讀取文件內容
+    try:
+        file = urllib.request.urlopen(url)
+        content = ''
         wsbody  = file.readline()
+        while wsbody:
+            content  = content + wsbody.decode('utf-8') 
+            wsbody  = file.readline()
     # 關閉 URL
-    file.close()
+        file.close()
+    except :
+         return ("信件內容錯誤 :" + url)     
     
 
 
@@ -133,20 +161,21 @@ def send_mail(lineid,wmsg,userFolder):
 
      # 檢查 主旨
      
-    url = "http://mdcgenius.tw/" + uid + "/subject.txt"
+    url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
      
-    wschkfile = check_url_file(url)
-    if wschkfile != '' :
-        return wschkfile
-     # 讀取文件內容
-    file = urllib.request.urlopen(url)
-    wsubject = ''
-    wsubject  = file.readline()
-    subject = wsubject.decode('utf-8') 
-  
+    #wschkfile = check_url_file(url)
+    #if wschkfile != '' :
+    #    return wschkfile
+    # # 讀取文件內容
+    try:
+        file = urllib.request.urlopen(url)
+        wsubject = ''
+        wsubject  = file.readline()
+        subject = wsubject.decode('utf-8') 
     # 關閉 URL
-     
-   
+        file.close()
+    except:     
+        return ("信件主旨讀取錯誤:"+ url)
  
  
 
@@ -227,7 +256,7 @@ def send_mail(lineid,wmsg,userFolder):
        
     # 記錄已發送的郵件
         sent_list.append(f"{to_addr},{subject}")
-        with open("SEND.LOG", "a", encoding="utf-8") as f:
+        with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
             f.write(f"{loopidx} , {datetime.datetime.now()},  {to_addr},{subject}\n")
             now = datetime.datetime.now()
             wssenddetail = wssenddetail + str(loopidx)  + ",  "  + " " + smtp_username + "=> " + to_addr   + "\n"
@@ -235,11 +264,11 @@ def send_mail(lineid,wmsg,userFolder):
     #    print(f"第 {j+1} 封郵件發送成功 {smtp_username}  ===>  {to_addr}  ")
 
     # 更新郵件smtp記錄
-        with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
+        with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:
             f.write(str(smtp_idx))        
     # 更新郵件發送記錄
         counter += 1
-        with open("mail_counter.log", "w", encoding="utf-8") as f:
+        with open(userFolder.strip('\n') +"_mail_counter.log", "w", encoding="utf-8") as f:
             f.write(str(counter))
         #print (" j = " + str(j) + " sleep 3 for next send")
         time.sleep(0.5)
