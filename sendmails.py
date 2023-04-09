@@ -179,6 +179,8 @@ def send_mail(lineid,wmsg,userFolder):
         smtp_password = smtp_list[smtp_idx][1]
         
         to_addr = row[0]
+
+        print("to_addr = " + to_addr + "-" + row[0])
        
         #cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
         #print(cc_addrs)
@@ -224,8 +226,8 @@ def send_mail(lineid,wmsg,userFolder):
             wssendcounter = wssendcounter + 1
         except Exception as e:
             print(f"第 {loopidx } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
-          
-            
+
+
             if 'Authentication unsuccessful' in e.decode('utf-8') :
                 print(f"第 {loopidx } 封郵件發送失敗： Authentication unsuccessful\n  {e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
             if 'Authentication unsuccessful' in e.decode('utf-8') :
