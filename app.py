@@ -119,7 +119,7 @@ line_bot_api = LineBotApi(line_access_token)
 handler = WebhookHandler(line_channel_secret)
 
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/r4u_003", methods=['POST'])
+@app.route("/r4u_004", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
     print("start CALL BACK PROCESS")
