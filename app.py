@@ -185,8 +185,8 @@ def handle_message(event):
         except:
             exc_type, exc_value, exc_traceback = sys.exc_info()
             print("Exception Type:===>", exc_type)
-            #print("Exception Value:", exc_value)
-            #print("Traceback Object:", exc_traceback)
+            print("Exception Value:", exc_value)
+            print("Traceback Object:", exc_traceback)
     elif '/SMAIL' in msg.upper():     #isupper(), islower(), lower(), upper()
         if userFolder == '' :
             message = TextSendMessage(text= "找不到 發送信件的授權資料，請記住您的代碼 " + usr +"\n與 系統管理員聯絡申請授權 " )
