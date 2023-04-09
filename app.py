@@ -93,7 +93,11 @@ filename = 'key.txt'
 #url = 'https://mdcgenius.000webhostapp.com/key.txt' 
 #print(url + "-" + filename)
 print("#####################" + url + "######################")
-urllib.request.urlretrieve(url, filename)
+try:
+    urllib.request.urlretrieve(url, filename)
+except:
+    print("url get error " + url)    
+    exit()
 #取得 系統 KEY 
 
 #print("========================= " + url )
