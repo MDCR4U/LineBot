@@ -71,7 +71,7 @@ def send_mail(lineid,wmsg,userFolder):
         print ("寄件者資料 讀取錯誤 \n " + url)
         return ("寄件者資料 讀取錯誤 \n " + url)
 
-    print ("====smtp_count = " + smtp_count)
+    print ("====smtp_count = " + str(smtp_count))
     
 
 # 讀取郵件發送記錄
