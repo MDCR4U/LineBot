@@ -68,7 +68,8 @@ def send_mail(lineid,wmsg,userFolder):
         response.close()                                                                    # 關閉 URL
         smtp_count = len(smtp_list)   
     except :
-        return ("寄件者資料 讀取錯誤 \n " + URL)
+        print ("寄件者資料 讀取錯誤 \n " + url)
+        return ("寄件者資料 讀取錯誤 \n " + url)
 
     print ("====smtp_count = " + smtp_count)
     
@@ -113,6 +114,7 @@ def send_mail(lineid,wmsg,userFolder):
             reader = csv.reader(response.read().decode('utf-8').splitlines())
             rows = [row for i, row in enumerate(reader) if i >= n]
     except urllib.error.URLError:
+        print ("收件者資料讀取錯誤 : " + url )
         return ("收件者資料讀取錯誤 : " + url )
     #    rows = []
     #with open("mail.csv", "r", encoding="utf-8") as f:
