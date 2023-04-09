@@ -272,29 +272,44 @@ def send_mail(lineid,wmsg,userFolder):
     return("郵件發送完成  \n" + wssenddetail)
 
 
-def loadfile(file_name):
+def loadfile(usr,msg,userFolder ):
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+    #ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
+ 
+    file.close()
 
-
-    url = 'https://mdcgenius.tw/mdcr4ugpt/' + file_name + '.csv'
-     
-    filename = file_name + '.csv'
-    urllib.request.urlretrieve(url, filename)
-    print("\n" + filename + "上傳完成")
+    #msg = '/load#admin#smtp230409.csv#smtp.csv#
+    wmsg = msg.split("#")
+    if len(wmsg) !=3 :
+        print ("load file layout error ")
+        return ("load file layout error ")
+    url = wsftpflr + wmsg[1] + "/" 
+        
+    filename = wmsg[1] + "_" + wmsg[3]
+    print ("source from : " + url  + " to: " + filename ) 
    #url 是要下載的檔案的 URL，
    # file_name 則是下載後要儲存的檔案名稱和路徑
    # （如果只指定檔案名稱，則預設儲存到目前的資料夾中）。 urlretrieve() 函式會從指定的 URL 下載檔案，並將其儲存在 file_name 指定的位置。   
 
+    urllib.request.urlretrieve(url, filename)
+    print("\n" + wmsg[3]  + "上傳完成")
+
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
 
 
-    url = 'https://mdcgenius.tw/mdcr4ugpt/' + file_name 
+    #url = 'https://mdcgenius.tw/mdcr4ugpt/' + file_name 
      
-    filename = file_name  
-    urllib.request.urlretrieve(url, filename)
-    print("\n" + filename + "上傳完成")
+    #filename = file_name  
+    #urllib.request.urlretrieve(url, filename)
+    #print("\n" + filename + "上傳完成")
    #url 是要下載的檔案的 URL，
    # file_name 則是下載後要儲存的檔案名稱和路徑
    # （如果只指定檔案名稱，則預設儲存到目前的資料夾中）。 urlretrieve() 函式會從指定的 URL 下載檔案，並將其儲存在 file_name 指定的位置。   
@@ -326,13 +341,33 @@ def file_exsit(filename):
         print(f'File {filename} does not exist')
         wsreturn = 'File  : ' + filename + ' does not exist'
         return wsreturn 
-def initcounter()   :
-    with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
+def initcounter(msg,userFolder)   :
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+    file.close()
+
+    #msg = '/initcounter#admin#
+    wmsg = msg.split("#")
+    if len(wmsg) !=1 :
+        print ("init counter layout error ")
+        return ("init counter layout error ")
+
+    url = wsftpflr + wmsg[1] + "_smtp_send_counter.log" 
+    print(" initialize " + url )
+    with open(url, "w", encoding="utf-8") as f:
+    #with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
             f.write(str(0))        
     # 更新郵件發送記錄
-    with open("mail_counter.log", "w", encoding="utf-8") as f:
+    url = wsftpflr + wmsg[1] + "_mail_counter.log" 
+    print(" initialize " + url )
+    with open(url , "w", encoding="utf-8") as f:
             f.write(str(0))
-
+    
+    return("counter initialize complete")
 
 def check_line_id(ftpurl ,lineid):
      

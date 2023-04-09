@@ -211,18 +211,14 @@ def handle_message(event):
         message = TextSendMessage(text= wsmenu)
         line_bot_api.reply_message(event.reply_token, message) 
     elif '/init' in msg:
-        initcounter()   
+        initcounter(msg,userFolder)   
         message = TextSendMessage(text= "完成信件處理 : initial counter complete =====")
-        line_bot_api.reply_message(event.reply_token, message)            
-    elif '/loadsmtp' in msg:
-        loadsts = loadfile('smtp.csv')   
-        message = TextSendMessage(text= "完成信件處理 : " + loadsts+ "\n==========================")
-        line_bot_api.reply_message(event.reply_token, message)        
-    elif '/loadmail' in msg:
-        loadsts = loadfile('mail.csv')   
-        message = TextSendMessage(text= "完成信件處理 : " + loadsts+ "\n==========================")
-        line_bot_api.reply_message(event.reply_token, message)    
-        '/S001:最新合作廠商\n/S002:最新活動訊息\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:我們的產品\n/S006:'
+        line_bot_api.reply_message(event.reply_token, message)   
+    elif '/load' in msg:
+          loadsts  = loadfile(usr,msg,userFolder) 
+          message = TextSendMessage(text= "檔案設置處理 : " + loadsts+ "\n==========================")
+          line_bot_api.reply_message(event.reply_token, message)            
+   
     #elif '最新合作廠商' in msg:
     elif '/S001' in msg:        
         message = imagemap_message()
