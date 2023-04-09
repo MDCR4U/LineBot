@@ -1,5 +1,7 @@
 # for upload file
 import urllib.request
+
+import sys
 #
 import os 
 import csv
@@ -224,8 +226,13 @@ def send_mail(lineid,wmsg,userFolder):
              
             server.quit()
             wssendcounter = wssendcounter + 1
-        except Exception as e:
-            print(f"第 {loopidx } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
+        #except Exception as e:
+        except :
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            print("Exception Type:===>", exc_type)
+            print("Exception Value:", exc_value)
+            print("Traceback Object:", exc_traceback)
+        #    print(f"第 {loopidx } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
 
 
             #if 'Authentication unsuccessful' in e.decode('utf-8') :
