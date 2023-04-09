@@ -228,10 +228,10 @@ def send_mail(lineid,wmsg,userFolder):
             print(f"第 {loopidx } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
 
 
-            if 'Authentication unsuccessful' in e.decode('utf-8') :
-                print(f"第 {loopidx } 封郵件發送失敗： Authentication unsuccessful\n  {e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
-            if 'Authentication unsuccessful' in e.decode('utf-8') :
-                wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
+            #if 'Authentication unsuccessful' in e.decode('utf-8') :
+            #    print(f"第 {loopidx } 封郵件發送失敗： Authentication unsuccessful\n  {e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
+            #if 'Authentication unsuccessful' in e.decode('utf-8') :
+            wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             return(f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
          
         loopidx = loopidx + 1
