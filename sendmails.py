@@ -287,9 +287,9 @@ def loadfile(usr,msg,userFolder ):
 
     #msg = '/load#admin#smtp230409.csv#smtp.csv#
     wmsg = msg.split("#")
-    if len(wmsg) !=3 :
-        print ("load file layout error ")
-        return ("load file layout error ")
+    if len(wmsg) !=4 :
+        print ("load file layout error " + len(wmsg))
+        return ("load file layout error " + len(wmsg))
     url = wsftpflr + wmsg[1] + "/" 
         
     filename = wmsg[1] + "_" + wmsg[3]
@@ -352,7 +352,7 @@ def initcounter(msg,userFolder)   :
 
     #msg = '/initcounter#admin#
     wmsg = msg.split("#")
-    if len(wmsg) !=1 :
+    if len(wmsg) !=2 :
         print ("init counter layout error ")
         return ("init counter layout error ")
 
