@@ -43,6 +43,8 @@ from linebot.models import *
 
 #======這裡是呼叫的檔案內容=====
 from message import *
+from image_response import *
+from button_response import *
 from new import *
 from Function import *
 from gptapi import *
@@ -225,7 +227,7 @@ def handle_message(event):
         message = imagemap_5_message(msg)
         line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
-    elif '/S002' in msg:
+    elif msg.upper()[0:7] == '/BUTTON' :
         message = buttons_message()
         line_bot_api.reply_message(event.reply_token, message)
     #elif '註冊會員' in msg:

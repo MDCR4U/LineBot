@@ -14,7 +14,7 @@ import urllib.request
 #json_data = json.loads(data)
 
 #ImagemapSendMessage(組圖訊息)
-def imagemap_5_message(msg):
+def xxximagemap_message(msg):
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -22,7 +22,6 @@ def imagemap_5_message(msg):
     #line=line.strip('\n')
     wsftpflr= line[12:].strip()
 
-    print ("process image * 5" + wsftpflr)
     wsmsg = msg.split('#')
     
     wjson_file = wsmsg[1] + ".json"
@@ -32,7 +31,6 @@ def imagemap_5_message(msg):
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
 
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
@@ -40,7 +38,6 @@ def imagemap_5_message(msg):
  
     print("jsaon read complete")
     background_url  = js_dta["image"]                           #"https://i.ibb.co/mJfp6Nf/background.png"  #https://ibb.co/0BZHztf"
-    print ("image" + background_url)
     url_top_left    = js_dta["url_top_left"]                             #"https://www.youtube.com/watch?v=0kOpOqHuiGo"
     url_top_right   = js_dta["url_top_right"]                            #"https://www.youtube.com/watch?v=XFvgYYHvcfE"
     url_left_down   = js_dta["url_left_down"]                            #"https://www.youtube.com/watch?v=iOu5DwEQaJE"
@@ -49,7 +46,6 @@ def imagemap_5_message(msg):
     alt_text        = js_dta ["alt_text"]                                     #"CBD"
     base_width = js_dta["base_width"]     #2000
     base_height = js_dta["base_height"]   #2000
-    print("aaaaa")
     p1_x = js_dta["p1_x"]                 #0
     p1_y = js_dta["p1_y"]                 #0
     p1_width = js_dta["p1_width"]         #1000
@@ -75,10 +71,7 @@ def imagemap_5_message(msg):
     p5_width = js_dta["p5_width"]         #1000
     p5_height = js_dta["p5_width"]        #500
 
-    print(background_url)
     message = ImagemapSendMessage(
-        #base_url="https://i.imgur.com/BfTFVDN.jpg",    #顯示的圖片 2000 * 2000
-        #base_url = "https://mdcgenius.000webhostapp.com/resource/background_CBD.jpg",
         base_url=background_url , 
        
         #base_url="https://i.ibb.co/TKZqd7P/background-CBD.jpg",
@@ -126,7 +119,7 @@ def imagemap_5_message(msg):
     return message
 
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
-def buttons_message():
+def xxxbuttons_message():
     message = TemplateSendMessage(
         alt_text='好消息來囉～',
         template=ButtonsTemplate(
