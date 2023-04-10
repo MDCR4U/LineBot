@@ -16,11 +16,12 @@ import urllib.request
 #ImagemapSendMessage(組圖訊息)
 def imagemap_5_message(msg):
     print ("process image * 5")
-    #wsmsg = msg.split('#')
-    wsmsg = "myjson" 
+    wsmsg = msg.split('#')
+    
     wjson_file = wsmsg + ".json"
 # 讀取 JSON 檔案
-    with open("cbd.json" , "r") as f:
+#    with open("cbd.json" , "r") as f:
+    with open(wjson_file , "r") as f:
         js_dta = json.load(f)
  
      
@@ -63,9 +64,9 @@ def imagemap_5_message(msg):
     message = ImagemapSendMessage(
         #base_url="https://i.imgur.com/BfTFVDN.jpg",    #顯示的圖片 2000 * 2000
         #base_url = "https://mdcgenius.000webhostapp.com/resource/background_CBD.jpg",
-        #base_url=background_url , 
+        base_url=background_url , 
        
-        base_url="https://i.ibb.co/TKZqd7P/background-CBD.jpg",
+        #base_url="https://i.ibb.co/TKZqd7P/background-CBD.jpg",
         alt_text=alt_text,
         base_size=BaseSize(height=base_height, width=base_width),
         actions=[                                       # 依據顯示 的圖片  做切割處理動作 
