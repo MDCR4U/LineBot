@@ -23,9 +23,8 @@ def imagemap_5_message(msg):
     with open("cbd.json" , "r") as f:
         js_dta = json.load(f)
  
-    print ("get cbd7.json  complete")
-    print ("background " + js_dta["background_url"] )
-    background_url  = js_dta["background_url"]                           #"https://i.ibb.co/mJfp6Nf/background.png"  #https://ibb.co/0BZHztf"
+     
+    background_url  = js_dta["image"]                           #"https://i.ibb.co/mJfp6Nf/background.png"  #https://ibb.co/0BZHztf"
     url_top_left    = js_dta["url_top_left"]                             #"https://www.youtube.com/watch?v=0kOpOqHuiGo"
     url_top_right   = js_dta["url_top_right"]                            #"https://www.youtube.com/watch?v=XFvgYYHvcfE"
     url_left_down   = js_dta["url_left_down"]                            #"https://www.youtube.com/watch?v=iOu5DwEQaJE"
