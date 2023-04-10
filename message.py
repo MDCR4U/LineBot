@@ -61,7 +61,7 @@ def imagemap_5_message(msg):
 
     print(background_url)
     message = ImagemapSendMessage(
-        base_url="https://i.imgur.com/BfTFVDN.jpg",    #顯示的圖片 2000 * 2000
+        #base_url="https://i.imgur.com/BfTFVDN.jpg",    #顯示的圖片 2000 * 2000
         base_url = "https://mdcgenius.000webhostapp.com/resource/background_CBD.jpg",
         #base_url=background_url , 
        
