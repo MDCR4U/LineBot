@@ -42,6 +42,10 @@ def buttons_message():
                 URITemplateAction(
                     label="免費註冊享回饋",
                     uri="https://mydailychoice.com/lifefree"
+                ),
+                URITemplateAction(
+                    label="免費註冊享回饋",
+                    uri="https://mydailychoice.com/lifefree"
                 )
             ]
         )
