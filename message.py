@@ -65,7 +65,7 @@ def imagemap_5_message(msg):
         #base_url = "https://mdcgenius.000webhostapp.com/resource/background_CBD.jpg",
         #base_url=background_url , 
        
-        base_url="https://upload.cc/i1/2023/04/10/gbWmQ9.jpg",
+        base_url="https://i.ibb.co/TKZqd7P/background-CBD.jpg",
         alt_text=alt_text,
         base_size=BaseSize(height=base_height, width=base_width),
         actions=[                                       # 依據顯示 的圖片  做切割處理動作 
