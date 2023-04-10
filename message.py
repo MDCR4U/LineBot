@@ -15,14 +15,28 @@ import urllib.request
 
 #ImagemapSendMessage(組圖訊息)
 def imagemap_5_message(msg):
-    print ("process image * 5")
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+
+    print ("process image * 5" + wsftpflr)
     wsmsg = msg.split('#')
     
     wjson_file = wsmsg[1] + ".json"
-# 讀取 JSON 檔案
-#    with open("cbd.json" , "r") as f:
-    with open(wjson_file , "r") as f:
-        js_dta = json.load(f)
+# 讀取 JSON 檔案  local
+#   # with open("cbd.json" , "r") as f:
+    #with open(wjson_file , "r") as f:
+    #    js_dta = json.load(f)
+
+    url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
+    print(url)
+
+    response = urllib.request.urlopen(url)
+    data = response.read().decode("utf-8")
+    js_dta = json.loads(data)
  
     print("jsaon read complete")
     background_url  = js_dta["image"]                           #"https://i.ibb.co/mJfp6Nf/background.png"  #https://ibb.co/0BZHztf"
