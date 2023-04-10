@@ -1,10 +1,11 @@
 {
-	"image": "https://mdcgenius.000webhostapp.com/resource/background-CBD.jpg",
+	"image": "https://mdcgenius.000webhostapp.com/resource/background_CBD.jpg",
     "imagexx": "https://i.ibb.co/TKZqd7P/background-CBD.jpg",
     "alt_text":"CBD 1-2-3",
     "base_width": 2000,
     "base_height": 2000,
-    "url_top_left":"https://www.youtube.com/watch?v=0kOpOqHuiGo",
+    "url_top_left_x":"https://www.youtube.com/watch?v=0kOpOqHuiGo",
+    "url_top_left"  :"https://www.youtube.com/watch?v=lv2HCwtnZtE",
     "url_top_right":"https://www.youtube.com/watch?v=XFvgYYHvcfE",
     "url_left_down":"https://www.youtube.com/watch?v=iOu5DwEQaJE",
     "url_right_down1":"https://www.youtube.com/watch?v=R9cx3kgwWD0",
