@@ -18,7 +18,7 @@ def imagemap_5_message(msg):
     print ("process image * 5")
     wsmsg = msg.split('#')
     
-    wjson_file = wsmsg + ".json"
+    wjson_file = wsmsg[1] + ".json"
 # 讀取 JSON 檔案
 #    with open("cbd.json" , "r") as f:
     with open(wjson_file , "r") as f:
