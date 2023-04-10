@@ -42,7 +42,7 @@ from linebot.models import *
 
 
 #======這裡是呼叫的檔案內容=====
-from usermessage import *
+from message import *
 from new import *
 from Function import *
 from gptapi import *
