@@ -211,12 +211,12 @@ def handle_message(event):
         message = TextSendMessage(text= wsmenu)
         line_bot_api.reply_message(event.reply_token, message) 
     elif '/init' in msg:
-        initcounter(msg,userFolder)   
+        initcounter(usr,msg,userFolder) 
         message = TextSendMessage(text= "完成信件處理 : initial counter complete =====")
         line_bot_api.reply_message(event.reply_token, message)   
     elif '/load' in msg:
           loadsts  = loadfile(usr,msg,userFolder) 
-          message = TextSendMessage(text= "檔案設置處理 : " + loadsts+ "\n==========================")
+          message = TextSendMessage(text= "檔案設置處理 : " + loadsts)
           line_bot_api.reply_message(event.reply_token, message)            
    
     #elif '最新合作廠商' in msg:

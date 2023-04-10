@@ -272,7 +272,14 @@ def send_mail(lineid,wmsg,userFolder):
     return("郵件發送完成  \n" + wssenddetail)
 
 
-def loadfile(usr,msg,userFolder ):
+def loadfile(lineid,msg,userFolder ):
+    wsflr = ''
+    wssts = check_line_id(wsftpflr,lineid)
+    if   wssts == ''  :
+        print('使用者 ' + lineid + ' 發送信件功能未啟動')
+        return ('使用者 ' + lineid + ' 發送信件功能未啟動')
+    wsflr = wssts 
+
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
     file = open('config.txt','r',encoding="utf-8")
@@ -285,21 +292,22 @@ def loadfile(usr,msg,userFolder ):
  
     file.close()
 
-    #msg = '/load#admin#smtp230409.csv#smtp.csv#
+    #msg = '/load#smtp230409.csv#smtp.csv#
     wmsg = msg.split("#")
-    if len(wmsg) !=4 :
+    if len(wmsg) !=3 :
         print ("load file layout error " + len(wmsg))
         return ("load file layout error " + len(wmsg))
-    url = wsftpflr + wmsg[1] + "/" 
+    url = wsftpflr + wsflr + "/" + wmsg[1]
         
-    filename = wmsg[1] + "_" + wmsg[3]
+    filename = wsflr + "_" + wmsg[2]
     print ("source from : " + url  + " to: " + filename ) 
    #url 是要下載的檔案的 URL，
    # file_name 則是下載後要儲存的檔案名稱和路徑
    # （如果只指定檔案名稱，則預設儲存到目前的資料夾中）。 urlretrieve() 函式會從指定的 URL 下載檔案，並將其儲存在 file_name 指定的位置。   
 
     urllib.request.urlretrieve(url, filename)
-    print("\n" + wmsg[3]  + "上傳完成")
+    print("\n" + wmsg[2]  + "上傳完成")
+    return("\n" + wmsg[2]  + "上傳完成")
 
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
@@ -341,7 +349,14 @@ def file_exsit(filename):
         print(f'File {filename} does not exist')
         wsreturn = 'File  : ' + filename + ' does not exist'
         return wsreturn 
-def initcounter(msg,userFolder)   :
+def initcounter(lineid,msg,userFolder ):
+    wsflr = ''
+    wssts = check_line_id(wsftpflr,lineid)
+    if   wssts == ''  :
+        print('使用者 ' + lineid + ' 發送信件功能未啟動')
+        return ('使用者 ' + lineid + ' 發送信件功能未啟動')
+    
+    wsflr = wssts 
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -351,18 +366,15 @@ def initcounter(msg,userFolder)   :
     file.close()
 
     #msg = '/initcounter#admin#
-    wmsg = msg.split("#")
-    if len(wmsg) !=2 :
-        print ("init counter layout error ")
-        return ("init counter layout error ")
+  
 
-    url = wsftpflr + wmsg[1] + "_smtp_send_counter.log" 
+    url = wsftpflr + wsflr  + "_smtp_send_counter.log" 
     print(" initialize " + url )
     with open(url, "w", encoding="utf-8") as f:
     #with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
             f.write(str(0))        
     # 更新郵件發送記錄
-    url = wsftpflr + wmsg[1] + "_mail_counter.log" 
+    url = wsftpflr + wsflr + "_mail_counter.log" 
     print(" initialize " + url )
     with open(url , "w", encoding="utf-8") as f:
             f.write(str(0))
