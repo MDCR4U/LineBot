@@ -62,10 +62,10 @@ def imagemap_5_message(msg):
     print(background_url)
     message = ImagemapSendMessage(
         #base_url="https://i.imgur.com/BfTFVDN.jpg",    #顯示的圖片 2000 * 2000
-        base_url = "https://mdcgenius.000webhostapp.com/resource/background_CBD.jpg",
+        #base_url = "https://mdcgenius.000webhostapp.com/resource/background_CBD.jpg",
         #base_url=background_url , 
        
-        #base_url="https://upload.cc/i1/2023/04/05/ieMoEl.jpg",
+        base_url="https://upload.cc/i1/2023/04/10/gbWmQ9.jpg",
         alt_text=alt_text,
         base_size=BaseSize(height=base_height, width=base_width),
         actions=[                                       # 依據顯示 的圖片  做切割處理動作 
