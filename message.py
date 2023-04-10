@@ -61,8 +61,8 @@ def imagemap_5_message(msg):
 
     print(background_url)
     message = ImagemapSendMessage(
-        #base_url="https://i.imgur.com/BfTFVDN.jpg",    #顯示的圖片 2000 * 2000
-        base_url=background_url , 
+        base_url="https://i.imgur.com/BfTFVDN.jpg",    #顯示的圖片 2000 * 2000
+        #base_url=background_url , 
        
         #base_url="https://upload.cc/i1/2023/04/05/ieMoEl.jpg",
         alt_text=alt_text,
