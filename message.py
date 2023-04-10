@@ -30,7 +30,7 @@ def imagemap_5_message(msg):
     url_left_down   = js_dta["url_left_down"]                            #"https://www.youtube.com/watch?v=iOu5DwEQaJE"
     url_right_down1 = js_dta["url_right_down1"]                          #"https://www.youtube.com/watch?v=R9cx3kgwWD0"
     url_right_down2 = js_dta["url_right_down2"]                          #"https://www.youtube.com/watch?v=DAlIup87Aso&t=26s"
-    alt_text = js_dta = ["alt_text"]                                     #"CBD"
+    alt_text        = js_dta ["alt_text"]                                     #"CBD"
     base_width = js_dta["base_width"]     #2000
     base_height = js_dta["base_height"]   #2000
 
