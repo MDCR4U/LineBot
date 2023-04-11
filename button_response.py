@@ -33,7 +33,7 @@ def buttons_31(msg):    # 3 text, 1URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-
+    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
