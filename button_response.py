@@ -20,18 +20,10 @@ def buttons_41(msg):    # 4 text, 1URL
     message = TemplateSendMessage(
         alt_text='CBD的法律常識～',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://i.ibb.co/NWrhxmc/cbd.jpg",
+            thumbnail_image_url="https://pic2.zhimg.com/v2-de4b8114e8408d5265503c8b41f59f85_b.jpg",  #"https://i.ibb.co/NWrhxmc/cbd.jpg",
             title="CBD的百寶庫",
             text="選擇您想要的內容",
             actions=[
-                #DatetimePickerTemplateAction(
-                #    label="請選擇生日",
-                #    data="input_birthday",
-                #    mode='date',
-                #    initial='1990-01-01',
-                #    max='2019-03-10',
-                #    min='1930-01-01'
-                #),
                 URITemplateAction(
                     label="認識CBD影片介紹",
                     uri="https://www.youtube.com/watch?v=0kOpOqHuiGo"
@@ -55,4 +47,6 @@ def buttons_41(msg):    # 4 text, 1URL
             ]
         )
     )
+
+    print("button 4-1 complete")
     return message
