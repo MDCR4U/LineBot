@@ -38,7 +38,7 @@ def buttons_31(msg):    # 3 text, 1URL
                 ),
                 MessageTemplateAction(
                     label="更多選項",
-                    uri="/C000"
+                    text="/C000"
                 )
             ]
         )
