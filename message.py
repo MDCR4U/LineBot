@@ -119,7 +119,7 @@ def xxximagemap_message(msg):
     return message
 
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
-def buttons_41():
+def buttons_41(msg):
     message = TemplateSendMessage(
         alt_text='好消息來囉～',
         template=ButtonsTemplate(
