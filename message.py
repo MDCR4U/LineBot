@@ -120,6 +120,8 @@ def xxximagemap_message(msg):
 
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
 def buttons_41(msg):
+    #最多可以有4個button，每個button的文字長度上限為20個字元，而回傳給LINE平台的訊息大小上限為5,000 bytes
+    print("最多可以有4個button，每個button的文字長度上限為20個字元，而回傳給LINE平台的訊息大小上限為5,000 bytes")
     message = TemplateSendMessage(
         alt_text='好消息來囉～',
         template=ButtonsTemplate(
@@ -139,10 +141,6 @@ def buttons_41(msg):
                 MessageTemplateAction(
                     label="索取百元美金旅遊補助金",
                     text="sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
-                ),
-                MessageTemplateAction(
-                    label="索取百元美金旅遊補助金",
-                    text="開啟網站\nhttps://mydailychoice.com/shop?selected_brands=7&ref=lifefree\n百元美金旅遊補助等著您"
                 ),
                 MessageTemplateAction(
                     label="索取百元美金旅遊補助金",
