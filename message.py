@@ -138,6 +138,18 @@ def buttons_41(msg):
                 #),
                 MessageTemplateAction(
                     label="索取百元美金旅遊補助金",
+                    text="sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\nssssssssssssssssssssssssns\smmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
+                ),
+                MessageTemplateAction(
+                    label="索取百元美金旅遊補助金",
+                    text="開啟網站\nhttps://mydailychoice.com/shop?selected_brands=7&ref=lifefree\n百元美金旅遊補助等著您"
+                ),
+                MessageTemplateAction(
+                    label="索取百元美金旅遊補助金",
+                    text="開啟網站\nhttps://mydailychoice.com/shop?selected_brands=7&ref=lifefree\n百元美金旅遊補助等著您"
+                ),
+                MessageTemplateAction(
+                    label="索取百元美金旅遊補助金",
                     text="開啟網站\nhttps://mydailychoice.com/shop?selected_brands=7&ref=lifefree\n百元美金旅遊補助等著您"
                 ),
                 URITemplateAction(
