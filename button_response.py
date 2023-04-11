@@ -15,7 +15,7 @@ import urllib.request
 #                                        text='台北市',
 #                                        data='A&台北市'
 #                                    ),
-def buttons_31(msg):    # 3 text, 1URL
+def buttons_41(msg):    # 3 text, 1URL
     print (" process 3 text 1url button")
     message = TemplateSendMessage(
         alt_text='CBD的法律常識～',
