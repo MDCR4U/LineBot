@@ -15,7 +15,7 @@ import urllib.request
 #                                        text='台北市',
 #                                        data='A&台北市'
 #                                    ),
-def buttons_41(msg):    # 4 text, 1URL
+def sbuttons_41(msg):    # 4 text, 1URL
     print (" process 4 text 1url button")
     message = TemplateSendMessage(
         alt_text='CBD的法律常識～',
@@ -39,10 +39,10 @@ def buttons_41(msg):    # 4 text, 1URL
                 URITemplateAction(
                     label="CBD與寵物",
                     uri="/C40"
-                ),
-                URITemplateAction(
-                    label="CBD的未來性",
-                    uri="/c50"
+                #),
+                #URITemplateAction(
+                ##    label="CBD的未來性",
+                #    uri="/c50"
                 )
             ]
         )

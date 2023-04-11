@@ -119,7 +119,7 @@ def xxximagemap_message(msg):
     return message
 
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
-def xxxbuttons_message():
+def buttons_41():
     message = TemplateSendMessage(
         alt_text='好消息來囉～',
         template=ButtonsTemplate(
@@ -127,14 +127,14 @@ def xxxbuttons_message():
             title="是否要獲得旅遊補助金活動？",
             text="輸入生日可獲得生日驚喜禮得機會",
             actions=[
-                DatetimePickerTemplateAction(
-                    label="請選擇生日",
-                    data="input_birthday",
-                    mode='date',
-                    initial='1990-01-01',
-                    max='2019-03-10',
-                    min='1930-01-01'
-                ),
+                #DatetimePickerTemplateAction(
+                #    label="請選擇生日",
+                #    data="input_birthday",
+                #    mode='date',
+                #    initial='1990-01-01',
+                #    max='2019-03-10',
+                #    min='1930-01-01'
+                #),
                 MessageTemplateAction(
                     label="索取百元美金旅遊補助金",
                     text="開啟網站\nhttps://mydailychoice.com/shop?selected_brands=7&ref=lifefree\n百元美金旅遊補助等著您"
