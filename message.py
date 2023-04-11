@@ -138,7 +138,7 @@ def buttons_41(msg):
                 #),
                 MessageTemplateAction(
                     label="索取百元美金旅遊補助金",
-                    text="sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss\nssssssssssssssssssssssssns\smmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm"
+                    text="sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
                 ),
                 MessageTemplateAction(
                     label="索取百元美金旅遊補助金",
