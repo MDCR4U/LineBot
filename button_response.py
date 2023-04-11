@@ -36,13 +36,9 @@ def buttons_31(msg):    # 3 text, 1URL
                     label="CBD的研究報告",
                     text="/C30"
                 ),
-                URITemplateAction(
+                MessageTemplateAction(
                     label="更多選項",
                     uri="/C000"
-                #),
-                #URITemplateAction(
-                ##    label="CBD的未來性",
-                #    uri="/c50"
                 )
             ]
         )
