@@ -123,7 +123,8 @@ def buttons_41(msg):
     message = TemplateSendMessage(
         alt_text='好消息來囉～',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://pic2.zhimg.com/v2-de4b8114e8408d5265503c8b41f59f85_b.jpg",
+            #thumbnail_image_url="https://pic2.zhimg.com/v2-de4b8114e8408d5265503c8b41f59f85_b.jpg",
+            thumbnail_image_url="https://i.ibb.co/NWrhxmc/cbd.jpg",
             title="是否要獲得旅遊補助金活動？",
             text="輸入生日可獲得生日驚喜禮得機會",
             actions=[
