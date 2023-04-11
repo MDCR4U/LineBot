@@ -306,7 +306,7 @@ def buttons_03(msg):    # 0 text, 3URL
                 URITemplateAction(
                     label=label2   , #"認識CBD影片介紹",
                     uri=url2,     #"https://www.youtube.com/watch?v=0kOpOqHuiGo"
-                )                
+                ) ,               
                 URITemplateAction(
                     label=label3   , #"認識CBD影片介紹",
                     uri=url3     #"https://www.youtube.com/watch?v=0kOpOqHuiGo"
