@@ -15,7 +15,7 @@ import urllib.request
 #                                        text='台北市',
 #                                        data='A&台北市'
 #                                    ),
-def buttons_31(msg):    # 3 text, 1URL
+def buttons_31(token):    # 3 text, 1URL
     print (" process 3 text 1url button")
     message = TemplateSendMessage(
         alt_text='CBD的法律常識～',
@@ -33,13 +33,9 @@ def buttons_31(msg):    # 3 text, 1URL
                     text="/C20"
                 ),
                 MessageTemplateAction(
-                    label="" , #CBD的研究報告",
-                    text="" #"/C30"
+                    label="CBD的研究報告",
+                    text="/C30"
                 ),
-                #MessageTemplateAction(
-                #    label=CBD的研究報告",
-                #    text="/C30"
-                #),
                 MessageTemplateAction(
                     label="更多選項",
                     text="/C000"
@@ -48,5 +44,5 @@ def buttons_31(msg):    # 3 text, 1URL
         )
     )
 
-    print("button 4-1 complete")
+    print("button 3-1 complete")
     return message
