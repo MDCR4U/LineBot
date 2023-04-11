@@ -228,7 +228,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
     elif msg.upper()[0:4] == '/CBD' :
-        message = buttons_41(msg)
+        message = buttons_31(msg)
         line_bot_api.reply_message(event.reply_token, message)
     #elif '註冊會員' in msg:
     elif '/S003' in msg:

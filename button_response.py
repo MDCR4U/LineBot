@@ -15,12 +15,12 @@ import urllib.request
 #                                        text='台北市',
 #                                        data='A&台北市'
 #                                    ),
-def sbuttons_41(msg):    # 4 text, 1URL
-    print (" process 4 text 1url button")
+def buttons_31(msg):    # 3 text, 1URL
+    print (" process 3 text 1url button")
     message = TemplateSendMessage(
         alt_text='CBD的法律常識～',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://pic2.zhimg.com/v2-de4b8114e8408d5265503c8b41f59f85_b.jpg",  #"https://i.ibb.co/NWrhxmc/cbd.jpg",
+            thumbnail_image_url="https://i.ibb.co/NWrhxmc/cbd.jpg",
             title="CBD的百寶庫",
             text="選擇您想要的內容",
             actions=[
@@ -37,8 +37,8 @@ def sbuttons_41(msg):    # 4 text, 1URL
                     text="/C30"
                 ),
                 URITemplateAction(
-                    label="CBD與寵物",
-                    uri="/C40"
+                    label="更多選項",
+                    uri="/C000"
                 #),
                 #URITemplateAction(
                 ##    label="CBD的未來性",

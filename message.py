@@ -119,7 +119,7 @@ def xxximagemap_message(msg):
     return message
 
 #TemplateSendMessage - ButtonsTemplate (按鈕介面訊息)
-def buttons_41(msg):
+def buttons_41x(msg):
     #最多可以有4個button，每個button的文字長度上限為20個字元，而回傳給LINE平台的訊息大小上限為5,000 bytes
     print("最多可以有4個button，每個button的文字長度上限為20個字元，而回傳給LINE平台的訊息大小上限為5,000 bytes")
     message = TemplateSendMessage(
