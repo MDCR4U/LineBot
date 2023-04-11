@@ -228,6 +228,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
     elif msg.upper()[0:2] == '&&' :
+        print("msg   for token" + msg)
         message = token(msg)
         line_bot_api.reply_message(event.reply_token, message)
     elif msg.upper()[0:4] == '/CBD' :
@@ -291,13 +292,28 @@ def welcome(event):
 
 def token(msg):
     wmsg = msg[2:]
-    wsmsg = wmsg.split('#')
+    wkmsg = wmsg.split('#')
     
-    if  wsmsg[2]  == "button30" :
-        wsmessage = buttons_30(wsmsg)
-    elif wsmsg[2] == "button31" :
-        wsmessage = buttons_31(wsmsg)    
-
+    if  wkmsg[2]  == "button_30" :
+        wsmessage = buttons_30(wkmsg[1])
+    elif wkmsg[2] == "button_31" :
+        wsmessage = buttons_31(wkmsg[1])    
+    elif wkmsg[2] == "button_01" :
+        wsmessage = buttons_01(wkmsg[1])    
+    elif wkmsg[2] == "button_10" :
+        wsmessage = buttons_10(wkmsg[1])    
+    elif wkmsg[2] == "button_02" :
+        wsmessage = buttons_02(wkmsg[1])                  
+    elif wkmsg[2] == "button_11" :
+        wsmessage = buttons_11(wkmsg[1])          
+    elif wkmsg[2] == "button_20" :
+        wsmessage = buttons_20(wkmsg[1])          
+    elif wkmsg[2] == "button_03" :
+        wsmessage = buttons_03(wkmsg[1])  
+    elif wkmsg[2] == "button_04" :
+        wsmessage = buttons_04(wkmsg[1])  
+    elif wkmsg[2] == "button_40" :
+        wsmessage = buttons_40(wkmsg[1])                          
     return wsmessage    
             
 #def loadfile():
