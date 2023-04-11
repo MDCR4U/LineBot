@@ -76,6 +76,6 @@ def buttons_31(msg):    # 3 text, 1URL
         )
     )
 
-
+    print(message)
     print("button 3-1 complete")
     return message
