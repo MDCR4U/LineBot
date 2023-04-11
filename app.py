@@ -222,13 +222,13 @@ def handle_message(event):
           line_bot_api.reply_message(event.reply_token, message)            
    
     #elif '最新合作廠商' in msg:
-    elif msg.upper()[0:6] == '/IMAGE'  : #'/image#cbd' in msg:   
+    elif msg.upper()[0:5] == '/MAIN'  : #'/image#cbd' in msg:   
         print(" will proces simage message")
-        message = imagemap_5_message(msg)
+        message = imagemap_5(msg)
         line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
-    elif msg.upper()[0:7] == '/BUTTON' :
-        message = buttons_message()
+    elif msg.upper()[0:4] == '/CBD  ' :
+        message = buttons_41(msg)
         line_bot_api.reply_message(event.reply_token, message)
     #elif '註冊會員' in msg:
     elif '/S003' in msg:

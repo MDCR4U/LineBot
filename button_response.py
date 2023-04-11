@@ -15,13 +15,13 @@ import urllib.request
 #                                        text='台北市',
 #                                        data='A&台北市'
 #                                    ),
-def buttons_message():
+def buttons_41():    # 4 text, 1URL
     message = TemplateSendMessage(
-        alt_text='好消息來囉～',
+        alt_text='CBD的法律常識～',
         template=ButtonsTemplate(
-            thumbnail_image_url="https://pic2.zhimg.com/v2-de4b8114e8408d5265503c8b41f59f85_b.jpg",
-            title="是否要獲得旅遊補助金活動？",
-            text="輸入生日可獲得生日驚喜禮得機會",
+            thumbnail_image_url="https://i.ibb.co/NWrhxmc/cbd.jpg",
+            title="CBD的百寶庫",
+            text="選擇您想要的內容",
             actions=[
                 #DatetimePickerTemplateAction(
                 #    label="請選擇生日",
@@ -31,21 +31,25 @@ def buttons_message():
                 #    max='2019-03-10',
                 #    min='1930-01-01'
                 #),
-                MessageTemplateAction(
-                    label="索取百元美金旅遊補助金",
-                    text="開啟網站\nhttps://mydailychoice.com/shop?selected_brands=7&ref=lifefree\n百元美金旅遊補助等著您"
+                URITemplateAction(
+                    label="認識CBD影片介紹",
+                    uri="https://www.youtube.com/watch?v=0kOpOqHuiGo"
                 ),
                 MessageTemplateAction(
-                    label="索取百元美金旅遊補助金",
-                    text="開啟網站\nhttps://mydailychoice.com/shop?selected_brands=7&ref=lifefree\n百元美金旅遊補助等著您"
+                    label="CBD的法律常識",
+                    text="/C20"
+                ),
+                MessageTemplateAction(
+                    label="CBD的研究報告",
+                    text="/C30"
                 ),
                 URITemplateAction(
-                    label="免費註冊享回饋",
-                    uri="https://mydailychoice.com/lifefree"
+                    label="CBD與寵物",
+                    uri="/C40"
                 ),
                 URITemplateAction(
-                    label="免費註冊享回饋",
-                    uri="https://mydailychoice.com/lifefree"
+                    label="CBD的未來性",
+                    uri="/c50"
                 )
             ]
         )

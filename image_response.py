@@ -14,7 +14,7 @@ import urllib.request
 #json_data = json.loads(data)
 
 #ImagemapSendMessage(組圖訊息)
-def imagemap_5_message(msg):
+def imagemap_5 (msg):
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
