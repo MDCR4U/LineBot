@@ -291,29 +291,32 @@ def welcome(event):
     line_bot_api.reply_message(event.reply_token, message)
 
 def token(msg):
+    print ("token msg " + msg )
     wmsg = msg[2:]
     wkmsg = wmsg.split('#')
-    
+    print (wkmsg[2])
+    print (wkmsg[1])
     if  wkmsg[2]  == "button_30" :
-        wsmessage = buttons_30(wkmsg[1])
+        wsmessage = buttons_30(msg)
     elif wkmsg[2] == "button_31" :
-        wsmessage = buttons_31(wkmsg[1])    
+        print("button_31")
+        wsmessage = buttons_31(msg)    
     elif wkmsg[2] == "button_01" :
-        wsmessage = buttons_01(wkmsg[1])    
+        wsmessage = buttons_01(msg)    
     elif wkmsg[2] == "button_10" :
-        wsmessage = buttons_10(wkmsg[1])    
+        wsmessage = buttons_10(msg)    
     elif wkmsg[2] == "button_02" :
-        wsmessage = buttons_02(wkmsg[1])                  
+        wsmessage = buttons_02(msg)                  
     elif wkmsg[2] == "button_11" :
-        wsmessage = buttons_11(wkmsg[1])          
+        wsmessage = buttons_11(msg)          
     elif wkmsg[2] == "button_20" :
-        wsmessage = buttons_20(wkmsg[1])          
+        wsmessage = buttons_20(msg)          
     elif wkmsg[2] == "button_03" :
-        wsmessage = buttons_03(wkmsg[1])  
+        wsmessage = buttons_03(msg)  
     elif wkmsg[2] == "button_04" :
-        wsmessage = buttons_04(wkmsg[1])  
+        wsmessage = buttons_04(msg)  
     elif wkmsg[2] == "button_40" :
-        wsmessage = buttons_40(wkmsg[1])                          
+        wsmessage = buttons_40(msg)                          
     return wsmessage    
             
 #def loadfile():
