@@ -446,7 +446,7 @@ def buttons_04(msg):    # 0 text, 4URL
 #def buttons_13(msg):     #1 text 3url
 #def buttons_22(msg):     #2 text 2url
 def buttons_31(msg):     # 3 text, 1URL   
-    print (" process 3 text 1url button " + MessageDeliveryPushResponse)
+    print (" process 3 text 1url button " + msg)
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
