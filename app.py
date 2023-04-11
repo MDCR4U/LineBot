@@ -227,8 +227,11 @@ def handle_message(event):
         message = imagemap_5(msg)
         line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
+    elif msg.upper()[0:2] == '&&' :
+        message = token(msg)
+        line_bot_api.reply_message(event.reply_token, message)
     elif msg.upper()[0:4] == '/CBD' :
-        message = buttons_31("CBD#C000#")
+        message = buttons_31("&&#C000#button31#")
         line_bot_api.reply_message(event.reply_token, message)
     #elif '註冊會員' in msg:
     elif '/S003' in msg:
@@ -285,7 +288,18 @@ def welcome(event):
 
     message = TextSendMessage(text=f'{name}歡迎加入 MDC 富裕與您同在請輸入 /MAIN 顯示功能表')
     line_bot_api.reply_message(event.reply_token, message)
-        
+
+def token(msg):
+    wmsg = msg[2:]
+    wsmsg = wmsg.split('#')
+    
+    if  wsmsg[2]  == "button30" :
+        wsmessage = buttons_30(wsmsg)
+    elif wsmsg[2] == "button31" :
+        wsmessage = buttons_31(wsmsg)    
+
+    return wsmessage    
+            
 #def loadfile():
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
