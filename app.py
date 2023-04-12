@@ -28,6 +28,8 @@ import urllib.request
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from sendmails import *
+from senddemomail import *
+
 #==================  for email ===================
 
 from flask import Flask, request, abort
@@ -200,18 +202,13 @@ def handle_message(event):
         message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         #print("Line BOT reply ======  aaaaaaaaaaaaaaaaaaaa")
         line_bot_api.reply_message(event.reply_token, message)  
+    elif msg.upper()[0:9] == '/DEMOMAIL'  :
+        sendlog = demomail(msg)
+        message = TextSendMessage(text= "完成信件發送 : " + sendlog)
+        
+        line_bot_api.reply_message(event.reply_token, message)          
            
-        #line_bot_api.push_message(usr, message)
-        #print("reply tokem" +event.reply_token)
-        #line_bot_api.reply_message(event.reply_token, message)
-        #line_bot_api.push_message(usr, message)
-        #print("Line BOT reply ===complete ===  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb    " + msg)
-    #elif '/main' in msg:
-    #    wsmenu = '目錄:\n 指令   命令內容\n==============\n/S001:圖片展示\n/S002:旅遊現金抵用券\n/S003:註冊會員\n/S004:旋轉木馬\n/S005:我們的產品\n/S006:功能列表'
-    #    wsmenu = wsmenu + '\n/TSTMAIL:service@mdcr4u.com.tw \n 發送測試信件說明\n /TSTMAIL=> 指令 +":" + "收件者信箱")'
-    #    wsmenu = wsmenu + '\n/SMAIL:8  \n  批量發送信件說明\n SMAIL=> 指令 + ":" + 發送數量'
-    #    message = TextSendMessage(text= wsmenu)
-    #    line_bot_api.reply_message(event.reply_token, message) 
+    
     elif '/init' in msg:
         initcounter(usr,msg,userFolder) 
         message = TextSendMessage(text= "完成信件處理 : initial counter complete =====")
@@ -231,10 +228,6 @@ def handle_message(event):
         print("msg   for token" + msg)
         message = token(msg)
         line_bot_api.reply_message(event.reply_token, message)
-    #elif msg.upper()[0:4] == '/CBD' :
-    #    message = buttons_31("&&#C000#button31#")
-    #    line_bot_api.reply_message(event.reply_token, message)
-    #elif '註冊會員' in msg:
     elif '/S003' in msg:
         message = Confirm_Template()
         line_bot_api.reply_message(event.reply_token, message)
@@ -334,6 +327,10 @@ def token(msg):
         wsmessage = buttons_40(msg)   
         print("button_40 return \n")     
         print(wsmessage )                     
+
+    if wkmsg[2] == "image_50" :    
+        wsmessage = imagemap_5(wmsg)   
+
     return wsmessage    
             
 #def loadfile():
