@@ -85,7 +85,7 @@ github_prj = line[12:].strip()
 line = file.readline().strip('\n')   #line1 githubproject
 line=line.strip('\n')
 ftpurl= line[12:].strip()
-print(ftpurl + "*")
+#print(ftpurl + "*")
 file.close()
 
  
@@ -97,7 +97,7 @@ url = ftpurl + "key.txt"
 filename = 'key.txt'
 #url = 'https://mdcgenius.000webhostapp.com/key.txt' 
 #print(url + "-" + filename)
-print("#####################" + url + "######################")
+#print("#####################" + url + "######################")
 try:
     urllib.request.urlretrieve(url, filename)
 except:
@@ -135,7 +135,7 @@ def callback():
     app.logger.info("Request body: " + body)
     # handle webhook body
     try:
-        print("Handle event " + body)
+#        print("Handle event " + body)
         handler.handle(body, signature)
 #        print("control return to   callback")
     except InvalidSignatureError:
@@ -148,21 +148,21 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    print("??????????????????????????????????????????????????????")
+#    print("??????????????????????????????????????????????????????")
     usr =event.source.user_id
     line_user_id = usr
-    print("\n====handle_message=========\n"+ line_user_id)
+#    print("\n====handle_message=========\n"+ line_user_id)
     userFolder = check_line_id(ftpurl ,line_user_id)
-    print("USER Folder " + userFolder + "*")
+#    print("USER Folder " + userFolder + "*")
     msg = event.message.text
-    print("\n====handle_message=========\n"+ msg)
+#    print("\n====handle_message=========\n"+ msg)
     # first 4 char 
     # last 5 char string[-5:])
     # string.upper
     # string.lower
   
 
-    print("\n   handle START===>           "+ msg +"\n")
+#    print("\n   handle START===>           "+ msg +"\n")
     if msg.startswith('#'):
 #        url=githubutl +  "key.txt"
 #        url = "http://mdcgenius.tw/key.txt"
@@ -170,7 +170,7 @@ def handle_message(event):
 #        wkey =  file.readline()
 #        openai.api_key = wkey.decode('utf-8') 
         openai.api_key = gpt_token.decode('utf-8') 
-        print(openai.api_key + msg)
+#        print(openai.api_key + msg)
         #file.close()
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
@@ -221,14 +221,14 @@ def handle_message(event):
    
     #elif '最新合作廠商' in msg:
     elif msg.upper()[0:5] == '/MAIN'  : #'/image#cbd' in msg:   
-        print(" will proces simage message")
+#        print(" will proces simage message")
         message = imagemap_5(msg)
         line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
     elif msg.upper()[0:2] == '&&' :
-        print("msg   for token" + msg)
+#        print("msg   for token" + msg)
         message = token(msg)
-        print(message)
+#        print(message)
         line_bot_api.reply_message(event.reply_token, message)
     elif '/S003' in msg:
         message = Confirm_Template()
@@ -261,7 +261,7 @@ def handle_message(event):
             reply_text = "您是在群組或聊天室中"
 
              
-        print(reply_text)
+#        print(reply_text)
         message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
 
@@ -272,7 +272,11 @@ def handle_message(event):
 
 @handler.add(PostbackEvent)
 def handle_message(event):
+    print ("=====================================\npost back data\n===========================================================")
     print(event.postback.data)
+    message = token(event.postback.data)
+    print (message)
+    line_bot_api.reply_message(event.reply_token, message)
 
 
 @handler.add(MemberJoinedEvent)
@@ -286,10 +290,10 @@ def welcome(event):
     line_bot_api.reply_message(event.reply_token, message)
 
 def token(msg):
-    print ("token msg " + msg )
+#    print ("token msg " + msg )
     wmsg = msg[2:]
     wkmsg = msg.split('#')
-    print ("*" + wkmsg[0] + "-" + wkmsg[1] + "-" + wkmsg[2] + "*")
+    #print ("*" + wkmsg[0] + "-" + wkmsg[1] + "-" + wkmsg[2] + "*")
     
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
@@ -311,7 +315,6 @@ def token(msg):
     elif  wkmsg[2]  == "button_30" :
         message = buttons_30(msg)
     elif wkmsg[2] == "button_31" :
-        print("buttons_31")
         message = buttons_31(msg)    
     elif wkmsg[2] == "button_01" :
         message = buttons_01(msg)    
@@ -328,10 +331,7 @@ def token(msg):
     elif wkmsg[2] == "button_04" :
         message = buttons_04(msg)  
     elif wkmsg[2] == "button_40" :
-        print (" call buttons_40")
         message = buttons_40(msg)   
-        print("button_40 return \n")     
-        print(message )                     
     elif wkmsg[2] == "image_50" :    
         message = imagemap_5(wmsg)   
     else :
