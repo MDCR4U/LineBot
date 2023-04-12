@@ -298,11 +298,12 @@ def token(msg):
 
     url = wsftpflr + "json/" + wkmsg[1] + ".json"
     wurlfile = check_url_file(url)
+    message = ''
     if wurlfile != '' :
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
         return message
     
-
+    
     if  wkmsg[2]  == "button_30" :
         message = buttons_30(msg)
     elif wkmsg[2] == "button_31" :
@@ -324,11 +325,13 @@ def token(msg):
         message = buttons_04(msg)  
     elif wkmsg[2] == "button_40" :
         print (" call buttons_40")
-        message = buttons_40(msg)   
+        message = xbuttons_40(msg)   
         print("button_40 return \n")     
         print(message )                     
     elif wkmsg[2] == "image_50" :    
         message = imagemap_5(wmsg)   
+    else :
+        message = TextSendMessage(text=  "\您是說 : " + msg + "嗎?")    
 
     return message    
             
