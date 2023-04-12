@@ -231,9 +231,9 @@ def handle_message(event):
         print("msg   for token" + msg)
         message = token(msg)
         line_bot_api.reply_message(event.reply_token, message)
-    elif msg.upper()[0:4] == '/CBD' :
-        message = buttons_31("&&#C000#button31#")
-        line_bot_api.reply_message(event.reply_token, message)
+    #elif msg.upper()[0:4] == '/CBD' :
+    #    message = buttons_31("&&#C000#button31#")
+    #    line_bot_api.reply_message(event.reply_token, message)
     #elif '註冊會員' in msg:
     elif '/S003' in msg:
         message = Confirm_Template()
@@ -296,6 +296,20 @@ def token(msg):
     wkmsg = wmsg.split('#')
     print (wkmsg[2])
     print (wkmsg[1])
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+
+    url = wsftpflr + "json/" + wkmsg[2] + ".json"
+    wurlfile = check_url_file(url)
+    if wurlfile != '' :
+        message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
+        return message
+    
+
     if  wkmsg[2]  == "button_30" :
         wsmessage = buttons_30(msg)
     elif wkmsg[2] == "button_31" :
