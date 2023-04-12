@@ -47,6 +47,7 @@ from linebot.models import *
 from message import *
 from image_response import *
 from button_response import *
+from text_response import *
 from new import *
 from Function import *
 from gptapi import *
@@ -304,8 +305,10 @@ def token(msg):
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
         return message
     
-    
-    if  wkmsg[2]  == "button_30" :
+    if  wkmsg[2]  == "text_200" :
+        message = text_20(msg)
+
+    elif  wkmsg[2]  == "button_30" :
         message = buttons_30(msg)
     elif wkmsg[2] == "button_31" :
         print("buttons_31")
