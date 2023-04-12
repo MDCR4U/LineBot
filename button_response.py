@@ -29,7 +29,7 @@ def buttons_01(msg):    # 0 text, 1URL
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
+    #print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -60,10 +60,9 @@ def buttons_01(msg):    # 0 text, 1URL
         )
     )
 
-    print(message)
+    #print(message)
     return message
 def buttons_10(msg):    # 1 text, 0URL   
-    print (" process 1 text 0 url button")
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -569,7 +568,7 @@ def buttons_31(msg):     # 3 text, 1URL
         )
     )
 
-    print(message)
+     
     return message
 def buttons_40(msg):     # 3 text, 1URL   
     print (" process 4 text 0url button ==>" + msg)
