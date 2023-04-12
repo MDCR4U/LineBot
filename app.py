@@ -307,7 +307,7 @@ def token(msg):
     if  wkmsg[2]  == "button_30" :
         message = buttons_30(msg)
     elif wkmsg[2] == "button_31" :
-        print("button_31")
+        print("buttons_31")
         message = buttons_31(msg)    
     elif wkmsg[2] == "button_01" :
         message = buttons_01(msg)    
