@@ -625,13 +625,13 @@ def xbuttons_40(msg):    # 4 text, 0URL
                     label=label3  ,   #"CBD的研究報告",
                     text=text3  ,   #"/C30"
                 ),
-                 PostbackTemplateAction(
-                    label =label4,
-                    data=text4
+                # PostbackTemplateAction(
+                #    label ='1', # label4,
+                #    data='2'
                  
-                #MessageTemplateAction(
-                ##    label=label4 ,   #"更多選項",
-                #    text=text4 
+                MessageTemplateAction(
+                    label='123' ,   #"更多選項",
+                   text='abc' 
                 )
             ]
         )
