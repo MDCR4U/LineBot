@@ -561,9 +561,13 @@ def buttons_40(msg):    # 4 text, 0URL
                     label=label3  ,   #"CBD的研究報告",
                     text=text3  ,   #"/C30"
                 ),
-                MessageTemplateAction(
-                    label=label4 ,   #"更多選項",
-                    text=text4 
+                 PostbackTemplateAction(
+                    label =label4,
+                    data=text4
+                 
+                #MessageTemplateAction(
+                ##    label=label4 ,   #"更多選項",
+                #    text=text4 
                 )
             ]
         )
