@@ -332,7 +332,8 @@ def token(msg):
     elif wkmsg[2] == "button_40" :
         print (" call buttons_40")
         wsmessage = buttons_40(msg)   
-        print("button_40 return \n" + wsmessage + "\n\n")                       
+        print("button_40 return \n")     
+        print(wsmessage )                     
     return wsmessage    
             
 #def loadfile():
