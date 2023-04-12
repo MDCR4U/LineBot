@@ -227,6 +227,7 @@ def handle_message(event):
     elif msg.upper()[0:2] == '&&' :
         print("msg   for token" + msg)
         message = token(msg)
+        print(message)
         line_bot_api.reply_message(event.reply_token, message)
     elif '/S003' in msg:
         message = Confirm_Template()
@@ -325,7 +326,7 @@ def token(msg):
         message = buttons_04(msg)  
     elif wkmsg[2] == "button_40" :
         print (" call buttons_40")
-        message = xbuttons_40(msg)   
+        message = buttons_40(msg)   
         print("button_40 return \n")     
         print(message )                     
     elif wkmsg[2] == "image_50" :    
