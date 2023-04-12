@@ -563,7 +563,7 @@ def buttons_40(msg):    # 4 text, 0URL
                 ),
                 MessageTemplateAction(
                     label=label4 ,   #"更多選項",
-                    text=text4 ,
+                    text=text4 
                 )
             ]
         )
