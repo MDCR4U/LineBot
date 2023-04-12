@@ -293,9 +293,9 @@ def welcome(event):
 def token(msg):
     print ("token msg " + msg )
     wmsg = msg[2:]
-    wkmsg = wmsg.split('#')
-    print (wkmsg[2])
-    print (wkmsg[1])
+    wkmsg = msg.split('#')
+    print ("*" + wkmsg[0] + "-" + wkmsg[1] + "-" + wkmsg[2] + "*")
+    
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -303,7 +303,7 @@ def token(msg):
     #line=line.strip('\n')
     wsftpflr= line[12:].strip()
 
-    url = wsftpflr + "json/" + wkmsg[2] + ".json"
+    url = wsftpflr + "json/" + wkmsg[1] + ".json"
     wurlfile = check_url_file(url)
     if wurlfile != '' :
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
