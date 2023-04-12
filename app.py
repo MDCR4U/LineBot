@@ -304,34 +304,33 @@ def token(msg):
     
 
     if  wkmsg[2]  == "button_30" :
-        wsmessage = buttons_30(msg)
+        message = buttons_30(msg)
     elif wkmsg[2] == "button_31" :
         print("button_31")
-        wsmessage = buttons_31(msg)    
+        message = buttons_31(msg)    
     elif wkmsg[2] == "button_01" :
-        wsmessage = buttons_01(msg)    
+        message = buttons_01(msg)    
     elif wkmsg[2] == "button_10" :
-        wsmessage = buttons_10(msg)    
+        message = buttons_10(msg)    
     elif wkmsg[2] == "button_02" :
-        wsmessage = buttons_02(msg)                  
+        message = buttons_02(msg)                  
     elif wkmsg[2] == "button_11" :
-        wsmessage = buttons_11(msg)          
+        message = buttons_11(msg)          
     elif wkmsg[2] == "button_20" :
-        wsmessage = buttons_20(msg)          
+        message = buttons_20(msg)          
     elif wkmsg[2] == "button_03" :
-        wsmessage = buttons_03(msg)  
+        message = buttons_03(msg)  
     elif wkmsg[2] == "button_04" :
-        wsmessage = buttons_04(msg)  
+        message = buttons_04(msg)  
     elif wkmsg[2] == "button_40" :
         print (" call buttons_40")
-        wsmessage = buttons_40(msg)   
+        message = buttons_40(msg)   
         print("button_40 return \n")     
-        print(wsmessage )                     
+        print(message )                     
+    elif wkmsg[2] == "image_50" :    
+        message = imagemap_5(wmsg)   
 
-    if wkmsg[2] == "image_50" :    
-        wsmessage = imagemap_5(wmsg)   
-
-    return wsmessage    
+    return message    
             
 #def loadfile():
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
