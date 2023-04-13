@@ -688,7 +688,7 @@ def buttons_dd(msg):    # uri + post
     label1     = js_dta["label1"]
     label2     = js_dta["label2"]
  
-    url1       = js_dta["url1"]
+    text1      = js_dta["text1"]
     text2      = js_dta["text2"]
      
     message = TemplateSendMessage(
