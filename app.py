@@ -86,7 +86,6 @@ github_prj = line[12:].strip()
 line = file.readline().strip('\n')   #line1 githubproject
 line=line.strip('\n')
 ftpurl= line[12:].strip()
-#print(ftpurl + "*")
 file.close()
 
  
@@ -96,9 +95,6 @@ file.close()
 url = ftpurl #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
 url = ftpurl + "key.txt"
 filename = 'key.txt'
-#url = 'https://mdcgenius.000webhostapp.com/key.txt' 
-#print(url + "-" + filename)
-#print("#####################" + url + "######################")
 try:
     urllib.request.urlretrieve(url, filename)
 except:
@@ -106,7 +102,6 @@ except:
     exit()
 #取得 系統 KEY 
 
-#print("========================= " + url )
 file = open('key.txt','r',encoding="utf-8")
 line = file.readline().strip('\n')                 #line_access_token = ''
 line_access_token =line[17:].strip()
@@ -128,42 +123,33 @@ handler = WebhookHandler(line_channel_secret)
 @app.route("/rich4u_004", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
-    print("start CALL BACK PROCESS")
     signature = request.headers['X-Line-Signature']
     # get request body as text
     body = request.get_data(as_text=True)
-    #print("body = " + body)
     app.logger.info("Request body: " + body)
     # handle webhook body
     try:
-#        print("Handle event " + body)
         handler.handle(body, signature)
-#        print("control return to   callback")
     except InvalidSignatureError:
         abort(400)
     
-#    print("call back return")
     return 'OK'  #ok(200)
 
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-#    print("??????????????????????????????????????????????????????")
     usr =event.source.user_id
     line_user_id = usr
-#    print("\n====handle_message=========\n"+ line_user_id)
     userFolder = check_line_id(ftpurl ,line_user_id)
 #    print("USER Folder " + userFolder + "*")
     msg = event.message.text
-    print("\n====handle_message=========\n"+ msg)
     # first 4 char 
     # last 5 char string[-5:])
     # string.upper
     # string.lower
   
 
-#    print("\n   handle START===>           "+ msg +"\n")
     if msg.startswith('#'):
 #        url=githubutl +  "key.txt"
 #        url = "http://mdcgenius.tw/key.txt"
@@ -171,7 +157,6 @@ def handle_message(event):
 #        wkey =  file.readline()
 #        openai.api_key = wkey.decode('utf-8') 
         openai.api_key = gpt_token.decode('utf-8') 
-#        print(openai.api_key + msg)
         #file.close()
         gpt_response = openai.Completion.create(
             engine='text-davinci-003',
@@ -202,7 +187,6 @@ def handle_message(event):
         #增加 user folder
         sendlog = send_mail(usr,msg,userFolder)
         message = TextSendMessage(text= "完成信件發送 : " + sendlog)
-        #print("Line BOT reply ======  aaaaaaaaaaaaaaaaaaaa")
         line_bot_api.reply_message(event.reply_token, message)  
     elif msg.upper()[0:9] == '/DEMOMAIL'  :
         sendlog = demomail(msg)
@@ -222,14 +206,11 @@ def handle_message(event):
    
     #elif '最新合作廠商' in msg:
     elif msg.upper()[0:5] == '/MAIN'  : #'/image#cbd' in msg:   
-#        print(" will proces simage message")
         message = imagemap_5(msg)
         line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
     elif msg.upper()[0:2] == '&&' :
-#        print("msg   for token" + msg)
         message = token(msg)
-#        print(message)
         line_bot_api.reply_message(event.reply_token, message)
     elif '/S003' in msg:
         message = Confirm_Template()
@@ -242,10 +223,6 @@ def handle_message(event):
     elif '/S005' in msg:
         message = image_carousel_message1() # test()
         line_bot_api.reply_message(event.reply_token, message)
-    #elif '功能列表' in msg:
-    #elif 'S006' in msg:        
-    #    message = function_list()
-    #    line_bot_api.reply_message(event.reply_token, message)
     else :
         user_id = event.source.user_id
         user_type = event.source.type
@@ -262,11 +239,9 @@ def handle_message(event):
             reply_text = "您是在群組或聊天室中"
 
              
-#        print(reply_text)
         message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
         line_bot_api.reply_message(event.reply_token,  message )
 
-    print(' call back return OK')
     
      
     
@@ -291,10 +266,8 @@ def welcome(event):
     line_bot_api.reply_message(event.reply_token, message)
 
 def token(msg):
-#    print ("token msg " + msg )
     wmsg = msg[2:]
     wkmsg = msg.split('#')
-    #print ("*" + wkmsg[0] + "-" + wkmsg[1] + "-" + wkmsg[2] + "*")
     
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
@@ -311,6 +284,7 @@ def token(msg):
         return message
  
     if  wkmsg[2]  == "carousel_2" :
+        print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
         message = carousel_2(msg)
     elif  wkmsg[2]  == "text_20" :
         message = text_20(msg)

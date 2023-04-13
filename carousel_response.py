@@ -18,6 +18,8 @@ import urllib.request
 #旋轉木馬按鈕訊息介面
 
 def carousel_2(msg):
+
+    print(' carousel_2 ' + msg)
     #LINE bot的Carousel Template可以有最多10個columns
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
@@ -95,8 +97,8 @@ def carousel_2(msg):
                             data=c2_text2
                         ),
                         PostbackTemplateAction(
-                            label= c2_label3,
-                            data=c2_text3
+                            label= 'aaaa', #c2_label3,
+                            data='bbbb' #c2_text3
                         )
                     ]
                 )

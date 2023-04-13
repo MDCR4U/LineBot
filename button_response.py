@@ -758,7 +758,6 @@ def buttons_40t(msg):     # 3 text, 1URL
         )
     )
 
-    print(message)
     return message
 def xbuttons_40(msg):    # 4 text, 0URL
     print (" process 4 text 0 url button")
@@ -825,7 +824,6 @@ def xbuttons_40(msg):    # 4 text, 0URL
         )
     )
 
-    print(message)
     print("button 4-0 complete")
     return message
 
@@ -879,7 +877,6 @@ def text_20(msg):     # 2 text, 0URL
         )
     )
 
-    print(message)
     return message
 
 
