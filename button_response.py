@@ -1104,21 +1104,7 @@ def text_10(msg):     # 2 text, 0URL
     label2     = js_dta["label2"]
     text1       = js_dta["text1"]
     text2      = js_dta["text2"]
-    message = TemplateSendMessage(
-        alt_text= alt_text ,   #'CBD的法律常識～',
-        template=ButtonsTemplate(
-            thumbnail_image_url= image_url, #"https://i.ibb.co/NWrhxmc/cbd.jpg",
-            title= title,      #CBD的百寶庫",
-            text=text0,       #"選擇您想要的內容",
-            actions=[
-                MessageTemplateAction(
-                    label= label1 ,  #"CBD的法律常識",
-                    text=text1 ,    #"/C20"
-                )
-            ]
-        )
-    )
-
+    message = TextSendMessage(text= text1)
     return message
 
 
