@@ -45,7 +45,8 @@ def text_20(msg):     # 2 text, 0URL
      
  
 
-    print(message)
+    
     return message
+
 
 

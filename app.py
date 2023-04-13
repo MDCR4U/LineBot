@@ -48,6 +48,7 @@ from message import *
 from image_response import *
 from button_response import *
 from text_response import *
+from carousel_response import *
 from new import *
 from Function import *
 from gptapi import *
@@ -308,11 +309,13 @@ def token(msg):
     if wurlfile != '' :
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
         return message
-    
-    if  wkmsg[2]  == "text_20" :
+ 
+    if  wkmsg[2]  == "carousel_2" :
+        message = carousel_2(msg)
+    elif  wkmsg[2]  == "text_20" :
         message = text_20(msg)
-    elif  wkmsg[2]  == "text_40" :
-        message = text_40(msg)
+    elif  wkmsg[2]  == "button_40" :
+        message = buttons_40(msg)
     elif  wkmsg[2]  == "button_30" :
         message = buttons_30(msg)
     elif wkmsg[2] == "button_31" :
