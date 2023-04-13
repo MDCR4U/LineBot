@@ -17,7 +17,7 @@ import urllib.request
  
 #旋轉木馬按鈕訊息介面
 
-def xcarousel_2(msg):
+def carousel_2(msg):
 
     print(' carousel_2 ' + msg)
     #LINE bot的Carousel Template可以有最多10個columns
