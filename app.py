@@ -155,7 +155,7 @@ def handle_message(event):
     userFolder = check_line_id(ftpurl ,line_user_id)
 #    print("USER Folder " + userFolder + "*")
     msg = event.message.text
-#    print("\n====handle_message=========\n"+ msg)
+    print("\n====handle_message=========\n"+ msg)
     # first 4 char 
     # last 5 char string[-5:])
     # string.upper
@@ -309,9 +309,10 @@ def token(msg):
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
         return message
     
-    if  wkmsg[2]  == "text_200" :
+    if  wkmsg[2]  == "text_20" :
         message = text_20(msg)
-
+    elif  wkmsg[2]  == "text_40" :
+        message = text_40(msg)
     elif  wkmsg[2]  == "button_30" :
         message = buttons_30(msg)
     elif wkmsg[2] == "button_31" :

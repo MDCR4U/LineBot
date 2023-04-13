@@ -319,7 +319,70 @@ def buttons_03(msg):    # 0 text, 3URL
     return message
 #def buttons_12(msg):     #1 text 2url
 #def buttons_21(msg):     #2 text 1url
-def buttons_30(msg):     # 3 text, 0URL
+def buttons_30(msg):     # 3 text, 1URL   
+  
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+
+    wsmsg = msg.split('#')
+    
+    wjson_file = wsmsg[1] + ".json"
+# 讀取 JSON 檔案  local
+#   # with open("cbd.json" , "r") as f:
+    #with open(wjson_file , "r") as f:
+    #    js_dta = json.load(f)
+
+    url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
+    print(url)
+    response = urllib.request.urlopen(url)
+    data = response.read().decode("utf-8")
+    js_dta = json.loads(data)
+    image_url  = js_dta["image"]   
+    alt_text   = js_dta["alt_text"]
+    title      = js_dta["title"]
+    text0      = js_dta["text0"]
+    label1     = js_dta["label1"]
+    label2     = js_dta["label2"]
+    label3     = js_dta["label3"]
+    label4     = js_dta["label4"]
+    text1      = js_dta["text1"]
+    text2      = js_dta["text2"]
+    text3      = js_dta["text3"]
+    text4      = js_dta["text4"]
+    message = TemplateSendMessage(
+        alt_text= alt_text ,   #'CBD的法律常識～',
+        template=ButtonsTemplate(
+            thumbnail_image_url= image_url, #"https://i.ibb.co/NWrhxmc/cbd.jpg",
+            title= title,      #CBD的百寶庫",
+            text=text0,       #"選擇您想要的內容",
+            actions=[
+               PostbackTemplateAction(
+                            label=label1,
+                            data=text1
+                ),
+                PostbackTemplateAction(
+                            label=label2,
+                            data=text2
+                ),
+                PostbackTemplateAction(
+                            label=label3,
+                            data=text3
+                )
+                #PostbackTemplateAction(
+                #            label=label4,
+                #            data=text4
+                #)
+            ]
+        )
+    )
+
+     
+    return message
+def buttons_30t(msg):     # 3 text, 0URL
     print (" process 3 text 0 url button")
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
@@ -571,6 +634,69 @@ def buttons_31(msg):     # 3 text, 1URL
      
     return message
 def buttons_40(msg):     # 3 text, 1URL   
+  
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+
+    wsmsg = msg.split('#')
+    
+    wjson_file = wsmsg[1] + ".json"
+# 讀取 JSON 檔案  local
+#   # with open("cbd.json" , "r") as f:
+    #with open(wjson_file , "r") as f:
+    #    js_dta = json.load(f)
+
+    url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
+    print(url)
+    response = urllib.request.urlopen(url)
+    data = response.read().decode("utf-8")
+    js_dta = json.loads(data)
+    image_url  = js_dta["image"]   
+    alt_text   = js_dta["alt_text"]
+    title      = js_dta["title"]
+    text0      = js_dta["text0"]
+    label1     = js_dta["label1"]
+    label2     = js_dta["label2"]
+    label3     = js_dta["label3"]
+    label4     = js_dta["label4"]
+    text1      = js_dta["text1"]
+    text2      = js_dta["text2"]
+    text3      = js_dta["text3"]
+    text4      = js_dta["text4"]
+    message = TemplateSendMessage(
+        alt_text= alt_text ,   #'CBD的法律常識～',
+        template=ButtonsTemplate(
+            thumbnail_image_url= image_url, #"https://i.ibb.co/NWrhxmc/cbd.jpg",
+            title= title,      #CBD的百寶庫",
+            text=text0,       #"選擇您想要的內容",
+            actions=[
+               PostbackTemplateAction(
+                            label=label1,
+                            data=text1
+                ),
+                PostbackTemplateAction(
+                            label=label2,
+                            data=text2
+                ),
+                PostbackTemplateAction(
+                            label=label3,
+                            data=text3
+                ),
+                PostbackTemplateAction(
+                            label=label4,
+                            data=text4
+                )
+            ]
+        )
+    )
+
+     
+    return message
+def buttons_40t(msg):     # 3 text, 1URL   
     print (" process 4 text 0url button ==>" + msg)
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
