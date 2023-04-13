@@ -291,8 +291,10 @@ def token(msg):
         message = text_10(msg)        
     elif  wkmsg[2]  == "text_20" :
         message = text_20(msg)
-    elif  wkmsg[2]  == "button_du" :         message = buttons_du(msg)        
-    elif  wkmsg[2]  == "button_40" :        message = buttons_40(msg)
+    elif  wkmsg[2]  == "buttons_du" : 
+        message = buttons_du(msg)        
+    elif  wkmsg[2]  == "button_40" :
+        message = buttons_40(msg)
     elif  wkmsg[2]  == "button_30" :
         message = buttons_30(msg)
     elif wkmsg[2] == "button_31" :
