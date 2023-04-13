@@ -286,6 +286,7 @@ def token(msg):
     if  wkmsg[2]  == "carousel_2" :
         print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
         message = carousel_2(msg)
+        print(message)
     elif  wkmsg[2]  == "text_20" :
         message = text_20(msg)
     elif  wkmsg[2]  == "button_40" :
