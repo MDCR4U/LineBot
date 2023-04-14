@@ -154,6 +154,7 @@ def handle_message(event):
         wmsg = get_token(ftpurl,msg[1:].strip('\n') )
         if wmsg == 'NF' :
             TextSendMessage(text="找不到您要執行的命令 :" + msg)
+            line_bot_api.reply_message(event.reply_token, message)   
             return 
         else :
             print ("convert msg " + wmsg)

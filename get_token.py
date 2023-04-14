@@ -3,6 +3,7 @@ import requests
 
 def get_token(url ,wstoken):
     wurl = url + "token.csv"
+    print("get_token " + wurl + "-" + wstoken)
     response = requests.get(wurl)
     if response.status_code != 200:
         return "Error: Cannot fetch data from the server."
