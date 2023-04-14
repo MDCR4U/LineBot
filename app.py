@@ -153,7 +153,7 @@ def handle_message(event):
         print("token url " + ftpurl + "  token : " + msg[1:])
         wmsg = get_token(ftpurl,msg[1:].strip('\n') )
         if wmsg == 'NF' :
-            TextSendMessage(text="找不到您要執行的命令 :" + msg)
+            message = TextSendMessage(text="找不到您要執行的命令 :" + msg)
             line_bot_api.reply_message(event.reply_token, message)   
             return 
         else :
@@ -216,24 +216,24 @@ def handle_message(event):
           line_bot_api.reply_message(event.reply_token, message)            
    
     #elif '最新合作廠商' in msg:
-    elif msg.upper()[0:5] == '/MAIN'  : #'/image#cbd' in msg:   
-        message = imagemap_5(msg)
-        line_bot_api.reply_message(event.reply_token, message)
+    #elif msg.upper()[0:5] == '/MAIN'  : #'/image#cbd' in msg:   
+    #    message = imagemap_5(msg)
+    #    line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
     elif msg.upper()[0:2] == '&&' :
         message = token(msg)
         line_bot_api.reply_message(event.reply_token, message)
-    elif '/S003' in msg:
-        message = Confirm_Template()
-        line_bot_api.reply_message(event.reply_token, message)
+   # elif '/S003' in msg:
+   #     message = Confirm_Template()
+   #     line_bot_api.reply_message(event.reply_token, message)
     #elif '旋轉木馬' in msg:
-    elif 'S004' in msg:        
-        message = Carousel_Template()
-        line_bot_api.reply_message(event.reply_token, message)
+   # elif 'S004' in msg:        
+   #     message = Carousel_Template()
+   #     line_bot_api.reply_message(event.reply_token, message)
     #elif '圖片畫廊' in msg:
-    elif '/S005' in msg:
-        message = image_carousel_message1() # test()
-        line_bot_api.reply_message(event.reply_token, message)
+   # elif '/S005' in msg:
+   #     message = image_carousel_message1() # test()
+   #     line_bot_api.reply_message(event.reply_token, message)
     else :
         user_id = event.source.user_id
         user_type = event.source.type
