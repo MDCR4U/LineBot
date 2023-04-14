@@ -52,6 +52,7 @@ from carousel_response import *
 from new import *
 from Function import *
 from gptapi import *
+from get_token import *
 #======這裡是呼叫的檔案內容=====
 
 #======python的函數庫==========
@@ -148,7 +149,15 @@ def handle_message(event):
     # last 5 char string[-5:])
     # string.upper
     # string.lower
-  
+    if msg[0,1] == "@" :
+        wmsg = get_token(ftpurl,msg[1:].strip('\n') )
+        if wmsg == 'NF' :
+            TextSendMessage(text="找不到您要執行的命令的 :" + msg[1:])
+            return 
+        else :
+            print ("convert msg " + wmsg)
+            msg = wmsg
+            
 
     if msg.startswith('#'):
 #        url=githubutl +  "key.txt"
@@ -279,6 +288,7 @@ def token(msg):
     url = wsftpflr + "json/" + wkmsg[1] + ".json"
     wurlfile = check_url_file(url)
     message = ''
+
     if wurlfile != '' :
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
         return message

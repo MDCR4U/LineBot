@@ -251,7 +251,7 @@ def Carousel_Template():
         )
     )
     return message
-def carousel_2(msg):
+def carousel_2x(msg):
     
     #LINE bot的Carousel Template可以有最多10個columns
     message = TemplateSendMessage(
