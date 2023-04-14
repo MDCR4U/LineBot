@@ -149,15 +149,16 @@ def handle_message(event):
     # last 5 char string[-5:])
     # string.upper
     # string.lower
-    if msg[0,1] == "@" :
+    if msg[0:1] == "@" :
+        print("token url " + ftpurl "  token : " + msg[1:]
         wmsg = get_token(ftpurl,msg[1:].strip('\n') )
         if wmsg == 'NF' :
-            TextSendMessage(text="找不到您要執行的命令的 :" + msg[1:])
+            TextSendMessage(text="找不到您要執行的命令 :" + msg)
             return 
         else :
             print ("convert msg " + wmsg)
             msg = wmsg
-            
+
 
     if msg.startswith('#'):
 #        url=githubutl +  "key.txt"
