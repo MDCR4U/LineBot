@@ -270,10 +270,16 @@ def handle_message(event):
 def welcome(event):
     uid = event.joined.members[0].user_id
     gid = event.source.group_id
+
+    print("add member event ")
+    print(event)
     profile = line_bot_api.get_group_member_profile(gid, uid)
+
+    print(" new member profile : ")
+    print (profile)
     name = profile.display_name
 
-    message = TextSendMessage(text=f'{name}歡迎加入 MDC 富裕與您同在請輸入 /MAIN 顯示功能表')
+    message = TextSendMessage(text=f'{name}歡迎加入 MDC 富裕與您同在')
     line_bot_api.reply_message(event.reply_token, message)
 
 def token(msg):
