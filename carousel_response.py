@@ -97,14 +97,15 @@ def carousel_2(msg):
                             data=c2_text2
                         ),
                         PostbackTemplateAction(
-                            label= 'aaaa', #c2_label3,
-                            data='bbbb' #c2_text3
+                            label= c2_label3,
+                            data=c2_text3
                         )
                     ]
                 )
             ]
         )
     )
+    print (message)
     return message
 def Carousel_5(msg):
     #LINE bot的Carousel Template可以有最多10個columns
