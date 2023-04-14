@@ -17,10 +17,11 @@ def get_token(url ,wstoken):
     for row in csv_reader:
         code, description = row
         if code == wstoken:
+            print("get token return " + description)
             return description
 
     return "NF"
 
 # 使用範例
-wstoken = "a001_1"
-print(get_token(wstoken))
+#wstoken = "a001_1"
+#print(get_token(wstoken))
