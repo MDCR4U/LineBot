@@ -22,7 +22,30 @@ def get_token(url ,wstoken):
             return description
 
     return "NF"
+def get_continue(line_id):
 
+    wfn = 'continue/' + line_id + '.txt'
+
+    print("get_continue  " + wfn)
+
+    try:
+        with open("mail_counter.log", "r", encoding="utf-8") as f:
+            wslast= f.readline()
+            print("last token = " + wslast)
+            return f.readline()
+    except FileNotFoundError:
+            print("not found last ")
+            write_continue(line_id,'xxxxx')
+            return('@cbd')
+
+def write_continue(line_id,wstoken):
+
+    wfn = 'continue/' + line_id + '.txt'
+
+    print("get_continue  " + wfn)
+
+    with open(wfn.strip('\n') + "/continue/"+ line_id +"txt", "w", encoding="utf-8") as f:
+            f.write(str(wstoken))     
 # 使用範例
 #wstoken = "a001_1"
-#print(get_token(wstoken))
+#print(get_token(wstoken)

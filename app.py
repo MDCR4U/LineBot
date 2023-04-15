@@ -18,6 +18,9 @@
 
 #https://engineering.linecorp.com/zh-hant/blog/line-bot-guideline-3/
 
+#@ show text url 
+#https://mdcgenius.000webhostapp.com/show.html?show=text1.txt
+
  #================= for send mail =================
 import datetime
 import smtplib
@@ -145,10 +148,17 @@ def handle_message(event):
     userFolder = check_line_id(ftpurl ,line_user_id)
 #    print("USER Folder " + userFolder + "*")
     msg = event.message.text
+    get_continue(line_user_id)
+    
+    return
+
     # first 4 char 
     # last 5 char string[-5:])
     # string.upper
     # string.lower
+    if msg[1:8].upper()  == 'CONTINUE'  or msg[1:] == '繼續' :
+        wscontinue =get_continue()
+        return( wscontinue)
     if msg[0:1] == "@" :
         print("token url " + ftpurl + "  token : " + msg[1:])
         wmsg = get_token(ftpurl,msg[1:].strip('\n') )
