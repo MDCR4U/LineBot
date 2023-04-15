@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>顯示兩行文本</title>
+</head>
+<body>
+    <div id="textContainer"></div>
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        function displayText() {
+            const showtext = getParameterByName('showtext');
+            if (showtext) {
+                const [line1, line2] = showtext.split(/(?<=\d{4})/);
+                const textContainer = document.getElementById('textContainer');
+                textContainer.innerHTML = `<p>${line1}</p><p>${line2}</p>`;
+            }
+        }
+
+        displayText();
+    </script>
+</body>
+</html>
