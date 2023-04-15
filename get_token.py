@@ -29,7 +29,7 @@ def get_continue(line_id):
     print("get_continue  " + wfn)
 
     try:
-        with open("mail_counter.log", "r", encoding="utf-8") as f:
+        with open(wfn, "r", encoding="utf-8") as f:
             wslast= f.readline()
             print("last token = " + wslast)
             return f.readline()
@@ -44,7 +44,7 @@ def write_continue(line_id,wstoken):
 
     print("get_continue  " + wfn)
 
-    with open(wfn.strip('\n') + "/continue/"+ line_id +"txt", "w", encoding="utf-8") as f:
+    with open( wfn, "w", encoding="utf-8") as f:
             f.write(str(wstoken))     
 # 使用範例
 #wstoken = "a001_1"
