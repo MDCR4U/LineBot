@@ -79,6 +79,8 @@ github_prj="LineBot"
 userFolder= ''
 sendmail_auth = 'N'
 
+ispostback = 'N'
+
 #讀取 config.sys 取得 information  
 file = open('config.txt','r',encoding="utf-8")
 line = file.readline().strip('\n')    #line1 githubid
@@ -126,6 +128,8 @@ handler = WebhookHandler(line_channel_secret)
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/rich4u_004", methods=['POST'])
 def callback():
+
+    print(" call back entry ")
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     # get request body as text
@@ -280,8 +284,9 @@ def handle_message(event):
     print(event.postback.data)
     print("\n===========================================================")
     message = token(event.postback.data)
-    print (" message = " + message )
-    #line_bot_api.reply_message(event.reply_token, message)
+    #print (" message = " + message )
+    line_bot_api.reply_message(event.reply_token, message)
+    print("return postback")
 
 
 @handler.add(MemberJoinedEvent)
@@ -319,6 +324,8 @@ def token(msg):
     if wurlfile != '' :
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
         return message
+    
+    print("msg = " + msg  + " from token" )
     if msg[0:2] == "&&" :
         write_continue(line_user_id,msg)
     if  wkmsg[2]  == "carousel_2" :
