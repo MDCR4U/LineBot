@@ -148,9 +148,9 @@ def handle_message(event):
     userFolder = check_line_id(ftpurl ,line_user_id)
 #    print("USER Folder " + userFolder + "*")
     msg = event.message.text
-    get_continue(line_user_id)
     
-    return
+    
+    
 
     # first 4 char 
     # last 5 char string[-5:])
@@ -158,10 +158,15 @@ def handle_message(event):
     # string.lower
     if msg[1:8].upper()  == 'CONTINUE'  or msg[1:] == '繼續' :
         wscontinue =get_continue()
-        return( wscontinue)
+
+        print("continue token" + wscontinue)
+        msg = wscontinue
+        #message = TextSendMessage(text="找不到您要執行的命令 :" + msg)
+
+    
     if msg[0:1] == "@" :
         print("token url " + ftpurl + "  token : " + msg[1:])
-        wmsg = get_token(ftpurl,msg[1:].strip('\n') )
+        wmsg = get_run_command(ftpurl,msg[1:].strip('\n') )
         if wmsg == 'NF' :
             message = TextSendMessage(text="找不到您要執行的命令 :" + msg)
             line_bot_api.reply_message(event.reply_token, message)   
@@ -230,9 +235,11 @@ def handle_message(event):
     #    message = imagemap_5(msg)
     #    line_bot_api.reply_message(event.reply_token, message)
     #elif '最新活動訊息' in msg:
-    elif msg.upper()[0:2] == '&&' :
-        message = token(msg)
+    elif msg.upper()[0:2] == '&&' or msg.upper()[0:2] == "&%" :
+        #write_continue(line_user_id,msg)
+        message = token(line_user_id,msg)
         line_bot_api.reply_message(event.reply_token, message)
+        
    # elif '/S003' in msg:
    #     message = Confirm_Template()
    #     line_bot_api.reply_message(event.reply_token, message)
@@ -292,7 +299,7 @@ def welcome(event):
     message = TextSendMessage(text=f'{name}歡迎加入 MDC 富裕與您同在')
     line_bot_api.reply_message(event.reply_token, message)
 
-def token(msg):
+def token(line_user_id,msg):
     wmsg = msg[2:]
     wkmsg = msg.split('#')
     
@@ -310,9 +317,9 @@ def token(msg):
     if wurlfile != '' :
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
         return message
- 
+    if msg[0:2] == "&&" :
+        write_continue(line_user_id,msg)
     if  wkmsg[2]  == "carousel_2" :
-        print("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD")
         message = carousel_2(msg)
         print(message)
     elif  wkmsg[2]  == "text_10" :
