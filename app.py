@@ -1,3 +1,8 @@
+#need to add
+#   post back : get line id by event 
+#   call token(msg,lineid)
+#   in token writ continue token
+
 #使用 LINE BOT SDK
 #搭配Flask使用 LINE BOT SDK
 #https://qiu-yan-ming.gitbook.io/python-chatbot/shi-yong-line-bot-sdk
@@ -241,7 +246,7 @@ def handle_message(event):
     #elif '最新活動訊息' in msg:
     elif msg.upper()[0:2] == '&&' or msg.upper()[0:2] == "&%" :
         #write_continue(line_user_id,msg)
-        message = token(line_user_id,msg)
+        message = token(msg)
         line_bot_api.reply_message(event.reply_token, message)
         
    # elif '/S003' in msg:
