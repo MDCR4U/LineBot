@@ -631,8 +631,11 @@ def buttons_ud(msg):    # uri + post
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
+    print(js_dta)
     image_url  = js_dta["image"]   
     alt_text   = js_dta["alt_text"]
+    print(alt_text)
+    print(js_dta["title"])
     title      = js_dta["title"]
     text0      = js_dta["text0"]
     label1     = js_dta["label1"]
