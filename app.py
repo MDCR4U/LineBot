@@ -300,7 +300,8 @@ def welcome(event):
     message = TextSendMessage(text=f'{name}歡迎加入 MDC 富裕與您同在')
     line_bot_api.reply_message(event.reply_token, message)
 
-def token(line_user_id,msg):
+def token(msg):
+#def token(line_user_id,msg):
     wmsg = msg[2:]
     wkmsg = msg.split('#')
     
@@ -329,8 +330,8 @@ def token(line_user_id,msg):
         message = text_20(msg)
     elif  wkmsg[2]  == "button_dd" : 
         message = buttons_dd(msg)         
-    elif  wkmsg[2]  == "button_du" : 
-        message = buttons_du(msg)      
+    elif  wkmsg[2]  == "button_ud" : 
+        message = buttons_ud(msg)      
     elif  wkmsg[2]  == "button_40" :
         message = buttons_40(msg)
     elif  wkmsg[2]  == "button_30" :
