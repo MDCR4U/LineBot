@@ -328,8 +328,12 @@ def token(msg):
     
     if msg[0:2] == "&&" :
         write_continue(line_user_id,msg)
+    if  wkmsg[2]  == "carousel_1" :
+        message = carousel_1(msg)
     if  wkmsg[2]  == "carousel_2" :
         message = carousel_2(msg)
+    if  wkmsg[2]  == "carousel_3" :
+        message = carousel_3(msg)
     elif  wkmsg[2]  == "text_10" :
         message = text_10(msg)        
     elif  wkmsg[2]  == "text_20" :
