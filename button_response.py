@@ -664,6 +664,64 @@ def buttons_ud(msg):    # uri + post
         )
     )
 
+    return message
+def buttons_u2d(msg):    # 2uri + post 
+  
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+
+    wsmsg = msg.split('#')
+    
+    wjson_file = wsmsg[1] + ".json"
+ 
+    url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
+    print(url)
+    response = urllib.request.urlopen(url)
+    data = response.read().decode("utf-8")
+    js_dta = json.loads(data)
+    print(js_dta)
+    image_url  = js_dta["image"]   
+    alt_text   = js_dta["alt_text"]
+    print(alt_text)
+    print(js_dta["title"])
+    title      = js_dta["title"]
+    text0      = js_dta["text0"]
+    label1     = js_dta["label1"]
+    label2     = js_dta["label2"]
+    label3     = js_dta["label3"]
+ 
+    url1       = js_dta["url1"]
+    url2       = js_dta["url2"]    
+    text3      = js_dta["text3"]
+     
+    message = TemplateSendMessage(
+        alt_text= alt_text ,   #'CBD的法律常識～',
+        template=ButtonsTemplate(
+            thumbnail_image_url= image_url, 
+            title= title,     
+            text=text0,       
+            actions=[
+                URITemplateAction(
+                    label=label1   , 
+                    uri=url1  ,   
+                ),
+                URITemplateAction(
+                    label=label2  , 
+                    uri=url2  ,   
+                ),
+                PostbackTemplateAction(
+                            label=label3,
+                            data=text3
+ 
+                )
+            ]
+        )
+    )
+
  
     return message
 def buttons_dd(msg):    # uri + post 
