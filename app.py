@@ -278,7 +278,7 @@ def handle_message(event):
             reply_text = "您是在群組或聊天室中"
 
              
-        message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎?")
+        message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎? " + userFolder)
         line_bot_api.reply_message(event.reply_token,  message )
 
     
