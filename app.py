@@ -325,10 +325,11 @@ def token(msg):
     if wurlfile != '' :
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
         return message
-    
+  
     if msg[0:2] == "&&" :
         write_continue(line_user_id,msg)
-    elif  wkmsg[2]  == "carousel_1" :
+        
+    if  wkmsg[2]  == "carousel_1" :
         message = carousel_1(msg)
     elif  wkmsg[2]  == "carousel_2" :
         message = carousel_2(msg)
