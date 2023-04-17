@@ -343,7 +343,9 @@ def token(msg):
     elif  wkmsg[2]  == "button_dd" : 
         message = buttons_dd(msg)         
     elif  wkmsg[2]  == "button_ud" : 
-        message = buttons_ud(msg)      
+        message = buttons_ud(msg)    
+    elif  wkmsg[2]  == "button_u2d" : 
+        message = buttons_u2d(msg)              
     elif  wkmsg[2]  == "button_40" :
         message = buttons_40(msg)
     elif  wkmsg[2]  == "button_30" :
