@@ -402,7 +402,7 @@ def initcounter(lineid,msg,userFolder ):
     with open(url , "w", encoding="utf-8") as f:
             f.write(str(0))
     
-    return("counter initialize complete \n" + wslog)
+    return("counter initialize complete " + wslog)
 
 def check_line_id(ftpurl ,lineid):
      

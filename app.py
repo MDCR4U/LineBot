@@ -233,8 +233,8 @@ def handle_message(event):
            
     
     elif '/init' in msg:
-        initcounter(usr,msg,userFolder) 
-        message = TextSendMessage(text= "完成信件處理 : initial counter complete =====")
+        wsts = initcounter(usr,msg,userFolder) 
+        message = TextSendMessage(text= wsts)
         line_bot_api.reply_message(event.reply_token, message)   
     elif '/load' in msg:
           loadsts  = loadfile(usr,msg,userFolder) 
