@@ -166,11 +166,13 @@ def handle_message(event):
     # string.upper
     # string.lower
     if msg[1:8].upper()  == 'CONTINUE'  or msg[1:] == '繼續' :
-        wscontinue =get_continue()
+        wscontinue =get_continue(line_user_id)
 
         print("continue token" + wscontinue)
         msg = wscontinue
-        #message = TextSendMessage(text="找不到您要執行的命令 :" + msg)
+        message = TextSendMessage(text="上一次查閱進度 :" + msg)
+        line_bot_api.reply_message(event.reply_token, message)  
+        return 
 
     
     if msg[0:1] == "@" :
@@ -317,7 +319,7 @@ def token(msg):
     line = file.readline().strip('\n')   #line1 githubproject
     #line=line.strip('\n')
     wsftpflr= line[12:].strip()
-
+    print("TOKEN + "  + msg)
     url = wsftpflr + "json/" + wkmsg[1] + ".json"
     wurlfile = check_url_file(url)
     message = ''
@@ -328,7 +330,7 @@ def token(msg):
   
     if msg[0:2] == "&&" :
         write_continue(line_user_id,msg)
-        
+
     if  wkmsg[2]  == "carousel_1" :
         message = carousel_1(msg)
     elif  wkmsg[2]  == "carousel_2" :
