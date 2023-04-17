@@ -54,7 +54,7 @@ def send_mail(lineid,wmsg,userFolder):
     smtp_server = "smtp.office365.com"
     smtp_port = 587
 
-    print("=====send mail start ")
+    print("=====send mail start userFolder = " + userFolder)
      
     url = wsftpflr + userFolder.strip('\n') + "_smtp.csv"
  

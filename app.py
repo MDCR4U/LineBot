@@ -155,7 +155,7 @@ def handle_message(event):
     usr =event.source.user_id
     line_user_id = usr
     userFolder = check_line_id(ftpurl ,line_user_id)
-#    print("USER Folder " + userFolder + "*")
+    print("line user id = " + usr + "        USER Folder " + userFolder + "*")
     msg = event.message.text
     
     
