@@ -16,10 +16,8 @@ import urllib.request
 #ImagemapSendMessage(組圖訊息)
  
 #旋轉木馬按鈕訊息介面
+def carousel_1(msg):
 
-def carousel_2(msg):
-
-    print(' carousel_2 ' + msg)
     #LINE bot的Carousel Template可以有最多10個columns
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
@@ -37,7 +35,69 @@ def carousel_2(msg):
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
+    response = urllib.request.urlopen(url)
+    data = response.read().decode("utf-8")
+    js_dta = json.loads(data)
+    c1_image_url  = js_dta["c1_image"]   
+    c1_alt_text   = js_dta["c1_alt_text"]
+    c1_title      = js_dta["c1_title"]
+    c1_text0      = js_dta["c1_text0"]
+    c1_label1     = js_dta["c1_label1"]
+    c1_label2     = js_dta["c1_label2"]
+    c1_label3     = js_dta["c1_label3"]
+    c1_text1      = js_dta["c1_text1"]
+    c1_text2      = js_dta["c1_text2"]
+    c1_text3      = js_dta["c1_text3"]
+  
+    message = TemplateSendMessage(
+        alt_text=c1_alt_text,
+        template=CarouselTemplate(
+            columns=[
+                CarouselColumn(
+                    thumbnail_image_url=c1_image_url,
+                    title=c1_title,
+                    text=c1_text0,
+                    actions=[
+                        PostbackTemplateAction(
+                            label= c1_label1,
+                            data=c1_text1
+                        ),
+                        PostbackTemplateAction(
+                            label= c1_label2,
+                            data=c1_text2
+                        ),
+                        PostbackTemplateAction(
+                            label= c1_label3,
+                            data=c1_text3
+                        )
+                    ]
+                )
+ 
+            ]
+        )
+    )
+    
+    return message
+ 
+def carousel_2(msg):
+
+    #LINE bot的Carousel Template可以有最多10個columns
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+
+    wsmsg = msg.split('#')
+    
+    wjson_file = wsmsg[1] + ".json"
+# 讀取 JSON 檔案  local
+#   # with open("cbd.json" , "r") as f:
+    #with open(wjson_file , "r") as f:
+    #    js_dta = json.load(f)
+
+    url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -105,7 +165,121 @@ def carousel_2(msg):
             ]
         )
     )
-    print (message)
+    return message
+def carousel_3(msg):
+
+    #LINE bot的Carousel Template可以有最多10個columns
+    file = open('config.txt','r',encoding="utf-8")
+    line = file.readline().strip('\n')    #line1 githubid
+    line = file.readline().strip('\n')   #line1 githubproject
+    line = file.readline().strip('\n')   #line1 githubproject
+    #line=line.strip('\n')
+    wsftpflr= line[12:].strip()
+
+    wsmsg = msg.split('#')
+    
+    wjson_file = wsmsg[1] + ".json"
+# 讀取 JSON 檔案  local
+#   # with open("cbd.json" , "r") as f:
+    #with open(wjson_file , "r") as f:
+    #    js_dta = json.load(f)
+
+    url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
+    response = urllib.request.urlopen(url)
+    data = response.read().decode("utf-8")
+    js_dta = json.loads(data)
+    c1_image_url  = js_dta["c1_image"]   
+    c1_alt_text   = js_dta["c1_alt_text"]
+    c1_title      = js_dta["c1_title"]
+    c1_text0      = js_dta["c1_text0"]
+    c1_label1     = js_dta["c1_label1"]
+    c1_label2     = js_dta["c1_label2"]
+    c1_label3     = js_dta["c1_label3"]
+    c1_text1      = js_dta["c1_text1"]
+    c1_text2      = js_dta["c1_text2"]
+    c1_text3      = js_dta["c1_text3"]
+    c2_image_url  = js_dta["c2_image"]   
+    c2_title      = js_dta["c2_title"]
+    c2_text0      = js_dta["c2_text0"]
+    c2_label1     = js_dta["c2_label1"]
+    c2_label2     = js_dta["c2_label2"]
+    c2_label3     = js_dta["c2_label3"]
+    c2_text1      = js_dta["c2_text1"]
+    c2_text2      = js_dta["c2_text2"]
+    c2_text3      = js_dta["c2_text3"]
+    c3_image_url  = js_dta["c3_image"]   
+    c3_title      = js_dta["c3_title"]
+    c3_text0      = js_dta["c3_text0"]
+    c3_label1     = js_dta["c3_label1"]
+    c3_label2     = js_dta["c3_label2"]
+    c3_label3     = js_dta["c3_label3"]
+    c3_text1      = js_dta["c3_text1"]
+    c3_text2      = js_dta["c3_text2"]
+    c3_text3      = js_dta["c3_text3"]
+    message = TemplateSendMessage(
+        alt_text=c1_alt_text,
+        template=CarouselTemplate(
+            columns=[
+                CarouselColumn(
+                    thumbnail_image_url=c1_image_url,
+                    title=c1_title,
+                    text=c1_text0,
+                    actions=[
+                        PostbackTemplateAction(
+                            label= c1_label1,
+                            data=c1_text1
+                        ),
+                        PostbackTemplateAction(
+                            label= c1_label2,
+                            data=c1_text2
+                        ),
+                        PostbackTemplateAction(
+                            label= c1_label3,
+                            data=c1_text3
+                        )
+                    ]
+                ),
+                CarouselColumn(
+                    thumbnail_image_url=c2_image_url,
+                    title=c2_title,
+                    text=c2_text0,
+                    actions=[
+                        PostbackTemplateAction(
+                            label= c2_label1,
+                            data=c2_text1
+                        ),
+                        PostbackTemplateAction(
+                            label= c2_label2,
+                            data=c2_text2
+                        ),
+                        PostbackTemplateAction(
+                            label= c2_label3,
+                            data=c2_text3
+                        )
+                    ]
+                ),
+                CarouselColumn(
+                    thumbnail_image_url=c3_image_url,
+                    title=c3_title,
+                    text=c3_text0,
+                    actions=[
+                        PostbackTemplateAction(
+                            label= c3_label1,
+                            data=c3_text1
+                        ),
+                        PostbackTemplateAction(
+                            label= c3_label2,
+                            data=c3_text2
+                        ),
+                        PostbackTemplateAction(
+                            label= c3_label3,
+                            data=c3_text3
+                        )
+                    ]                    
+                )
+            ]
+        )
+    )
     return message
 def Carousel_5(msg):
     #LINE bot的Carousel Template可以有最多10個columns
@@ -125,7 +299,6 @@ def Carousel_5(msg):
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
