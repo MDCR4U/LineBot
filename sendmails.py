@@ -282,11 +282,9 @@ def send_mail(lineid,wmsg,userFolder):
 
 def loadfile(lineid,msg,userFolder ):
     wsflr = ''
+    print ('userfolder ' +  userFolder )
     wssts = check_line_id(wsftpflr,lineid)
-    if   wssts == ''  :
-        print('使用者 ' + lineid + ' 發送信件功能未啟動')
-        return ('使用者 ' + lineid + ' 發送信件功能未啟動')
-    wsflr = wssts 
+    
 
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
@@ -299,7 +297,13 @@ def loadfile(lineid,msg,userFolder ):
     #ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
  
     file.close()
-
+    wsflr = ''
+    wssts = check_line_id(wsftpflr,lineid)
+    if   wssts == ''  :
+        print('使用者 ' + lineid + ' 發送信件功能未啟動')
+        return ('使用者 ' + lineid + ' 發送信件功能未啟動')
+    wsflr = wssts 
+    
     #msg = '/load#smtp230409.csv#smtp.csv#
     wmsg = msg.split("#")
     if len(wmsg) !=3 :
