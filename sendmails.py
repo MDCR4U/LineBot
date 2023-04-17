@@ -306,12 +306,17 @@ def loadfile(lineid,msg,userFolder ):
         print ("load file layout error " + len(wmsg))
         return ("load file layout error " + len(wmsg))
     url = wsftpflr + wsflr + "/" + wmsg[1]
-        
+
+    #make folder
+    if not os.path.exists(wsflr):
+        os.makedirs(wsflr)
+
+
     #filename = wsflr + "_" + wmsg[2]
     filename = wsflr + "/" + wmsg[2]
     print ("source from : " + url  + " to: " + filename ) 
 
-    return
+    
    #url 是要下載的檔案的 URL，
    # file_name 則是下載後要儲存的檔案名稱和路徑
    # （如果只指定檔案名稱，則預設儲存到目前的資料夾中）。 urlretrieve() 函式會從指定的 URL 下載檔案，並將其儲存在 file_name 指定的位置。   
