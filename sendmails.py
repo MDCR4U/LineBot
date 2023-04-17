@@ -367,7 +367,7 @@ def file_exsit(filename):
         return wsreturn 
 def initcounter(lineid,msg,userFolder ):
     
-    wsflr = wssts 
+   
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -383,6 +383,9 @@ def initcounter(lineid,msg,userFolder ):
     
     #msg = '/initcounter#admin#
     wsflr = wssts
+
+    if wsflr != 'admin':
+        return('權限錯誤' + wsflr)
 
     url = wsftpflr + wsflr  + "/smtp_send_counter.log" 
     wslog = url 
