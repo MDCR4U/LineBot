@@ -56,7 +56,8 @@ def send_mail(lineid,wmsg,userFolder):
 
     print("=====send mail start userFolder = " + userFolder)
      
-    url = wsftpflr + userFolder.strip('\n') + "_smtp.csv"
+    #url = wsftpflr + userFolder.strip('\n') + "_smtp.csv"
+    url = wsftpflr + userFolder.strip('\n') + "/smtp.csv"
  
     
     try:
@@ -86,7 +87,8 @@ def send_mail(lineid,wmsg,userFolder):
     #except FileNotFoundError:
     #    counter = 0
 # 讀取SMTP發送記錄
-    url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
+    #url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
+    url = wsftpflr + userFolder.strip('\n') +  '/smtp_send_counter.log'
     try:
         with urllib.request.urlopen(url) as response:
             smtp_idx = response.read().decode('utf-8')
@@ -101,7 +103,8 @@ def send_mail(lineid,wmsg,userFolder):
 
 
 # 讀取收件人列表
-    url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
+    #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
+    url = wsftpflr + userFolder.strip('\n') + '/mail.csv'
     n = counter                                                 # 要跳過的行數
 
     try:
@@ -134,7 +137,8 @@ def send_mail(lineid,wmsg,userFolder):
 
 #getbody 
     # 檢查 發送內容
-    url = wsftpflr + userFolder.strip('\n') + '_body.txt'
+    #url = wsftpflr + userFolder.strip('\n') + '_body.txt'
+    url = wsftpflr + userFolder.strip('\n') + '/body.txt'
     try:
         file = urllib.request.urlopen(url)
         content = ''
@@ -152,7 +156,8 @@ def send_mail(lineid,wmsg,userFolder):
 #getsubject 
 
      # 檢查 主旨
-    url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
+    #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
+    url = url = wsftpflr + userFolder.strip('\n') +  '/subject.txt'
     try:
         file = urllib.request.urlopen(url)
         wsubject = ''
@@ -252,18 +257,21 @@ def send_mail(lineid,wmsg,userFolder):
        
     # 記錄已發送的郵件
         sent_list.append(f"{to_addr},{subject}")
-        with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
+        #with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
+        with open(userFolder.strip('\n') + "/SEND.LOG", "a", encoding="utf-8") as f:
             f.write(f"{loopidx} , {datetime.datetime.now()},  {to_addr},{subject}\n")
             now = datetime.datetime.now()
             wssenddetail = wssenddetail + str(loopidx)  + ",  "  + " " + smtp_username + "=> " + to_addr   + "\n"
  
 
     # 更新郵件smtp記錄
-        with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:
+        #with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:
+        with open(userFolder.strip('\n') + "/smtp_send_counter.log", "w", encoding="utf-8") as f:            
             f.write(str(smtp_idx))        
     # 更新郵件發送記錄
         counter += 1
-        with open(userFolder.strip('\n') +"_mail_counter.log", "w", encoding="utf-8") as f:
+        #with open(userFolder.strip('\n') +"_mail_counter.log", "w", encoding="utf-8") as f:
+        with open(userFolder.strip('\n') +"/mail_counter.log", "w", encoding="utf-8") as f:    
             f.write(str(counter))
         
         time.sleep(0.5)
@@ -299,7 +307,8 @@ def loadfile(lineid,msg,userFolder ):
         return ("load file layout error " + len(wmsg))
     url = wsftpflr + wsflr + "/" + wmsg[1]
         
-    filename = wsflr + "_" + wmsg[2]
+    #filename = wsflr + "_" + wmsg[2]
+    filename = wsflr + "/" + wmsg[2]
     print ("source from : " + url  + " to: " + filename ) 
    #url 是要下載的檔案的 URL，
    # file_name 則是下載後要儲存的檔案名稱和路徑
@@ -307,7 +316,7 @@ def loadfile(lineid,msg,userFolder ):
 
     urllib.request.urlretrieve(url, filename)
     print("\n" + wmsg[2]  + "上傳完成")
-    return("\n" + wmsg[2]  + "上傳完成")
+    return("\n" + "source from : " + url  + " to: " + filename + "上傳完成")
 
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
