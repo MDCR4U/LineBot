@@ -387,14 +387,16 @@ def initcounter(lineid,msg,userFolder ):
     if wsflr != 'admin':
         return('權限錯誤' + wsflr)
 
-    url = wsftpflr + wsflr  + "/smtp_send_counter.log" 
+    #url = wsftpflr + wsflr  + "/smtp_send_counter.log" 
+    url =  wsflr  + "/smtp_send_counter.log" 
     wslog = url 
     print(" initialize " + url )
     with open(url, "w", encoding="utf-8") as f:
     #with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
             f.write(str(0))        
     # 更新郵件發送記錄
-    url = wsftpflr + wsflr + "/mail_counter.log" 
+    print("complete ")
+    url =  wsflr + "/mail_counter.log" 
     wslog = wslog + "\n" + url
     print(" initialize " + url )
     with open(url , "w", encoding="utf-8") as f:
