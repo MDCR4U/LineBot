@@ -285,13 +285,9 @@ def handle_message(event):
 
 @handler.add(PostbackEvent)
 def handle_message(event):
-    print ("=====================================\npost back data")
-    print(event.postback.data)
-    print("\n===========================================================")
     message = token(event.postback.data)
     #print (" message = " + message )
     line_bot_api.reply_message(event.reply_token, message)
-    print("return postback")
 
 
 @handler.add(MemberJoinedEvent)
@@ -330,12 +326,10 @@ def token(msg):
         message = TextSendMessage(text= "工作指令" + url + " 不存在\n請與管理者聯絡")
         return message
     
-    print("msg = " + msg  + " from token" )
     if msg[0:2] == "&&" :
         write_continue(line_user_id,msg)
     if  wkmsg[2]  == "carousel_2" :
         message = carousel_2(msg)
-        print(message)
     elif  wkmsg[2]  == "text_10" :
         message = text_10(msg)        
     elif  wkmsg[2]  == "text_20" :

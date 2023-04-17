@@ -29,7 +29,6 @@ def buttons_01(msg):    # 0 text, 1URL
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    #print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -60,7 +59,6 @@ def buttons_01(msg):    # 0 text, 1URL
         )
     )
 
-    #print(message)
     return message
     
 def buttons_10(msg):    # 1 text, 0URL   
@@ -80,7 +78,6 @@ def buttons_10(msg):    # 1 text, 0URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -127,7 +124,6 @@ def buttons_10t(msg):    # 1 text, 0URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -171,7 +167,6 @@ def buttons_02(msg):    # 0 text, 2URL
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -203,7 +198,6 @@ def buttons_02(msg):    # 0 text, 2URL
         )
     )
 
-    print(message)
     return message
 def buttons_11(msg):    # 1 text, 1URL
   
@@ -219,7 +213,6 @@ def buttons_11(msg):    # 1 text, 1URL
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -272,7 +265,6 @@ def buttons_20(msg):     # 2 text, 0URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -304,7 +296,6 @@ def buttons_20(msg):     # 2 text, 0URL
         )
     )
 
-    print(message)
     return message
 
 def buttons_03(msg):    # 0 text, 3URL
@@ -321,7 +312,6 @@ def buttons_03(msg):    # 0 text, 3URL
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -360,7 +350,6 @@ def buttons_03(msg):    # 0 text, 3URL
         )
     )
 
-    print(message)
     return message
 #def buttons_12(msg):     #1 text 2url
 #def buttons_21(msg):     #2 text 1url
@@ -382,7 +371,6 @@ def buttons_30(msg):     # 3 text, 1URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -428,7 +416,6 @@ def buttons_30(msg):     # 3 text, 1URL
      
     return message
 def buttons_30t(msg):     # 3 text, 0URL
-    print (" process 3 text 0 url button")
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -445,7 +432,6 @@ def buttons_30t(msg):     # 3 text, 0URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -485,8 +471,6 @@ def buttons_30t(msg):     # 3 text, 0URL
         )
     )
 
-    print(message)
-    print("button 3-0 complete")
     return message
 
 
@@ -504,7 +488,6 @@ def buttons_04(msg):    # 0 text, 4URL
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -548,12 +531,10 @@ def buttons_04(msg):    # 0 text, 4URL
         )
     )
 
-    print(message)
     return message
 #def buttons_13(msg):     #1 text 3url
 #def buttons_22(msg):     #2 text 2url
 def buttons_31t(msg):     # 3 text, 1URL   
-    print (" process 3 text 1url button " + msg)
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -570,7 +551,6 @@ def buttons_31t(msg):     # 3 text, 1URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -627,15 +607,11 @@ def buttons_ud(msg):    # uri + post
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
-    print(js_dta)
     image_url  = js_dta["image"]   
     alt_text   = js_dta["alt_text"]
-    print(alt_text)
-    print(js_dta["title"])
     title      = js_dta["title"]
     text0      = js_dta["text0"]
     label1     = js_dta["label1"]
@@ -666,7 +642,7 @@ def buttons_ud(msg):    # uri + post
 
     return message
 def buttons_u2d(msg):    # 2uri + post 
-  
+    print("u2d ==>" + msg)
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -679,15 +655,11 @@ def buttons_u2d(msg):    # 2uri + post
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
-    print(js_dta)
     image_url  = js_dta["image"]   
     alt_text   = js_dta["alt_text"]
-    print(alt_text)
-    print(js_dta["title"])
     title      = js_dta["title"]
     text0      = js_dta["text0"]
     label1     = js_dta["label1"]
@@ -738,7 +710,6 @@ def buttons_dd(msg):    # uri + post
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -775,7 +746,6 @@ def buttons_dd(msg):    # uri + post
  
     return message 
 def buttons_du(msg):    # post + url
-    print("buttons_du")
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -788,7 +758,6 @@ def buttons_du(msg):    # post + url
     wjson_file = wsmsg[1] + ".json"
  
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -825,7 +794,6 @@ def buttons_du(msg):    # post + url
 
 
 def buttons_tu(msg):     #Text + url
-    print (" process 3 text 1url button " + msg)
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -842,7 +810,6 @@ def buttons_tu(msg):     #Text + url
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -877,7 +844,6 @@ def buttons_tu(msg):     #Text + url
     )
     return message
 def buttons_ut(msg):     # url + test
-    print (" process 3 text 1url button " + msg)
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -894,7 +860,6 @@ def buttons_ut(msg):     # url + test
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -928,7 +893,6 @@ def buttons_ut(msg):     # url + test
     )
     return message
 def buttons_31(msg):     # 3 text, 1URL   
-    print (" process 3 text 1url button " + msg)
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -945,7 +909,6 @@ def buttons_31(msg):     # 3 text, 1URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -1008,7 +971,6 @@ def buttons_40(msg):     # 3 text, 1URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -1054,7 +1016,6 @@ def buttons_40(msg):     # 3 text, 1URL
      
     return message
 def buttons_40t(msg):     # 3 text, 1URL   
-    print (" process 4 text 0url button ==>" + msg)
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -1071,7 +1032,6 @@ def buttons_40t(msg):     # 3 text, 1URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -1117,7 +1077,6 @@ def buttons_40t(msg):     # 3 text, 1URL
 
     return message
 def xbuttons_40(msg):    # 4 text, 0URL
-    print (" process 4 text 0 url button")
     file = open('config.txt','r',encoding="utf-8")
     line = file.readline().strip('\n')    #line1 githubid
     line = file.readline().strip('\n')   #line1 githubproject
@@ -1134,7 +1093,6 @@ def xbuttons_40(msg):    # 4 text, 0URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -1181,7 +1139,6 @@ def xbuttons_40(msg):    # 4 text, 0URL
         )
     )
 
-    print("button 4-0 complete")
     return message
 
 def text_10(msg):     # 2 text, 0URL
@@ -1202,7 +1159,6 @@ def text_10(msg):     # 2 text, 0URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -1236,7 +1192,6 @@ def text_20(msg):     # 2 text, 0URL
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
-    print(url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
