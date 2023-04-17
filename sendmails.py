@@ -366,11 +366,6 @@ def file_exsit(filename):
         wsreturn = 'File  : ' + filename + ' does not exist'
         return wsreturn 
 def initcounter(lineid,msg,userFolder ):
-    wsflr = ''
-    wssts = check_line_id(wsftpflr,lineid)
-    if   wssts == ''  :
-        print('使用者 ' + lineid + ' 發送信件功能未啟動')
-        return ('使用者 ' + lineid + ' 發送信件功能未啟動')
     
     wsflr = wssts 
     file = open('config.txt','r',encoding="utf-8")
@@ -380,22 +375,29 @@ def initcounter(lineid,msg,userFolder ):
     #line=line.strip('\n')
     wsftpflr= line[12:].strip()
     file.close()
-
+    wsflr = ''
+    wssts = check_line_id(wsftpflr,lineid)
+    if   wssts == ''  :
+        print('使用者 ' + lineid + ' 發送信件功能未啟動')
+        return ('使用者 ' + lineid + ' 發送信件功能未啟動')
+    
     #msg = '/initcounter#admin#
-  
+    wsflr = wssts
 
-    url = wsftpflr + wsflr  + "_smtp_send_counter.log" 
+    url = wsftpflr + wsflr  + "/smtp_send_counter.log" 
+    wslog = url 
     print(" initialize " + url )
     with open(url, "w", encoding="utf-8") as f:
     #with open("smtp_send_counter.log", "w", encoding="utf-8") as f:
             f.write(str(0))        
     # 更新郵件發送記錄
-    url = wsftpflr + wsflr + "_mail_counter.log" 
+    url = wsftpflr + wsflr + "/mail_counter.log" 
+    wslog = wslog + "\n" + url
     print(" initialize " + url )
     with open(url , "w", encoding="utf-8") as f:
             f.write(str(0))
     
-    return("counter initialize complete")
+    return("counter initialize complete \n" + wslog)
 
 def check_line_id(ftpurl ,lineid):
      
