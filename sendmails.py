@@ -58,6 +58,7 @@ def send_mail(lineid,wmsg,userFolder):
      
     #url = wsftpflr + userFolder.strip('\n') + "_smtp.csv"
     url = wsftpflr + userFolder.strip('\n') + "/smtp.csv"
+    print (" 寄件人 : " + url )
  
     
     try:
@@ -88,7 +89,7 @@ def send_mail(lineid,wmsg,userFolder):
     #    counter = 0
 # 讀取SMTP發送記錄
     #url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
-    url = wsftpflr + userFolder.strip('\n') +  '/smtp_send_counter.log'
+    url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
     try:
         with urllib.request.urlopen(url) as response:
             smtp_idx = response.read().decode('utf-8')
@@ -105,6 +106,7 @@ def send_mail(lineid,wmsg,userFolder):
 # 讀取收件人列表
     #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
     url = wsftpflr + userFolder.strip('\n') + '/mail.csv'
+    print ("收件人 : " + url)
     n = counter                                                 # 要跳過的行數
 
     try:
@@ -139,6 +141,7 @@ def send_mail(lineid,wmsg,userFolder):
     # 檢查 發送內容
     #url = wsftpflr + userFolder.strip('\n') + '_body.txt'
     url = wsftpflr + userFolder.strip('\n') + '/body.txt'
+    print ("信件內容 : " + url)
     try:
         file = urllib.request.urlopen(url)
         content = ''
@@ -157,7 +160,8 @@ def send_mail(lineid,wmsg,userFolder):
 
      # 檢查 主旨
     #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
-    url = url = wsftpflr + userFolder.strip('\n') +  '/subject.txt'
+    url = wsftpflr + userFolder.strip('\n') +  '/subject.txt'
+    print ("信件主旨 : " + url )
     try:
         file = urllib.request.urlopen(url)
         wsubject = ''
@@ -258,7 +262,7 @@ def send_mail(lineid,wmsg,userFolder):
     # 記錄已發送的郵件
         sent_list.append(f"{to_addr},{subject}")
         #with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
-        with open(userFolder.strip('\n') + "/SEND.LOG", "a", encoding="utf-8") as f:
+        with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
             f.write(f"{loopidx} , {datetime.datetime.now()},  {to_addr},{subject}\n")
             now = datetime.datetime.now()
             wssenddetail = wssenddetail + str(loopidx)  + ",  "  + " " + smtp_username + "=> " + to_addr   + "\n"
@@ -266,13 +270,13 @@ def send_mail(lineid,wmsg,userFolder):
 
     # 更新郵件smtp記錄
         #with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:
-        with open(userFolder.strip('\n') + "/smtp_send_counter.log", "w", encoding="utf-8") as f:            
+        with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:            
             f.write(str(smtp_idx))        
     # 更新郵件發送記錄
         counter += 1
         #with open(userFolder.strip('\n') +"_mail_counter.log", "w", encoding="utf-8") as f:
-        with open(userFolder.strip('\n') +"/mail_counter.log", "w", encoding="utf-8") as f:    
-            f.write(str(counter))
+        #with open(userFolder.strip('\n') +"/mail_counter.log", "w", encoding="utf-8") as f:    
+        #    f.write(str(counter))
         
         time.sleep(0.5)
 
@@ -313,7 +317,7 @@ def loadfile(lineid,msg,userFolder ):
 
 
     #filename = wsflr + "_" + wmsg[2]
-    filename = wsflr + "_" + wmsg[2]
+    filename = wsflr + "/" + wmsg[2]
     print ("source from : " + url  + " to: " + filename ) 
 
     
