@@ -313,7 +313,7 @@ def loadfile(lineid,msg,userFolder ):
 
 
     #filename = wsflr + "_" + wmsg[2]
-    filename = wsflr + "/" + wmsg[2]
+    filename = wsflr + "_" + wmsg[2]
     print ("source from : " + url  + " to: " + filename ) 
 
     
