@@ -167,7 +167,6 @@ def handle_message(event):
     # string.lower
     if msg[1:8].upper()  == 'CONTINUE'  or msg[1:] == '繼續' :
         wscontinue =get_continue(line_user_id)
-
         print("continue token" + wscontinue)
         msg = wscontinue
         message = TextSendMessage(text="上一次查閱進度 :" + msg)
@@ -187,35 +186,36 @@ def handle_message(event):
             msg = wmsg
 
 
-    if msg.startswith('#'):
+    #if msg.startswith('#'):
 #        url=githubutl +  "key.txt"
 #        url = "http://mdcgenius.tw/key.txt"
 #        file = urllib.request.urlopen(url)
 #        wkey =  file.readline()
 #        openai.api_key = wkey.decode('utf-8') 
-        openai.api_key = gpt_token.decode('utf-8') 
+     #   openai.api_key = gpt_token.decode('utf-8') 
         #file.close()
-        gpt_response = openai.Completion.create(
-            engine='text-davinci-003',
-            prompt=msg[1:],
-            temperature=0.5,
-            n=1,
-            max_tokens=200
-        ).choices[0].text
+     #   gpt_response = openai.Completion.create(
+     #       engine='text-davinci-003',
+     #       prompt=msg[1:],
+     #       temperature=0.5,
+     #       n=1,
+     #       max_tokens=200
+     #   ).choices[0].text
 
-        gpt_response =gpt_response[0:20]
-        print("Line BOT reply ======>" + gpt_response)
-        try :
-            line_bot_api.reply_message(
-                event.reply_token,
-                TextSendMessage(text="line bot reply gpt \n" + gpt_response)
-            )
-        except:
-            exc_type, exc_value, exc_traceback = sys.exc_info()
-            print("Exception Type:===>", exc_type)
-            print("Exception Value:", exc_value)
-            print("Traceback Object:", exc_traceback)
-    elif '/SMAIL' in msg.upper():     #isupper(), islower(), lower(), upper()
+    #    gpt_response =gpt_response[0:20]
+    #    print("Line BOT reply ======>" + gpt_response)
+    #    try :
+    #        line_bot_api.reply_message(
+    #            event.reply_token,
+    #            TextSendMessage(text="line bot reply gpt \n" + gpt_response)
+    #        )
+    #    except:
+    #        exc_type, exc_value, exc_traceback = sys.exc_info()
+    #        print("Exception Type:===>", exc_type)
+    #        print("Exception Value:", exc_value)
+    #        print("Traceback Object:", exc_traceback)
+    
+    if '/SMAIL' in msg.upper():     #isupper(), islower(), lower(), upper()
         if userFolder == '' :
             message = TextSendMessage(text= "找不到 發送信件的授權資料，請記住您的代碼 " + usr +"\n與 系統管理員聯絡申請授權 " )
             line_bot_api.reply_message(event.reply_token, message)              
@@ -251,18 +251,6 @@ def handle_message(event):
         #write_continue(line_user_id,msg)
         message = token(msg)
         line_bot_api.reply_message(event.reply_token, message)
-        
-   # elif '/S003' in msg:
-   #     message = Confirm_Template()
-   #     line_bot_api.reply_message(event.reply_token, message)
-    #elif '旋轉木馬' in msg:
-   # elif 'S004' in msg:        
-   #     message = Carousel_Template()
-   #     line_bot_api.reply_message(event.reply_token, message)
-    #elif '圖片畫廊' in msg:
-   # elif '/S005' in msg:
-   #     message = image_carousel_message1() # test()
-   #     line_bot_api.reply_message(event.reply_token, message)
     else :
         user_id = event.source.user_id
         user_type = event.source.type
