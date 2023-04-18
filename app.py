@@ -293,6 +293,18 @@ def welcome(event):
     print(" new member profile : ")
     print (profile)
     name = profile.display_name
+    ids = profile.user_id
+    text = input("Enter text: ")
+    filename = "users.txt"
+    if os.path.exists(filename):
+        mode = "a"
+    else:
+        mode = "w"
+
+    with open(filename, mode) as file:
+        file.write(ids + "-" + name  + "\n")
+
+    print( " add new one : " +ids + "-" + name  + "\n")
 
     message = TextSendMessage(text=f'{name}歡迎加入 MDC 富裕與您同在')
     line_bot_api.reply_message(event.reply_token, message)
