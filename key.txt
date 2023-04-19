@@ -1,4 +1,0 @@
-line_token     = gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU=
-Channel Secret = 82ab0090dc70c5f7d3a6c62fb1e09eb8
-gpt key        = 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
-ftp url        = https://mdcgenius.000webhostapp.com/
