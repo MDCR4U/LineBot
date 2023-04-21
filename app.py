@@ -101,7 +101,7 @@ if not os.path.exists("admin"):
     os.makedirs("admin")
 url = ftpurl + "admin\key.json" #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
  
-filename = 'admin\key.json'
+filename = 'key.json'
 try:
     urllib.request.urlretrieve(url, filename)
 except:
@@ -110,7 +110,7 @@ except:
     #line_bot_api.reply_message(event.reply_token, message)   
     exit()
 #取得 系統 KEY 
-with open("key.json.json", "r", encoding="utf-8") as f:
+with open("key.json", "r", encoding="utf-8") as f:
     loaded_data = json.load(f)
 
 line_access_token = loaded_data["line_token"]
