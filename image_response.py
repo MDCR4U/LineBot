@@ -15,7 +15,7 @@ import urllib.request
 
 #ImagemapSendMessage(組圖訊息)
 def imagemap_5 (msg):
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]

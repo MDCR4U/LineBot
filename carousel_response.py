@@ -19,7 +19,7 @@ import urllib.request
 def carousel_1(msg):
 
     #LINE bot的Carousel Template可以有最多10個columns
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -80,7 +80,7 @@ def carousel_1(msg):
 def carousel_2(msg):
 
     #LINE bot的Carousel Template可以有最多10個columns
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -168,7 +168,7 @@ def carousel_2(msg):
 def carousel_3(msg):
 
     #LINE bot的Carousel Template可以有最多10個columns
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -280,7 +280,7 @@ def carousel_3(msg):
     return message
 def Carousel_5(msg):
     #LINE bot的Carousel Template可以有最多10個columns
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]

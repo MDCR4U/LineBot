@@ -16,7 +16,7 @@ import urllib.request
 #                                        data='A&台北市'
 #                                    ),
 def buttons_01(msg):    # 0 text, 1URL
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -59,7 +59,7 @@ def buttons_01(msg):    # 0 text, 1URL
     return message
     
 def buttons_10(msg):    # 1 text, 0URL   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -103,7 +103,7 @@ def buttons_10(msg):    # 1 text, 0URL
   
     return message
 def buttons_10t(msg):    # 1 text, 0URL   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -148,7 +148,7 @@ def buttons_10t(msg):    # 1 text, 0URL
     return message
 def buttons_02(msg):    # 0 text, 2URL
   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -191,7 +191,7 @@ def buttons_02(msg):    # 0 text, 2URL
 
     return message
 def buttons_11(msg):    # 1 text, 1URL
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -236,7 +236,7 @@ def buttons_11(msg):    # 1 text, 1URL
  
     return message
 def buttons_20(msg):     # 2 text, 0URL
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -284,7 +284,7 @@ def buttons_20(msg):     # 2 text, 0URL
     return message
 
 def buttons_03(msg):    # 0 text, 3URL
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -336,7 +336,7 @@ def buttons_03(msg):    # 0 text, 3URL
 #def buttons_12(msg):     #1 text 2url
 #def buttons_21(msg):     #2 text 1url
 def buttons_30(msg):     # 3 text, 1URL   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -395,7 +395,7 @@ def buttons_30(msg):     # 3 text, 1URL
      
     return message
 def buttons_30t(msg):     # 3 text, 0URL
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -453,7 +453,7 @@ def buttons_30t(msg):     # 3 text, 0URL
 
 def buttons_04(msg):    # 0 text, 4URL
   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -510,7 +510,7 @@ def buttons_04(msg):    # 0 text, 4URL
 #def buttons_13(msg):     #1 text 3url
 #def buttons_22(msg):     #2 text 2url
 def buttons_31t(msg):     # 3 text, 1URL   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -568,7 +568,7 @@ def buttons_31t(msg):     # 3 text, 1URL
     return message
 def buttons_ud(msg):    # uri + post 
   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -614,7 +614,7 @@ def buttons_ud(msg):    # uri + post
     return message
 def buttons_u2d(msg):    # 2uri + post 
     print("u2d ==>" + msg)
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -667,7 +667,7 @@ def buttons_u2d(msg):    # 2uri + post
     return message
 def buttons_dd(msg):    # uri + post 
   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -713,7 +713,7 @@ def buttons_dd(msg):    # uri + post
  
     return message 
 def buttons_du(msg):    # post + url
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -759,7 +759,7 @@ def buttons_du(msg):    # post + url
 
 
 def buttons_tu(msg):     #Text + url
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -807,7 +807,7 @@ def buttons_tu(msg):     #Text + url
     )
     return message
 def buttons_ut(msg):     # url + test
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -854,7 +854,7 @@ def buttons_ut(msg):     # url + test
     )
     return message
 def buttons_31(msg):     # 3 text, 1URL   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -914,7 +914,7 @@ def buttons_31(msg):     # 3 text, 1URL
     return message
 def buttons_40(msg):     # 3 text, 1URL   
   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -973,7 +973,7 @@ def buttons_40(msg):     # 3 text, 1URL
      
     return message
 def buttons_40t(msg):     # 3 text, 1URL   
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -1032,7 +1032,7 @@ def buttons_40t(msg):     # 3 text, 1URL
 
     return message
 def xbuttons_40(msg):    # 4 text, 0URL
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -1096,7 +1096,7 @@ def xbuttons_40(msg):    # 4 text, 0URL
 
 def text_10(msg):     # 2 text, 0URL
      
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
@@ -1127,7 +1127,7 @@ def text_10(msg):     # 2 text, 0URL
 
 def text_20(msg):     # 2 text, 0URL
      
-    with open("admin/config.json", "r", encoding="utf-8") as f:
+    with open("config.json", "r", encoding="utf-8") as f:
          loaded_data = json.load(f)
 
     wsftpflr = loaded_data["ftpurl"]
