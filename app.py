@@ -86,44 +86,39 @@ sendmail_auth = 'N'
 
 ispostback = 'N'
 
-#讀取 config.sys 取得 information  
-file = open('config.txt','r',encoding="utf-8")
-line = file.readline().strip('\n')    #line1 githubid
-github_id = line[12:].strip()         # 去除  頭尾 space
 
-line = file.readline().strip('\n')   #line1 githubproject
-#line=line.strip('\n')
-github_prj = line[12:].strip()
-line = file.readline().strip('\n')   #line1 githubproject
-line=line.strip('\n')
-ftpurl= line[12:].strip()
-file.close()
+with open("admin/config.json", "r", encoding="utf-8") as f:
+    loaded_data = json.load(f)
+
+ftpurl = loaded_data["ftpurl"]
 
  
 
  
 # download key file
-url = ftpurl #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
+# 确保当前目录下存在 "admin" 文件夹
+if not os.path.exists("admin"):
+    os.makedirs("admin")
+url = ftpurl + "admin\key.json" #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
 url = ftpurl + "key.txt"
-filename = 'key.txt'
+filename = 'admin\key.json'
 try:
     urllib.request.urlretrieve(url, filename)
 except:
-    print("url get error " + url)    
+    print("not found key.json  " + url)   
+    #message = TextSendMessage(text="Key information missing  :" + msg)
+    #line_bot_api.reply_message(event.reply_token, message)   
     exit()
 #取得 系統 KEY 
+with open("admin/key.json", "r", encoding="utf-8") as f:
+    loaded_data = json.load(f)
 
-file = open('key.txt','r',encoding="utf-8")
-line = file.readline().strip('\n')                 #line_access_token = ''
-line_access_token =line[17:].strip()
+line_access_token = loaded_data["line_token"]
+line_channel_secret = loaded_data["Channel Secret"]
+gpt_token           = loaded_data["gptkey"]
 
-
-line = file.readline().strip('\n')                #line_channel_secret = ''
-line_channel_secret = line[17:].strip()
-
-line = file.readline().strip('\n')                #gpt_token
-gpt_token = line[17:].strip()
-
+print ("line_access_token ")
+print ("line_channel_secret ")
 
 # Channel Access Token 
 line_bot_api = LineBotApi(line_access_token)
@@ -313,13 +308,11 @@ def token(msg):
 #def token(line_user_id,msg):
     wmsg = msg[2:]
     wkmsg = msg.split('#')
-    
-    file = open('config.txt','r',encoding="utf-8")
-    line = file.readline().strip('\n')    #line1 githubid
-    line = file.readline().strip('\n')   #line1 githubproject
-    line = file.readline().strip('\n')   #line1 githubproject
-    #line=line.strip('\n')
-    wsftpflr= line[12:].strip()
+    with open("admin/config.json", "r", encoding="utf-8") as f:
+         loaded_data = json.load(f)
+
+    wsftpflr = loaded_data["ftpurl"]
+     
     print("TOKEN + "  + msg)
     url = wsftpflr + "json/" + wkmsg[1] + ".json"
     wurlfile = check_url_file(url)

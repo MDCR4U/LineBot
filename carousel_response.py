@@ -19,12 +19,10 @@ import urllib.request
 def carousel_1(msg):
 
     #LINE bot的Carousel Template可以有最多10個columns
-    file = open('config.txt','r',encoding="utf-8")
-    line = file.readline().strip('\n')    #line1 githubid
-    line = file.readline().strip('\n')   #line1 githubproject
-    line = file.readline().strip('\n')   #line1 githubproject
-    #line=line.strip('\n')
-    wsftpflr= line[12:].strip()
+    with open("admin/config.json", "r", encoding="utf-8") as f:
+         loaded_data = json.load(f)
+
+    wsftpflr = loaded_data["ftpurl"]
 
     wsmsg = msg.split('#')
     
@@ -82,12 +80,10 @@ def carousel_1(msg):
 def carousel_2(msg):
 
     #LINE bot的Carousel Template可以有最多10個columns
-    file = open('config.txt','r',encoding="utf-8")
-    line = file.readline().strip('\n')    #line1 githubid
-    line = file.readline().strip('\n')   #line1 githubproject
-    line = file.readline().strip('\n')   #line1 githubproject
-    #line=line.strip('\n')
-    wsftpflr= line[12:].strip()
+    with open("admin/config.json", "r", encoding="utf-8") as f:
+         loaded_data = json.load(f)
+
+    wsftpflr = loaded_data["ftpurl"]
 
     wsmsg = msg.split('#')
     
@@ -98,6 +94,9 @@ def carousel_2(msg):
     #    js_dta = json.load(f)
 
     url = wsftpflr + "json/" + wjson_file #http://www.abc.com/cust.json"
+
+
+    print("\carousel2  ==>" + c1_image_url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -169,12 +168,10 @@ def carousel_2(msg):
 def carousel_3(msg):
 
     #LINE bot的Carousel Template可以有最多10個columns
-    file = open('config.txt','r',encoding="utf-8")
-    line = file.readline().strip('\n')    #line1 githubid
-    line = file.readline().strip('\n')   #line1 githubproject
-    line = file.readline().strip('\n')   #line1 githubproject
-    #line=line.strip('\n')
-    wsftpflr= line[12:].strip()
+    with open("admin/config.json", "r", encoding="utf-8") as f:
+         loaded_data = json.load(f)
+
+    wsftpflr = loaded_data["ftpurl"]
 
     wsmsg = msg.split('#')
     
@@ -283,12 +280,10 @@ def carousel_3(msg):
     return message
 def Carousel_5(msg):
     #LINE bot的Carousel Template可以有最多10個columns
-    file = open('config.txt','r',encoding="utf-8")
-    line = file.readline().strip('\n')    #line1 githubid
-    line = file.readline().strip('\n')   #line1 githubproject
-    line = file.readline().strip('\n')   #line1 githubproject
-    #line=line.strip('\n')
-    wsftpflr= line[12:].strip()
+    with open("admin/config.json", "r", encoding="utf-8") as f:
+         loaded_data = json.load(f)
+
+    wsftpflr = loaded_data["ftpurl"]
 
     wsmsg = msg.split('#')
     

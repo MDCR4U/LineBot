@@ -15,12 +15,10 @@ import urllib.request
 
 #ImagemapSendMessage(組圖訊息)
 def imagemap_5 (msg):
-    file = open('config.txt','r',encoding="utf-8")
-    line = file.readline().strip('\n')    #line1 githubid
-    line = file.readline().strip('\n')   #line1 githubproject
-    line = file.readline().strip('\n')   #line1 githubproject
-    #line=line.strip('\n')
-    wsftpflr= line[12:].strip()
+    with open("admin/config.json", "r", encoding="utf-8") as f:
+         loaded_data = json.load(f)
+
+    wsftpflr = loaded_data["ftpurl"]
 
     wsmsg = msg.split('#')
     

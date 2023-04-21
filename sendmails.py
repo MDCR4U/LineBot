@@ -18,6 +18,8 @@ from flask import Flask
  #================= for send mail =================
  
 def send_mail(lineid,wmsg,userFolder):
+
+    
     wsftpflr = '' 
     #print("\n@@@@@ send mail folder @@@@@@@@@@@@@@@@@@@@  = " + userFolder +"@@@")
 
