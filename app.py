@@ -68,6 +68,7 @@ import tempfile, os
 import datetime
 import time
 #======python的函數庫==========
+import json 
 
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
@@ -85,14 +86,6 @@ userFolder= ''
 sendmail_auth = 'N'
 
 ispostback = 'N'
-if not os.path.exists("admin"):
-    os.makedirs("admin")
-url = ftpurl + "admin\config.json" #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
-filename = 'config.json'
-try:
-    urllib.request.urlretrieve(url, filename)
-except:
-    print("not found config.json  " + url)   
 
 with open("config.json", "r", encoding="utf-8") as f:
     loaded_data = json.load(f)
@@ -159,8 +152,32 @@ def handle_message(event):
     userFolder = check_line_id(ftpurl ,line_user_id)
     print("line user id = " + usr + "        USER Folder " + userFolder + "*")
     msg = event.message.text
-    
-    
+
+    if msg[1:5].upper()  == 'SETUP': 
+        ftpurl = msg[8:].strip('\n')
+
+        # 创建一个包含 loc 字段的字典
+        data = {
+            "ftpurl": ftpurl
+        }
+
+        # 确保当前目录下存在 "admin" 文件夹
+        if not os.path.exists("admin"):
+            os.makedirs("admin")
+
+        # 将字典写入 JSON 文件
+        with open("admin/data.json", "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=4)
+
+
+    if msg[1:8].upper()  == 'CONTINUE'  or msg[1:] == '繼續' :
+        wscontinue =get_continue(line_user_id)
+        print("continue token" + wscontinue)
+        msg = wscontinue
+        message = TextSendMessage(text="上一次查閱進度 :" + msg)
+        line_bot_api.reply_message(event.reply_token, message)  
+        return 
+
     
 
     # first 4 char 
