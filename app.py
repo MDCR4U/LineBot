@@ -85,14 +85,21 @@ userFolder= ''
 sendmail_auth = 'N'
 
 ispostback = 'N'
-
+if not os.path.exists("admin"):
+    os.makedirs("admin")
+url = ftpurl + "admin\config.json" #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
+filename = 'config.json'
+try:
+    urllib.request.urlretrieve(url, filename)
+except:
+    print("not found config.json  " + url)   
 
 with open("config.json", "r", encoding="utf-8") as f:
     loaded_data = json.load(f)
 
 ftpurl = loaded_data["ftpurl"]
 
- 
+print (" work url " + ftpurl) 
 
  
 # download key file
