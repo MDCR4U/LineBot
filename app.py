@@ -167,11 +167,12 @@ def handle_message(event):
     ftpurl = get_ftpurl()
 
     userFolder = check_line_id(ftpurl ,line_user_id)
-    print("line user id = " + usr + "        USER Folder " + userFolder + "*")
+    print("line user id = " + usr + "        USER Folder " + userFolder + "*" + msg + "*")
     msg = event.message.text
     #@SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
 
     if 1 == 1 :   #if msg[1:5].upper()  == 'SETUP': 
+        print("Set Process" + msg)
         if msg[1:5].upper()  == 'SETUP': 
             ftpurl = msg[8:].strip('\n')
 
