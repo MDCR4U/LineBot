@@ -152,13 +152,13 @@ def handle_message(event):
     userFolder = check_line_id(ftpurl ,line_user_id)
     print("line user id = " + usr + "        USER Folder " + userFolder + "*")
     msg = event.message.text
-
+    #@SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
     if msg[1:5].upper()  == 'SETUP': 
         ftpurl = msg[8:].strip('\n')
 
         # 创建一个包含 loc 字段的字典
         data = {
-            "ftpurl": ftpurl
+            "ftpurl": "https://" + ftpurl + "000webhostapp.com/"   #ftpurl
         }
 
         # 确保当前目录下存在 "admin" 文件夹
@@ -166,8 +166,12 @@ def handle_message(event):
             os.makedirs("admin")
 
         # 将字典写入 JSON 文件
-        with open("admin/data.json", "w", encoding="utf-8") as f:
+        with open("config.json", "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=4)
+            message = TextSendMessage(text="system set up complete" )
+            line_bot_api.reply_message(event.reply_token, message)  
+            return 
+
 
 
     if msg[1:8].upper()  == 'CONTINUE'  or msg[1:] == '繼續' :
