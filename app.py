@@ -438,8 +438,8 @@ def get_informatiion(wsusr) :
     url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
     print (" key url " + url )
     response = urllib.request.urlopen(url)
-    loaded_data = json.load(f)   #response.read().decode("utf-8")
-
+    data = response.read().decode("utf-8")
+    loaded_data = json.loads(data)
     wsline_access_token = loaded_data["line_token"]
     wsline_channel_secret = loaded_data["Channel Secret"]
 
