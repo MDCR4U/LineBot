@@ -178,8 +178,6 @@ def handle_message(event):
         print("*" + wkmsg[1].upper() +"*")
         if wkmsg[1].upper() == 'SETUP': 
             ftpurl = wkmsg[2]
-
-            # 创建一个包含 loc 字段的字典
             data = {
                 "ftpurl": "https://" + ftpurl + "000webhostapp.com/"   #ftpurl
             }
@@ -196,8 +194,7 @@ def handle_message(event):
             return 
 
     if 1 == 1:
-        print(msg[1:4])
-        if msg[1:4].upper() == "INFO" :
+        if wkmsg[1].upper()== "INFO" :
             wsinformation = get_indormatiion(usr)
             message = TextSendMessage(text="informtion :" + wsinformation)
             line_bot_api.reply_message(event.reply_token, message)  
