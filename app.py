@@ -174,7 +174,7 @@ def handle_message(event):
 
     if 1 == 1 :   #if msg[1:5].upper()  == 'SETUP': 
         print("Set Process" + msg)
-        print(msg[1:5].upper())
+        print("*" + msg[1:6].upper() +"*")
         if msg[1:5].upper()  == 'SETUP': 
             ftpurl = msg[8:].strip('\n')
 
