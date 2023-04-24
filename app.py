@@ -99,7 +99,7 @@ print (" work url " + ftpurl)
 # 确保当前目录下存在 "admin" 文件夹
 if not os.path.exists("admin"):
     os.makedirs("admin")
-url = ftpurl + "admin\key.json" #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
+url = ftpurl + "admin/key.json" #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
  
 filename = 'key.json'
 try:
