@@ -99,19 +99,23 @@ print (" work url " + ftpurl)
 # 确保当前目录下存在 "admin" 文件夹
 if not os.path.exists("admin"):
     os.makedirs("admin")
+#copy ftp to current root    
 url = ftpurl + "admin/key.json" #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
- 
-filename = 'key.json'
-try:
-    urllib.request.urlretrieve(url, filename)
-except:
-    print("not found key.json  " + url)   
+#filename = 'key.json'
+#try:
+#    urllib.request.urlretrieve(url, filename)
+#except:
+#    print("not found key.json  " + url)   
     #message = TextSendMessage(text="Key information missing  :" + msg)
     #line_bot_api.reply_message(event.reply_token, message)   
-    exit()
+#    exit()
 #取得 系統 KEY 
-with open("key.json", "r", encoding="utf-8") as f:
-    loaded_data = json.load(f)
+#with open("key.json", "r", encoding="utf-8") as f:
+#    loaded_data = json.load(f)
+#取得 系統 KEY     
+url = ftpurl + "admin/key.jsob" #+ wjson_file #http://www.abc.com/cust.json"
+response = urllib.request.urlopen(url)
+loaded_data = response.read().decode("utf-8")
 
 line_access_token = loaded_data["line_token"]
 line_channel_secret = loaded_data["Channel Secret"]
@@ -157,7 +161,7 @@ def handle_message(event):
     
     usr =event.source.user_id
     line_user_id = usr
-    print("ftpurl " + ftpurl)
+    ftpurl = get_ftpurl()
 
     userFolder = check_line_id(ftpurl ,line_user_id)
     print("line user id = " + usr + "        USER Folder " + userFolder + "*")
@@ -184,6 +188,12 @@ def handle_message(event):
                 line_bot_api.reply_message(event.reply_token, message)  
                 return 
 
+    if 1 == 1:
+        if msg[1:4].upper() == "INFO" :
+            wsinformation = get_indormatiion()
+            message = TextSendMessage(text="informtion :" + wsinformation)
+            line_bot_api.reply_message(event.reply_token, message)  
+            return 
 
 
     if msg[1:8].upper()  == 'CONTINUE'  or msg[1:] == '繼續' :
@@ -409,7 +419,27 @@ def token(msg):
         message = TextSendMessage(text=  "\您是說 : " + msg + "嗎?")    
 
     return message    
-            
+
+def get_ftpurl():
+    with open("config.json", "r", encoding="utf-8") as f:
+        loaded_data = json.load(f)
+
+        ftpurl = loaded_data["ftpurl"]
+
+        print (" get ftpurl return " + ftpurl) 
+        return(ftpurl)
+def get_indormatiion() :
+    wsftp = get_ftpurl()
+    url = ftpurl + "admin/key.jsob" #+ wjson_file #http://www.abc.com/cust.json"
+    response = urllib.request.urlopen(url)
+    loaded_data = response.read().decode("utf-8")
+
+    wsline_access_token = loaded_data["line_token"]
+    wsline_channel_secret = loaded_data["Channel Secret"]
+
+    return ("work ftp " + wsftp + "\n Line Access token " +  wsline_access_token + "\nChannel Secret" + wsline_channel_secret)
+    
+    
 #def loadfile():
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
