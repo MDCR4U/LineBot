@@ -171,18 +171,19 @@ def handle_message(event):
     print("line user id = " + usr + "        USER Folder " + userFolder + "*" + msg + "*")
 
     #@SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
-
+    wkmsg = msg.split('#')
+    
     if 1 == 1 :   #if msg[1:5].upper()  == 'SETUP': 
         print("Set Process" + msg)
-        print("*" + msg[1:6].upper() +"*")
-        if msg[1:5].upper()  == 'SETUP': 
-            ftpurl = msg[8:].strip('\n')
+        print("*" + wkmsg[1].upper() +"*")
+        if wkmsg[1].upper() == 'SETUP': 
+            ftpurl = wkmsg[2]
 
             # 创建一个包含 loc 字段的字典
             data = {
                 "ftpurl": "https://" + ftpurl + "000webhostapp.com/"   #ftpurl
             }
-
+            print("https://" + ftpurl + "000webhostapp.com/")
             # 确保当前目录下存在 "admin" 文件夹
             if not os.path.exists("admin"):
                 os.makedirs("admin")
