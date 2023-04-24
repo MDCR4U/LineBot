@@ -429,14 +429,12 @@ def token(msg):
 def get_ftpurl():
     with open("config.json", "r", encoding="utf-8") as f:
         loaded_data = json.load(f)
-
         ftpurl = loaded_data["ftpurl"]
-
-        print (" get ftpurl return " + ftpurl) 
         return(ftpurl)
+
 def get_indormatiion(wsusr) :
     wsftp = get_ftpurl()
-    url = ftpurl + "admin/key.jsob" #+ wjson_file #http://www.abc.com/cust.json"
+    url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
     response = urllib.request.urlopen(url)
     loaded_data = response.read().decode("utf-8")
 
