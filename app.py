@@ -194,7 +194,7 @@ def handle_message(event):
 
     if 1 == 1:
         if msg[1:4].upper() == "INFO" :
-            wsinformation = get_indormatiion()
+            wsinformation = get_indormatiion(usr)
             message = TextSendMessage(text="informtion :" + wsinformation)
             line_bot_api.reply_message(event.reply_token, message)  
             return 
@@ -432,7 +432,7 @@ def get_ftpurl():
 
         print (" get ftpurl return " + ftpurl) 
         return(ftpurl)
-def get_indormatiion() :
+def get_indormatiion(wsusr) :
     wsftp = get_ftpurl()
     url = ftpurl + "admin/key.jsob" #+ wjson_file #http://www.abc.com/cust.json"
     response = urllib.request.urlopen(url)
@@ -441,7 +441,7 @@ def get_indormatiion() :
     wsline_access_token = loaded_data["line_token"]
     wsline_channel_secret = loaded_data["Channel Secret"]
 
-    return ("work ftp " + wsftp + "\n Line Access token " +  wsline_access_token + "\nChannel Secret" + wsline_channel_secret)
+    return ("USER : " + wsusr + "\n work ftp " + wsftp + "\n Line Access token " +  wsline_access_token + "\nChannel Secret" + wsline_channel_secret)
     
     
 #def loadfile():
