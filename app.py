@@ -174,6 +174,7 @@ def handle_message(event):
 
     if 1 == 1 :   #if msg[1:5].upper()  == 'SETUP': 
         print("Set Process" + msg)
+        print(msg[1:5].upper())
         if msg[1:5].upper()  == 'SETUP': 
             ftpurl = msg[8:].strip('\n')
 
@@ -194,6 +195,7 @@ def handle_message(event):
             return 
 
     if 1 == 1:
+        print(msg[1:4])
         if msg[1:4].upper() == "INFO" :
             wsinformation = get_indormatiion(usr)
             message = TextSendMessage(text="informtion :" + wsinformation)
