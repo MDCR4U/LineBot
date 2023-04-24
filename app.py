@@ -101,7 +101,8 @@ print (" work url " + ftpurl)
 if not os.path.exists("admin"):
     os.makedirs("admin")
 #copy ftp to current root    
-url = ftpurl + "admin/key.json" #+ "ket.txt" #'https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
+url = ftpurl + "admin/key.json" 
+#https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
 #filename = 'key.json'
 #try:
 #    urllib.request.urlretrieve(url, filename)
@@ -127,7 +128,7 @@ gpt_token           = js_dta["gptkey"]
 print ("line_access_token " + line_access_token )
 print ("line_channel_secret " + line_channel_secret)
 print("ftpurl " + ftpurl)
-
+print("usr  "+ line_user_id)
 userFolder = check_line_id(ftpurl ,line_user_id)
 
 
