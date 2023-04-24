@@ -117,8 +117,8 @@ line_access_token = loaded_data["line_token"]
 line_channel_secret = loaded_data["Channel Secret"]
 gpt_token           = loaded_data["gptkey"]
 
-print ("line_access_token ")
-print ("line_channel_secret ")
+print ("line_access_token " + line_access_token )
+print ("line_channel_secret " + line_channel_secret)
 
 # Channel Access Token 
 line_bot_api = LineBotApi(line_access_token)
@@ -147,30 +147,35 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    userFolder = ''
     usr =event.source.user_id
     line_user_id = usr
+    print("ftpurl " + ftpurl)
+
     userFolder = check_line_id(ftpurl ,line_user_id)
     print("line user id = " + usr + "        USER Folder " + userFolder + "*")
     msg = event.message.text
     #@SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
-    if msg[1:5].upper()  == 'SETUP': 
-        ftpurl = msg[8:].strip('\n')
 
-        # 创建一个包含 loc 字段的字典
-        data = {
-            "ftpurl": "https://" + ftpurl + "000webhostapp.com/"   #ftpurl
-        }
+    if 1 == 1 :   #if msg[1:5].upper()  == 'SETUP': 
+        if msg[1:5].upper()  == 'SETUP': 
+            ftpurl = msg[8:].strip('\n')
 
-        # 确保当前目录下存在 "admin" 文件夹
-        if not os.path.exists("admin"):
-            os.makedirs("admin")
+            # 创建一个包含 loc 字段的字典
+            data = {
+                "ftpurl": "https://" + ftpurl + "000webhostapp.com/"   #ftpurl
+            }
 
-        # 将字典写入 JSON 文件
-        with open("config.json", "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
-            message = TextSendMessage(text="system set up complete" )
-            line_bot_api.reply_message(event.reply_token, message)  
-            return 
+            # 确保当前目录下存在 "admin" 文件夹
+            if not os.path.exists("admin"):
+                os.makedirs("admin")
+
+            # 将字典写入 JSON 文件
+            with open("config.json", "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
+                message = TextSendMessage(text="system set up complete" )
+                line_bot_api.reply_message(event.reply_token, message)  
+                return 
 
 
 
