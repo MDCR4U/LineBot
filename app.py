@@ -191,7 +191,7 @@ def handle_message(event):
                 json.dump(data, f, ensure_ascii=False, indent=4)
                 message = TextSendMessage(text="system set up complete" )
                 line_bot_api.reply_message(event.reply_token, message)  
-                return 
+            return 
 
     if 1 == 1:
         if msg[1:4].upper() == "INFO" :
