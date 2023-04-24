@@ -114,7 +114,9 @@ url = ftpurl + "admin/key.json" #+ "ket.txt" #'https://mdcgenius.000webhostapp.c
 #with open("key.json", "r", encoding="utf-8") as f:
 #    loaded_data = json.load(f)
 #取得 系統 KEY     
-url = ftpurl + "admin/key.jsob" #+ wjson_file #http://www.abc.com/cust.json"
+url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
+
+print("Key URL " + url)
 response = urllib.request.urlopen(url)
 loaded_data = response.read().decode("utf-8")
 
