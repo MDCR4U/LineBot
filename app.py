@@ -196,7 +196,8 @@ def handle_message(event):
 
     if 1 == 1:
         if wkmsg[1].upper()== "INFO" :
-            wsinformation = get_indormatiion(usr)
+            wsinformation = get_informatiion(usr)
+            print("wsinformation " + wsinformation)
             message = TextSendMessage(text="informtion :" + wsinformation)
             line_bot_api.reply_message(event.reply_token, message)  
             return 
@@ -432,11 +433,12 @@ def get_ftpurl():
         ftpurl = loaded_data["ftpurl"]
         return(ftpurl)
 
-def get_indormatiion(wsusr) :
+def get_informatiion(wsusr) :
     wsftp = get_ftpurl()
     url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
+    print (" key url " + url )
     response = urllib.request.urlopen(url)
-    loaded_data = response.read().decode("utf-8")
+    loaded_data = json.load(f)   #response.read().decode("utf-8")
 
     wsline_access_token = loaded_data["line_token"]
     wsline_channel_secret = loaded_data["Channel Secret"]
