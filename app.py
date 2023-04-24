@@ -118,11 +118,11 @@ url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
 
 print("Key URL " + url)
 response = urllib.request.urlopen(url)
-loaded_data = response.read().decode("utf-8")
-
-line_access_token = loaded_data["line_token"]
-line_channel_secret = loaded_data["Channel Secret"]
-gpt_token           = loaded_data["gptkey"]
+data = response.read().decode("utf-8")
+js_dta = json.loads(data)
+line_access_token = js_dta["line_token"]
+line_channel_secret = js_dta["Channel Secret"]
+gpt_token           = js_dta["gptkey"]
 
 print ("line_access_token " + line_access_token )
 print ("line_channel_secret " + line_channel_secret)
