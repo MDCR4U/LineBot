@@ -170,7 +170,7 @@ def handle_message(event):
     msg = event.message.text
     print("line user id = " + usr + "        USER Folder " + userFolder + "*" + msg + "*")
 
-    #@SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
+    #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
     wkmsg = msg.split('#')
     
     if 1 == 1 :   #if msg[1:5].upper()  == 'SETUP': 
