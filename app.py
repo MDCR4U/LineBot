@@ -140,7 +140,7 @@ handler = WebhookHandler(line_channel_secret)
 
 
 # 監聽所有來自 /callback 的 Post Request
-@app.route("/rich4u_004", methods=['POST'])
+@app.route("/rich4u", methods=['POST'])
 def callback():
 
     print(" call back entry ")
