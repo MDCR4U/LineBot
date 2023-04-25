@@ -98,7 +98,7 @@ def send_mail(lineid,wmsg,userFolder):
     print("=====send mail start userFolder = " + userFolder)
      
     #url = wsftpflr + userFolder.strip('\n') + "_smtp.csv"
-    url = wsftpflr + userFolder.strip('\n') + smtpfn   #"/smtp.csv"
+    url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
     print (" 寄件人 : " + url )
  
     
@@ -150,7 +150,7 @@ def send_mail(lineid,wmsg,userFolder):
 
 # 讀取收件人列表
     #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
-    url = wsftpflr + userFolder.strip('\n') + mailfn #'/mail.csv'
+    url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
     print ("收件人 : " + url)
     n = counter                                                 # 要跳過的行數
 
@@ -185,7 +185,7 @@ def send_mail(lineid,wmsg,userFolder):
 #getbody 
     # 檢查 發送內容
     #url = wsftpflr + userFolder.strip('\n') + '_body.txt'
-    url = wsftpflr + userFolder.strip('\n') + bodyfn # '/body.txt'
+    url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
     print ("信件內容 : " + url)
     try:
         file = urllib.request.urlopen(url)
@@ -205,7 +205,7 @@ def send_mail(lineid,wmsg,userFolder):
 
      # 檢查 主旨
     #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
-    url = wsftpflr + userFolder.strip('\n') +  subjectfn #'/subject.txt'
+    url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
     print ("信件主旨 : " + url )
     try:
         file = urllib.request.urlopen(url)
