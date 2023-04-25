@@ -49,7 +49,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
     url = url + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
 
-    print("Key URL " + url)
+#    print("Key URL " + url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -76,13 +76,13 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     
     wssts = check_line_id(wsftpflr,lineid)
     if   wssts == ''  :
-        print('使用者 ' + lineid + ' 發送信件功能未啟動')
+#        print('使用者 ' + lineid + ' 發送信件功能未啟動')
         return ('使用者 ' + lineid + ' 發送信件功能未啟動')
      
 # 取得發送郵件  環境
     mailconfig= "mailconfig.json"
     url = wsftpflr + "admin/" + mailconfig #http://www.abc.com/cust.json"
-    print(url)
+    print(" mail config " + url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -105,7 +105,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
      
     #url = wsftpflr + userFolder.strip('\n') + "_smtp.csv"
     url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
-    print (" 寄件人 : " + url )
+#    print (" 寄件人 : " + url )
  
     
     try:
@@ -116,10 +116,10 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         response.close()                                                                    # 關閉 URL
         smtp_count = len(smtp_list)   
     except :
-        print ("寄件者資料 讀取錯誤 \n " + url)
+#        print ("寄件者資料 讀取錯誤 \n " + url)
         return ("寄件者資料 讀取錯誤 \n " + url)
 
-    print("發信者 人數" + str(len(smtp_list)))
+#    print("發信者 人數" + str(len(smtp_list)))
 # 讀取郵件發送記錄
     counter = int(mailidx)
     smtp_idx = int(smtpidx)    
@@ -141,7 +141,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             reader = csv.reader(response.read().decode('utf-8').splitlines())
             rows = [row for i, row in enumerate(reader) if i >= n]
     except urllib.error.URLError:
-        print ("收件者資料讀取錯誤 : " + url )
+#        print ("收件者資料讀取錯誤 : " + url )
         return ("收件者資料讀取錯誤 : " + url )
 
 # 設置發件人的初始賬戶信息
@@ -208,14 +208,14 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
            smtp_idx  = 0
         else :
             smtp_idx = smtp_idx + 1
-        print("**" + str(smtp_idx) + " - " + str(len(smtp_list)) + "**" )
+#        print("**" + str(smtp_idx) + " - " + str(len(smtp_list)) + "**" )
         smtp_username = smtp_list[smtp_idx][0]
-        print("user name " + smtp_username)
+#        print("user name " + smtp_username)
         smtp_password = smtp_list[smtp_idx][1]
         
         to_addr = row[0]
 
-        print("to_addr = " + to_addr + "-" + row[0])
+        print("to_addr = " + to_addr )
        
         #cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
         #print(cc_addrs)
@@ -277,6 +277,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
          
         loopidx = loopidx + 1
         sendcnt = sendcnt + 1
+        print (" 第 " + str(loopidx) + "發送成功")
         if sendcnt == 5 :
            print ("push msg " + push_to )
            message = TextSendMessage(text="已完成   :" +  str(loopidx) + " 信件發送" )

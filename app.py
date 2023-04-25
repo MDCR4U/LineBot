@@ -276,6 +276,8 @@ def handle_message(event):
         now = datetime.now() # current date and time
         #增加 user folder
         sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
+        print("send mail complete ")
+        return ""
         #message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         #line_bot_api.reply_message(event.reply_token, message)  
     elif msg.upper()[0:9] == '/DEMOMAIL'  :
