@@ -12,14 +12,15 @@ from email.mime.application import MIMEApplication
 
 def demomail(msg):
 # /demomail#jj0922792265@outlook.com#
-    file = open('config.txt','r',encoding="utf-8")
-    line = file.readline().strip('\n')    #line1 githubid
-    line = file.readline().strip('\n')   #line1 githubproject
-    line = file.readline().strip('\n')   #line1 githubproject
-    #line=line.strip('\n')
-    wsftpflr= line[12:].strip()
-
-    wsmsg = msg.split('#')
+    #        file = open('config.txt','r',encoding="utf-8")
+    #        line = file.readline().strip('\n')    #line1 githubid
+    #        line = file.readline().strip('\n')   #line1 githubproject
+    #        line = file.readline().strip('\n')   #line1 githubproject
+    #        #line=line.strip('\n')
+    #        wsftpflr= line[12:].strip()
+    with open("config.json", "r", encoding="utf-8") as f:
+        loaded_data = json.load(f)
+    wsftpflr = loaded_data["ftpurl"]
     wjson_file = "demosmtp.json"
 # 讀取 JSON 檔案  local
 #   # with open("cbd.json" , "r") as f:
@@ -38,7 +39,7 @@ def demomail(msg):
     smtp_port = 587
 
         # 讀取收件人列表
-
+    wsmsg =  msg.split('#')   # msg = '/demomail#jj0922792265@outlook.com#'
     receiver = wsmsg[1]    #"buddhisty@gmail.com" #"tt6395b@outlook.com" 
     subject = js_dta["subject"] #"臉書優質紛絲團，邀請您 按讚支持" 
 
