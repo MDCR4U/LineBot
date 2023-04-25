@@ -3,13 +3,23 @@ import urllib.request
 
 import sys
 #
-import os 
+import os  
+import json
 import csv
 import datetime
 import smtplib
 import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+# LINT BOT API
+from linebot import LineBotApi
+from linebot.exceptions import LineBotApiError
+from linebot import LineBotApi, WebhookHandler
+#from linebot.exceptions import InvalidSignatureError
+from linebot.models import MessageEvent, TextMessage, TextSendMessage
+from flask import Flask, request, abort
+# LINEＢＯＴ　ＡＰＩ
 
  
 from flask import Flask
@@ -19,23 +29,37 @@ from flask import Flask
  
 def send_mail(lineid,wmsg,userFolder):
 
-    
+    smtpfn =""
+    mailfn = ""
+    subjectfn =""
+    bodyfn = ""
+    smtpidx = ""
+    mailidx = ""
+
+    print ("sendmail by : " + lineid )
     wsftpflr = '' 
     #print("\n@@@@@ send mail folder @@@@@@@@@@@@@@@@@@@@  = " + userFolder +"@@@")
 
-#讀取 config.sys 取得 information  ftp folder
-    file = open('config.txt','r',encoding="utf-8")
-    line = file.readline().strip('\n')    #line1 githubid
-    line = file.readline().strip('\n')   #line1 githubproject
-    line = file.readline().strip('\n')   #line1 githubproject
-    #line=line.strip('\n')
-    wsftpflr= line[12:].strip()
-    #ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
- 
-    file.close()
+    with open("config.json", "r", encoding="utf-8") as f:
+        loaded_data = json.load(f)
+        url  = loaded_data["ftpurl"]
+    
+    wsftpflr = url 
 
- 
-    wstarget = wmsg[7:]
+    url = url + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
+
+    print("Key URL " + url)
+    response = urllib.request.urlopen(url)
+    data = response.read().decode("utf-8")
+    js_dta = json.loads(data)
+    line_access_token = js_dta["line_token"]
+    line_bot_api = LineBotApi(line_access_token)
+
+    
+    
+ # 發送比數
+    wsmsg =  wmsg.split('#')   # msg = '/smail#90#'
+    wstarget = wsmsg[1]
      
     if (wstarget.isdigit()):
         targetno = int(wstarget)
@@ -49,6 +73,21 @@ def send_mail(lineid,wmsg,userFolder):
         print('使用者 ' + lineid + ' 發送信件功能未啟動')
         return ('使用者 ' + lineid + ' 發送信件功能未啟動')
      
+# 取得發送郵件  環境
+    mailconfig= "mailconfig.json"
+    url = wsftpflr + "admin/" + mailconfig #http://www.abc.com/cust.json"
+    print(url)
+    response = urllib.request.urlopen(url)
+    data = response.read().decode("utf-8")
+    js_dta = json.loads(data)
+    smtpfn =js_dta["smtp"] 
+    mailfn = js_dta["mail"] 
+    subjectfn =js_dta["subject"] 
+    bodyfn = js_dta["body"] 
+    smtpidx = js_dta["smtpidx"] 
+    mailidx = js_dta["mailidx"] 
+
+
 
 
     #https://github.com/MDCR4U/LineBot/blob/main/mail.csv
@@ -59,7 +98,7 @@ def send_mail(lineid,wmsg,userFolder):
     print("=====send mail start userFolder = " + userFolder)
      
     #url = wsftpflr + userFolder.strip('\n') + "_smtp.csv"
-    url = wsftpflr + userFolder.strip('\n') + "/smtp.csv"
+    url = wsftpflr + userFolder.strip('\n') + smtpfn   #"/smtp.csv"
     print (" 寄件人 : " + url )
  
     
@@ -76,13 +115,15 @@ def send_mail(lineid,wmsg,userFolder):
 
 
 # 讀取郵件發送記錄
-    url = wsftpflr + userFolder.strip('\n') +  '_mail_counter.log'
-    try:
-        with urllib.request.urlopen(url) as response:
-            content = response.read().decode('utf-8')
-            counter = int(content.strip())
-    except urllib.error.URLError:
-        counter = 0
+    #url = wsftpflr + userFolder.strip('\n') +  '_mail_counter.log'
+    #try:
+    #    with urllib.request.urlopen(url) as response:
+    ##        content = response.read().decode('utf-8')
+    #        counter = int(content.strip())
+    #except urllib.error.URLError:
+    #    counter = 0
+
+    counter = int(mailidx)
    
     #try:
     #    with open("mail_counter.log", "r", encoding="utf-8") as f:
@@ -91,13 +132,15 @@ def send_mail(lineid,wmsg,userFolder):
     #    counter = 0
 # 讀取SMTP發送記錄
     #url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
-    url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
-    try:
-        with urllib.request.urlopen(url) as response:
-            smtp_idx = response.read().decode('utf-8')
-            smtp_idx = int(content.strip())
-    except urllib.error.URLError:
-        smtp_idx = 0
+    #url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
+    #try:
+    #    with urllib.request.urlopen(url) as response:
+    #        smtp_idx = response.read().decode('utf-8')
+    #        smtp_idx = int(content.strip())
+    #except urllib.error.URLError:
+    #    smtp_idx = 0
+
+    smtpidx = int(smtpidx)    
    #try:
     #    with open("smtp_send_counter.log", "r", encoding="utf-8") as f:
     #        smtp_idx  = int(f.readline())
@@ -107,7 +150,7 @@ def send_mail(lineid,wmsg,userFolder):
 
 # 讀取收件人列表
     #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
-    url = wsftpflr + userFolder.strip('\n') + '/mail.csv'
+    url = wsftpflr + userFolder.strip('\n') + mailfn #'/mail.csv'
     print ("收件人 : " + url)
     n = counter                                                 # 要跳過的行數
 
@@ -142,7 +185,7 @@ def send_mail(lineid,wmsg,userFolder):
 #getbody 
     # 檢查 發送內容
     #url = wsftpflr + userFolder.strip('\n') + '_body.txt'
-    url = wsftpflr + userFolder.strip('\n') + '/body.txt'
+    url = wsftpflr + userFolder.strip('\n') + bodyfn # '/body.txt'
     print ("信件內容 : " + url)
     try:
         file = urllib.request.urlopen(url)
@@ -162,7 +205,7 @@ def send_mail(lineid,wmsg,userFolder):
 
      # 檢查 主旨
     #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
-    url = wsftpflr + userFolder.strip('\n') +  '/subject.txt'
+    url = wsftpflr + userFolder.strip('\n') +  subjectfn #'/subject.txt'
     print ("信件主旨 : " + url )
     try:
         file = urllib.request.urlopen(url)
@@ -177,6 +220,7 @@ def send_mail(lineid,wmsg,userFolder):
  
 
 # 開始發送郵件
+    sendcnt = 0
     loopidx = -1 
     print (str(len(smtp_list)))
     for j, row in enumerate(rows):    #rows : mail.csv
@@ -254,6 +298,12 @@ def send_mail(lineid,wmsg,userFolder):
         #   return(f"第 {+1} 封郵件發送失敗：   {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
          
         loopidx = loopidx + 1
+        sendcnt = sendcnt + 1
+        if sendcnt == 5 :
+           print ("push msg ")
+           message = TextSendMessage(text="完成   :" +  loopidx + " 信件發送" )
+           line_bot_api.push_message(lineid, message)
+    #line_bot_api.reply_message(event.reply_token, message)   
 
         if loopidx  == targetno :
             print(f"{targetno} emails complete ")  
