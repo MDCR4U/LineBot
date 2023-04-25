@@ -87,6 +87,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     bodyfn = js_dta["body"] 
     smtpidx = js_dta["smtpidx"] 
     mailidx = js_dta["mailidx"] 
+    wspush = js_dta["push"]
 
 
 
@@ -260,7 +261,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         loopidx = loopidx + 1
         sendcnt = sendcnt + 1
         print (" 第 " + str(loopidx) + "發送成功")
-        if sendcnt == 5 :
+        if sendcnt == wspush :
            print ("push msg " + push_to )
            message = TextSendMessage(text="已完成   :" +  str(loopidx) + " 信件發送" )
            line_bot_api.push_message(push_to, message)
