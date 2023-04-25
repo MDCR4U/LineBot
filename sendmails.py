@@ -215,7 +215,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         
         to_addr = row[0]
 
-        print("to_addr = " + to_addr )
+        print("from = " + smtp_username  + " to_addr = " + to_addr )
        
         #cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
         #print(cc_addrs)
