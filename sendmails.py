@@ -272,11 +272,11 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             #    print(f"第 {loopidx } 封郵件發送失敗： Authentication unsuccessful\n  {e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
             #if 'Authentication unsuccessful' in e.decode('utf-8') :
             #wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
-            print ("push msg " + push_to )
+            print ("push error msg " + push_to )
             message = TextSendMessage(text="第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n")
             line_bot_api.push_message(push_to, message)
-            return("") #f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
-        #   return(f"第 {+1} 封郵件發送失敗：   {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
+            print (" return due to error")
+            return("")  
          
         loopidx = loopidx + 1
         sendcnt = sendcnt + 1
@@ -293,6 +293,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
             message = TextSendMessage(text="發送完成  共計發送   :" +  str(loopidx)  + " 封信件" )
             line_bot_api.push_message(push_to, message)
+            print (" complete send return to app.py")
             return("") 
                
     # 記錄已發送的郵件
@@ -316,7 +317,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         
         time.sleep(0.5)
 
-    print(  " return from email \n" + wssenddetail)
+    print(  " return from email \n" + wssenddetail + "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
     return("郵件發送完成  \n" + wssenddetail)
 
 

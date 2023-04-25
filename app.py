@@ -151,6 +151,7 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    print("handle message entry")
     user_id = ""
     group_id = ""
     usr =event.source.user_id
@@ -218,13 +219,7 @@ def handle_message(event):
     # last 5 char string[-5:])
     # string.upper
     # string.lower
-    if msg[1:8].upper()  == 'CONTINUE'  or msg[1:] == '繼續' :
-        wscontinue =get_continue(line_user_id)
-        print("continue token" + wscontinue)
-        msg = wscontinue
-        message = TextSendMessage(text="上一次查閱進度 :" + msg)
-        line_bot_api.reply_message(event.reply_token, message)  
-        return 
+     
 
     
     if msg[0:1] == "@" :
@@ -269,6 +264,7 @@ def handle_message(event):
     #        print("Traceback Object:", exc_traceback)
     
     if '/SMAIL' in msg.upper():     #isupper(), islower(), lower(), upper()
+        print (" CALL Send Mail")
         if userFolder == '' :
             message = TextSendMessage(text= "找不到 發送信件的授權資料，請記住您的代碼 " + usr +"\n與 系統管理員聯絡申請授權 " )
             line_bot_api.reply_message(event.reply_token, message)              
@@ -276,7 +272,7 @@ def handle_message(event):
         now = datetime.now() # current date and time
         #增加 user folder
         sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
-        print("send mail complete ")
+        print("send mail complete #############################################")
         return ""
         #message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         #line_bot_api.reply_message(event.reply_token, message)  
