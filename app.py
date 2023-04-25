@@ -93,9 +93,6 @@ with open("config.json", "r", encoding="utf-8") as f:
 
 ftpurl = loaded_data["ftpurl"]
 
-print (" work url " + ftpurl) 
-
- 
 # download key file
 # 确保当前目录下存在 "admin" 文件夹
 if not os.path.exists("admin"):
@@ -133,7 +130,7 @@ handler = WebhookHandler(line_channel_secret)
 @app.route("/rich4u", methods=['POST'])
 def callback():
 
-    print(" call back entry mdcbot7")
+    print(" call back entry mdcbot8")
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     # get request body as text

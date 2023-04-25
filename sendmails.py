@@ -87,7 +87,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     bodyfn = js_dta["body"] 
     smtpidx = js_dta["smtpidx"] 
     mailidx = js_dta["mailidx"] 
-    wspush = js_dta["push"]
+    wspush = int(js_dta["push"])
 
 
 
