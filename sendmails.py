@@ -463,6 +463,8 @@ def initcounter(lineid,msg,userFolder ):
 def check_line_id(ftpurl ,lineid):
      
     url = ftpurl + "authids.txt"
+
+    print ("authids url " + url )
 # 讀取文件內容
     file = urllib.request.urlopen(url)
     line = file.readline()

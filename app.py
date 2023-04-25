@@ -102,18 +102,7 @@ if not os.path.exists("admin"):
     os.makedirs("admin")
 #copy ftp to current root    
 url = ftpurl + "admin/key.json" 
-#https://mdcgenius.000webhostapp.com/key.txt'   #githuburl + "key.txt"
-#filename = 'key.json'
-#try:
-#    urllib.request.urlretrieve(url, filename)
-#except:
-#    print("not found key.json  " + url)   
-    #message = TextSendMessage(text="Key information missing  :" + msg)
-    #line_bot_api.reply_message(event.reply_token, message)   
-#    exit()
-#取得 系統 KEY 
-#with open("key.json", "r", encoding="utf-8") as f:
-#    loaded_data = json.load(f)
+
 #取得 系統 KEY     
 url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
 
@@ -128,8 +117,8 @@ gpt_token           = js_dta["gptkey"]
 print ("line_access_token " + line_access_token )
 print ("line_channel_secret " + line_channel_secret)
 print("ftpurl " + ftpurl)
-print("usr  "+ line_user_id)
-userFolder = check_line_id(ftpurl ,line_user_id)
+#print("usr  "+ line_user_id)
+#userFolder = check_line_id(ftpurl ,line_user_id)
 
 
 # Channel Access Token 
@@ -169,7 +158,7 @@ def handle_message(event):
 
     userFolder = check_line_id(ftpurl ,line_user_id)
     msg = event.message.text
-    print("line user id = " + usr + "        USER Folder " + userFolder + "*" + msg + "*")
+    print("line user id = " + usr + "        USER Folder= " + userFolder + "*" + msg + "*")
 
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
     wkmsg = msg.split('#')
