@@ -155,12 +155,11 @@ def handle_message(event):
     group_id = ""
     usr =event.source.user_id
     user_id = event.source.user_id
-   
     user_type = event.source.type
     print("user_type " + user_type)
     print(event)
     if user_type != "user" :
-        group_id =  event.source.groupId
+        group_id =  event.source.group_id
     
     print (event)
     print("echo message " + user_id + " " + user_type + " " + group_id)
