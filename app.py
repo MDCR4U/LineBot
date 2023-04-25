@@ -153,6 +153,15 @@ def callback():
 def handle_message(event):
     
     usr =event.source.user_id
+    user_id = event.source.user_id
+   
+    user_type = event.source.type
+    print (event)
+    print("echo message " + user_id + " " + user_type)
+    return ()
+    #if user_type == "user":
+
+
     line_user_id = usr
     ftpurl = get_ftpurl()
 
