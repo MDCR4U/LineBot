@@ -188,7 +188,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 # 開始發送郵件
     sendcnt = 0
     loopidx = 0 
-    print ("from y 資料比數 " + str(len(smtp_list)))
+    
     for j, row in enumerate(rows):    #rows : mail.csv
          
         if smtp_idx >= len (smtp_list) :

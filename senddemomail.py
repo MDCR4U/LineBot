@@ -45,6 +45,7 @@ def demomail(msg):
 
     content = js_dta["content"]  # "陌生開發優質粉絲團，人員募集中\n歡迎加入\n分享陌開心法及免費工具\n邀起您加入我們 請開啟網址 https://www.facebook.com/profile.php?id=100065188140659 按讚留言 獲取更多的資訊\n www.mydailychoice.com"
     sendfrom = js_dta["from"]   
+    print("sendfrom" + sendfrom)
                 # 設置郵件內容
 
     print ("=================  demomail info ==================")
@@ -54,6 +55,7 @@ def demomail(msg):
     print ("to " + receiver)
 
     message = MIMEMultipart()
+    print(sendfrom + "<" +  username + ">")
     message["From"] = sendfrom + "<" +  username + ">"
     message["To"] =  receiver 
     message["Subject"] = subject 
