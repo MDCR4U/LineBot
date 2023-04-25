@@ -36,7 +36,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     smtpidx = ""
     mailidx = ""
 
-    print ("sendmail by : " + lineid )
+    print ("sendmail by : " + lineid  + " " + user_id + "*" + group_id)
+    return("")
     wsftpflr = '' 
     #print("\n@@@@@ send mail folder @@@@@@@@@@@@@@@@@@@@  = " + userFolder +"@@@")
 
@@ -278,7 +279,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         sendcnt = sendcnt + 1
         if sendcnt == 5 :
            print ("push msg ")
-           message = TextSendMessage(text="完成   :" +  loopidx + " 信件發送" )
+           message = TextSendMessage(text="完成   :" +  str(loopidx) + " 信件發送" )
            line_bot_api.push_message(push_to, message)
     #line_bot_api.reply_message(event.reply_token, message)   
 
