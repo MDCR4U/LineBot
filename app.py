@@ -151,14 +151,18 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    
+    user_id = ""
+    group_id = ""
     usr =event.source.user_id
     user_id = event.source.user_id
    
     user_type = event.source.type
+    if user_type != "user" :
+        group_id = user_id = event.source.groupid
+    
     print (event)
     print("echo message " + user_id + " " + user_type)
-    return ()
+    
     #if user_type == "user":
 
 
@@ -270,7 +274,7 @@ def handle_message(event):
         from datetime import datetime
         now = datetime.now() # current date and time
         #增加 user folder
-        sendlog = send_mail(usr,msg,userFolder)
+        sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
         #message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         #line_bot_api.reply_message(event.reply_token, message)  
     elif msg.upper()[0:9] == '/DEMOMAIL'  :

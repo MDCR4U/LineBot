@@ -27,7 +27,7 @@ from flask import Flask
 #@app.route('/')
  #================= for send mail =================
  
-def send_mail(lineid,wmsg,userFolder):
+def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
     smtpfn =""
     mailfn = ""
@@ -55,7 +55,12 @@ def send_mail(lineid,wmsg,userFolder):
     line_access_token = js_dta["line_token"]
     line_bot_api = LineBotApi(line_access_token)
 
-    
+    push_to = ""
+    if group_id != "":
+        push_to = group_id 
+    else :
+        push_to = user_id    
+
     
  # 發送比數
     wsmsg =  wmsg.split('#')   # msg = '/smail#90#'
@@ -274,14 +279,14 @@ def send_mail(lineid,wmsg,userFolder):
         if sendcnt == 5 :
            print ("push msg ")
            message = TextSendMessage(text="完成   :" +  loopidx + " 信件發送" )
-           line_bot_api.push_message(lineid, message)
+           line_bot_api.push_message(push_to, message)
     #line_bot_api.reply_message(event.reply_token, message)   
 
         if loopidx  == targetno :
             print(f"{targetno} emails complete ")  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
             message = TextSendMessage(text="完成   :" +  loopidx + " 信件發送" )
-            line_bot_api.push_message(lineid, message)
+            line_bot_api.push_message(push_to, message)
             return("") 
                
     # 記錄已發送的郵件
