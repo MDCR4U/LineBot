@@ -66,7 +66,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
  # 發送比數
     wsmsg =  wmsg.split('#')   # msg = '/smail#90#'
     wstarget = wsmsg[1]
-     
+    print("target " + wstarget ) 
     if (wstarget.isdigit()):
         targetno = int(wstarget)
     else : 
@@ -199,7 +199,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
 # 開始發送郵件
     sendcnt = 0
-    loopidx = -1 
+    loopidx = 0 
     print (str(len(smtp_list)))
     for j, row in enumerate(rows):    #rows : mail.csv
          
@@ -265,7 +265,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #    print("Exception Type:===>", exc_type)
         #    print("Exception Value:", exc_value)
         #    print("Traceback Object:", exc_traceback)
-            print(f"第 {loopidx } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
+            print(f"第 {loopidx + 1 } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
 
 
             #if 'Authentication unsuccessful' in e.decode('utf-8') :
@@ -278,14 +278,14 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         loopidx = loopidx + 1
         sendcnt = sendcnt + 1
         if sendcnt == 5 :
-           print ("push msg ")
+           print ("push msg " + push_to )
            message = TextSendMessage(text="完成   :" +  str(loopidx) + " 信件發送" )
            line_bot_api.push_message(push_to, message)
            sendcnt = 0
     #line_bot_api.reply_message(event.reply_token, message)   
 
         if loopidx  == targetno :
-            print(f"{targetno} emails complete ")  
+            print(f"{targetno} emails complete " + push_to)  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
             message = TextSendMessage(text="完成   :" +  loopidx + " 信件發送" )
             line_bot_api.push_message(push_to, message)
