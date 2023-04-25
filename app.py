@@ -176,7 +176,7 @@ def handle_message(event):
 
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
     wkmsg = msg.split('#')
-    
+    print(len(wkmsg) )
     if  msg[0:1] == "@" and len(wkmsg) > 1 :   #if msg[1:5].upper()  == 'SETUP': 
         if wkmsg[1].upper() == 'SETUP': 
             ftpurl = wkmsg[2]
