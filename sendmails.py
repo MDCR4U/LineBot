@@ -113,7 +113,7 @@ def send_mail(lineid,wmsg,userFolder):
         print ("寄件者資料 讀取錯誤 \n " + url)
         return ("寄件者資料 讀取錯誤 \n " + url)
 
-
+    print("發信者 人數" + len(smtp_list))
 # 讀取郵件發送記錄
     #url = wsftpflr + userFolder.strip('\n') +  '_mail_counter.log'
     #try:
@@ -140,7 +140,7 @@ def send_mail(lineid,wmsg,userFolder):
     #except urllib.error.URLError:
     #    smtp_idx = 0
 
-    smtpidx = int(smtpidx)    
+    smtp_idx = int(smtpidx)    
    #try:
     #    with open("smtp_send_counter.log", "r", encoding="utf-8") as f:
     #        smtp_idx  = int(f.readline())
