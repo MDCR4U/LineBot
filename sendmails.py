@@ -36,11 +36,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     smtpidx = ""
     mailidx = ""
 
-    print ("sendmail by :  lineid  =  " + user_id + "*group id = " + group_id) 
+#    print ("sendmail by :  lineid  =  " + user_id + "*group id = " + group_id) 
     
     wsftpflr = '' 
-    #print("\n@@@@@ send mail folder @@@@@@@@@@@@@@@@@@@@  = " + userFolder +"@@@")
-
     with open("config.json", "r", encoding="utf-8") as f:
         loaded_data = json.load(f)
         url  = loaded_data["ftpurl"]
@@ -49,7 +47,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
     url = url + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
 
-#    print("Key URL " + url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -76,13 +73,11 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     
     wssts = check_line_id(wsftpflr,lineid)
     if   wssts == ''  :
-#        print('使用者 ' + lineid + ' 發送信件功能未啟動')
         return ('使用者 ' + lineid + ' 發送信件功能未啟動')
      
 # 取得發送郵件  環境
     mailconfig= "mailconfig.json"
     url = wsftpflr + "admin/" + mailconfig #http://www.abc.com/cust.json"
-    print(" mail config " + url)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
@@ -105,8 +100,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
      
     #url = wsftpflr + userFolder.strip('\n') + "_smtp.csv"
     url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
-#    print (" 寄件人 : " + url )
- 
     
     try:
         response = urllib.request.urlopen(url)                                              # 開啟 URL
@@ -116,7 +109,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         response.close()                                                                    # 關閉 URL
         smtp_count = len(smtp_list)   
     except :
-#        print ("寄件者資料 讀取錯誤 \n " + url)
         return ("寄件者資料 讀取錯誤 \n " + url)
 
 #    print("發信者 人數" + str(len(smtp_list)))
@@ -133,7 +125,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 # 讀取收件人列表
     #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
     url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
-    #print ("收件人 : " + url)
     n = counter                                                 # 要跳過的行數
 
     try:
@@ -141,7 +132,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             reader = csv.reader(response.read().decode('utf-8').splitlines())
             rows = [row for i, row in enumerate(reader) if i >= n]
     except urllib.error.URLError:
-#        print ("收件者資料讀取錯誤 : " + url )
         return ("收件者資料讀取錯誤 : " + url )
 
 # 設置發件人的初始賬戶信息
@@ -162,9 +152,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
 #getbody 
     # 檢查 發送內容
-    #url = wsftpflr + userFolder.strip('\n') + '_body.txt'
     url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
-    print ("信件內容 : " + url)
     try:
         file = urllib.request.urlopen(url)
         content = ''
@@ -184,7 +172,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
      # 檢查 主旨
     #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
     url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
-    print ("信件主旨 : " + url )
     try:
         file = urllib.request.urlopen(url)
         wsubject = ''
@@ -200,22 +187,19 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 # 開始發送郵件
     sendcnt = 0
     loopidx = 0 
-    print (str(len(smtp_list)))
+    print ("from y 資料比數 " + str(len(smtp_list)))
     for j, row in enumerate(rows):    #rows : mail.csv
          
         if smtp_idx >= len (smtp_list) :
-           print("smtp idx reach max reset")
            smtp_idx  = 0
         else :
             smtp_idx = smtp_idx + 1
-#        print("**" + str(smtp_idx) + " - " + str(len(smtp_list)) + "**" )
         smtp_username = smtp_list[smtp_idx][0]
-#        print("user name " + smtp_username)
         smtp_password = smtp_list[smtp_idx][1]
         
         to_addr = row[0]
 
-        print("from = " + smtp_username  + " to_addr = " + to_addr )
+        print("from  " + smtp_username  + " ===>  " + to_addr )
        
         #cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
         #print(cc_addrs)
@@ -267,11 +251,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #    print("Traceback Object:", exc_traceback)
             print(f"第 {loopidx + 1 } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
 
-
-            #if 'Authentication unsuccessful' in e.decode('utf-8') :
-            #    print(f"第 {loopidx } 封郵件發送失敗： Authentication unsuccessful\n  {e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
-            #if 'Authentication unsuccessful' in e.decode('utf-8') :
-            #wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             print ("push error msg " + push_to )
             message = TextSendMessage(text="第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n")
             line_bot_api.push_message(push_to, message)
@@ -318,7 +297,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         time.sleep(0.5)
 
     print(  " return from email \n" + wssenddetail + "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-    return("郵件發送完成  \n" + wssenddetail)
+    return("")
 
 
 def loadfile(lineid,msg,userFolder ):
@@ -449,19 +428,19 @@ def check_line_id(ftpurl ,lineid):
      
     url = ftpurl + "authids.txt"
 
-    print ("authids url " + url )
+#    print ("authids url " + url )
 # 讀取文件內容
     file = urllib.request.urlopen(url)
     line = file.readline()
     while line:
         wslineid = line.decode('utf-8').strip('\n')
         xx = wslineid.split("#", 2)
-        print("authids - " + xx[0] + "-" + xx[1] + "*")
+#        print("authids - " + xx[0] + "-" + xx[1] + "*")
         if   lineid == xx[0]:
-             print("check_line_id return " +xx[1] +"##")
+#             print("check_line_id return " +xx[1] +"##")
              return(xx[1])  
         line = file.readline()
-    print("check_line_id return space")    
+#    print("check_line_id return space")    
     return("")    
 
 
@@ -481,26 +460,7 @@ def check_line_id(ftpurl ,lineid):
         if   lineid in ids[j]:
              return(ids[j][34:])  
     return (" ")    
-def check_line_idx(lineid) :
-    url = "http://mdcgenius.tw/authids.txt"
-     
-    wschkfile = check_url_file(url)
-    if wschkfile != '' :
-        return ("授權記錄檔案 authids.txt not found ") 
-     # 讀取文件內容
-    file = urllib.request.urlopen(url)
-    wauthid = ''
-    wauthid  = file.read()
-    wauthid  = wauthid.decode('utf-8')     
-#    print ( wauthid)
-
-
-    if  lineid  in wauthid :
-#        print('授權成功')
-        return ('')
-    if  lineid  not in wauthid : 
-        print('授權錯誤')
-        return ('授權紀錄檔 not found ,請洽 群組館理員')
+ 
 
 def test_func(msg):
     wmsg =  "我跟你說一樣的 : " + msg 

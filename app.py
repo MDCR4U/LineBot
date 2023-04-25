@@ -114,8 +114,8 @@ line_access_token = js_dta["line_token"]
 line_channel_secret = js_dta["Channel Secret"]
 gpt_token           = js_dta["gptkey"]
 
-print ("line_access_token " + line_access_token )
-print ("line_channel_secret " + line_channel_secret)
+#print ("line_access_token " + line_access_token )
+#print ("line_channel_secret " + line_channel_secret)
 print("ftpurl " + ftpurl)
 #print("usr  "+ line_user_id)
 #userFolder = check_line_id(ftpurl ,line_user_id)
@@ -163,7 +163,7 @@ def handle_message(event):
         group_id =  event.source.group_id
     
     
-    print("echo message " + user_id + " " + user_type + " " + group_id)
+#    print("echo message " + user_id + " " + user_type + " " + group_id)
     
     #if user_type == "user":
 
@@ -173,18 +173,18 @@ def handle_message(event):
 
     userFolder = check_line_id(ftpurl ,line_user_id)
     msg = event.message.text
-    print("line user id = " + usr + "        USER Folder= " + userFolder + "*" + msg + "*")
+#    print("line user id = " + usr + "        USER Folder= " + userFolder + "*" + msg + "*")
 
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
     wkmsg = msg.split('#')
-    print(len(wkmsg) )
+#    print(len(wkmsg) )
     if  msg[0:1] == "@" and len(wkmsg) > 1 :   #if msg[1:5].upper()  == 'SETUP': 
         if wkmsg[1].upper() == 'SETUP': 
             ftpurl = wkmsg[2]
             data = {
                 "ftpurl": "https://" + ftpurl + "000webhostapp.com/"   #ftpurl
             }
-            print("https://" + ftpurl + "000webhostapp.com/")
+#            print("https://" + ftpurl + "000webhostapp.com/")
             # 确保当前目录下存在 "admin" 文件夹
             if not os.path.exists("admin"):
                 os.makedirs("admin")
@@ -199,7 +199,7 @@ def handle_message(event):
     if  msg[0:1] == "@" and len(wkmsg) > 1 :
         if wkmsg[1].upper()== "INFO" :
             wsinformation = get_informatiion(usr)
-            print("wsinformation " + wsinformation)
+#            print("wsinformation " + wsinformation)
             message = TextSendMessage(text="informtion :" + wsinformation)
             line_bot_api.reply_message(event.reply_token, message)  
             return 
@@ -207,7 +207,7 @@ def handle_message(event):
 
     if msg[1:8].upper()  == 'CONTINUE'  or msg[1:] == '繼續' :
         wscontinue =get_continue(line_user_id)
-        print("continue token" + wscontinue)
+#        print("continue token" + wscontinue)
         msg = wscontinue
         message = TextSendMessage(text="上一次查閱進度 :" + msg)
         line_bot_api.reply_message(event.reply_token, message)  
@@ -223,14 +223,14 @@ def handle_message(event):
 
     
     if msg[0:1] == "@" :
-        print("token url " + ftpurl + "  token : " + msg[1:])
+#        print("token url " + ftpurl + "  token : " + msg[1:])
         wmsg = get_run_command(ftpurl,msg[1:].strip('\n') )
         if wmsg == 'NF' :
             message = TextSendMessage(text="找不到您要執行的命令 :" + msg)
             line_bot_api.reply_message(event.reply_token, message)   
             return 
         else :
-            print ("convert msg " + wmsg)
+#            print ("convert msg " + wmsg)
             msg = wmsg
 
 
@@ -273,7 +273,7 @@ def handle_message(event):
         #增加 user folder
         sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
         print("send mail complete #############################################")
-        return ""
+    
         #message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         #line_bot_api.reply_message(event.reply_token, message)  
     elif msg.upper()[0:9] == '/DEMOMAIL'  :
