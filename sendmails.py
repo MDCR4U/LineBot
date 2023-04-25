@@ -36,8 +36,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     smtpidx = ""
     mailidx = ""
 
-    print ("sendmail by : " + lineid  + " " + user_id + "*" + group_id)
-    return("")
+    print ("sendmail by :  lineid  =  " + user_id + "*group id = " + group_id) 
+    
     wsftpflr = '' 
     #print("\n@@@@@ send mail folder @@@@@@@@@@@@@@@@@@@@  = " + userFolder +"@@@")
 
@@ -281,6 +281,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
            print ("push msg ")
            message = TextSendMessage(text="完成   :" +  str(loopidx) + " 信件發送" )
            line_bot_api.push_message(push_to, message)
+           sendcnt = 0
     #line_bot_api.reply_message(event.reply_token, message)   
 
         if loopidx  == targetno :
@@ -291,20 +292,20 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             return("") 
                
     # 記錄已發送的郵件
-        sent_list.append(f"{to_addr},{subject}")
-        #with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
-        with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
-            f.write(f"{loopidx} , {datetime.datetime.now()},  {to_addr},{subject}\n")
-            now = datetime.datetime.now()
-            wssenddetail = wssenddetail + str(loopidx)  + ",  "  + " " + smtp_username + "=> " + to_addr   + "\n"
+    #    sent_list.append(f"{to_addr},{subject}")
+    #    #with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
+    #    with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
+    #        f.write(f"{loopidx} , {datetime.datetime.now()},  {to_addr},{subject}\n")
+    #        now = datetime.datetime.now()
+    #        wssenddetail = wssenddetail + str(loopidx)  + ",  "  + " " + smtp_username + "=> " + to_addr   + "\n"
  
 
     # 更新郵件smtp記錄
-        #with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:
-        with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:            
-            f.write(str(smtp_idx))        
+    #    #with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:
+    #    with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:            
+    #        f.write(str(smtp_idx))        
     # 更新郵件發送記錄
-        counter += 1
+    #    counter += 1
         #with open(userFolder.strip('\n') +"_mail_counter.log", "w", encoding="utf-8") as f:
         #with open(userFolder.strip('\n') +"/mail_counter.log", "w", encoding="utf-8") as f:    
         #    f.write(str(counter))
