@@ -163,7 +163,7 @@ def handle_message(event):
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
     wkmsg = msg.split('#')
     
-    if 1 == 1 :   #if msg[1:5].upper()  == 'SETUP': 
+    if  msg[0:1] == "@" and len(wkmsg) > 1 :   #if msg[1:5].upper()  == 'SETUP': 
         if wkmsg[1].upper() == 'SETUP': 
             ftpurl = wkmsg[2]
             data = {
@@ -181,7 +181,7 @@ def handle_message(event):
                 line_bot_api.reply_message(event.reply_token, message)  
             return 
 
-    if 1 == 1:
+    if  msg[0:1] == "@" and len(wkmsg) > 1 :
         if wkmsg[1].upper()== "INFO" :
             wsinformation = get_informatiion(usr)
             print("wsinformation " + wsinformation)
