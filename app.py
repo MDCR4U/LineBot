@@ -164,8 +164,6 @@ def handle_message(event):
     wkmsg = msg.split('#')
     
     if 1 == 1 :   #if msg[1:5].upper()  == 'SETUP': 
-        print("Set Process" + msg)
-        print("*" + wkmsg[1].upper() +"*")
         if wkmsg[1].upper() == 'SETUP': 
             ftpurl = wkmsg[2]
             data = {
