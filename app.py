@@ -133,7 +133,7 @@ handler = WebhookHandler(line_channel_secret)
 @app.route("/rich4u", methods=['POST'])
 def callback():
 
-    print(" call back entry ")
+    print(" call back entry mdcbot7")
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     # get request body as text
@@ -144,7 +144,7 @@ def callback():
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
-    
+    print("CALL BACK return")
     return 'OK'  #ok(200)
 
 
