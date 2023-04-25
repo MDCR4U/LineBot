@@ -157,6 +157,8 @@ def handle_message(event):
     user_id = event.source.user_id
    
     user_type = event.source.type
+    print("user_type " + user_type)
+    print(event)
     if user_type != "user" :
         group_id = user_id = event.source.groupid
     
