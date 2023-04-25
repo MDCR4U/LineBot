@@ -115,31 +115,7 @@ def send_mail(lineid,wmsg,userFolder):
 
     print("發信者 人數" + str(len(smtp_list)))
 # 讀取郵件發送記錄
-    #url = wsftpflr + userFolder.strip('\n') +  '_mail_counter.log'
-    #try:
-    #    with urllib.request.urlopen(url) as response:
-    ##        content = response.read().decode('utf-8')
-    #        counter = int(content.strip())
-    #except urllib.error.URLError:
-    #    counter = 0
-
     counter = int(mailidx)
-   
-    #try:
-    #    with open("mail_counter.log", "r", encoding="utf-8") as f:
-    ##        counter = int(f.readline())
-    #except FileNotFoundError:
-    #    counter = 0
-# 讀取SMTP發送記錄
-    #url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
-    #url = wsftpflr + userFolder.strip('\n') +  '_smtp_send_counter.log'
-    #try:
-    #    with urllib.request.urlopen(url) as response:
-    #        smtp_idx = response.read().decode('utf-8')
-    #        smtp_idx = int(content.strip())
-    #except urllib.error.URLError:
-    #    smtp_idx = 0
-
     smtp_idx = int(smtpidx)    
    #try:
     #    with open("smtp_send_counter.log", "r", encoding="utf-8") as f:
@@ -151,7 +127,7 @@ def send_mail(lineid,wmsg,userFolder):
 # 讀取收件人列表
     #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
     url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
-    print ("收件人 : " + url)
+    #print ("收件人 : " + url)
     n = counter                                                 # 要跳過的行數
 
     try:
@@ -161,11 +137,7 @@ def send_mail(lineid,wmsg,userFolder):
     except urllib.error.URLError:
         print ("收件者資料讀取錯誤 : " + url )
         return ("收件者資料讀取錯誤 : " + url )
-    #    rows = []
-    #with open("mail.csv", "r", encoding="utf-8") as f:
-    #    reader = csv.reader(f)
-    #    next(reader)  # 跳過表頭
-    #    rows = [row for i, row in enumerate(reader) if i >= counter]
+
 # 設置發件人的初始賬戶信息
      
     smtp_username = smtp_list[smtp_idx][0]
@@ -308,9 +280,10 @@ def send_mail(lineid,wmsg,userFolder):
         if loopidx  == targetno :
             print(f"{targetno} emails complete ")  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
-            return("發送 " + str(targetno) + "  完成 \n" + wssenddetail)
-
-       
+            message = TextSendMessage(text="完成   :" +  loopidx + " 信件發送" )
+            line_bot_api.push_message(lineid, message)
+            return("") 
+               
     # 記錄已發送的郵件
         sent_list.append(f"{to_addr},{subject}")
         #with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
