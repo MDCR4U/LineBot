@@ -28,7 +28,7 @@ from flask import Flask
  #================= for send mail =================
  
 def send_mail(lineid,wmsg,userFolder, user_id,group_id):
-
+    print(" 開始發送信件")
     smtpfn =""
     mailfn = ""
     subjectfn =""
@@ -271,8 +271,11 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             #if 'Authentication unsuccessful' in e.decode('utf-8') :
             #    print(f"第 {loopidx } 封郵件發送失敗： Authentication unsuccessful\n  {e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
             #if 'Authentication unsuccessful' in e.decode('utf-8') :
-            wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
-            return(f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
+            #wssenddetail = "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
+            print ("push msg " + push_to )
+            message = TextSendMessage(text="第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n")
+            line_bot_api.push_message(push_to, message)
+            return("") #f"第 {+1} 封郵件發送失敗：{e}  {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
         #   return(f"第 {+1} 封郵件發送失敗：   {smtp_username} {smtp_password} {smtp_port} \n + {wssenddetail}")
          
         loopidx = loopidx + 1
