@@ -103,19 +103,12 @@ url = ftpurl + "admin/key.json"
 #取得 系統 KEY     
 url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
 
-print("Key URL " + url)
 response = urllib.request.urlopen(url)
 data = response.read().decode("utf-8")
 js_dta = json.loads(data)
 line_access_token = js_dta["line_token"]
 line_channel_secret = js_dta["Channel Secret"]
 gpt_token           = js_dta["gptkey"]
-
-#print ("line_access_token " + line_access_token )
-#print ("line_channel_secret " + line_channel_secret)
-print("ftpurl " + ftpurl)
-#print("usr  "+ line_user_id)
-#userFolder = check_line_id(ftpurl ,line_user_id)
 
 
 # Channel Access Token 
@@ -130,7 +123,7 @@ handler = WebhookHandler(line_channel_secret)
 @app.route("/rich4u", methods=['POST'])
 def callback():
 
-    print(" call back entry mdcbot8")
+    print(" 0000 - 開始 call back 處理")
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     # get request body as text
@@ -141,47 +134,42 @@ def callback():
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
-    print("CALL BACK return")
+    print("0000 - CALL BACK 處理結束 ")
     return 'OK'  #ok(200)
 
 
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    print("handle message entry")
+    print("  0010 - 開始 處理 handle message entry")
     user_id = ""
     group_id = ""
     usr =event.source.user_id
     user_id = event.source.user_id
     user_type = event.source.type
-    #print("user_type " + user_type)
-    #print(event)
     if user_type != "user" :
         group_id =  event.source.group_id
     
-    
-#    print("echo message " + user_id + " " + user_type + " " + group_id)
-    
-    #if user_type == "user":
-
-
     line_user_id = usr
     ftpurl = get_ftpurl()
 
     userFolder = check_line_id(ftpurl ,line_user_id)
     msg = event.message.text
-#    print("line user id = " + usr + "        USER Folder= " + userFolder + "*" + msg + "*")
 
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
     wkmsg = msg.split('#')
-#    print(len(wkmsg) )
+
+    if msg  == '@?' :
+        msg = '@#token# \n@setup#ftpurl\n/smail#nnn#\n/demomail#receiver#\nINFO'
+        message = TextSendMessage(text="指令表 \n" + msg)
+        line_bot_api.reply_message(event.reply_token, message)  
+        return 
     if  msg[0:1] == "@" and len(wkmsg) > 1 :   #if msg[1:5].upper()  == 'SETUP': 
         if wkmsg[1].upper() == 'SETUP': 
             ftpurl = wkmsg[2]
             data = {
                 "ftpurl": "https://" + ftpurl + "000webhostapp.com/"   #ftpurl
             }
-#            print("https://" + ftpurl + "000webhostapp.com/")
             # 确保当前目录下存在 "admin" 文件夹
             if not os.path.exists("admin"):
                 os.makedirs("admin")
@@ -195,8 +183,7 @@ def handle_message(event):
 
     if  msg[0:1] == "@" and len(wkmsg) > 1 :
         if wkmsg[1].upper()== "INFO" :
-            wsinformation = get_informatiion(usr)
-#            print("wsinformation " + wsinformation)
+            wsinformation = get_informatiion(usr,group_id,user_type)
             message = TextSendMessage(text="informtion :" + wsinformation)
             line_bot_api.reply_message(event.reply_token, message)  
             return 
@@ -280,15 +267,15 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, message)          
            
     
-    elif '/init' in msg:
-        wsts = initcounter(usr,msg,userFolder) 
-        message = TextSendMessage(text= wsts)
-        line_bot_api.reply_message(event.reply_token, message)   
-    elif '/load' in msg:
-          loadsts  = loadfile(usr,msg,userFolder) 
-          print(loadsts)
-          message = TextSendMessage(text= "檔案設置處理 : " + loadsts)
-          line_bot_api.reply_message(event.reply_token, message)            
+#    elif '/init' in msg:
+#        wsts = initcounter(usr,msg,userFolder) 
+#        message = TextSendMessage(text= wsts)
+#        line_bot_api.reply_message(event.reply_token, message)   
+#    elif '/load' in msg:
+#          loadsts  = loadfile(usr,msg,userFolder) 
+#          print(loadsts)
+#          message = TextSendMessage(text= "檔案設置處理 : " + loadsts)
+#          line_bot_api.reply_message(event.reply_token, message)            
    
     #elif '最新合作廠商' in msg:
     #elif msg.upper()[0:5] == '/MAIN'  : #'/image#cbd' in msg:   
@@ -429,7 +416,7 @@ def get_ftpurl():
         ftpurl = loaded_data["ftpurl"]
         return(ftpurl)
 
-def get_informatiion(wsusr) :
+def get_informatiion(wsusr,group_id,user_type) :
     wsftp = get_ftpurl()
     url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
     print (" key url " + url )
@@ -439,7 +426,7 @@ def get_informatiion(wsusr) :
     wsline_access_token = loaded_data["line_token"]
     wsline_channel_secret = loaded_data["Channel Secret"]
 
-    return ("USER : " + wsusr + "\n work ftp " + wsftp + "\n Line Access token " +  wsline_access_token + "\nChannel Secret" + wsline_channel_secret)
+    return ("type : " + user_type + "\nGroup :" + group_id + "\nUSER : " + wsusr + "\n work ftp " + wsftp + "\n Line Access token " +  wsline_access_token + "\nChannel Secret" + wsline_channel_secret)
     
     
 #def loadfile():
