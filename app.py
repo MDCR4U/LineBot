@@ -139,8 +139,8 @@ def handle_message(event):
 
 
     print("  0010 - 開始 處理 handle message entry")
-    user_id = ""
-    group_id = ""
+    user_id = "--"
+    group_id = "--"
     usr =event.source.user_id
     user_id = event.source.user_id
     user_type = event.source.type
@@ -417,6 +417,9 @@ def get_ftpurl():
     return(ftpurl)
 
 def get_informatiion(wsusr,group_id,user_type) :
+    print(wsusr )
+    print(group_id)
+    print(user_type)
     wsftp = get_ftpurl()
     #url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
     #print (" key url " + url )
@@ -426,9 +429,9 @@ def get_informatiion(wsusr,group_id,user_type) :
 
     wsline_access_token = os.environ.get('linebot_Token')
     #wsline_channel_secret = os.environ.get('line_Channel_Secret')
-    print("type : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
+    #print("type : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
 
-    return ("type : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
+    return ( wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
     
     
 def loadfile():
