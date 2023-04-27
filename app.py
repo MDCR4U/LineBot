@@ -277,23 +277,23 @@ def handle_message(event):
         user_id = event.source.user_id
         user_type = event.source.type
         print("echo message " + user_id)
-        if user_type == "user":
-            if user_id.startswith("U"):
-            # 手機版的 LINE
-                reply_text = "您是使用手機版的 LINE"
-            else:
-                # 電腦版的 LINE
-                reply_text = "您是使用電腦版的 LINE"
-        else:
-            # 群組或聊天室
-            reply_text = "您是在群組或聊天室中"
+        #if user_type == "user":
+        #    if user_id.startswith("U"):
+        #    # 手機版的 LINE
+        #        reply_text = "您是使用手機版的 LINE"
+        #    else:
+        #        # 電腦版的 LINE
+        #        reply_text = "您是使用電腦版的 LINE"
+        #else:
+        #    # 群組或聊天室
+        #    reply_text = "您是在群組或聊天室中"
 
-
+        print(line_access_token)
         channel_access_token = "gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU="
-
+        print(channel_access_token)
 # 建立 LineBotApi 物件
         line_bot_api = LineBotApi(channel_access_token)
-        message = TextSendMessage(text="Hello, LINE BOT!")
+        message = TextSendMessage(text=" 您說 " + msg  )
         line_bot_api.reply_message(event.reply_token,  message )
         return('')
         print(reply_text)    
