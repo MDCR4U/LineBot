@@ -289,8 +289,8 @@ def handle_message(event):
 
         #print(line_access_token)
         channel_access_token = "gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU="
-        print("channel_access_token *" + channel_access_token + "*")
-        print("   line_access_token *" + line_access_token + "*")
+      #  print("channel_access_token *" + channel_access_token + "*")
+       # print("   line_access_token *" + line_access_token + "*")
 # 建立 LineBotApi 物件
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text=" 您說 " + msg  )
@@ -417,11 +417,9 @@ def get_ftpurl():
     return(ftpurl)
 
 def get_informatiion(wsusr,group_id,user_type) :
-    print(wsusr )
-    print(group_id)
-    print(user_type)
+   
     wsftp = get_ftpurl()
-    print(wsftp)
+ 
 
     #url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
     #print (" key url " + url )
