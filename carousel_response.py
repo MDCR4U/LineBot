@@ -4,6 +4,7 @@ from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
 
 import json
+import os
 
 import urllib.request
 
@@ -19,10 +20,7 @@ import urllib.request
 def carousel_1(msg):
 
     #LINE bot的Carousel Template可以有最多10個columns
-    with open("config.json", "r", encoding="utf-8") as f:
-         loaded_data = json.load(f)
-
-    wsftpflr = loaded_data["ftpurl"]
+    wsftpflr = os.environ.get('linebot_ftpurl')
 
     wsmsg = msg.split('#')
     
@@ -80,10 +78,7 @@ def carousel_1(msg):
 def carousel_2(msg):
 
     #LINE bot的Carousel Template可以有最多10個columns
-    with open("config.json", "r", encoding="utf-8") as f:
-         loaded_data = json.load(f)
-
-    wsftpflr = loaded_data["ftpurl"]
+    wsftpflr = os.environ.get('linebot_ftpurl')
 
     wsmsg = msg.split('#')
     
@@ -168,10 +163,7 @@ def carousel_2(msg):
 def carousel_3(msg):
 
     #LINE bot的Carousel Template可以有最多10個columns
-    with open("config.json", "r", encoding="utf-8") as f:
-         loaded_data = json.load(f)
-
-    wsftpflr = loaded_data["ftpurl"]
+    wsftpflr = os.environ.get('linebot_ftpurl')
 
     wsmsg = msg.split('#')
     
@@ -280,11 +272,7 @@ def carousel_3(msg):
     return message
 def Carousel_5(msg):
     #LINE bot的Carousel Template可以有最多10個columns
-    with open("config.json", "r", encoding="utf-8") as f:
-         loaded_data = json.load(f)
-
-    wsftpflr = loaded_data["ftpurl"]
-
+    wsftpflr = os.environ.get('linebot_ftpurl')
     wsmsg = msg.split('#')
     
     wjson_file = wsmsg[1] + ".json"

@@ -2,6 +2,7 @@ import csv
 import time
 import smtplib
 import json
+import os
 
 import urllib.request
 from email.mime.text import MIMEText
@@ -12,16 +13,9 @@ from email.mime.application import MIMEApplication
 
 def demomail(msg):
 # /demomail#jj0922792265@outlook.com#
-    #        file = open('config.txt','r',encoding="utf-8")
-    #        line = file.readline().strip('\n')    #line1 githubid
-    #        line = file.readline().strip('\n')   #line1 githubproject
-    #        line = file.readline().strip('\n')   #line1 githubproject
-    #        #line=line.strip('\n')
-    #        wsftpflr= line[12:].strip()
-    with open("config.json", "r", encoding="utf-8") as f:
-        loaded_data = json.load(f)
-    wsftpflr = loaded_data["ftpurl"]
+ 
     wjson_file = "demosmtp.json"
+    wsftpflr = os.environ.get('linebot_ftpurl')
 # 讀取 JSON 檔案  local
 #   # with open("cbd.json" , "r") as f:
     #with open(wjson_file , "r") as f:

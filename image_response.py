@@ -4,6 +4,7 @@ from linebot.exceptions import (InvalidSignatureError)
 from linebot.models import *
 
 import json
+import os
 
 import urllib.request
 
@@ -15,10 +16,7 @@ import urllib.request
 
 #ImagemapSendMessage(組圖訊息)
 def imagemap_5 (msg):
-    with open("config.json", "r", encoding="utf-8") as f:
-         loaded_data = json.load(f)
-
-    wsftpflr = loaded_data["ftpurl"]
+    wsftpflr = os.environ.get('linebot_ftpurl')
 
     wsmsg = msg.split('#')
     

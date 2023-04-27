@@ -121,7 +121,7 @@ print("token " + line_access_token)
 #
 # Channel Secret
 
-line_access_token = os.environ.get('linebot_Token')
+line_access_token = os.environ.get('line_Token')
 line_channel_secret = os.environ.get('line_Channel_Secret')
 line_bot_api = LineBotApi(line_access_token)
 handler = WebhookHandler(line_channel_secret)
