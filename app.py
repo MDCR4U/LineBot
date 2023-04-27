@@ -102,27 +102,17 @@ ftpurl = os.environ.get('linebot_ftpurl')
 if not os.path.exists("admin"):
     os.makedirs("admin")
     
-#copy ftp to current root    
-#url = ftpurl + "admin/key.json" 
-
-#取得 系統 KEY     
-#url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
-#print("initial key " + url )
-#response = urllib.request.urlopen(url)
-#data = response.read().decode("utf-8")
-#js_dta = json.loads(data)
-#line_access_token = js_dta["line_token"]
-##line_channel_secret = js_dta["Channel Secret"]
-#gpt_token           = js_dta["gptkey"]
-
-print("secret " + line_channel_secret)
-print("token " + line_access_token)
 # Channel Access Token 
 #
 # Channel Secret
 
 line_access_token = os.environ.get('line_Token')
 line_channel_secret = os.environ.get('line_Channel_Secret')
+
+print("secret " + line_channel_secret)
+print("token " + line_access_token)
+
+
 line_bot_api = LineBotApi(line_access_token)
 handler = WebhookHandler(line_channel_secret)
 
@@ -171,26 +161,11 @@ def handle_message(event):
     wkmsg = msg.split('#')
 
     if msg  == '@?' :
-        msg = '@#token# \n@setup#ftpurl\n/smail#nnn#\n/demomail#receiver#\n@#INFO'
+        msg = '@#token# \n/smail#nnn#\n/demomail#receiver#\n@#INFO'
         message = TextSendMessage(text="指令表 \n" + msg)
         line_bot_api.reply_message(event.reply_token, message)  
         return 
-    if  msg[0:1] == "@" and len(wkmsg) > 1 :   #if msg[1:5].upper()  == 'SETUP': 
-        if wkmsg[1].upper() == 'SETUP': 
-            ftpurl = wkmsg[2]
-            data = {
-                "ftpurl": "https://" + ftpurl + "000webhostapp.com/"   #ftpurl
-            }
-            # 确保当前目录下存在 "admin" 文件夹
-            if not os.path.exists("admin"):
-                os.makedirs("admin")
-
-            # 将字典写入 JSON 文件
-            with open("config.json", "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=4)
-                message = TextSendMessage(text="system set up complete" )
-                line_bot_api.reply_message(event.reply_token, message)  
-            return 
+     
 
     if  msg[0:1] == "@" and len(wkmsg) > 1 :
         if wkmsg[1].upper()== "INFO" :
