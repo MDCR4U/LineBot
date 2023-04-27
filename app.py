@@ -161,7 +161,7 @@ def handle_message(event):
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
     wkmsg = msg.split('#')
 
-    if msg  == '@?' :
+
     if  msg[0:5].upper() == "@HELP"  :    
         msg = '@#token# \n/smail#nnn#\n/demomail#receiver#\n@INFO'
         message = TextSendMessage(text="指令表 \n" + msg)
