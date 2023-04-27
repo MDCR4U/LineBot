@@ -78,8 +78,8 @@ line_access_token = ''
 line_channel_secret = ''
 ftpurl = ''
 gpt_token = ''
-line_bot_api = LineBotApi('gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU=')
-handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
+#line_bot_api = LineBotApi('gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU=')
+#handler = WebhookHandler('82ab0090dc70c5f7d3a6c62fb1e09eb8')
 line_user_id = ''
 github_id ="MDCR4U"
 github_prj="LineBot"
@@ -92,6 +92,16 @@ with open("config.json", "r", encoding="utf-8") as f:
     loaded_data = json.load(f)
 
 ftpurl = loaded_data["ftpurl"]
+print(ftpurl) 
+
+# 读取环境变量的值
+env_variable = os.environ.get('linebot_ftpurl')
+# 检查环境变量是否存在
+if env_variable:
+    # 打印环境变量的值
+    print(f"环境变量的值为：{env_variable}")
+else:
+    print("环境变量未设置或不存在")
 
 # download key file
 # 确保当前目录下存在 "admin" 文件夹
@@ -102,7 +112,7 @@ url = ftpurl + "admin/key.json"
 
 #取得 系統 KEY     
 url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
-
+print("initial key " + url )
 response = urllib.request.urlopen(url)
 data = response.read().decode("utf-8")
 js_dta = json.loads(data)
@@ -110,7 +120,9 @@ line_access_token = js_dta["line_token"]
 line_channel_secret = js_dta["Channel Secret"]
 gpt_token           = js_dta["gptkey"]
 
+print("secret " + line_channel_secret)
 
+print("token " + line_access_token)
 # Channel Access Token 
 line_bot_api = LineBotApi(line_access_token)
 # Channel Secret
@@ -129,12 +141,13 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-    # handle webhook body
+  
     try:
+        print(" handle webhook body")
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
-    print("0000 - CALL BACK 處理結束 ")
+   #print("0000 - CALL BACK 處理結束 ")
     return 'OK'  #ok(200)
 
 
@@ -160,7 +173,7 @@ def handle_message(event):
     wkmsg = msg.split('#')
 
     if msg  == '@?' :
-        msg = '@#token# \n@setup#ftpurl\n/smail#nnn#\n/demomail#receiver#\nINFO'
+        msg = '@#token# \n@setup#ftpurl\n/smail#nnn#\n/demomail#receiver#\n@#INFO'
         message = TextSendMessage(text="指令表 \n" + msg)
         line_bot_api.reply_message(event.reply_token, message)  
         return 
@@ -429,15 +442,16 @@ def get_informatiion(wsusr,group_id,user_type) :
     return ("type : " + user_type + "\nGroup :" + group_id + "\nUSER : " + wsusr + "\n work ftp " + wsftp + "\n Line Access token " +  wsline_access_token + "\nChannel Secret" + wsline_channel_secret)
     
     
-#def loadfile():
+def loadfile():
    #可以使用 Python 的 urllib 模組中的 urlretrieve() 函式來下載檔案。以下是一個示範程式碼：
    #ythonCopy code
 
 
-#   url = 'https://www.example.com/example_file.txt'
-#   file_name = 'example_file.txt'
+   url = 'https://www.example.com/example_file.txt'
+   file_name = 'example_file.txt'
 
-#   urllib.request.urlretrieve(url, file_name)
+   urllib.request.urlretrieve(url, file_name)
+   
    #url 是要下載的檔案的 URL，
    # file_name 則是下載後要儲存的檔案名稱和路徑
    # （如果只指定檔案名稱，則預設儲存到目前的資料夾中）。 urlretrieve() 函式會從指定的 URL 下載檔案，並將其儲存在 file_name 指定的位置。   
