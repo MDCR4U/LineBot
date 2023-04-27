@@ -49,7 +49,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import *
-
+from linebot.models import   TextSendMessage
 
 #======這裡是呼叫的檔案內容=====
 from message import *
@@ -290,7 +290,7 @@ def handle_message(event):
 
         print(reply_text)    
         message = TextSendMessage(text= reply_text) # + "\您是說 : " + msg + "嗎? " )
-        print("message \n" + message)
+        print("message \n" + message.text)
         line_bot_api.reply_message(event.reply_token,  message )
 
     
