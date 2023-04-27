@@ -41,7 +41,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wsftpflr = '' 
     wsftpflr =  os.environ.get('linebot_ftpurl')
 
-    line_access_token = os.environ.get('linebot_Token')
+    line_access_token = os.environ.get('line_Token')
+    print(line_access_token)
+    
     line_bot_api = LineBotApi(line_access_token)
 
     push_to = ""
