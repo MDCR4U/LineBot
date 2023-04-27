@@ -294,10 +294,10 @@ def handle_message(event):
         #    reply_text = "您是在群組或聊天室中"
 
         #print(line_access_token)
-        #channel_access_token = "gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU="
+        channel_access_token = "gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU="
         #print(channel_access_token)
 # 建立 LineBotApi 物件
-        line_bot_api = LineBotApi(line_access_token)
+        line_bot_api = LineBotApi(channel_access_token) #line_access_token)
         message = TextSendMessage(text=" 您說 " + msg  )
         line_bot_api.reply_message(event.reply_token,  message )
         return('')
