@@ -288,6 +288,14 @@ def handle_message(event):
             # 群組或聊天室
             reply_text = "您是在群組或聊天室中"
 
+
+        channel_access_token = "gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU="
+
+# 建立 LineBotApi 物件
+        line_bot_api = LineBotApi(channel_access_token)
+        message = TextSendMessage(text="Hello, LINE BOT!")
+        line_bot_api.reply_message(event.reply_token,  message )
+        return('')
         print(reply_text)    
         message = TextSendMessage(text= reply_text) # + "\您是說 : " + msg + "嗎? " )
         print("message \n" + message.text)
