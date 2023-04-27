@@ -43,7 +43,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
     line_access_token = os.environ.get('line_Token')
     print(line_access_token)
-    
+
     line_bot_api = LineBotApi(line_access_token)
 
     push_to = ""
@@ -193,7 +193,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         
         to_addr = row[0]
 
-        print("from  " + smtp_username  + " ===>  " + to_addr )
+        print(str(loopidx) + "  from  " + smtp_username  + " ===>  " + to_addr )
        
         #cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
         #print(cc_addrs)
