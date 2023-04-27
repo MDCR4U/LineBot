@@ -1,3 +1,0 @@
-githubid  = MDCR4U
-githubprj = LineBot
-ftpurl    = https://mdcgenius.000webhostapp.com/
