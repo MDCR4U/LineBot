@@ -39,18 +39,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 #    print ("sendmail by :  lineid  =  " + user_id + "*group id = " + group_id) 
     
     wsftpflr = '' 
-    with open("config.json", "r", encoding="utf-8") as f:
-        loaded_data = json.load(f)
-        url  = loaded_data["ftpurl"]
-    
-    wsftpflr = url 
+    wsftpflr =  os.environ.get('linebot_ftpurl')
 
-    url = url + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
-
-    response = urllib.request.urlopen(url)
-    data = response.read().decode("utf-8")
-    js_dta = json.loads(data)
-    line_access_token = js_dta["line_token"]
+    line_access_token = os.environ.get('linebot_Token')
     line_bot_api = LineBotApi(line_access_token)
 
     push_to = ""
@@ -209,7 +200,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     # 準備發送郵件
         message = MIMEMultipart()
         #message["From"] = smtp_list
-        message["From"] =    smtp_sender + "<" + smtp_username +">"  
+        message["From"] =    smtp_sender + " <" + smtp_username +">"  
         message["To"] = to_addr  
     
     #if cc_addrs:
@@ -311,7 +302,7 @@ def loadfile(lineid,msg,userFolder ):
     line = file.readline().strip('\n')   #line1 githubproject
     #line=line.strip('\n')
     wsftpflr= line[12:].strip()
-    #ftpurl = 'https://mdcgenius.000webhostapp.com/key.txt'
+    
  
     file.close()
     wsflr = ''

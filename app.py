@@ -88,44 +88,42 @@ sendmail_auth = 'N'
 
 ispostback = 'N'
 
-with open("config.json", "r", encoding="utf-8") as f:
-    loaded_data = json.load(f)
-
-ftpurl = loaded_data["ftpurl"]
-print(ftpurl) 
+#with open("config.json", "r", encoding="utf-8") as f:
+#    loaded_data = json.load(f)
+#
+#ftpurl = loaded_data["ftpurl"]
+#print(ftpurl) 
 
 # 读取环境变量的值
-env_variable = os.environ.get('linebot_ftpurl')
-# 检查环境变量是否存在
-if env_variable:
-    # 打印环境变量的值
-    print(f"环境变量的值为：{env_variable}")
-else:
-    print("环境变量未设置或不存在")
+ftpurl = os.environ.get('linebot_ftpurl')
 
-# download key file
+
 # 确保当前目录下存在 "admin" 文件夹
 if not os.path.exists("admin"):
     os.makedirs("admin")
+    
 #copy ftp to current root    
-url = ftpurl + "admin/key.json" 
+#url = ftpurl + "admin/key.json" 
 
 #取得 系統 KEY     
-url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
-print("initial key " + url )
-response = urllib.request.urlopen(url)
-data = response.read().decode("utf-8")
-js_dta = json.loads(data)
-line_access_token = js_dta["line_token"]
-line_channel_secret = js_dta["Channel Secret"]
-gpt_token           = js_dta["gptkey"]
+#url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
+#print("initial key " + url )
+#response = urllib.request.urlopen(url)
+#data = response.read().decode("utf-8")
+#js_dta = json.loads(data)
+#line_access_token = js_dta["line_token"]
+##line_channel_secret = js_dta["Channel Secret"]
+#gpt_token           = js_dta["gptkey"]
 
 print("secret " + line_channel_secret)
-
 print("token " + line_access_token)
 # Channel Access Token 
-line_bot_api = LineBotApi(line_access_token)
+#
 # Channel Secret
+
+line_access_token = os.environ.get('linebot_Token')
+line_channel_secret = os.environ.get('line_Channel_Secret')
+line_bot_api = LineBotApi(line_access_token)
 handler = WebhookHandler(line_channel_secret)
 
 
@@ -424,20 +422,24 @@ def token(msg):
     return message    
 
 def get_ftpurl():
-    with open("config.json", "r", encoding="utf-8") as f:
-        loaded_data = json.load(f)
-        ftpurl = loaded_data["ftpurl"]
-        return(ftpurl)
+    #with open("config.json", "r", encoding="utf-8") as f:
+    #    loaded_data = json.load(f)
+    #    ftpurl = loaded_data["ftpurl"]
+    #    return(ftpurl)
+    ftpurl = os.environ.get('linebot_ftpurl')
+    return(ftpurl)
 
 def get_informatiion(wsusr,group_id,user_type) :
     wsftp = get_ftpurl()
-    url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
-    print (" key url " + url )
-    response = urllib.request.urlopen(url)
-    data = response.read().decode("utf-8")
-    loaded_data = json.loads(data)
-    wsline_access_token = loaded_data["line_token"]
-    wsline_channel_secret = loaded_data["Channel Secret"]
+    #url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
+    #print (" key url " + url )
+    ##response = urllib.request.urlopen(url)
+    #data = response.read().decode("utf-8")
+    #loaded_data = json.loads(data)
+
+    wsline_access_token = os.environ.get('linebot_Token')
+    wsline_channel_secret = os.environ.get('line_Channel_Secret')
+    
 
     return ("type : " + user_type + "\nGroup :" + group_id + "\nUSER : " + wsusr + "\n work ftp " + wsftp + "\n Line Access token " +  wsline_access_token + "\nChannel Secret" + wsline_channel_secret)
     
