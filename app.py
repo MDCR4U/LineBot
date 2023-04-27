@@ -425,8 +425,8 @@ def get_informatiion(wsusr,group_id,user_type) :
     #loaded_data = json.loads(data)
 
     wsline_access_token = os.environ.get('linebot_Token')
-    wsline_channel_secret = os.environ.get('line_Channel_Secret')
-    
+    #wsline_channel_secret = os.environ.get('line_Channel_Secret')
+    print("type : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
 
     return ("type : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
     
