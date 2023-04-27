@@ -428,7 +428,7 @@ def get_informatiion(wsusr,group_id,user_type) :
     wsline_channel_secret = os.environ.get('line_Channel_Secret')
     
 
-    return ("\ntype : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token + "\n\nChannel Secret" + wsline_channel_secret)
+    return ("type : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
     
     
 def loadfile():
