@@ -142,6 +142,10 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    line_access_token = os.environ.get('line_Token')
+    #line_channel_secret = os.environ.get('line_Channel_Secret')
+    line_bot_api = LineBotApi(line_access_token)
+
     print("  0010 - 開始 處理 handle message entry")
     user_id = ""
     group_id = ""
