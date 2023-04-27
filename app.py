@@ -422,7 +422,7 @@ def get_informatiion(wsusr,group_id,user_type) :
     print(user_type)
     wsftp = get_ftpurl()
     print(wsftp)
-    print(wsline_access_token)
+
     #url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
     #print (" key url " + url )
     ##response = urllib.request.urlopen(url)
@@ -430,6 +430,7 @@ def get_informatiion(wsusr,group_id,user_type) :
     #loaded_data = json.loads(data)
 
     wsline_access_token = os.environ.get('line_Token')
+    print(wsline_access_token)
     #wsline_channel_secret = os.environ.get('line_Channel_Secret')
     return ("type : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
 
