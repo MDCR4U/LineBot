@@ -162,14 +162,15 @@ def handle_message(event):
     wkmsg = msg.split('#')
 
     if msg  == '@?' :
-        msg = '@#token# \n/smail#nnn#\n/demomail#receiver#\n@#INFO'
+    if  msg[0:5].upper() == "@HELP"  :    
+        msg = '@#token# \n/smail#nnn#\n/demomail#receiver#\n@INFO'
         message = TextSendMessage(text="指令表 \n" + msg)
         line_bot_api.reply_message(event.reply_token, message)  
         return 
      
 
-    if  msg[0:1] == "@" and len(wkmsg) > 1 :
-        if wkmsg[1].upper()== "INFO" :
+    if  msg[0:5].upper() == "@INFO"  :
+        
             wsinformation = get_informatiion(usr,group_id,user_type)
             message = TextSendMessage(text="informtion :" + wsinformation)
             line_bot_api.reply_message(event.reply_token, message)  
@@ -288,14 +289,16 @@ def handle_message(event):
         #    # 群組或聊天室
         #    reply_text = "您是在群組或聊天室中"
 
-        print(line_access_token)
-        channel_access_token = "gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU="
-        print(channel_access_token)
+        #print(line_access_token)
+        #channel_access_token = "gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU="
+        #print(channel_access_token)
 # 建立 LineBotApi 物件
-        line_bot_api = LineBotApi(channel_access_token)
+        line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text=" 您說 " + msg  )
         line_bot_api.reply_message(event.reply_token,  message )
         return('')
+    
+
         print(reply_text)    
         message = TextSendMessage(text= reply_text) # + "\您是說 : " + msg + "嗎? " )
         print("message \n" + message.text)
@@ -426,7 +429,7 @@ def get_informatiion(wsusr,group_id,user_type) :
     wsline_channel_secret = os.environ.get('line_Channel_Secret')
     
 
-    return ("type : " + user_type + "\nGroup :" + group_id + "\nUSER : " + wsusr + "\n work ftp " + wsftp + "\n Line Access token " +  wsline_access_token + "\nChannel Secret" + wsline_channel_secret)
+    return ("\ntype : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token + "\n\nChannel Secret" + wsline_channel_secret)
     
     
 def loadfile():
