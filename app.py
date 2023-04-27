@@ -155,6 +155,7 @@ def handle_message(event):
     ftpurl = get_ftpurl()
 
     userFolder = check_line_id(ftpurl ,line_user_id)
+    print("userFolder " + userFolder)
     msg = event.message.text
 
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
@@ -287,8 +288,9 @@ def handle_message(event):
             # 群組或聊天室
             reply_text = "您是在群組或聊天室中"
 
-             
-        message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎? " + userFolder)
+        print(reply_text)    
+        message = TextSendMessage(text= reply_text + "\您是說 : " + msg + "嗎? " )
+        print("message \n" + message)
         line_bot_api.reply_message(event.reply_token,  message )
 
     
