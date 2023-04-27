@@ -295,7 +295,8 @@ def handle_message(event):
 
         #print(line_access_token)
         channel_access_token = "gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU="
-        #print(channel_access_token)
+        print("channel_access_token *" + channel_access_token + "*")
+        print("   line_access_token *" + line_access_token + "*")
 # 建立 LineBotApi 物件
         line_bot_api = LineBotApi(channel_access_token) #line_access_token)
         message = TextSendMessage(text=" 您說 " + msg  )
