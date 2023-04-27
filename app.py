@@ -421,17 +421,19 @@ def get_informatiion(wsusr,group_id,user_type) :
     print(group_id)
     print(user_type)
     wsftp = get_ftpurl()
+    print(wsftp)
+    print(wsline_access_token)
     #url = ftpurl + "admin/key.json" #+ wjson_file #http://www.abc.com/cust.json"
     #print (" key url " + url )
     ##response = urllib.request.urlopen(url)
     #data = response.read().decode("utf-8")
     #loaded_data = json.loads(data)
 
-    wsline_access_token = os.environ.get('linebot_Token')
+    wsline_access_token = os.environ.get('line_Token')
     #wsline_channel_secret = os.environ.get('line_Channel_Secret')
-    #print("type : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
+    return ("type : " + user_type + "\n\nGroup :" + group_id + "\n\nUSER : " + wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
 
-    return ( wsusr + "\n\n work ftp " + wsftp + "\n\n Line Access token " +  wsline_access_token )
+    
     
     
 def loadfile():
