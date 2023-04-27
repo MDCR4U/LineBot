@@ -142,9 +142,7 @@ def callback():
 # 處理訊息
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_access_token = os.environ.get('line_Token')
-    #line_channel_secret = os.environ.get('line_Channel_Secret')
-    line_bot_api = LineBotApi(line_access_token)
+
 
     print("  0010 - 開始 處理 handle message entry")
     user_id = ""
@@ -165,7 +163,9 @@ def handle_message(event):
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
     wkmsg = msg.split('#')
 
-
+    line_access_token = os.environ.get('line_Token')
+    #line_channel_secret = os.environ.get('line_Channel_Secret')
+    line_bot_api = LineBotApi(line_access_token)
     if  msg[0:5].upper() == "@HELP"  :    
         msg = '@#token# \n/smail#nnn#\n/demomail#receiver#\n@INFO'
         message = TextSendMessage(text="指令表 \n" + msg)
