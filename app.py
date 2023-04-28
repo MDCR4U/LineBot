@@ -148,6 +148,7 @@ def handle_message(event):
         group_id =  event.source.group_id
     
     line_user_id = usr
+
     ftpurl = get_ftpurl()
 
     userFolder = check_line_id(ftpurl ,line_user_id)
@@ -413,7 +414,9 @@ def get_ftpurl():
     #    loaded_data = json.load(f)
     #    ftpurl = loaded_data["ftpurl"]
     #    return(ftpurl)
+    print("get ftpurl")
     ftpurl = os.environ.get('linebot_ftpurl')
+    print(ftpurl)
     return(ftpurl)
 
 def get_informatiion(wsusr,group_id,user_type) :
