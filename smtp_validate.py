@@ -83,7 +83,7 @@ def smtp_check(  user_id,group_id):
  
 
 # 設置發件人的初始賬戶信息
-     
+    smtp_idx = 0
     smtp_username = smtp_list[smtp_idx][0]
     smtp_password = smtp_list[smtp_idx][1]
     smtp_sender = smtp_list[smtp_idx][2]
