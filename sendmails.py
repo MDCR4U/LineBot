@@ -224,6 +224,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #    message.attach(part)
     
     # 發送郵件
+        print("         準備發送")
         try:
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
@@ -233,7 +234,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             time.sleep(1)
 
             wk_addr = to_addr 
+            print("              發送")
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
+            print("              發送完成")
              
             server.quit()
             wssendcounter = wssendcounter + 1
