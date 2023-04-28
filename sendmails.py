@@ -237,17 +237,18 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
             server.quit()
             wssendcounter = wssendcounter + 1
-        except Exception as e:
-        #except :
-        #    exc_type, exc_value, exc_traceback = sys.exc_info()
-        #    print("Exception Type:===>", exc_type)
-        #    print("Exception Value:", exc_value)
-        #    print("Traceback Object:", exc_traceback)
+        #except Exception as e:
+        except :
+            exc_type, exc_value, exc_traceback = sys.exc_info()
+            print("Exception Type:===>", exc_type)
+            print("Exception Value:", exc_value)
+            print("Traceback Object:", exc_traceback)
             print(f"第 {loopidx + 1 } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
-
-            line_bot_api = LineBotApi(line_access_token)
-            message = TextSendMessage(text="第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n")
-            line_bot_api.push_message(push_to, message)
+            wserrmsg = "第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
+            tracemsg(line_access_token,wserrmsg,push_to)
+            #line_bot_api = LineBotApi(line_access_token)
+            #message = TextSendMessage(text=wserrmsg)
+            #line_bot_api.push_message(push_to, message)
             return("")  
          
         loopidx = loopidx + 1
