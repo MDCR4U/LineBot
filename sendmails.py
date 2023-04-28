@@ -49,7 +49,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     message = TextSendMessage(text="信件發送失敗 " )
     line_bot_api.push_message(user_id, message)
     push_to = ""
-    if group_id != "":
+    if group_id != "---":
         push_to = group_id 
     else :
         push_to = user_id    
