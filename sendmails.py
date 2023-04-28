@@ -221,14 +221,16 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #    message.attach(part)
     
     # 發送郵件
-        tracemsg(line_access_token,"start send " ,user_id)      
+        tracemsg(line_access_token,"start send " + smtp_server ,user_id)      
         try:
-            print("try")
+            #print("try")
+            tracemsg(line_access_token,"connect server " + smtp_server ,user_id)  
             server = smtplib.SMTP(smtp_server, smtp_port)
+            tracemsg(line_access_token,"starttls  " + smtp_server ,user_id)  
             server.starttls()
 #            time.sleep(1)
             wk_addr="$$$$$"
-            tracemsg(line_access_token,"login  " ,user_id)     
+            tracemsg(line_access_token,"login  " + smtp_server ,user_id)     
             server.login(smtp_username,       smtp_password)
             time.sleep(1)
 
@@ -246,8 +248,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             print("第 " + str(loopidx + 1) + " 封郵件發送失敗 ：" +  smtp_username )
             wserrmsg = "第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             tracemsg(line_access_token,wserrmsg,push_to)
-
-            print("continue   next")
+            return("")
+            
             #line_bot_api = LineBotApi(line_access_token)
             #message = TextSendMessage(text=wserrmsg)
             #line_bot_api.push_message(push_to, message)
