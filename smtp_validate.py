@@ -27,7 +27,7 @@ from flask import Flask
 #@app.route('/')
  #================= for send mail =================
  
-def smtp_validate(lineid,wmsg,userFolder, user_id,group_id):
+def smtp_validate(lineid, user_id,group_id):
    
     smtpfn =""
     mailfn = ""

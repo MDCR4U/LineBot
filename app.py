@@ -252,13 +252,13 @@ def handle_message(event):
         line_bot_api.push_message(user_id, message)
     elif '/SMTP' in msg.upper():     #isupper(), islower(), lower(), upper()
         print (" CALL CHECK SMTP ")
-        if userFolder == '' :
-            message = TextSendMessage(text= "找不到 發送信件的授權資料，請記住您的代碼 " + usr +"\n與 系統管理員聯絡申請授權 " )
-            line_bot_api.reply_message(event.reply_token, message)              
-        from datetime import datetime
-        now = datetime.now() # current date and time
+        #if userFolder == '' :
+        #    message = TextSendMessage(text= "找不到 發送信件的授權資料，請記住您的代碼 " + usr +"\n與 系統管理員聯絡申請授權 " )
+        #    line_bot_api.reply_message(event.reply_token, message)              
+        #from datetime import datetime
+        #now = datetime.now() # current date and time
         #增加 user folder
-        sts  = smtp_validate(usr,msg,userFolder,user_id, group_id)
+        sts  = smtp_validate(usr,user_id, group_id)
         print("Check smtp  complete #############################################")
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="validate_smtp RETURN  "  + sts )
