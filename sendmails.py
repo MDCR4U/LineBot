@@ -44,10 +44,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     line_access_token = os.environ.get('line_Token')
     print(line_access_token)
 
-    line_bot_api = LineBotApi(line_access_token)
-    ine_bot_api = LineBotApi(line_access_token)
-    message = TextSendMessage(text="信件發送失敗 " )
-    line_bot_api.push_message(user_id, message)
+
+    tracemsg(line_access_token,"開始發送信件 ",user_id)
     push_to = ""
     if group_id != "":
         push_to = group_id 
@@ -197,6 +195,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
         print(str(loopidx) + "  from  " + smtp_sender + "-" + smtp_username  + " ===>  " + to_addr)
        
+        tmpmsg = str(loopidx) + "  from  " + smtp_sender + "-" + smtp_username  + " ===>  " + to_addr
+        tracemsg(line_access_token,tmpmsg,user_id)      
         #cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
         #print(cc_addrs)
         #subject = smtp_username +"臉書優質紛絲團，邀請您 按讚支持"
@@ -221,16 +221,19 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #    message.attach(part)
     
     # 發送郵件
+        tracemsg(line_access_token,"start send " ,user_id)      
         try:
             print("try")
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
 #            time.sleep(1)
             wk_addr="$$$$$"
+            tracemsg(line_access_token,"login  " ,user_id)     
             server.login(smtp_username,       smtp_password)
             time.sleep(1)
 
             wk_addr = to_addr 
+            tracemsg(line_access_token,"server.sendmail " ,user_id)     
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
             server.quit()
             wssendcounter = wssendcounter + 1
@@ -415,6 +418,12 @@ def initcounter(lineid,msg,userFolder ):
             f.write(str(0))
     
     return("counter initialize complete " + wslog)
+
+
+def tracemsg(line_access_token,msg,to ):
+    line_bot_api = LineBotApi(line_access_token)
+    message = TextSendMessage(text=msg )
+    line_bot_api.push_message(to , message)
 
 def check_line_id(ftpurl ,lineid):
      
