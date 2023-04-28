@@ -27,8 +27,8 @@ from flask import Flask
 #@app.route('/')
  #================= for send mail =================
  
-def send_mail(lineid,wmsg,userFolder, user_id,group_id):
-    print(" aaaa 開始發送信件")
+def smtp_validate(lineid,wmsg,userFolder, user_id,group_id):
+   
     smtpfn =""
     mailfn = ""
     subjectfn =""
@@ -39,6 +39,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wsftpflr = '' 
     wsftpflr =  os.environ.get('linebot_ftpurl')
     line_access_token = os.environ.get('line_Token')
+ 
+    line_bot_api = LineBotApi(line_access_token)
 
 
 #    tracemsg(line_access_token,"開始發送信件 ",user_id)
@@ -50,14 +52,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
     
  # 發送比數
-    wsmsg =  wmsg.split('#')   # msg = '/smail#90#'
-    wstarget = wsmsg[1]
-    if (wstarget.isdigit()):
-        targetno = int(wstarget)
-    else : 
-        targetno = 0
-        return("發送信件格式 錯誤\n正確格式==>/SMAIL:nnnn\n 結束作業 :*" + wstarget +"*")   
-     
     
     wssts = check_line_id(wsftpflr,lineid)
     if   wssts == ''  :
@@ -97,21 +91,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     except :
         return ("寄件者資料 讀取錯誤 \n " + url)
 
-#    print("發信者 人數" + str(len(smtp_list)))
-# 讀取郵件發送記錄
-    counter = int(mailidx)
-    smtp_idx = int(smtpidx)    
-   #try:
-    #    with open("smtp_send_counter.log", "r", encoding="utf-8") as f:
-    #        smtp_idx  = int(f.readline())
-    #except FileNotFoundError:
-    #    smtp_idx  = 0        
-
-
-# 讀取收件人列表
-    #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
-    url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
-    n = counter                                                 # 要跳過的行數
 
     try:
         with urllib.request.urlopen(url) as response:
@@ -174,105 +153,33 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     sendcnt = 0
     loopidx = 0 
     
-    for j, row in enumerate(rows):    #rows : mail.csv
-         
-        if smtp_idx >= len (smtp_list) :
-           smtp_idx  = 0
-        else :
-            smtp_idx = smtp_idx + 1
+    #for j, row in enumerate(rows):    #rows : mail.csv
+    smtp_idx = 0
+    while  smtp_idx <  len(smtp_list) :
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
-        
-        to_addr = row[0]
+        smtp_idx = smtp_idx + 1
 
-        #cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
-        #print(cc_addrs)
-        #subject = smtp_username +"臉書優質紛絲團，邀請您 按讚支持"
-        #content =  "陌生開發優質粉絲團，人員募集中\n歡迎加入\n分享陌開心法及免費工具\n邀起您加入我們 請開啟網址 https://www.facebook.com/profile.php?id=100065188140659 按讚留言 獲取更多的資訊\n www.mydailychoice.com"
-    # 準備發送郵件
-        message = MIMEMultipart()
-        #message["From"] = smtp_list
-        message["From"] =    smtp_sender + " <" + smtp_username +">"  
-        message["To"] = to_addr  
-    
-    #if cc_addrs:
-    #    message["Cc"] = ",".join(cc_addrs)
-            #cc_email = 'eel.honey@yahoo.com.tw,ejob@livemail.tw'.split(',')
-    #message['Cc'] = ','.join(cc_email)
-        message["Subject"] = subject
-        message.attach(MIMEText(content, "plain", "utf-8"))
-    # 添加附件
-    #filename = "test.txt"
-    #with open(filename, "rb") as attachment:
-    #    part = MIMEApplication(attachment.read(), Name=filename)
-    #    part["Content-Disposition"] = f'attachment; filename="{filename}"'
-    #    message.attach(part)
-    
-    # 發送郵件
         try:
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
-            wk_addr="$$$$$"
             server.login(smtp_username,       smtp_password)
             time.sleep(1)
 
-            wk_addr = to_addr 
-            tracemsg(line_access_token,"server.sendmail " ,user_id)     
-            server.sendmail(smtp_username,  wk_addr  , message.as_string())
-            server.quit()
-            wssendcounter = wssendcounter + 1
-        #except Exception as e:
         except :
             exc_type, exc_value, exc_traceback = sys.exc_info()
             #print("Exception Type:===>", exc_type)
             #print("Exception Value:", exc_value)
             #print("Traceback Object:", exc_traceback)
-            print("第 " + str(loopidx + 1) + " 封郵件發送失敗 ：" +  smtp_username )
-            wserrmsg = "第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
-            tracemsg(line_access_token,wserrmsg,push_to)
-            return("")
-            
+            wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
+            print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
+            message = TextSendMessage(text=wserrmsg )
+            line_bot_api.push_message(push_to , message)
+    
+                        
          
-        loopidx = loopidx + 1
-        sendcnt = sendcnt + 1
-        print (" 第 " + str(loopidx) + "發送成功")
-        if sendcnt == wspush :
-           line_bot_api = LineBotApi(line_access_token)
-           message = TextSendMessage(text="已完成   :" +  str(loopidx) + "封 信件發送" )
-           line_bot_api.push_message(push_to, message)
-           sendcnt = 0
-        if loopidx  == targetno :
-            print(f"{targetno} emails complete " + push_to)  
-            wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
-            message = TextSendMessage(text="發送完成  共計發送   :" +  str(loopidx)  + " 封信件" )
-            line_bot_api = LineBotApi(line_access_token)
-            line_bot_api.push_message(push_to, message)
-            return("") 
-               
-    # 記錄已發送的郵件
-    #    sent_list.append(f"{to_addr},{subject}")
-    #    #with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
-    #    with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
-    #        f.write(f"{loopidx} , {datetime.datetime.now()},  {to_addr},{subject}\n")
-    #        now = datetime.datetime.now()
-    #        wssenddetail = wssenddetail + str(loopidx)  + ",  "  + " " + smtp_username + "=> " + to_addr   + "\n"
- 
-
-    # 更新郵件smtp記錄
-    #    #with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:
-    #    with open(userFolder.strip('\n') + "_smtp_send_counter.log", "w", encoding="utf-8") as f:            
-    #        f.write(str(smtp_idx))        
-    # 更新郵件發送記錄
-    #    counter += 1
-        #with open(userFolder.strip('\n') +"_mail_counter.log", "w", encoding="utf-8") as f:
-        #with open(userFolder.strip('\n') +"/mail_counter.log", "w", encoding="utf-8") as f:    
-        #    f.write(str(counter))
-        
-        time.sleep(0.5)
     line_bot_api = LineBotApi(line_access_token)
-    message = TextSendMessage(text="結束 SMAIL " )
-    line_bot_api.push_message(push_to , message)
-    print(  " return from email \n" + wssenddetail + "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+    message = TextSendMessage(text="結束 Smtp Check  " )
     return("")
 
 
