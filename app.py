@@ -32,13 +32,14 @@ import smtplib
 import time
 import sys
 import urllib.request
-import smtp_validate 
+import smtp_validate
 
  
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from sendmails import *
 from senddemomail import *
+from smtp_validate import * 
 
 
 #==================  for email ===================
@@ -73,7 +74,7 @@ import time
 #======python的函數庫==========
 import json 
 import urllib.request
-import smtp_validate
+ 
 
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
@@ -259,7 +260,8 @@ def handle_message(event):
         #from datetime import datetime
         #now = datetime.now() # current date and time
         #增加 user folder
-        sts  = smtpvalidate(usr,user_id, group_id)
+        sts = smtp_validate.smtp_check(usr,user_id, group_id)
+    
         print("Check smtp  complete #############################################")
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="validate_smtp RETURN  "  + sts )
