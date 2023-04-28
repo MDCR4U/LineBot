@@ -258,7 +258,7 @@ def handle_message(event):
         #from datetime import datetime
         #now = datetime.now() # current date and time
         #增加 user folder
-        sts  = smtp_validate(usr,user_id, group_id)
+        sts  = smtpvalidate(usr,user_id, group_id)
         print("Check smtp  complete #############################################")
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="validate_smtp RETURN  "  + sts )
