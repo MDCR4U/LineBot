@@ -139,8 +139,8 @@ def handle_message(event):
 
 
     print("  0010 - 開始 處理 handle message entry")
-    user_id = "--"
-    group_id = "--"
+    user_id = ""
+    group_id = ""
     usr =event.source.user_id
     user_id = event.source.user_id
     user_type = event.source.type

@@ -49,7 +49,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     message = TextSendMessage(text="信件發送失敗 " )
     line_bot_api.push_message(user_id, message)
     push_to = ""
-    if group_id != "---":
+    if group_id != "":
         push_to = group_id 
     else :
         push_to = user_id    
@@ -226,7 +226,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #    message.attach(part)
     
     # 發送郵件
-        print("         準備發送")
         try:
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
@@ -236,10 +235,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             time.sleep(1)
 
             wk_addr = to_addr 
-            print("              發送")
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
-            print("              發送完成")
-             
             server.quit()
             wssendcounter = wssendcounter + 1
         except Exception as e:
@@ -250,24 +246,19 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #    print("Traceback Object:", exc_traceback)
             print(f"第 {loopidx + 1 } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
 
-            print ("push error msg " + push_to )
             line_bot_api = LineBotApi(line_access_token)
             message = TextSendMessage(text="第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n")
             line_bot_api.push_message(push_to, message)
-            print (" return due to error")
             return("")  
          
         loopidx = loopidx + 1
         sendcnt = sendcnt + 1
         print (" 第 " + str(loopidx) + "發送成功")
         if sendcnt == wspush :
-           print ("push msg " + push_to )
            line_bot_api = LineBotApi(line_access_token)
-           message = TextSendMessage(text="已完成   :" +  str(loopidx) + " 信件發送" )
-           #line_bot_api.push_message(push_to, message)
+           message = TextSendMessage(text="已完成   :" +  str(loopidx) + "封 信件發送" )
            line_bot_api.push_message(user_id, message)
            sendcnt = 0
-    #line_bot_api.reply_message(event.reply_token, message)   
 
         if loopidx  == targetno :
             print(f"{targetno} emails complete " + push_to)  
