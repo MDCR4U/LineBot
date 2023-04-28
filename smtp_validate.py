@@ -118,7 +118,7 @@ def smtp_check(  user_id,group_id):
             print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
-    
+        server.quit()
                         
          
     line_bot_api = LineBotApi(line_access_token)
