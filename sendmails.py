@@ -28,7 +28,7 @@ from flask import Flask
  #================= for send mail =================
  
 def send_mail(lineid,wmsg,userFolder, user_id,group_id):
-    print(" 開始發送信件")
+    print(" aaaa 開始發送信件")
     smtpfn =""
     mailfn = ""
     subjectfn =""
@@ -40,12 +40,14 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     
     wsftpflr = '' 
     wsftpflr =  os.environ.get('linebot_ftpurl')
-
+    print('ftp url ' + wsftpflr)
     line_access_token = os.environ.get('line_Token')
     print(line_access_token)
 
     line_bot_api = LineBotApi(line_access_token)
-
+    ine_bot_api = LineBotApi(line_access_token)
+    message = TextSendMessage(text="信件發送失敗 " )
+    line_bot_api.push_message(user_id, message)
     push_to = ""
     if group_id != "":
         push_to = group_id 
