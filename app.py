@@ -73,6 +73,7 @@ import time
 #======python的函數庫==========
 import json 
 import urllib.request
+import smtp_validate
 
 app = Flask(__name__)
 static_tmp_path = os.path.join(os.path.dirname(__file__), 'static', 'tmp')
