@@ -264,7 +264,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
            print ("push msg " + push_to )
            line_bot_api = LineBotApi(line_access_token)
            message = TextSendMessage(text="已完成   :" +  str(loopidx) + " 信件發送" )
-           line_bot_api.push_message(push_to, message)
+           #line_bot_api.push_message(push_to, message)
+           line_bot_api.push_message(user_id, message)
            sendcnt = 0
     #line_bot_api.reply_message(event.reply_token, message)   
 
