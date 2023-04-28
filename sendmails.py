@@ -221,12 +221,12 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #    message.attach(part)
     
     # 發送郵件
-        tracemsg(line_access_token,"start send " + smtp_server ,user_id)      
+        tracemsg(line_access_token,"start send " + smtp_sender ,user_id)      
         try:
             #print("try")
-            tracemsg(line_access_token,"connect server " + smtp_server ,user_id)  
+            #tracemsg(line_access_token,"connect server " + smtp_sender ,user_id)  
             server = smtplib.SMTP(smtp_server, smtp_port)
-            tracemsg(line_access_token,"starttls  " + smtp_server ,user_id)  
+            #tracemsg(line_access_token,"starttls  " + smtp_sender ,user_id)  
             server.starttls()
 #            time.sleep(1)
             wk_addr="$$$$$"
@@ -242,9 +242,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #except Exception as e:
         except :
             exc_type, exc_value, exc_traceback = sys.exc_info()
-            print("Exception Type:===>", exc_type)
-            print("Exception Value:", exc_value)
-            print("Traceback Object:", exc_traceback)
+            #print("Exception Type:===>", exc_type)
+            #print("Exception Value:", exc_value)
+            #print("Traceback Object:", exc_traceback)
             print("第 " + str(loopidx + 1) + " 封郵件發送失敗 ：" +  smtp_username )
             wserrmsg = "第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             tracemsg(line_access_token,wserrmsg,push_to)
