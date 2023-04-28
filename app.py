@@ -244,7 +244,9 @@ def handle_message(event):
         #增加 user folder
         sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
         print("send mail complete #############################################")
-    
+        line_bot_api = LineBotApi(line_access_token)
+        message = TextSendMessage(text="SMAIL RETURN" )
+        line_bot_api.push_message(user_id, message)
         #message = TextSendMessage(text= "完成信件發送 : " + sendlog)
         #line_bot_api.reply_message(event.reply_token, message)  
     elif msg.upper()[0:9] == '/DEMOMAIL'  :

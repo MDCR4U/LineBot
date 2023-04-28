@@ -209,15 +209,10 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     
     #if cc_addrs:
     #    message["Cc"] = ",".join(cc_addrs)
-    
-        #cc_email = 'eel.honey@yahoo.com.tw,ejob@livemail.tw'.split(',')
-        
-  
+            #cc_email = 'eel.honey@yahoo.com.tw,ejob@livemail.tw'.split(',')
     #message['Cc'] = ','.join(cc_email)
-
         message["Subject"] = subject
         message.attach(MIMEText(content, "plain", "utf-8"))
-    
     # 添加附件
     #filename = "test.txt"
     #with open(filename, "rb") as attachment:
@@ -257,9 +252,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         if sendcnt == wspush :
            line_bot_api = LineBotApi(line_access_token)
            message = TextSendMessage(text="已完成   :" +  str(loopidx) + "封 信件發送" )
-           line_bot_api.push_message(user_id, message)
+           line_bot_api.push_message(push_to, message)
            sendcnt = 0
-
+        print("準備發送下一筆")
         if loopidx  == targetno :
             print(f"{targetno} emails complete " + push_to)  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
@@ -289,7 +284,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #    f.write(str(counter))
         
         time.sleep(0.5)
-
+    line_bot_api = LineBotApi(line_access_token)
+    message = TextSendMessage(text="結束 SMAIL " )
+    line_bot_api.push_message(push_to , message)
     print(  " return from email \n" + wssenddetail + "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
     return("")
 
