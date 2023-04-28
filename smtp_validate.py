@@ -99,7 +99,7 @@ def smtp_check(  user_id,group_id):
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
         smtp_idx = smtp_idx + 1
-        wserrmsg = ("第 " + str(smtp_idx) + " 登錄中 ：" +  smtp_username )
+        wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄中 ：" +  smtp_username )
         message = TextSendMessage(text=wserrmsg )
         line_bot_api.push_message(push_to , message)
         try:
@@ -123,6 +123,7 @@ def smtp_check(  user_id,group_id):
          
     line_bot_api = LineBotApi(line_access_token)
     message = TextSendMessage(text="結束 Smtp Check  " )
+    line_bot_api.push_message(push_to , message)
     return("")
 
 
