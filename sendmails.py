@@ -249,6 +249,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             print(f"第 {loopidx + 1 } 封郵件發送失敗：{e} \n {smtp_username} {smtp_password} {smtp_port} {wk_addr} \n ")
 
             print ("push error msg " + push_to )
+            line_bot_api = LineBotApi(line_access_token)
             message = TextSendMessage(text="第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n")
             line_bot_api.push_message(push_to, message)
             print (" return due to error")
@@ -259,6 +260,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         print (" 第 " + str(loopidx) + "發送成功")
         if sendcnt == wspush :
            print ("push msg " + push_to )
+           line_bot_api = LineBotApi(line_access_token)
            message = TextSendMessage(text="已完成   :" +  str(loopidx) + " 信件發送" )
            line_bot_api.push_message(push_to, message)
            sendcnt = 0
@@ -268,6 +270,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             print(f"{targetno} emails complete " + push_to)  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
             message = TextSendMessage(text="發送完成  共計發送   :" +  str(loopidx)  + " 封信件" )
+            line_bot_api = LineBotApi(line_access_token)
             line_bot_api.push_message(push_to, message)
             print (" complete send return to app.py")
             return("") 
