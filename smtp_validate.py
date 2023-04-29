@@ -107,7 +107,7 @@ def smtp_check(  msg,user_id,group_id):
         smtp_idx = smtp_idx + 1
         wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄中 ：" +  smtp_username )
         message = TextSendMessage(text=wserrmsg )
-        line_bot_api.push_message(push_to , message)
+        #line_bot_api.push_message(push_to , message)
         try:
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()

@@ -217,7 +217,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             time.sleep(1)
 
             wk_addr = to_addr 
-            tracemsg(line_access_token,"server.sendmail " ,user_id)     
+            #tracemsg(line_access_token,"server.sendmail " ,user_id)     
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
             server.quit()
             wssendcounter = wssendcounter + 1
