@@ -28,7 +28,7 @@ from flask import Flask
  #================= for send mail =================
  
 def smtp_check(  msg,user_id,group_id):
-    wmsg = msg.cplit('#')
+    wmsg =msg.split('#')
     if len(wmsg) == 1 :
         print ("invalid no  /smpt#n#")
 
