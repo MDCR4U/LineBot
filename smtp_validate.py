@@ -36,6 +36,8 @@ def smtp_check(  msg,user_id,group_id):
     mailfn = ""
     subjectfn =""
     bodyfn = ""
+    print(wmsg[1])
+ 
     smtp_idx = int(wmsg[1])
 
     mailidx = ""
@@ -98,7 +100,7 @@ def smtp_check(  msg,user_id,group_id):
      
     
     #for j, row in enumerate(rows):    #rows : mail.csv
-    smtp_idx = 0
+    #smtp_idx = 0
     while  smtp_idx <  len(smtp_list) :
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
