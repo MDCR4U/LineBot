@@ -27,13 +27,17 @@ from flask import Flask
 #@app.route('/')
  #================= for send mail =================
  
-def smtp_check(  user_id,group_id):
-   
+def smtp_check(  msg,user_id,group_id):
+    wmsg = msg.cplit('#')
+    if len(wmsg) == 1 :
+        print ("invalid no  /smpt#n#")
+
     smtpfn =""
     mailfn = ""
     subjectfn =""
     bodyfn = ""
-    smtpidx = ""
+    smtp_idx = int(wmsg[1])
+
     mailidx = ""
 
     wsftpflr = '' 
@@ -83,7 +87,7 @@ def smtp_check(  user_id,group_id):
  
 
 # 設置發件人的初始賬戶信息
-    smtp_idx = 0
+    #smtp_idx = 0
     smtp_username = smtp_list[smtp_idx][0]
     smtp_password = smtp_list[smtp_idx][1]
     smtp_sender = smtp_list[smtp_idx][2]
