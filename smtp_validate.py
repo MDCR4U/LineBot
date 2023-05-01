@@ -35,13 +35,13 @@ def smtp_check(  msg,user_id,group_id):
     wmsg =msg.split('#')
     if len(wmsg) == 1 :
         print ("invalid no  /smpt#n#")
-
+   
     smtpfn =""
     mailfn = ""
     subjectfn =""
     bodyfn = ""
     print(wmsg[1])
- 
+    
     smtp_idx = int(wmsg[1])
 
     mailidx = ""
@@ -134,9 +134,13 @@ def smtp_check(  msg,user_id,group_id):
            
             print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
             wsfail = "Y"
-            server.quit()
+            
             
             wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
+            message = TextSendMessage(text=wserrmsg )
+            line_bot_api.push_message(push_to , message)
+            server.quit()
+            wserrmsg = ("Server Quit Complete" )
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
             time.sleep(2)
