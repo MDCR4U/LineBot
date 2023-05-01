@@ -143,6 +143,7 @@ def smtp_check(  msg,user_id,group_id):
             print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
             wsfail = "Y"
             server.quit()
+            time.sleep(5)
             
         if wsfail == 'Y'    :
              wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
