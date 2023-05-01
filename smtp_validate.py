@@ -121,7 +121,7 @@ def smtp_check(  msg,user_id,group_id):
             #print("Exception Type:===>", exc_type)
             #print("Exception Value:", exc_value)
             #print("Traceback Object:", exc_traceback)
-            wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
+            wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
             print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
