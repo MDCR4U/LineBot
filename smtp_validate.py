@@ -118,18 +118,18 @@ def smtp_check(  msg,user_id,group_id):
             
         try:
  
-            tracemsg( line_access_token,"init server " ,push_to)
+        #    tracemsg( line_access_token,"init server " ,push_to)
          
                 
             server = smtplib.SMTP(smtp_server, smtp_port)
 
  
-            tracemsg( line_access_token,"start ttls " ,push_to)
+        #    tracemsg( line_access_token,"start ttls " ,push_to)
             server.starttls()
-            tracemsg( line_access_token,"login" ,push_to)
+        #    tracemsg( line_access_token,"login" ,push_to)
             
             server.login(smtp_username,       smtp_password)
-            tracemsg( line_access_token,"login complete  " ,push_to)
+        #    tracemsg( line_access_token,"login complete  " ,push_to)
 
                         
             time.sleep(0.5)
@@ -143,14 +143,13 @@ def smtp_check(  msg,user_id,group_id):
             print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
             wsfail = "Y"
             server.quit()
-            time.sleep(5)
             
-        if wsfail == 'Y'    :
-             wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
-             message = TextSendMessage(text=wserrmsg )
-             line_bot_api.push_message(push_to , message)
-        if wsfail == 'N':     
-            server.quit()
+            wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
+            message = TextSendMessage(text=wserrmsg )
+            line_bot_api.push_message(push_to , message)
+            time.sleep(5)
+        
+        
         if wsc == 3 :
             if wsfail =='N':
                 wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄成功 ：" +  smtp_username )
@@ -158,7 +157,8 @@ def smtp_check(  msg,user_id,group_id):
                 line_bot_api.push_message(push_to , message)
                 wsc = 0
             else :
-                wsc = wsc - 1    
+                wsc = wsc - 1   
+                wsfail = 'N' 
         wsc = wsc +1
                         
          
