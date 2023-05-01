@@ -119,6 +119,7 @@ def smtp_check(  msg,user_id,group_id):
         try:
             if wsfail == 'Y':
                 tracemsg( line_access_token,"init server " ,push_to)
+                server.quit()
                 
             server = smtplib.SMTP(smtp_server, smtp_port)
             if wsfail == 'Y':
