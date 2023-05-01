@@ -144,8 +144,10 @@ def smtp_check(  msg,user_id,group_id):
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
             time.sleep(2)
-        
-        
+        if wsfail == 'Y' : 
+            wserrmsg = ("continue " )
+            message = TextSendMessage(text=wserrmsg )
+            line_bot_api.push_message(push_to , message)        
         if wsc == 3 :
                 wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  測試紀錄 ：" +  smtp_username )
                 message = TextSendMessage(text=wserrmsg )
