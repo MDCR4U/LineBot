@@ -123,6 +123,8 @@ def smtp_check(  msg,user_id,group_id):
             print("login " + str(smtp_idx))
             server.login(smtp_username,       smtp_password)
             time.sleep(0.5)
+            server.quit()
+            time.sleep(2)
 
         except :
             exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -147,7 +149,7 @@ def smtp_check(  msg,user_id,group_id):
                 wsc = 0
            
         wsc = wsc +1
-        server.quit()
+
                         
          
     line_bot_api = LineBotApi(line_access_token)
