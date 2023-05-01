@@ -51,7 +51,7 @@ def smtp_check(  msg,user_id,group_id):
     line_access_token = os.environ.get('line_Token')
  
     line_bot_api = LineBotApi(line_access_token)
-
+    print("api connect")
 
 #    tracemsg(line_access_token,"開始發送信件 ",user_id)
     push_to = ""
@@ -107,6 +107,7 @@ def smtp_check(  msg,user_id,group_id):
     #smtp_idx = 0
     wsc = 1
     wsfail = "N"
+    print("START try")
     while  smtp_idx <  len(smtp_list) :
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
@@ -117,21 +118,10 @@ def smtp_check(  msg,user_id,group_id):
             line_bot_api.push_message(push_to , message)
             
         try:
- 
-        #    tracemsg( line_access_token,"init server " ,push_to)
-         
-                
             server = smtplib.SMTP(smtp_server, smtp_port)
-
- 
-        #    tracemsg( line_access_token,"start ttls " ,push_to)
             server.starttls()
-        #    tracemsg( line_access_token,"login" ,push_to)
-            
+            print("login " + str(smtp_idx))
             server.login(smtp_username,       smtp_password)
-        #    tracemsg( line_access_token,"login complete  " ,push_to)
-
-                        
             time.sleep(0.5)
 
         except :
