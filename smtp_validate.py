@@ -117,21 +117,20 @@ def smtp_check(  msg,user_id,group_id):
             line_bot_api.push_message(push_to , message)
             
         try:
-            if wsfail == 'Y':
-                tracemsg( line_access_token,"init server " ,push_to)
-                server.quit()
+ 
+            tracemsg( line_access_token,"init server " ,push_to)
+         
                 
             server = smtplib.SMTP(smtp_server, smtp_port)
-            if wsfail == 'Y':
-                tracemsg( line_access_token,"start ttls " ,push_to)
+
+ 
+            tracemsg( line_access_token,"start ttls " ,push_to)
             server.starttls()
-            if wsfail == 'Y':
-                tracemsg( line_access_token,"login" ,push_to)
+            tracemsg( line_access_token,"login" ,push_to)
             
             server.login(smtp_username,       smtp_password)
-            if wsfail == 'Y':
-                tracemsg( line_access_token,"login complete  " ,push_to)
-                wsfail = 'N'
+            tracemsg( line_access_token,"login complete  " ,push_to)
+
                         
             time.sleep(0.5)
 
@@ -143,6 +142,7 @@ def smtp_check(  msg,user_id,group_id):
            
             print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
             wsfail = "Y"
+            server.quit()
             
         if wsfail == 'Y'    :
              wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
