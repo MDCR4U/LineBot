@@ -26,7 +26,11 @@ from flask import Flask
 #app = Flask(__name__)
 #@app.route('/')
  #================= for send mail =================
- 
+def tracemsg(line_access_token,msg,to ):
+    line_bot_api = LineBotApi(line_access_token)
+    message = TextSendMessage(text=msg )
+    line_bot_api.push_message(to , message) 
+
 def smtp_check(  msg,user_id,group_id):
     wmsg =msg.split('#')
     if len(wmsg) == 1 :
@@ -111,12 +115,23 @@ def smtp_check(  msg,user_id,group_id):
             wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄中 ：" +  smtp_username )
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
-            wsfail = 'N'
+            
         try:
+            if wsfail == 'Y':
+                tracemsg( line_access_token,"init server " ,push_to)
+                
             server = smtplib.SMTP(smtp_server, smtp_port)
+            if wsfail == 'Y':
+                tracemsg( line_access_token,"start ttls " ,push_to)
             server.starttls()
-
+            if wsfail == 'Y':
+                tracemsg( line_access_token,"login" ,push_to)
+            
             server.login(smtp_username,       smtp_password)
+            if wsfail == 'Y':
+                tracemsg( line_access_token,"login complete  " ,push_to)
+                wsfail = 'N'
+                        
             time.sleep(0.5)
 
         except :
