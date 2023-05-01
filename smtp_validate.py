@@ -101,6 +101,7 @@ def smtp_check(  msg,user_id,group_id):
     
     #for j, row in enumerate(rows):    #rows : mail.csv
     #smtp_idx = 0
+    wsc = 1
     while  smtp_idx <  len(smtp_list) :
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
@@ -125,6 +126,12 @@ def smtp_check(  msg,user_id,group_id):
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
         server.quit()
+        if wsc == 10 :
+            wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄成功 ：" +  smtp_username )
+            message = TextSendMessage(text=wserrmsg )
+            line_bot_api.push_message(push_to , message)
+            wsc = 0
+        wsc = wsc +1
                         
          
     line_bot_api = LineBotApi(line_access_token)
