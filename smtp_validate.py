@@ -118,15 +118,15 @@ def smtp_check(  msg,user_id,group_id):
 
         except :
             exc_type, exc_value, exc_traceback = sys.exc_info()
-            #print("Exception Type:===>", exc_type)
-            #print("Exception Value:", exc_value)
-            #print("Traceback Object:", exc_traceback)
+            print("Exception Type:===>", exc_type)
+            print("Exception Value:", exc_value)
+            print("Traceback Object:", exc_traceback)
             wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
             print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
         server.quit()
-        if wsc == 10 :
+        if wsc == 3 :
             wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄成功 ：" +  smtp_username )
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
