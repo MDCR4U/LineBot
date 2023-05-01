@@ -147,19 +147,17 @@ def smtp_check(  msg,user_id,group_id):
             wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
-            time.sleep(5)
+            time.sleep(2)
         
         
         if wsc == 3 :
-            if wsfail =='N':
-                wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄成功 ：" +  smtp_username )
+                wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  測試紀錄 ：" +  smtp_username )
                 message = TextSendMessage(text=wserrmsg )
                 line_bot_api.push_message(push_to , message)
                 wsc = 0
-            else :
-                wsc = wsc - 1   
-                wsfail = 'N' 
+           
         wsc = wsc +1
+        server.quit()
                         
          
     line_bot_api = LineBotApi(line_access_token)
