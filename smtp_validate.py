@@ -139,17 +139,24 @@ def smtp_check(  msg,user_id,group_id):
             print("Exception Type:===>", exc_type)
             print("Exception Value:", exc_value)
             print("Traceback Object:", exc_traceback)
-            wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
+           
             print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
             wsfail = "Y"
-            message = TextSendMessage(text=wserrmsg )
-            line_bot_api.push_message(push_to , message)
-        server.quit()
+            
+        if wsfail == 'Y'    :
+             wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
+             message = TextSendMessage(text=wserrmsg )
+             line_bot_api.push_message(push_to , message)
+        if wsmail == 'N':     
+            server.quit()
         if wsc == 3 :
-            wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄成功 ：" +  smtp_username )
-            message = TextSendMessage(text=wserrmsg )
-            line_bot_api.push_message(push_to , message)
-            wsc = 0
+            if wsmail =='N':
+                wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄成功 ：" +  smtp_username )
+                message = TextSendMessage(text=wserrmsg )
+                line_bot_api.push_message(push_to , message)
+                wsc = 0
+            else :
+                wsc = wsc - 1    
         wsc = wsc +1
                         
          
