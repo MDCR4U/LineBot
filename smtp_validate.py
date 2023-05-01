@@ -102,19 +102,22 @@ def smtp_check(  msg,user_id,group_id):
     #for j, row in enumerate(rows):    #rows : mail.csv
     #smtp_idx = 0
     wsc = 1
+    wsfail = "N"
     while  smtp_idx <  len(smtp_list) :
         smtp_username = smtp_list[smtp_idx][0]
         smtp_password = smtp_list[smtp_idx][1]
         smtp_idx = smtp_idx + 1
-        wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄中 ：" +  smtp_username )
-        message = TextSendMessage(text=wserrmsg )
-        #line_bot_api.push_message(push_to , message)
+        if wsfail == 'Y':
+            wserrmsg = ("第 " + str(smtp_idx) + "-" + str(len(smtp_list)) + "  登錄中 ：" +  smtp_username )
+            message = TextSendMessage(text=wserrmsg )
+            line_bot_api.push_message(push_to , message)
+            wsfail = 'N'
         try:
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
 
             server.login(smtp_username,       smtp_password)
-            time.sleep(1)
+            time.sleep(0.5)
 
         except :
             exc_type, exc_value, exc_traceback = sys.exc_info()
@@ -123,6 +126,7 @@ def smtp_check(  msg,user_id,group_id):
             print("Traceback Object:", exc_traceback)
             wserrmsg = ("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username  + " " + smtp_password )
             print("第 " + str(smtp_idx) + " 登錄失敗 ：" +  smtp_username )
+            wsfail = "Y"
             message = TextSendMessage(text=wserrmsg )
             line_bot_api.push_message(push_to , message)
         server.quit()
