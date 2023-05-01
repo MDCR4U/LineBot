@@ -142,11 +142,14 @@ def smtp_check(  msg,user_id,group_id):
             try :
                 server.quit()
             except :
-                  print('server quit finish')    
-            wserrmsg = ("Server Quit Complete" )
-            message = TextSendMessage(text=wserrmsg )
-            line_bot_api.push_message(push_to , message)
-            time.sleep(2)
+                print('server quit finish')    
+                wserrmsg = ("Server Quit Complete wait 2sec" )
+                message = TextSendMessage(text=wserrmsg )
+                line_bot_api.push_message(push_to , message)
+                time.sleep(2)
+                wserrmsg = ("sleep return " )
+                message = TextSendMessage(text=wserrmsg )
+                line_bot_api.push_message(push_to , message)
         if wsfail == 'Y' : 
             wserrmsg = ("continue " )
             message = TextSendMessage(text=wserrmsg )
