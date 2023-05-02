@@ -112,7 +112,16 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         wstr = mailfn + "," + mailidx + "," + smtpidx + "," + '0'
         tracemsg(line_access_token,"writ new sendmail.log ",push_to)
         with open("sendmail.log", "w", encoding="utf-8") as f:            
-            f.write(wstr)  
+            f.write(wstr) 
+            f.close()
+        file = open('sendmail.log','r',encoding="utf-8")
+        wslog  = file.readline()
+        wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8')     
+        wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
+        tracemsg(line_access_token,wserrmsg,push_to)
+        return()
+        f.close()
+             
     else :
         tracemsg(line_access_token,wserrmsg,push_to)
 
