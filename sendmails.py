@@ -104,17 +104,17 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
     wsexsit = file_exsit('tmp/' + smtpfn)
     wsstr = ' url ' + url  + ' smtpfn  ' + smtpfn  + "-" + wsexsit + "*"
-    wserrmsg = "smtp  \n" + wsstr
+    wserrmsg = "smtp info  \n" + wsstr
     tracemsg(line_access_token,wserrmsg,push_to)
     if wsexsit != '' :
         print ("############     copy to local ")
-        copy_to_local(url , 'smtp/' + smtpfn )
+        copy_to_local(url , 'tmp/' + smtpfn )
  
-    with open('smtp/' + smtpfn, "r", encoding="utf-8") as f:
+    with open('tmp/' + smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         smtp_list = [row for row in reader]        
     wsstr = ' '.join (str(e) for e in smtp_list)
-    wserrmsg = "smtp  \n" + wsstr
+    wserrmsg = "smtp list   \n" + wsstr
     tracemsg(line_access_token,wserrmsg,push_to)
     return()
 
