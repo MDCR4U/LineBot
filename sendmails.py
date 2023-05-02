@@ -110,6 +110,16 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             f.write(wstr)  
     else :
         tracemsg(line_access_token,wserrmsg,push_to)
+    counter  = int(wslogs[1])
+    smtp_idx = int(wslogs[2])
+    sendcnt = int(wslogs[3])
+
+    counter = counter +1
+    smtp_idx = smtp_idx + 1
+    sendcnt = sendcnt + 1
+    wstr = mailfn + "," + str(counter) + "," + str(smtp_idx) + "," + str(sendcnt) 
+    with open("sendmail.log", "w", encoding="utf-8") as f:            
+            f.write(wstr) 
 
     return()
     file.close()
