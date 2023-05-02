@@ -103,7 +103,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wslog  = file.readline()
     wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8') 
     wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
-    tracemsg(line_access_token,wserrmsg,push_to)
+    wserrmsg =  wslog   + "- sendmail.log " + wslogs[0] + ' ' + mailfn 
+    #tracemsg(line_access_token,wserrmsg,push_to)
    
     if wslogs[0] != mailfn  :
         wslogs[1] = mailidx
@@ -119,7 +120,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8')     
         wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
         tracemsg(line_access_token,wserrmsg,push_to)
-        return()
+        
         f.close()
              
     else :
@@ -375,7 +376,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         message = TextSendMessage(text=" raise send post msg " + wstr  )
         line_bot_api = LineBotApi(line_access_token)
         line_bot_api.push_message(push_to, message)
-        return("")     
+        return('')     
     # 記錄已發送的郵件
     #    sent_list.append(f"{to_addr},{subject}")
     #    #with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
