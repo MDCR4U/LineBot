@@ -114,7 +114,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     else :
         tracemsg(line_access_token,wserrmsg,push_to)
 
-    
+    mailidx = wslogs[1]
+    smtpidx = wslogs[2]
+    sendcnt = int(wslogs[3])
     #return()
     file.close()
 
@@ -358,7 +360,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
                 f.write(wstr) 
         print (wstr)   
         f.close()
-        
+
         message = TextSendMessage(text=" raise send post msg " + wstr  )
         line_bot_api = LineBotApi(line_access_token)
         line_bot_api.push_message(push_to, message)
