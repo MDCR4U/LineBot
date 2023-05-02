@@ -359,6 +359,8 @@ def build_logfn(wsfn):
     return wssplit[0]
 
 def copy_to_local(url , filename):
+    print (url )
+    print(filename)
     try:
         urllib.request.urlretrieve(url, filename)
         print("文件已成功复制到本地")
@@ -444,6 +446,7 @@ def check_url_file(wsurl):
     return ''    
 def file_exsit(filename):
     # 檢查文件是否存在
+    print ('check file ' + filename)
     if os.path.exists(filename):
         print(f'File {filename} exists')
         return  ''
