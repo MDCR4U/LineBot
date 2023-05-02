@@ -77,15 +77,35 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     mailidx = js_dta["mailidx"] 
     wspush = int(js_dta["push"])
 
-    if not os.path.exists('tmp' ):
-        os.makedirs('tmp')
+
+    directory = "tmp"  # 要创建的目录名称
+
+    #try:
+    #    os.makedirs(directory)
+    #    print("目录已成功创建")
+    #except FileExistsError:
+    ##    print("目录已经存在")
+    #except OSError as e:
+    #    print("创建目录时出错:", e)
+
+    
+  #  if not os.path.exists('tmp' ):
+  #      os.makedirs('tmp')
 
 # 取得 發送紀錄
-    logfn = build_logfn(mailfn) + '_log.txt'
-    if file_exsit('tmp/' + logfn) == '':
-        file = open('tmp/' + logfn,'r',encoding="utf-8")
-        mailidx = file.readline().strip('\n')    #line1 githubid
-        smtp_idx = file.readline().strip('\n')   #line1 githubproject
+    logfn = 'sendmail.log'  #build_logfn(mailfn) + '_log.txt'
+    if file_exsit(logfn) == 'N':
+        wserrmsg = "發送紀錄 不存在 "
+        tracemsg(line_access_token,wserrmsg,push_to)
+        return()
+    
+    file = open('sendmail.log','r',encoding="utf-8")
+    wslog  = file.readline()
+    wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8') 
+    wserrmsg =  ' '.join (str(e) for e in wslogs)
+    tracemsg(line_access_token,wserrmsg,push_to)
+    return()
+    file.close()
 
 #  @@@@@@@@   mailfn + "_log"   123,11   123 :mailidx   11:smtpidx
 #  檢查  local mail.csv 
@@ -103,21 +123,16 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 #     如如果 不存在 copy url file 
 
     #wsexsit = file_exsit('tmp/' + smtpfn)
-    #wsstr = ' url ' + url  + ' smtpfn  ' + smtpfn  + "-" + wsexsit + "*"
-    #wserrmsg = "smtp info  \n" + wsstr
-    #tracemsg(line_access_token,wserrmsg,push_to)
-    #if wsexsit != '' :
-    #    print ("############     copy to local ")
-    #    copy_to_local(url , 'tmp/' + smtpfn )
+    wsstr = ' url ' + url  + ' smtpfn  ' + smtpfn  + "*"
+    copy_to_local(url ,  smtpfn )
  
-    with open('tmp/' + smtpfn, "r", encoding="utf-8") as f:
+    with open( smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         smtp_list = [row for row in reader]        
     wsstr = ' '.join (str(e) for e in smtp_list)
     wserrmsg = "smtp list   \n" + wsstr
     tracemsg(line_access_token,wserrmsg,push_to)
-    return()
-
+    
     # url file
     if 1 == 2 :                # url file
         try:
@@ -145,16 +160,14 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
     url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
     n = counter                                                 # 要跳過的行數
-    wsexsit = file_exsit(mailfn)
-    if wsexsit != '' :
-        copy_to_local(url , mailfn )
+    copy_to_local(url , mailfn )
 
     with open(mailfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         rows = [row for i, row in enumerate(reader) if i >= n]
-        #wsstr = ' '.join (str(e) for e in rows)
-        ##wserrmsg = "mails   \n" +  wsstr
-        #tracemsg(line_access_token,wserrmsg,push_to)
+        wsstr = ' '.join (str(e) for e in rows)
+        #wserrmsg = "mails   \n" +  wsstr
+        tracemsg(line_access_token,wserrmsg,push_to)
 
     if 1 ==2 :       # url file
         try:
@@ -183,9 +196,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 #getbody 
     # 檢查 發送內容
     url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
-    wsexsit = file_exsit(bodyfn)
-    if wsexsit == 'N' :
-        copy_to_local(url , bodyfn )
+    copy_to_local(url , bodyfn )
     file = open(bodyfn,'r',encoding="utf-8")
     content = ''
     wsbody  = file.readline()
@@ -218,12 +229,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
      # 檢查 主旨
     #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
     url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
-    print(url + " " + subjectfn )
-    wsexsit = file_exsit(subjectfn)
-
-    if wsexsit != '' :
-        print ("copy from url")
-        copy_to_local(url , subjectfn )
+    copy_to_local(url , subjectfn )
     file = open(subjectfn,'r',encoding="utf-8")
     wsubject  = file.readline()
     subject = wsubject #.decode('utf-8') 
