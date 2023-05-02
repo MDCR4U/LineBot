@@ -251,7 +251,7 @@ def handle_message(event):
         print("send mail complete #############################################")
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="SMAIL RETURN" )
-        line_bot_api.push_message(user_id, message)
+        #line_bot_api.push_message(user_id, message)
     elif '/SMTP' in msg.upper():     #isupper(), islower(), lower(), upper()
         print (" CALL CHECK SMTP ")
         #if userFolder == '' :

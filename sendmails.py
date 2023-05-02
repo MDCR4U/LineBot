@@ -100,8 +100,14 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 #     如如果 不存在 copy url file 
 
     wsexsit = file_exsit(smtpfn)
+    wsstr = ' url ' + url  + ' smtpfn  ' + smtpfn  + "-" + wsexsit + "*"
+    wserrmsg = "smtp  \n" + wsstr
+    tracemsg(line_access_token,wserrmsg,push_to)
     if wsexsit != '' :
+        print ("############     copy to local ")
         copy_to_local(url , smtpfn )
+ 
+    return 
 
     with open(smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
