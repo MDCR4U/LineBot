@@ -106,8 +106,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     with open(smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         smtp_list = [row for row in reader]        
-
-    wserrmsg = "smtp  \n" +  smtp_list
+    wsstr = ' '.join (str(e) for e in smtp_list)
+    wserrmsg = "smtp  \n" + wsstr
     tracemsg(line_access_token,wserrmsg,push_to)
 
 
@@ -145,7 +145,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     with open(mailfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         rows = [row for i, row in enumerate(reader) if i >= n]
-        wserrmsg = "mails   \n" +  rows
+        wsstr = ' '.join (str(e) for e in rows)
+        wserrmsg = "mails   \n" +  wsstr
         tracemsg(line_access_token,wserrmsg,push_to)
 
     if 1 ==2 :       # url file
@@ -186,7 +187,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             wsbody  = file.readline()
     file.close()
 
-    wserrmsg = "subject  \n" +  content 
+    wserrmsg = "body   \n" +  content 
     tracemsg(line_access_token,wserrmsg,push_to)
 
 
