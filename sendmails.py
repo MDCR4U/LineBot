@@ -102,13 +102,13 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 #  檢查  local mail.csv 
 #     如如果 不存在 copy url file 
 
-    wsexsit = file_exsit('tmp/' + smtpfn)
-    wsstr = ' url ' + url  + ' smtpfn  ' + smtpfn  + "-" + wsexsit + "*"
-    wserrmsg = "smtp info  \n" + wsstr
-    tracemsg(line_access_token,wserrmsg,push_to)
-    if wsexsit != '' :
-        print ("############     copy to local ")
-        copy_to_local(url , 'tmp/' + smtpfn )
+    #wsexsit = file_exsit('tmp/' + smtpfn)
+    #wsstr = ' url ' + url  + ' smtpfn  ' + smtpfn  + "-" + wsexsit + "*"
+    #wserrmsg = "smtp info  \n" + wsstr
+    #tracemsg(line_access_token,wserrmsg,push_to)
+    #if wsexsit != '' :
+    #    print ("############     copy to local ")
+    #    copy_to_local(url , 'tmp/' + smtpfn )
  
     with open('tmp/' + smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
