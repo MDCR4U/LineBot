@@ -77,25 +77,51 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     mailidx = js_dta["mailidx"] 
     wspush = int(js_dta["push"])
 
+# 取得 發送紀錄
+    logfn = build_logfn(mailfn) + '_log.txt'
+    if file_exsit(logfn):
+        file = open(logfn,'r',encoding="utf-8")
+        mailidx = file.readline().strip('\n')    #line1 githubid
+        smtp_idx = file.readline().strip('\n')   #line1 githubproject
 
-
+#  @@@@@@@@   mailfn + "_log"   123,11   123 :mailidx   11:smtpidx
+#  檢查  local mail.csv 
+#     如如果 不存在 copy url file 
 
     #https://github.com/MDCR4U/LineBot/blob/main/mail.csv
     
     smtp_server = "smtp.office365.com"
     smtp_port = 587
 
-    url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
     
-    try:
-        response = urllib.request.urlopen(url)                                              # 開啟 URL
-        reader = csv.reader(response.read().decode('utf-8').splitlines())                   # 讀取 CSV 檔案
-        next(reader)                                                                        # 跳過表頭
-        smtp_list = [row for row in reader]                                                 # 轉換為列表
-        response.close()                                                                    # 關閉 URL
-        smtp_count = len(smtp_list)   
-    except :
-        return ("寄件者資料 讀取錯誤 \n " + url)
+    
+    url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
+#  檢查  local mail.csv 
+#     如如果 不存在 copy url file 
+
+    wsexsit = file_exsit(smtpfn)
+    if wsexsit == 'N' :
+        copy_to_local(url , smtpfn )
+
+    with open(smtpfn, "r", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        smtp_list = [row for row in reader]        
+
+    wserrmsg = "smtp  \n" +  smtp_list
+    tracemsg(line_access_token,wserrmsg,push_to)
+
+
+    # url file
+    if 1 == 2 :                # url file
+        try:
+            response = urllib.request.urlopen(url)                                              # 開啟 URL
+            reader = csv.reader(response.read().decode('utf-8').splitlines())                   # 讀取 CSV 檔案
+            next(reader)                                                                        # 跳過表頭
+            smtp_list = [row for row in reader]                                                 # 轉換為列表
+            response.close()                                                                    # 關閉 URL
+            smtp_count = len(smtp_list)   
+        except :
+            return ("寄件者資料 讀取錯誤 \n " + url)
 
 #    print("發信者 人數" + str(len(smtp_list)))
 # 讀取郵件發送記錄
@@ -112,13 +138,23 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
     url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
     n = counter                                                 # 要跳過的行數
+    wsexsit = file_exsit(mailfn)
+    if wsexsit == 'N' :
+        copy_to_local(url , mailfn )
 
-    try:
-        with urllib.request.urlopen(url) as response:
-            reader = csv.reader(response.read().decode('utf-8').splitlines())
-            rows = [row for i, row in enumerate(reader) if i >= n]
-    except urllib.error.URLError:
-        return ("收件者資料讀取錯誤 : " + url )
+    with open(mailfn, "r", encoding="utf-8") as f:
+        reader = csv.reader(f)
+        rows = [row for i, row in enumerate(reader) if i >= n]
+        wserrmsg = "mails   \n" +  rows
+        tracemsg(line_access_token,wserrmsg,push_to)
+
+    if 1 ==2 :       # url file
+        try:
+            with urllib.request.urlopen(url) as response:
+                reader = csv.reader(response.read().decode('utf-8').splitlines())
+                rows = [row for i, row in enumerate(reader) if i >= n]
+        except urllib.error.URLError:
+            return ("收件者資料讀取錯誤 : " + url )
 
 # 設置發件人的初始賬戶信息
      
@@ -139,17 +175,33 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 #getbody 
     # 檢查 發送內容
     url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
-    try:
-        file = urllib.request.urlopen(url)
-        content = ''
-        wsbody  = file.readline()
-        while wsbody:
+    wsexsit = file_exsit(bodyfn)
+    if wsexsit == 'N' :
+        copy_to_local(url , bodyfn )
+    file = open(bodyfn,'r',encoding="utf-8")
+    content = ''
+    wsbody  = file.readline()
+    while wsbody:
             content  = content + wsbody.decode('utf-8') 
             wsbody  = file.readline()
+    file.close()
+
+    wserrmsg = "subject  \n" +  content 
+    tracemsg(line_access_token,wserrmsg,push_to)
+
+
+    if 1==2  :    #url file
+        try:
+            file = urllib.request.urlopen(url)
+            content = ''
+            wsbody  = file.readline()
+            while wsbody:
+                content  = content + wsbody.decode('utf-8') 
+                wsbody  = file.readline()
     # 關閉 URL
-        file.close()
-    except :
-         return ("信件內容錯誤 :" + url)     
+            file.close()
+        except :
+             return ("信件內容錯誤 :" + url)     
     
 
 
@@ -158,15 +210,28 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
      # 檢查 主旨
     #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
     url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
-    try:
-        file = urllib.request.urlopen(url)
-        wsubject = ''
-        wsubject  = file.readline()
-        subject = wsubject.decode('utf-8') 
-    # 關閉 URL
-        file.close()
-    except:     
-        return ("信件主旨讀取錯誤:"+ url)
+    wsexsit = file_exsit(subjectfn)
+    if wsexsit == 'N' :
+        copy_to_local(url , subjectfn )
+    file = open(subjectfn,'r',encoding="utf-8")
+    wsubject  = file.readline()
+    subject = wsubject.decode('utf-8') 
+    file.close()
+    wserrmsg = "subject  \n" +  subject 
+    tracemsg(line_access_token,wserrmsg,push_to)
+
+    return 
+
+    if 1 == 2:    #ｕｒｌ　ｆｉｌｅ
+        try:
+            file = urllib.request.urlopen(url)
+            wsubject = ''
+            wsubject  = file.readline()
+            subject = wsubject.decode('utf-8') 
+        # 關閉 URL
+            file.close()
+        except:     
+            return ("信件主旨讀取錯誤:"+ url)
  
  
 
@@ -236,11 +301,15 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         loopidx = loopidx + 1
         sendcnt = sendcnt + 1
         print (" 第 " + str(loopidx) + "發送成功")
+        
         if sendcnt == wspush :
            line_bot_api = LineBotApi(line_access_token)
            message = TextSendMessage(text="已完成   :" +  str(loopidx) + "封 信件發送" )
            line_bot_api.push_message(push_to, message)
            sendcnt = 0
+        ####@@@@@  write logfn  mailidx ,smtpidx,sendcnt            
+        ####@@@@ post message
+
         if loopidx  == targetno :
             print(f"{targetno} emails complete " + push_to)  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
@@ -274,7 +343,12 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     line_bot_api.push_message(push_to , message)
     print(  " return from email \n" + wssenddetail + "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
     return("")
+def build_logfn(wsfn):
+    wssplit = wsfn.split('.')
+    return wssplit[0]
 
+def copy_to_local(url , filename):
+    urllib.request.urlretrieve(url, filename)
 
 def loadfile(lineid,msg,userFolder ):
     
@@ -360,7 +434,7 @@ def file_exsit(filename):
     else:
         print(f'File {filename} does not exist')
         wsreturn = 'File  : ' + filename + ' does not exist'
-        return wsreturn 
+        return 'N' #wsreturn 
 def initcounter(lineid,msg,userFolder ):
     
    
