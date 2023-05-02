@@ -183,7 +183,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     content = ''
     wsbody  = file.readline()
     while wsbody:
-            content  = content + wsbody.decode('utf-8') 
+            content  = content + wsbody #.decode('utf-8') 
             wsbody  = file.readline()
     file.close()
 
