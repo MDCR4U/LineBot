@@ -103,7 +103,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wslog  = file.readline()
     wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8') 
     wserrmsg =  ' '.join (str(e) for e in wslogs)
-    tracemsg(line_access_token,wserrmsg,push_to)
+    #tracemsg(line_access_token,wserrmsg,push_to)
     if wslogs[0] != mailfn  :
         wslogs[1] = mailidx
         wslogs[2] = smtpidx 
@@ -113,19 +113,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             f.write(wstr)  
     else :
         tracemsg(line_access_token,wserrmsg,push_to)
-        
-    counter  = int(wslogs[1])
-    smtp_idx = int(wslogs[2])
-    sendcnt = int(wslogs[3])
 
-    counter = counter +1
-    smtp_idx = smtp_idx + 1
-    sendcnt = sendcnt + 1
-    wstr = mailfn + "," + str(counter) + "," + str(smtp_idx) + "," + str(sendcnt) 
-    with open("sendmail.log", "w", encoding="utf-8") as f:            
-            f.write(wstr) 
-    print (wstr)
-    return()
+    
+    #return()
     file.close()
 
 #  @@@@@@@@   mailfn + "_log"   123,11   123 :mailidx   11:smtpidx
@@ -186,7 +176,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     with open(mailfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         rows = [row for i, row in enumerate(reader) if i >= n]
-        wsstr = ' '.join (str(e) for e in rows)
+        wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
         #wserrmsg = "mails   \n" +  wsstr
         tracemsg(line_access_token,wserrmsg,push_to)
 
@@ -258,7 +248,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wserrmsg = "subject  \n" +  subject  + wmsg
     tracemsg(line_access_token,wserrmsg,push_to)
 
-    return 
+    #return 
 
     if 1 == 2:    #ｕｒｌ　ｆｉｌｅ
         try:
@@ -276,7 +266,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 # 開始發送郵件
     sendcnt = 0
     loopidx = 0 
-    
+    wsmail_cnt = len(rows)
     for j, row in enumerate(rows):    #rows : mail.csv
          
         if smtp_idx >= len (smtp_list) :
@@ -336,8 +326,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             return("")
             
          
-        loopidx = loopidx + 1
-        sendcnt = sendcnt + 1
+        #loopidx = loopidx + 1
+        #sendcnt = sendcnt + 1
         print (" 第 " + str(loopidx) + "發送成功")
         
         if sendcnt == wspush :
@@ -347,15 +337,27 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
            sendcnt = 0
         ####@@@@@  write logfn  mailidx ,smtpidx,sendcnt            
         ####@@@@ post message
-
-        if loopidx  == targetno :
+        message = TextSendMessage(text="wsmail cnt   :" +  str(wsmail_cnt ) + " counter " + str(counter) )
+        line_bot_api.push_message(push_to, message)
+        if counter   == wsmail_cnt  or counter > 5 :
             print(f"{targetno} emails complete " + push_to)  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
             message = TextSendMessage(text="發送完成  共計發送   :" +  str(loopidx)  + " 封信件" )
             line_bot_api = LineBotApi(line_access_token)
             line_bot_api.push_message(push_to, message)
             return("") 
-               
+
+
+        counter = counter +1
+        sendcnt = sendcnt + 1
+        wstr = mailfn + "," + str(counter) + "," + str(smtp_idx) + "," + str(sendcnt) 
+        with open("sendmail.log", "w", encoding="utf-8") as f:            
+                f.write(wstr) 
+        print (wstr)   
+        message = TextSendMessage(text=" raise send post msg " )
+        line_bot_api = LineBotApi(line_access_token)
+        line_bot_api.push_message(push_to, message)
+        return("")     
     # 記錄已發送的郵件
     #    sent_list.append(f"{to_addr},{subject}")
     #    #with open(userFolder.strip('\n') + "_SEND.LOG", "a", encoding="utf-8") as f:
