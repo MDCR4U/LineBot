@@ -100,7 +100,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 #     如如果 不存在 copy url file 
 
     wsexsit = file_exsit(smtpfn)
-    if wsexsit == 'N' :
+    if wsexsit != '' :
         copy_to_local(url , smtpfn )
 
     with open(smtpfn, "r", encoding="utf-8") as f:
@@ -139,7 +139,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
     n = counter                                                 # 要跳過的行數
     wsexsit = file_exsit(mailfn)
-    if wsexsit == 'N' :
+    if wsexsit != '' :
         copy_to_local(url , mailfn )
 
     with open(mailfn, "r", encoding="utf-8") as f:
@@ -211,8 +211,11 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
      # 檢查 主旨
     #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
     url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
+    print(url + " " + subjectfn )
     wsexsit = file_exsit(subjectfn)
-    if wsexsit == 'N' :
+
+    if wsexsit != '' :
+        print ("copy from url")
         copy_to_local(url , subjectfn )
     file = open(subjectfn,'r',encoding="utf-8")
     wsubject  = file.readline()
@@ -349,8 +352,6 @@ def build_logfn(wsfn):
     return wssplit[0]
 
 def copy_to_local(url , filename):
-
-    
     try:
         urllib.request.urlretrieve(url, filename)
         print("文件已成功复制到本地")
