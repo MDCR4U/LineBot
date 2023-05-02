@@ -218,7 +218,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wsubject  = file.readline()
     subject = wsubject #.decode('utf-8') 
     file.close()
-    wserrmsg = "subject  \n" +  subject 
+    wserrmsg = "subject  \n" +  subject  + wmsg
     tracemsg(line_access_token,wserrmsg,push_to)
 
     return 
@@ -349,7 +349,14 @@ def build_logfn(wsfn):
     return wssplit[0]
 
 def copy_to_local(url , filename):
-    urllib.request.urlretrieve(url, filename)
+
+    
+    try:
+        urllib.request.urlretrieve(url, filename)
+        print("文件已成功复制到本地")
+    except urllib.error.URLError as e:
+        print("下载文件时出错:", e)
+    print("download " + url   + " to " + filename )
 
 def loadfile(lineid,msg,userFolder ):
     
