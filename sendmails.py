@@ -102,7 +102,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     file = open('sendmail.log','r',encoding="utf-8")
     wslog  = file.readline()
     wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8') 
-    wserrmsg =  ' '.join (str(e) for e in wslogs)
+    wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log"
     #tracemsg(line_access_token,wserrmsg,push_to)
     if wslogs[0] != mailfn  :
         wslogs[1] = mailidx
@@ -142,7 +142,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         smtp_list = [row for row in reader]        
     wsstr = ' '.join (str(e) for e in smtp_list)
     wserrmsg = "smtp list   \n" + wsstr
-    tracemsg(line_access_token,wserrmsg,push_to)
+    #tracemsg(line_access_token,wserrmsg,push_to)
     
     # url file
     if 1 == 2 :                # url file
@@ -178,7 +178,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         rows = [row for i, row in enumerate(reader) if i >= n]
         wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
         #wserrmsg = "mails   \n" +  wsstr
-        tracemsg(line_access_token,wserrmsg,push_to)
+        #tracemsg(line_access_token,wserrmsg,push_to)
 
     if 1 ==2 :       # url file
         try:
@@ -246,7 +246,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     subject = wsubject #.decode('utf-8') 
     file.close()
     wserrmsg = "subject  \n" +  subject  + wmsg
-    tracemsg(line_access_token,wserrmsg,push_to)
+    #tracemsg(line_access_token,wserrmsg,push_to)
 
     #return 
 
@@ -357,7 +357,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         with open("sendmail.log", "w", encoding="utf-8") as f:            
                 f.write(wstr) 
         print (wstr)   
-        message = TextSendMessage(text=" raise send post msg " )
+        f.close()
+        
+        message = TextSendMessage(text=" raise send post msg " + wstr  )
         line_bot_api = LineBotApi(line_access_token)
         line_bot_api.push_message(push_to, message)
         return("")     
