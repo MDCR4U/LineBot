@@ -329,6 +329,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #loopidx = loopidx + 1
         #sendcnt = sendcnt + 1
         print (" 第 " + str(loopidx) + "發送成功")
+        line_bot_api = LineBotApi(line_access_token)
+        message = TextSendMessage(text="發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr )
+        line_bot_api.push_message(push_to, message)
         
         if sendcnt == wspush :
            line_bot_api = LineBotApi(line_access_token)
@@ -339,7 +342,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         ####@@@@ post message
         message = TextSendMessage(text="wsmail cnt   :" +  str(wsmail_cnt ) + " counter " + str(counter) )
         line_bot_api.push_message(push_to, message)
-        if counter   == wsmail_cnt  or counter > 5 :
+        if counter   == wsmail_cnt    :
             print(f"{targetno} emails complete " + push_to)  
             wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
             message = TextSendMessage(text="發送完成  共計發送   :" +  str(loopidx)  + " 封信件" )
