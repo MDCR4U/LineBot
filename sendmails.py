@@ -77,10 +77,13 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     mailidx = js_dta["mailidx"] 
     wspush = int(js_dta["push"])
 
+    if not os.path.exists('tmp' ):
+        os.makedirs('tmp')
+
 # 取得 發送紀錄
     logfn = build_logfn(mailfn) + '_log.txt'
-    if file_exsit(logfn) == '':
-        file = open(logfn,'r',encoding="utf-8")
+    if file_exsit('tmp/' + logfn) == '':
+        file = open('tmp/' + logfn,'r',encoding="utf-8")
         mailidx = file.readline().strip('\n')    #line1 githubid
         smtp_idx = file.readline().strip('\n')   #line1 githubproject
 
@@ -99,23 +102,21 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 #  檢查  local mail.csv 
 #     如如果 不存在 copy url file 
 
-    wsexsit = file_exsit(smtpfn)
+    wsexsit = file_exsit('tmp/' + smtpfn)
     wsstr = ' url ' + url  + ' smtpfn  ' + smtpfn  + "-" + wsexsit + "*"
     wserrmsg = "smtp  \n" + wsstr
     tracemsg(line_access_token,wserrmsg,push_to)
     if wsexsit != '' :
         print ("############     copy to local ")
-        copy_to_local(url , smtpfn )
+        copy_to_local(url , 'smtp/' + smtpfn )
  
-    return 
-
-    with open(smtpfn, "r", encoding="utf-8") as f:
+    with open('smtp/' + smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         smtp_list = [row for row in reader]        
-    #wsstr = ' '.join (str(e) for e in smtp_list)
-    #wserrmsg = "smtp  \n" + wsstr
-    #tracemsg(line_access_token,wserrmsg,push_to)
-
+    wsstr = ' '.join (str(e) for e in smtp_list)
+    wserrmsg = "smtp  \n" + wsstr
+    tracemsg(line_access_token,wserrmsg,push_to)
+    return()
 
     # url file
     if 1 == 2 :                # url file
