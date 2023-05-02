@@ -35,7 +35,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     bodyfn = ""
     smtpidx = ""
     mailidx = ""
-
+    isnew = 'N'
     wsftpflr = '' 
     wsftpflr =  os.environ.get('linebot_ftpurl')
     line_access_token = os.environ.get('line_Token')
@@ -111,6 +111,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         wslogs[2] = smtpidx 
         wslogs[3] = '0'
         wstr = mailfn + "," + mailidx + "," + smtpidx + "," + '0'
+        isnew = 'Y'
         tracemsg(line_access_token,"writ new sendmail.log ",push_to)
         with open("sendmail.log", "w", encoding="utf-8") as f:            
             f.write(wstr) 
@@ -128,7 +129,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
     mailidx = wslogs[1]
     smtpidx = wslogs[2]
-    sendcnt = int(wslogs[3])
+    sendcnt = int(wslogs[3]) + 1
     #return()
     file.close()
 
@@ -142,14 +143,19 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     smtp_port = 587
 
     
-    
-    url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
-#  檢查  local mail.csv 
-#     如如果 不存在 copy url file 
+    if isnew == 'Y' :
+        tracemsg(line_access_token," copy from url ",push_to)
+        url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
+        copy_to_local(url ,  smtpfn )
 
-    #wsexsit = file_exsit('tmp/' + smtpfn)
-    wsstr = ' url ' + url  + ' smtpfn  ' + smtpfn  + "*"
-    copy_to_local(url ,  smtpfn )
+        url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
+        copy_to_local(url , mailfn )
+
+        url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
+        copy_to_local(url , bodyfn )
+        
+        url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
+        copy_to_local(url , subjectfn )
  
     with open( smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
@@ -183,9 +189,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
 # 讀取收件人列表
     #url = wsftpflr + userFolder.strip('\n') + '_mail.csv'
-    url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
+
     n = counter                                                 # 要跳過的行數
-    copy_to_local(url , mailfn )
+  
 
     with open(mailfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
@@ -221,8 +227,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
 #getbody 
     # 檢查 發送內容
-    url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
-    copy_to_local(url , bodyfn )
+
     file = open(bodyfn,'r',encoding="utf-8")
     content = ''
     wsbody  = file.readline()
@@ -254,8 +259,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
      # 檢查 主旨
     #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
-    url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
-    copy_to_local(url , subjectfn )
+
     file = open(subjectfn,'r',encoding="utf-8")
     wsubject  = file.readline()
     subject = wsubject #.decode('utf-8') 
@@ -279,7 +283,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
  
 
 # 開始發送郵件
-    sendcnt = 0
+    #sendcnt = 0
     loopidx = 0 
     wsmail_cnt = len(rows)
     
@@ -368,7 +372,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
 
         counter = counter +1
-        sendcnt = sendcnt + 1
+        #sendcnt = sendcnt + 1
         wstr = mailfn + "," + str(counter) + "," + str(smtp_idx) + "," + str(sendcnt) 
         with open("sendmail.log", "w", encoding="utf-8") as f:            
                 f.write(wstr) 
