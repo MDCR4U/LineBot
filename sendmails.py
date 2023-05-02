@@ -79,7 +79,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
 # 取得 發送紀錄
     logfn = build_logfn(mailfn) + '_log.txt'
-    if file_exsit(logfn):
+    if file_exsit(logfn) == '':
         file = open(logfn,'r',encoding="utf-8")
         mailidx = file.readline().strip('\n')    #line1 githubid
         smtp_idx = file.readline().strip('\n')   #line1 githubproject
