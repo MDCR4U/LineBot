@@ -104,6 +104,13 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8') 
     wserrmsg =  ' '.join (str(e) for e in wslogs)
     tracemsg(line_access_token,wserrmsg,push_to)
+    if wslogs[0] != mailfn  :
+        wstr = mailfn + "," + mailidx + "," + smtpidx + "," + 0
+        with open("sendmail.log", "w", encoding="utf-8") as f:            
+            f.write(wstr)  
+    else :
+        tracemsg(line_access_token,wserrmsg,push_to)
+                 
     return()
     file.close()
 
