@@ -190,7 +190,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     with open(mailfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         #rows = [row for i, row in enumerate(reader) if i >= n]
-        rows = [row for i, row in enumerate(reader) if i = n]   # 只得取  第 n筆
+        rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
         wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
         wserrmsg = "mails   \n" + wsstr + "-" + str(len(rows))
         tracemsg(line_access_token,wserrmsg,push_to)
