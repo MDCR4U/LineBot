@@ -28,7 +28,7 @@ from flask import Flask
  #================= for send mail =================
  
 def send_mail(lineid,wmsg,userFolder, user_id,group_id):
-    print(" aaaa 開始發送信件")
+    print(" aaaa 開始發送信件 " + wmsg )
     smtpfn =""
     mailfn = ""
     subjectfn =""
