@@ -357,7 +357,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             print (" 第 " + str(counter) + "發送成功")
             line_bot_api = LineBotApi(line_access_token)
             message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt))
-            line_bot_api.push_message(push_to, message)
+            #line_bot_api.push_message(push_to, message)
         else:
             line_bot_api = LineBotApi(line_access_token)
             message = TextSendMessage(text= "continue 發送   :")
@@ -368,10 +368,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
                 message = TextSendMessage(text="累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送" )
                 line_bot_api.push_message(push_to, message)
                 sendcnt = 0
-        ####@@@@@  write logfn  mailidx ,smtpidx,sendcnt            
-        ####@@@@ post message
-        #message = TextSendMessage(text="wsmail cnt   :" +  str(wsmail_cnt ) + " counter " + str(counter) )
-        #line_bot_api.push_message(push_to, message)
+     
         if counter   >= targetno    :
             print(f"{targetno} emails complete " + push_to)  
         #    wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
@@ -394,6 +391,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         f.close()
         print("sleep for next")
         time.sleep(0.5)
+        line_bot_api = LineBotApi(line_access_token)
+        message = TextSendMessage(text= " sleep 0.5 sec contiue" )
+        line_bot_api.push_message(push_to, message)
         print(" sleep 0.5 sec contiue")
 
     message = TextSendMessage(text=" raise send post msg " + wstr  )
