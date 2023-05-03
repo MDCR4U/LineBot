@@ -20,6 +20,8 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 from flask import Flask, request, abort
 # LINEＢＯＴ　ＡＰＩ
+import requests
+from bs4 import BeautifulSoup
 
  
 from flask import Flask
@@ -614,6 +616,14 @@ from linebot.models import TextSendMessage, PostbackAction, QuickReply
 
 #https://mdcgenius.000webhostapp.com/admin/smail.html?from=facebook%20%3Cjj0922792265@outlook.com%3E&pwd=toyota1234&to=ejob@livemail.tw&subject=subject230409.txt&body=body230409.txt
 
+def listfile():
 
+    url = "https://mdcbot9.onrender.com"
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, "html.parser")
+
+    for link in soup.find_all("a"):
+        file_url = url + link.get("href")
+        print(file_url)
 #if __name__ == '__main__':
 #    app.run()

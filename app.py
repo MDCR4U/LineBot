@@ -171,7 +171,9 @@ def handle_message(event):
         message = TextSendMessage(text="指令表 \n" + msg)
         line_bot_api.reply_message(event.reply_token, message)  
         return 
-     
+    if  msg[0:5].upper() == "/LIST"  :    
+        listfile()
+        return  
 
     if  msg[0:5].upper() == "@INFO"  :
         
@@ -251,7 +253,7 @@ def handle_message(event):
         print("send mail complete #############################################")
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="SMAIL RETURN" )
-        line_bot_api.push_message(user_id, message)
+        #line_bot_api.push_message(user_id, message)
     elif '/SMTP' in msg.upper():     #isupper(), islower(), lower(), upper()
         print (" CALL CHECK SMTP ")
         #if userFolder == '' :
