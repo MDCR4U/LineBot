@@ -343,7 +343,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             #print("Exception Value:", exc_value)
             #print("Traceback Object:", exc_traceback)
             print("第 " + str( seq  + 1) + " 封郵件發送失敗 ：" +  smtp_username )
-            wserrmsg = "第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
+            wserrmsg = "第 " +  str(seq + 1) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             tracemsg(line_access_token,wserrmsg,push_to)
             wserr = 'Y'
             
