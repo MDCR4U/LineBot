@@ -322,6 +322,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #    message.attach(part)
     
     # 發送郵件
+        werr = 'N'
         try:
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
@@ -343,21 +344,22 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             print("第 " + str(loopidx + 1) + " 封郵件發送失敗 ：" +  smtp_username )
             wserrmsg = "第 " +  str(loopidx) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             tracemsg(line_access_token,wserrmsg,push_to)
-            return("")
+            wserr = 'Y'
             
          
         #loopidx = loopidx + 1
         #sendcnt = sendcnt + 1
-        print (" 第 " + str(j + 1) + "發送成功")
-        line_bot_api = LineBotApi(line_access_token)
-        message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr )
-        line_bot_api.push_message(push_to, message)
-        
-        if sendcnt == wspush :
-           line_bot_api = LineBotApi(line_access_token)
-           message = TextSendMessage(text="累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送" )
-           line_bot_api.push_message(push_to, message)
-           sendcnt = 0
+        if wserr == 'N':
+            print (" 第 " + str(j + 1) + "發送成功")
+            line_bot_api = LineBotApi(line_access_token)
+            message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr )
+            line_bot_api.push_message(push_to, message)
+            
+            if sendcnt >= wspush :
+                line_bot_api = LineBotApi(line_access_token)
+                message = TextSendMessage(text="累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送" )
+                line_bot_api.push_message(push_to, message)
+                sendcnt = 0
         ####@@@@@  write logfn  mailidx ,smtpidx,sendcnt            
         ####@@@@ post message
         #message = TextSendMessage(text="wsmail cnt   :" +  str(wsmail_cnt ) + " counter " + str(counter) )
