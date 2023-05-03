@@ -5,59 +5,60 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/nodemailer/6.6.3/nodemailer.min.js"></script>
   <script>
     // 引入所需的模块和库
-const http = require('http');
-const nodemailer = require('nodemailer');
+    //https://mdcbot9.onrender.com/smail.html?from=facebook <jj0922792265@outlook.com>&pwd=toyota1234&to=ejob@livemail.tw&subject=subject230409.txt&body=body230409.txt
+        const http = require('http');
+        const nodemailer = require('nodemailer');
 
-// 创建HTTP服务器
-const server = http.createServer((req, res) => {
-  const urlParams = new URLSearchParams(req.url.slice(1));
-  const from = urlParams.get('from');
-  const pwd = urlParams.get('pwd');
-  const to = urlParams.get('to');
-  const subjectFile = urlParams.get('subject');
-  const bodyFile = urlParams.get('body');
-  const attachFile = urlParams.get('attach');
+        // 创建HTTP服务器
+        const server = http.createServer((req, res) => {
+        const urlParams = new URLSearchParams(req.url.slice(1));
+        const from = urlParams.get('from');
+        const pwd = urlParams.get('pwd');
+        const to = urlParams.get('to');
+        const subjectFile = urlParams.get('subject');
+        const bodyFile = urlParams.get('body');
+        const attachFile = urlParams.get('attach');
 
-  // 使用Nodemailer设置SMTP传输
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.office365.com',
-    port: 587,
-    secure: false,
-    auth: {
-      user: from,
-      pass: pwd
-    }
-  });
+        // 使用Nodemailer设置SMTP传输
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.office365.com',
+            port: 587,
+            secure: false,
+            auth: {
+            user: from,
+            pass: pwd
+            }
+        });
 
-  // 使用Nodemailer发送邮件
-  const mailOptions = {
-    from: from,
-    to: to,
-    subject: fs.readFileSync(subjectFile, 'utf8'),
-    text: fs.readFileSync(bodyFile, 'utf8')
-  };
+        // 使用Nodemailer发送邮件
+        const mailOptions = {
+            from: from,
+            to: to,
+            subject: fs.readFileSync(subjectFile, 'utf8'),
+            text: fs.readFileSync(bodyFile, 'utf8')
+        };
 
-  if (attachFile) {
-    mailOptions.attachments = [
-      {
-        filename: attachFile,
-        path: attachFile
-      }
-    ];
-  }
+        if (attachFile) {
+            mailOptions.attachments = [
+            {
+                filename: attachFile,
+                path: attachFile
+            }
+            ];
+        }
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('邮件发送失败:', error);
-      res.statusCode = 500;
-      res.end('邮件发送失败');
-    } else {
-      console.log('邮件发送成功:', info.response);
-      res.statusCode = 200;
-      res.end('邮件发送成功');
-    }
-  });
-});
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+            console.error('邮件发送失败:', error);
+            res.statusCode = 500;
+            res.end('邮件发送失败');
+            } else {
+            console.log('邮件发送成功:', info.response);
+            res.statusCode = 200;
+            res.end('邮件发送成功');
+            }
+        });
+        });
 
 // 启动HTTP服务器
 const port = 3000; // 替换为你希望的服务器端口

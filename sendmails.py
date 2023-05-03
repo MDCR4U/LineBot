@@ -364,7 +364,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         ####@@@@@  write logfn  mailidx ,smtpidx,sendcnt            
         ####@@@@ post message
         #message = TextSendMessage(text="wsmail cnt   :" +  str(wsmail_cnt ) + " counter " + str(counter) )
-        #line_bot_api.push_message(push_to, message)
+        line_bot_api.push_message(push_to, message)
         if counter   >= targetno    :
             print(f"{targetno} emails complete " + push_to)  
         #    wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
@@ -372,7 +372,11 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             line_bot_api = LineBotApi(line_access_token)
             line_bot_api.push_message(push_to, message)
             return("") 
-
+        if wserr == 'Y':
+             
+            line_bot_api = LineBotApi(line_access_token)
+            message = TextSendMessage(text= "continue " )
+            line_bot_api.push_message(push_to, message)
 
         counter = counter +1
         #sendcnt = sendcnt + 1
