@@ -383,8 +383,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             
             message = TextSendMessage(text= "continue " )
             line_bot_api.push_message(push_to, message)
-        if wserr == 'Y':    
-             
+
             message = TextSendMessage(text= "trace message" )
             line_bot_api.push_message(push_to, message)
          
