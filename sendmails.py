@@ -354,7 +354,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             print (" 第 " + str(j + 1) + "發送成功")
             line_bot_api = LineBotApi(line_access_token)
             message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr )
-            #line_bot_api.push_message(push_to, message)
+            line_bot_api.push_message(push_to, message)
             
         if sendcnt >= wspush :
                 line_bot_api = LineBotApi(line_access_token)
