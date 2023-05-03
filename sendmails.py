@@ -322,7 +322,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #    message.attach(part)
     
     # 發送郵件
-        werr = 'N'
+        wserr = 'N'
         seq = j
         try:
             server = smtplib.SMTP(smtp_server, smtp_port)
