@@ -112,7 +112,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         wslogs[3] = '0'
         wstr = mailfn + "," + mailidx + "," + smtpidx + "," + '0'
         isnew = 'Y'
-        tracemsg(line_access_token,"writ new sendmail.log ",push_to)
+        #tracemsg(line_access_token,"writ new sendmail.log ",push_to)
         with open("sendmail.log", "w", encoding="utf-8") as f:            
             f.write(wstr) 
             f.close()
@@ -120,12 +120,12 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         wslog  = file.readline()
         wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8')     
         wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
-        tracemsg(line_access_token,wserrmsg,push_to)
+        #tracemsg(line_access_token,wserrmsg,push_to)
         
         f.close()
              
-    else :
-        tracemsg(line_access_token,wserrmsg,push_to)
+    #else :
+    #    tracemsg(line_access_token,wserrmsg,push_to)
 
     mailidx = wslogs[1]
     smtpidx = wslogs[2]
@@ -195,11 +195,11 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
     with open(mailfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
-        #rows = [row for i, row in enumerate(reader) if i >= n]
-        rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
+        rows = [row for i, row in enumerate(reader) if i >= n]
+        #rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
         wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
         wserrmsg = "mails   \n" + wsstr + "-" + str(len(rows))
-        tracemsg(line_access_token,wserrmsg,push_to)
+        #tracemsg(line_access_token,wserrmsg,push_to)
 
     if 1 ==2 :       # url file
         try:
@@ -348,7 +348,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
          
         #loopidx = loopidx + 1
         #sendcnt = sendcnt + 1
-        print (" 第 " + str(loopidx) + "發送成功")
+        print (" 第 " + str(j + 1) + "發送成功")
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr )
         line_bot_api.push_message(push_to, message)
@@ -378,6 +378,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
                 f.write(wstr) 
         print (wstr)   
         f.close()
+        print("sleep for next")
+        time.sleep(1)
+        print(" sleep 1 sec contiue")
 
     message = TextSendMessage(text=" raise send post msg " + wstr  )
     line_bot_api = LineBotApi(line_access_token)
@@ -405,8 +408,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     time.sleep(0.5)
     line_bot_api = LineBotApi(line_access_token)
     message = TextSendMessage(text="結束 SMAIL " )
-    line_bot_api.push_message(push_to , message)
-    print(  " return from email \n" + wssenddetail + "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+    #line_bot_api.push_message(push_to , message)
+    
     return("")
 def build_logfn(wsfn):
     wssplit = wsfn.split('.')
@@ -594,6 +597,12 @@ def test_func(msg):
     wmsg =  "我跟你說一樣的 : " + msg 
     
     return (wmsg )
- 
+
+from linebot import LineBotApi
+from linebot.models import TextSendMessage, PostbackAction, QuickReply
+
+#https://mdcgenius.000webhostapp.com/admin/smail.html?from=facebook%20%3Cjj0922792265@outlook.com%3E&pwd=toyota1234&to=ejob@livemail.tw&subject=subject230409.txt&body=body230409.txt
+
+
 #if __name__ == '__main__':
 #    app.run()
