@@ -11,6 +11,7 @@ import smtplib
 import time
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import requests
 
 # LINT BOT API
 from linebot import LineBotApi
