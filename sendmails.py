@@ -20,7 +20,7 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 from flask import Flask, request, abort
 # LINEＢＯＴ　ＡＰＩ
-import requests
+ 
 from bs4 import BeautifulSoup
 
  
