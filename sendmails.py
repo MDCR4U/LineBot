@@ -346,7 +346,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             #print("Exception Value:", exc_value)
             #print("Traceback Object:", exc_traceback)
             print("第 " + str( seq  + 1) + " 封郵件發送失敗 ：" +  smtp_username )
-            wserrmsg = "第 " +  str(seq + 1) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
+            wserrmsg = "第 " +  str(counter) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             tracemsg(line_access_token,wserrmsg,push_to)
             wserr = 'Y'
             
@@ -354,7 +354,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #loopidx = loopidx + 1
         sendcnt = sendcnt + 1
         if wserr == 'N':
-            print (" 第 " + str(j + 1) + "發送成功")
+            print (" 第 " + str(counter) + "發送成功")
             line_bot_api = LineBotApi(line_access_token)
             message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt))
             line_bot_api.push_message(push_to, message)
@@ -394,7 +394,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         f.close()
         print("sleep for next")
         time.sleep(0.5)
-        print(" sleep 1 sec contiue")
+        print(" sleep 0.5 sec contiue")
 
     message = TextSendMessage(text=" raise send post msg " + wstr  )
     line_bot_api = LineBotApi(line_access_token)
