@@ -349,11 +349,11 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             
          
         #loopidx = loopidx + 1
-        #sendcnt = sendcnt + 1
+        sendcnt = sendcnt + 1
         if wserr == 'N':
             print (" 第 " + str(j + 1) + "發送成功")
             line_bot_api = LineBotApi(line_access_token)
-            message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr )
+            message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt))
             line_bot_api.push_message(push_to, message)
         else:
             line_bot_api = LineBotApi(line_access_token)
@@ -390,7 +390,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         print (wstr)   
         f.close()
         print("sleep for next")
-        time.sleep(1)
+        time.sleep(0.5)
         print(" sleep 1 sec contiue")
 
     message = TextSendMessage(text=" raise send post msg " + wstr  )
