@@ -148,19 +148,19 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         tracemsg(line_access_token," 等候 環境建立" ,push_to)
         url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
         
-        #tracemsg(line_access_token," copy from url " + url ,push_to)
+        tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url ,  smtpfn )
         
         url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
-        #tracemsg(line_access_token," copy from url " + url ,push_to)
+        tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url , mailfn )
         
         url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
-        #tracemsg(line_access_token," copy from url " + url ,push_to)
+        tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url , bodyfn )
         
         url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
-        #tracemsg(line_access_token," copy from url " + url ,push_to)
+        tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url , subjectfn )
      
 
