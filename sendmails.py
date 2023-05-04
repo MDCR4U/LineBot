@@ -379,14 +379,15 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         print(wserr)
 
         line_bot_api = LineBotApi(line_access_token)
-        if wserr == 'Y':
-            
-            message = TextSendMessage(text= "continue " )
-            line_bot_api.push_message(push_to, message)
+        #if wserr == 'Y':
+        ##    
+        #    message = TextSendMessage(text= "continue " )
+        #    line_bot_api.push_message(push_to, message)
 
-            message = TextSendMessage(text= "trace message" )
-            line_bot_api.push_message(push_to, message)
-         
+        message = TextSendMessage(text= "trace message" )
+        line_bot_api.push_message(push_to, message)
+
+        print("sleep佛如nextprocess")
         message = TextSendMessage(text= str(counter) )
         line_bot_api.push_message(push_to, message)            
         print(" sleep 0.5 sec contiue")
