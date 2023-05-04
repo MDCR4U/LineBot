@@ -72,7 +72,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 # 取得發送郵件  環境
     mailconfig= "/mailconfig.json"
     url = wsftpflr + userFolder + mailconfig #http://www.abc.com/cust.json"
-    tracemsg(line_access_token,url,push_to)
+    #tracemsg(line_access_token,url,push_to)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
