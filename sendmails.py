@@ -149,19 +149,19 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
         
         tracemsg(line_access_token," copy from url " + url ,push_to)
-        copy_to_local(url ,  smtpfn )
+        copy_to_local(url ,  smtpfn,line_access_token,push_to  )
         
         url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
         tracemsg(line_access_token," copy from url " + url ,push_to)
-        copy_to_local(url , mailfn )
+        copy_to_local(url , mailfn,line_access_token,push_to )
         
         url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
         tracemsg(line_access_token," copy from url " + url ,push_to)
-        copy_to_local(url , bodyfn )
+        copy_to_local(url , bodyfn,line_access_token,push_to)
         
         url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
         tracemsg(line_access_token," copy from url " + url ,push_to)
-        copy_to_local(url , subjectfn )
+        copy_to_local(url , subjectfn ,line_access_token,push_to)
      
 
 
@@ -412,14 +412,14 @@ def build_logfn(wsfn):
     wssplit = wsfn.split('.')
     return wssplit[0]
 
-def copy_to_local(url , filename):
-    tracemsg ("copy to local " + url  + " " + filename)
+def copy_to_local(url , filename,token,to):
+    tracemsg (token,"copy to local " + url  + " " + filename,to)
     try:
         urllib.request.urlretrieve(url, filename)
-        tracemsg("download " + url   + " to " + filename )
+        tracemsg(token,"download " + url   + " to " + filename ,to )
         #print("文件已成功复制到本地")
     except urllib.error.URLError as e:
-        tracemsg("download " + url   + " fail  " + e )
+        tracemsg(token,"download " + url   + " fail  " + e ,to )
         print("下载文件时出错:", e)
 
 
