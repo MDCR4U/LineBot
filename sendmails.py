@@ -594,21 +594,10 @@ def tracemsg(line_access_token,msg,to ):
     line_bot_api.push_message(to , message)
 
 
-根据你提供的代码，有几个问题需要注意：
-
-在 send_heartbeat1 函数中，你发送了两条消息给用户。第一条消息是 "REQUEST GET"，这一步是正常的，可以通过 line_bot_api.push_message(to, message) 将消息推送给用户。但是在第二个消息中，你尝试将请求的响应作为消息内容发送给用户，这可能会导致问题。因为响应是一个对象，不能直接作为消息内容发送。你可以提取响应中的有用信息，如文本或其他字段，并将其作为消息内容发送给用户。
-
-在发送心跳请求之前，你创建了 line_bot_api 的实例，但在发送消息时又创建了一个新的 line_bot_api 实例。这可能导致代码逻辑混乱和不必要的重复。建议只创建一个 line_bot_api 实例，并在需要时重复使用该实例。
-
-在发送心跳请求时，你使用了 requests.get() 方法发送了一个 GET 请求。但是你需要确保你的应用程序的 URL 正确，而不是 'https://mdcbot9.onrender.com/heartbeat/' 这个示例 URL。请将其替换为你应用程序的实际 URL。
-
-以下是一个修改后的代码示例：
-
-python
-Copy code
-from linebot import LineBotApi
-from linebot.models import TextSendMessage
-import requests
+ 
+#
+##from linebot.models import TextSendMessage
+#import requests
 
 def send_heartbeat1(line_access_token, to):
     # 发送心跳请求
