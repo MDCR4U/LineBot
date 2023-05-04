@@ -32,7 +32,7 @@ from flask import Flask
  
 def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     print(" aaaa 開始發送信件 " + wmsg )
-    userFolder = 'admin'
+    #userFolder = 'admin'
     smtpfn =""
     mailfn = ""
     subjectfn =""
@@ -65,13 +65,13 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         return("發送信件格式 錯誤\n正確格式==>/SMAIL:nnnn\n 結束作業 :*" + wstarget +"*")   
      
     
-    #wssts = check_line_id(wsftpflr,lineid)
-    #if   wssts == ''  :
-    #    return ('使用者 ' + lineid + ' 發送信件功能未啟動')
+    wssts = check_line_id(wsftpflr,lineid)
+    if   wssts == ''  :
+        return ('使用者 ' + lineid + ' 發送信件功能未啟動')
      
 # 取得發送郵件  環境
     mailconfig= "mailconfig.json"
-    url = wsftpflr + "admin/" + mailconfig #http://www.abc.com/cust.json"
+    url = wsftpflr + userFolder + mailconfig #http://www.abc.com/cust.json"
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)

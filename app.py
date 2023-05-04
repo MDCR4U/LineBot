@@ -122,7 +122,7 @@ handler = WebhookHandler(line_channel_secret)
 @app.route("/rich4u", methods=['POST'])
 def callback():
 
-    print(" 0000 - 開始 call back 處理")
+    # print(" 0000 - 開始 call back 處理")
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     # get request body as text
@@ -130,7 +130,7 @@ def callback():
     app.logger.info("Request body: " + body)
   
     try:
-        print(" handle webhook body")
+        #print(" handle webhook body")
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
@@ -143,7 +143,7 @@ def callback():
 def handle_message(event):
 
 
-    print("  0010 - 開始 處理 handle message entry")
+    #print("  0010 - 開始 處理 handle message entry")
     user_id = ""
     group_id = ""
     usr =event.source.user_id
@@ -156,8 +156,8 @@ def handle_message(event):
 
     ftpurl = get_ftpurl()
 
-    userFolder = check_line_id(ftpurl ,line_user_id)
-    print("userFolder " + userFolder)
+    #userFolder = check_line_id(ftpurl ,line_user_id)
+    #print("userFolder " + userFolder)
     msg = event.message.text
 
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
@@ -246,18 +246,26 @@ def handle_message(event):
         if userFolder == '' :
             message = TextSendMessage(text= "找不到 發送信件的授權資料，請記住您的代碼 " + usr +"\n與 系統管理員聯絡申請授權 " )
             line_bot_api.reply_message(event.reply_token, message)              
+            return()
+        
         from datetime import datetime
         now = datetime.now() # current date and time
         #增加 user folder
-        sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
-        wshow = sendlog
-        time.sleep(0.5)
-        sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
-        wshow = wshow + "\n" + sendlog
-        time.sleep(0.5)
-        sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
-        wshow = wshow + "\n" + sendlog
-        time.sleep(0.5)        
+        mailconfig= "mailconfig.json"
+        url = userFolder + userFolder + mailconfig #http://www.abc.com/cust.json"
+        response = urllib.request.urlopen(url)
+        data = response.read().decode("utf-8")
+        js_dta = json.loads(data)
+        batch =js_dta["batch"] 
+
+        j = 1
+        while j <= int(batch) :
+            sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
+            wshow = wshow + "\n" + sendlog
+            time.sleep(0.5)
+            j = j + 1
+
+         
         print("send mail complete #############################################")
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="task complete :\n"+ wshow )
