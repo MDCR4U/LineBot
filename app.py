@@ -156,8 +156,8 @@ def handle_message(event):
 
     ftpurl = get_ftpurl()
 
-    #userFolder = check_line_id(ftpurl ,line_user_id)
-    #print("userFolder " + userFolder)
+    userFolder = check_line_id(ftpurl ,line_user_id)
+    print("userFolder " + userFolder)
     msg = event.message.text
 
     #@#SETUP#mdcgrniu           https://mdcgenius.000webhostapp.com/
@@ -252,7 +252,8 @@ def handle_message(event):
         now = datetime.now() # current date and time
         #增加 user folder
         mailconfig= "mailconfig.json"
-        url = userFolder + userFolder + mailconfig #http://www.abc.com/cust.json"
+        wsftpflr =  os.environ.get('linebot_ftpurl')
+        url = wsftpflr + userFolder + mailconfig #http://www.abc.com/cust.json"
         response = urllib.request.urlopen(url)
         data = response.read().decode("utf-8")
         js_dta = json.loads(data)
