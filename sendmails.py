@@ -457,9 +457,11 @@ def copy_to_local(url , filename):
     print ("copy to local " + url  + " " + filename)
     try:
         urllib.request.urlretrieve(url, filename)
-        print("文件已成功复制到本地")
+        #print("文件已成功复制到本地")
     except urllib.error.URLError as e:
         print("下载文件时出错:", e)
+
+
     print("download " + url   + " to " + filename )
 
 def loadfile(lineid,msg,userFolder ):
@@ -600,6 +602,9 @@ def tracemsg(line_access_token,msg,to ):
 #import requests
 
 def send_heartbeat1(line_access_token, to):
+
+    return()
+
     # 发送心跳请求
     line_bot_api = LineBotApi(line_access_token)
     message = TextSendMessage(text="REQUEST GET")
@@ -625,7 +630,7 @@ def send_heartbeat1(line_access_token, to):
         print('Failed to send heartbeat')    
 def send_heartbeat():
     # 发送心跳请求
-  
+    return(' ')
 
     response = requests.get('https://mdcbot9.onrender.com/heartbeat')  # 替换为你的应用程序的 URL
    
