@@ -266,7 +266,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wsubject  = file.readline()
     subject = wsubject #.decode('utf-8') 
     file.close()
-
+    tracemsg(line_access_token,subject ,push_to)
     if 1 == 2:    #ｕｒｌ　ｆｉｌｅ
         try:
             file = urllib.request.urlopen(url)
@@ -327,11 +327,11 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         seq = j
         wsmessage = ''
         try:
-     
+            tracemsg(line_access_token,"server " ,push_to)
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
             wk_addr="$$$$$"
- 
+            tracemsg(line_access_token,"login " ,push_to)
             server.login(smtp_username,       smtp_password)
             time.sleep(0.5)
 
@@ -405,7 +405,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #line_bot_api = LineBotApi(line_access_token)
     #message = TextSendMessage(text="結束 SMAIL " )
     #line_bot_api.push_message(push_to , message)
-    
+    tracemsg(line_access_token,wsmessage ,push_to)
     return(wsmessage) 
 
 
