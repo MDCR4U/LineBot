@@ -70,8 +70,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         return ('使用者 ' + lineid + ' 發送信件功能未啟動')
      
 # 取得發送郵件  環境
-    mailconfig= "mailconfig.json"
+    mailconfig= "/mailconfig.json"
     url = wsftpflr + userFolder + mailconfig #http://www.abc.com/cust.json"
+    tracemsg(line_access_token,url,push_to)
     response = urllib.request.urlopen(url)
     data = response.read().decode("utf-8")
     js_dta = json.loads(data)
