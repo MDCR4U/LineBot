@@ -351,7 +351,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #loopidx = loopidx + 1
         sendcnt = sendcnt + 1
     #    if wserr == 'N':
-         print (" 第 " + str(counter) + "發送成功")
+        print (" 第 " + str(counter) + "發送成功")
     #        line_bot_api = LineBotApi(line_access_token)
     #        message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt))
         wsmessage =  "發送   :" +  str(counter) + "封 信件發送"  + " ==> " +  wsemail 
