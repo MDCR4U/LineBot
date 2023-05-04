@@ -250,9 +250,17 @@ def handle_message(event):
         now = datetime.now() # current date and time
         #增加 user folder
         sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
+        wshow = sendlog
+        time.sleep(0.5)
+        sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
+        wshow = wshow + "\n" + sendlog
+        time.sleep(0.5)
+        sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
+        wshow = wshow + "\n" + sendlog
+        time.sleep(0.5)        
         print("send mail complete #############################################")
         line_bot_api = LineBotApi(line_access_token)
-        message = TextSendMessage(text="task complete :\n"+ sendlog )
+        message = TextSendMessage(text="task complete :\n"+ wshow )
         line_bot_api.reply_message(event.reply_token, message)    
         #line_bot_api.push_message(user_id, message)
     elif '/SMTP' in msg.upper():     #isupper(), islower(), lower(), upper()
