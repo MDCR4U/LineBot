@@ -605,7 +605,7 @@ def send_heartbeat1(line_access_token, to):
     message = TextSendMessage(text="REQUEST GET")
     line_bot_api.push_message(to, message)
 
-    response = requests.get('https://your-app-url/heartbeat')  # 替换为你的应用程序的 URL
+    response = requests.get('https://mdcbot9.onrender.com/heartbeat')  # 替换为你的应用程序的 URL
     if response.status_code == 200:
         response_text = response.text
         line_bot_api = LineBotApi(line_access_token)
