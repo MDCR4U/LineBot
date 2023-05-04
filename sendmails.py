@@ -50,14 +50,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         push_to = group_id 
     else :
         push_to = user_id    
-    line_bot_api = LineBotApi(line_access_token)
-    message = TextSendMessage(text= "send_heartbeat")
-    line_bot_api.push_message(push_to, message)
+ 
 
-    send_heartbeat1(line_access_token,push_to)
-    line_bot_api = LineBotApi(line_access_token)
-    message = TextSendMessage(text= "send_heartbeat complete")
-    line_bot_api.push_message(push_to, message)
+ 
 
  # 發送比數
     wsmsg =  wmsg.split('#')   # msg = '/smail#90#'
@@ -113,8 +108,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wslog  = file.readline()
     wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8') 
    # wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
-    # wserrmsg =  wslog   + "- sendmail.log " + wslogs[0] + ' ' + mailfn 
-    #tracemsg(line_access_token,wserrmsg,push_to)
+ 
    
     if wslogs[0] != mailfn  :
         wslogs[1] = mailidx
@@ -122,7 +116,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         wslogs[3] = '0'
         wstr = mailfn + "," + mailidx + "," + smtpidx + "," + '0'
         isnew = 'Y'
-        #tracemsg(line_access_token,"writ new sendmail.log ",push_to)
+        
         with open("sendmail.log", "w", encoding="utf-8") as f:            
             f.write(wstr) 
             f.close()
@@ -139,9 +133,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     sendcnt = int(wslogs[3]) + 1
     file.close()
 
-#  @@@@@@@@   mailfn + "_log"   123,11   123 :mailidx   11:smtpidx
-#  檢查  local mail.csv 
-#     如如果 不存在 copy url file 
+ 
 
     #https://github.com/MDCR4U/LineBot/blob/main/mail.csv
     
@@ -205,8 +197,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #rows = [row for i, row in enumerate(reader) if i >= n]
         rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
         #wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
-        #wserrmsg = "mails   \n" + wsstr + "-" + str(len(rows))
-        #tracemsg(line_access_token,wserrmsg,push_to)
+ 
 
     if 1 ==2 :       # url file
         try:
@@ -333,7 +324,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             time.sleep(0.5)
 
             wk_addr = to_addr 
-            #tracemsg(line_access_token,"server.sendmail " ,user_id)    
+            tracemsg(line_access_token,"server.sendmail " ,user_id)    
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
             server.quit()
             wssendcounter = wssendcounter + 1
