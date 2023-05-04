@@ -147,10 +147,12 @@ def handle_message(event):
     user_id = ""
     group_id = ""
     usr =event.source.user_id
+    wsid = usr 
     user_id = event.source.user_id
     user_type = event.source.type
     if user_type != "user" :
         group_id =  event.source.group_id
+        wsid = group_id
     
     line_user_id = usr
 
@@ -254,6 +256,7 @@ def handle_message(event):
         mailconfig= "mailconfig.json"
         wsftpflr =  os.environ.get('linebot_ftpurl')
         url = wsftpflr + userFolder + mailconfig #http://www.abc.com/cust.json"
+        tracemsg(line_access_token,url,wsid)
         response = urllib.request.urlopen(url)
         data = response.read().decode("utf-8")
         js_dta = json.loads(data)
