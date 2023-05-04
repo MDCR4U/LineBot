@@ -150,16 +150,18 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         tracemsg(line_access_token," copy from url ",push_to)
         url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
         copy_to_local(url ,  smtpfn )
-
+        send_heartbeat()
         url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
         copy_to_local(url , mailfn )
-
+        send_heartbeat()
         url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
         copy_to_local(url , bodyfn )
-        
+        send_heartbeat()
         url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
         copy_to_local(url , subjectfn )
- 
+        send_heartbeat()
+
+        
     with open( smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         smtp_list = [row for row in reader]        
