@@ -253,7 +253,7 @@ def handle_message(event):
         from datetime import datetime
         now = datetime.now() # current date and time
         #增加 user folder
-        mailconfig= "mailconfig.json"
+        mailconfig= "/mailconfig.json"
         wsftpflr =  os.environ.get('linebot_ftpurl')
         url = wsftpflr + userFolder + mailconfig #http://www.abc.com/cust.json"
         tracemsg(line_access_token,url,wsid)
