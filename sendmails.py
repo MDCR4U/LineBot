@@ -50,8 +50,14 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         push_to = group_id 
     else :
         push_to = user_id    
+    line_bot_api = LineBotApi(line_access_token)
+    message = TextSendMessage(text= "send_heartbeat")
+    line_bot_api.push_message(push_to, message)
+    send_heartbeat()
+    line_bot_api = LineBotApi(line_access_token)
+    message = TextSendMessage(text= "send_heartbeat complete")
+    line_bot_api.push_message(push_to, message)
 
-    
  # 發送比數
     wsmsg =  wmsg.split('#')   # msg = '/smail#90#'
     wstarget = wsmsg[1]
@@ -161,7 +167,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         copy_to_local(url , subjectfn )
         send_heartbeat()
 
-        
+
     with open( smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         smtp_list = [row for row in reader]        
