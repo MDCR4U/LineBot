@@ -421,15 +421,15 @@ def build_logfn(wsfn):
     return wssplit[0]
 
 def copy_to_local(url , filename):
-    print ("copy to local " + url  + " " + filename)
-    try:
+    tracemsg ("copy to local " + url  + " " + filename)
+    try
         urllib.request.urlretrieve(url, filename)
         #print("文件已成功复制到本地")
     except urllib.error.URLError as e:
         print("下载文件时出错:", e)
 
 
-    print("download " + url   + " to " + filename )
+    tracemsg("download " + url   + " to " + filename )
 
 def loadfile(lineid,msg,userFolder ):
     
@@ -511,10 +511,10 @@ def file_exsit(filename):
     # 檢查文件是否存在
     print ('check file ' + filename)
     if os.path.exists(filename):
-        print(f'File {filename} exists')
+        #print(f'File {filename} exists')
         return  ''
     else:
-        print(f'File {filename} does not exist')
+        #print(f'File {filename} does not exist')
         wsreturn = 'File  : ' + filename + ' does not exist'
         return 'N' #wsreturn 
 def initcounter(lineid,msg,userFolder ):
