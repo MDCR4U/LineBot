@@ -168,8 +168,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     with open( smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         smtp_list = [row for row in reader]        
-    #wsstr = ' '.join (str(e) for e in smtp_list)
-    #wserrmsg = "smtp list   \n" + wsstr
+    wsstr = ' '.join (str(e) for e in smtp_list)
+    wserrmsg = "smtp list   \n" + wsstr
+    tracemsg(line_access_token,wserrmsg ,push_to)
     
     # url file
     if 1 == 2 :                # url file
@@ -204,8 +205,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         reader = csv.reader(f)
         #rows = [row for i, row in enumerate(reader) if i >= n]
         rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
-        #wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
- 
+        wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
+        tracemsg(line_access_token,wsstr ,push_to)
 
     if 1 ==2 :       # url file
         try:
@@ -335,7 +336,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             time.sleep(0.5)
 
             wk_addr = to_addr 
-            #tracemsg(line_access_token,"server.sendmail " ,user_id)    
+            tracemsg(line_access_token,"server.sendmail " ,user_id)    
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
             server.quit()
             wssendcounter = wssendcounter + 1
