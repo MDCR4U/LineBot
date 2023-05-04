@@ -427,7 +427,7 @@ def build_logfn(wsfn):
     return wssplit[0]
 
 def copy_to_local(url , filename):
-    tracemsg ("copy to local " + url  + " " + filename)
+    #tracemsg ("copy to local " + url  + " " + filename)
     try:
         urllib.request.urlretrieve(url, filename)
         #print("文件已成功复制到本地")
@@ -435,7 +435,7 @@ def copy_to_local(url , filename):
         print("下载文件时出错:", e)
 
 
-    tracemsg("download " + url   + " to " + filename )
+    #tracemsg("download " + url   + " to " + filename )
 
 def loadfile(lineid,msg,userFolder ):
     
