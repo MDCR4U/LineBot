@@ -53,7 +53,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     line_bot_api = LineBotApi(line_access_token)
     message = TextSendMessage(text= "send_heartbeat")
     line_bot_api.push_message(push_to, message)
-    send_heartbeat()
+
+    send_heartbeat1(line_access_token,push_to)
     line_bot_api = LineBotApi(line_access_token)
     message = TextSendMessage(text= "send_heartbeat complete")
     line_bot_api.push_message(push_to, message)
@@ -591,10 +592,30 @@ def tracemsg(line_access_token,msg,to ):
     line_bot_api = LineBotApi(line_access_token)
     message = TextSendMessage(text=msg )
     line_bot_api.push_message(to , message)
+def send_heartbeat1(line_access_token,to):
+    # 发送心跳请求
+    line_bot_api = LineBotApi(line_access_token)
+    message = TextSendMessage(text= "request get https://mdcbot9.onrender.com/heartbeat")  
+    line_bot_api = LineBotApi(line_access_token)
+    line_bot_api.push_message(to, message)
+
+    response = requests.get('https://mdcbot9.onrender.com/heartbeat')  # 替换为你的应用程序的 URL
+    line_bot_api = LineBotApi(line_access_token)
+    message = TextSendMessage(text= response)
+    line_bot_api.push_message(to, message)
+
+    # 检查响应状态码
+    if response.status_code == 200:
+        print('Heartbeat sent successfully')
+    else:
+        print('Failed to send heartbeat')    
 def send_heartbeat():
     # 发送心跳请求
+  
+
     response = requests.get('https://mdcbot9.onrender.com/heartbeat')  # 替换为你的应用程序的 URL
-    
+   
+
     # 检查响应状态码
     if response.status_code == 200:
         print('Heartbeat sent successfully')
