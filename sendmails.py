@@ -348,23 +348,23 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
          
         #loopidx = loopidx + 1
         sendcnt = sendcnt + 1
-        if wserr == 'N':
-            print (" 第 " + str(counter) + "發送成功")
-            line_bot_api = LineBotApi(line_access_token)
-            message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt))
-            wsmessage =  "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt)
-            #line_bot_api.push_message(push_to, message)
-        else:
-            line_bot_api = LineBotApi(line_access_token)
-            message = TextSendMessage(text= "continue 發送   :")
+    #    if wserr == 'N':
+    #        print (" 第 " + str(counter) + "發送成功")
+    #        line_bot_api = LineBotApi(line_access_token)
+    #        message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt))
+    #        wsmessage =  "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt)
+    #        #line_bot_api.push_message(push_to, message)
+    #    else:
+    #        line_bot_api = LineBotApi(line_access_token)
+    #        message = TextSendMessage(text= "continue 發送   :")
             #line_bot_api.push_message(push_to, message)            
             
-        if sendcnt >= wspush :
-                line_bot_api = LineBotApi(line_access_token)
-                message = TextSendMessage(text="累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送" )
-                wsmessage = wsmessage + "\n"  + "累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送"
+    #    if sendcnt >= wspush :
+        line_bot_api = LineBotApi(line_access_token)
+        message = TextSendMessage(text="累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送" )
+        wsmessage = wsmessage + "\n"  + "累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送"
                 #line_bot_api.push_message(push_to, message)
-                sendcnt = 0
+    #            sendcnt = 0
          
         if counter   >= targetno    :
             print(f"{targetno} emails complete " + push_to)  
@@ -377,7 +377,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #    return(wsmessage) 
        
 
-        line_bot_api = LineBotApi(line_access_token)
       
          
         counter = counter +1
