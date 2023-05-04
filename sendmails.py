@@ -144,6 +144,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     if isnew == 'Y' :
         
         url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
+        
         tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url ,  smtpfn )
         
