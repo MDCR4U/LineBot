@@ -112,8 +112,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     file = open('sendmail.log','r',encoding="utf-8")
     wslog  = file.readline()
     wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8') 
-    wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
-    wserrmsg =  wslog   + "- sendmail.log " + wslogs[0] + ' ' + mailfn 
+   # wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
+    # wserrmsg =  wslog   + "- sendmail.log " + wslogs[0] + ' ' + mailfn 
     #tracemsg(line_access_token,wserrmsg,push_to)
    
     if wslogs[0] != mailfn  :
@@ -130,17 +130,13 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         wslog  = file.readline()
         wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8')     
         wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
-        #tracemsg(line_access_token,wserrmsg,push_to)
+        tracemsg(line_access_token,wserrmsg,push_to)
         
         f.close()
              
-    #else :
-    #    tracemsg(line_access_token,wserrmsg,push_to)
-
     mailidx = wslogs[1]
     smtpidx = wslogs[2]
     sendcnt = int(wslogs[3]) + 1
-    #return()
     file.close()
 
 #  @@@@@@@@   mailfn + "_log"   123,11   123 :mailidx   11:smtpidx
@@ -157,24 +153,23 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         tracemsg(line_access_token," copy from url ",push_to)
         url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
         copy_to_local(url ,  smtpfn )
-        send_heartbeat()
+        
         url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
         copy_to_local(url , mailfn )
-        send_heartbeat()
+        
         url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
         copy_to_local(url , bodyfn )
-        send_heartbeat()
+        
         url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
         copy_to_local(url , subjectfn )
-        send_heartbeat()
+     
 
 
     with open( smtpfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
         smtp_list = [row for row in reader]        
-    wsstr = ' '.join (str(e) for e in smtp_list)
-    wserrmsg = "smtp list   \n" + wsstr
-    #tracemsg(line_access_token,wserrmsg,push_to)
+    #wsstr = ' '.join (str(e) for e in smtp_list)
+    #wserrmsg = "smtp list   \n" + wsstr
     
     # url file
     if 1 == 2 :                # url file
@@ -207,10 +202,10 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
     with open(mailfn, "r", encoding="utf-8") as f:
         reader = csv.reader(f)
-        rows = [row for i, row in enumerate(reader) if i >= n]
-        #rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
-        wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
-        wserrmsg = "mails   \n" + wsstr + "-" + str(len(rows))
+        #rows = [row for i, row in enumerate(reader) if i >= n]
+        rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
+        #wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
+        #wserrmsg = "mails   \n" + wsstr + "-" + str(len(rows))
         #tracemsg(line_access_token,wserrmsg,push_to)
 
     if 1 ==2 :       # url file
@@ -248,9 +243,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             wsbody  = file.readline()
     file.close()
 
-    #wserrmsg = "body   \n" +  content 
-    #tracemsg(line_access_token,wserrmsg,push_to)
-
 
     if 1==2  :    #url file
         try:
@@ -270,16 +262,10 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 #getsubject 
 
      # 檢查 主旨
-    #url = url = wsftpflr + userFolder.strip('\n') +  '_subject.txt'
-
     file = open(subjectfn,'r',encoding="utf-8")
     wsubject  = file.readline()
     subject = wsubject #.decode('utf-8') 
     file.close()
-    wserrmsg = "subject  \n" +  subject  + wmsg
-    #tracemsg(line_access_token,wserrmsg,push_to)
-
-    #return 
 
     if 1 == 2:    #ｕｒｌ　ｆｉｌｅ
         try:
@@ -336,22 +322,20 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     # 發送郵件
         wserr = 'N'
         seq = j
-        send_heartbeat()
+    
         try:
             send_heartbeat()
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
             wk_addr="$$$$$"
-            send_heartbeat()
+ 
             server.login(smtp_username,       smtp_password)
             time.sleep(0.5)
 
             wk_addr = to_addr 
             #tracemsg(line_access_token,"server.sendmail " ,user_id)    
-            send_heartbeat() 
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
             server.quit()
-            send_heartbeat()
             wssendcounter = wssendcounter + 1
         #except Exception as e:
         except :
@@ -362,7 +346,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             print("第 " + str( seq  + 1) + " 封郵件發送失敗 ：" +  smtp_username )
             wserrmsg = "第 " +  str(counter) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
             tracemsg(line_access_token,wserrmsg,push_to)
-            wserr = 'Y'
             
          
         #loopidx = loopidx + 1
@@ -371,18 +354,18 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             print (" 第 " + str(counter) + "發送成功")
             line_bot_api = LineBotApi(line_access_token)
             message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt))
-            #line_bot_api.push_message(push_to, message)
+            line_bot_api.push_message(push_to, message)
         else:
             line_bot_api = LineBotApi(line_access_token)
             message = TextSendMessage(text= "continue 發送   :")
-            line_bot_api.push_message(push_to, message)            
+            #line_bot_api.push_message(push_to, message)            
             
         if sendcnt >= wspush :
                 line_bot_api = LineBotApi(line_access_token)
                 message = TextSendMessage(text="累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送" )
                 line_bot_api.push_message(push_to, message)
                 sendcnt = 0
-        send_heartbeat()
+         
         if counter   >= targetno    :
             print(f"{targetno} emails complete " + push_to)  
         #    wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
@@ -400,26 +383,18 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
         message = TextSendMessage(text= "trace message" )
         line_bot_api.push_message(push_to, message)
-        send_heartbeat()
+ 
         print("sleep佛如nextprocess")
-        message = TextSendMessage(text= str(counter) )
-        line_bot_api.push_message(push_to, message)            
-        print(" sleep 0.5 sec contiue")
         counter = counter +1
-        #sendcnt = sendcnt + 1
+  
         wstr = mailfn + "," + str(counter) + "," + str(smtp_idx) + "," + str(sendcnt) 
         with open("sendmail.log", "w", encoding="utf-8") as f:            
                 f.write(wstr) 
         print (wstr)   
         f.close()
-        print("sleep for next")
+  
         time.sleep(0.5)
-        line_bot_api = LineBotApi(line_access_token)
-        message = TextSendMessage(text= " sleep 0.5 sec contiue" )
-        #line_bot_api.push_message(push_to, message)
-        print(" sleep 0.5 sec contiue")
-        send_heartbeat()
-
+  
     message = TextSendMessage(text=" raise send post msg " + wstr  )
     line_bot_api = LineBotApi(line_access_token)
     line_bot_api.push_message(push_to, message)
