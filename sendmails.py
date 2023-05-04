@@ -32,6 +32,7 @@ from flask import Flask
  
 def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     print(" aaaa 開始發送信件 " + wmsg )
+    userFolder = 'admin'
     smtpfn =""
     mailfn = ""
     subjectfn =""
@@ -357,7 +358,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
 #        line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送" )
-        wsmessage = wsmessage + "\n"  + "累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送"
+        wsmessage = wsmessage + "\n"  + "      累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送"
                 #line_bot_api.push_message(push_to, message)
     #            sendcnt = 0
          
