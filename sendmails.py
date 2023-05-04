@@ -148,19 +148,19 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         tracemsg(line_access_token," 等候 環境建立" ,push_to)
         url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
         
-        tracemsg(line_access_token," copy from url " + url ,push_to)
+        #tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url ,  smtpfn,line_access_token,push_to  )
         
         url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
-        tracemsg(line_access_token," copy from url " + url ,push_to)
+        #tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url , mailfn,line_access_token,push_to )
         
         url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
-        tracemsg(line_access_token," copy from url " + url ,push_to)
+        #tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url , bodyfn,line_access_token,push_to)
         
         url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
-        tracemsg(line_access_token," copy from url " + url ,push_to)
+        #tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url , subjectfn ,line_access_token,push_to)
      
 
@@ -170,7 +170,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         smtp_list = [row for row in reader]        
     wsstr = ' '.join (str(e) for e in smtp_list)
     wserrmsg = "smtp list   \n" + wsstr
-    tracemsg(line_access_token,wserrmsg ,push_to)
+    #tracemsg(line_access_token,wserrmsg ,push_to)
     
     # url file
     if 1 == 2 :                # url file
@@ -206,7 +206,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #rows = [row for i, row in enumerate(reader) if i >= n]
         rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
         wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
-        tracemsg(line_access_token,wsstr ,push_to)
+        #tracemsg(line_access_token,wsstr ,push_to)
 
     if 1 ==2 :       # url file
         try:
@@ -266,7 +266,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wsubject  = file.readline()
     subject = wsubject #.decode('utf-8') 
     file.close()
-    tracemsg(line_access_token,subject ,push_to)
+    #tracemsg(line_access_token,subject ,push_to)
     if 1 == 2:    #ｕｒｌ　ｆｉｌｅ
         try:
             file = urllib.request.urlopen(url)
@@ -327,16 +327,16 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         seq = j
         wsmessage = ''
         try:
-            tracemsg(line_access_token,"server " ,push_to)
+            #tracemsg(line_access_token,"server " ,push_to)
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
             wk_addr="$$$$$"
-            tracemsg(line_access_token,"login " ,push_to)
+            #tracemsg(line_access_token,"login " ,push_to)
             server.login(smtp_username,       smtp_password)
             time.sleep(0.5)
 
             wk_addr = to_addr 
-            tracemsg(line_access_token,"server.sendmail " ,user_id)    
+            #tracemsg(line_access_token,"server.sendmail " ,user_id)    
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
             server.quit()
             wssendcounter = wssendcounter + 1
@@ -405,7 +405,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #line_bot_api = LineBotApi(line_access_token)
     #message = TextSendMessage(text="結束 SMAIL " )
     #line_bot_api.push_message(push_to , message)
-    tracemsg(line_access_token,wsmessage ,push_to)
+    #tracemsg(line_access_token,wsmessage ,push_to)
     return(wsmessage) 
 
 
@@ -414,10 +414,10 @@ def build_logfn(wsfn):
     return wssplit[0]
 
 def copy_to_local(url , filename,token,to):
-    tracemsg (token,"copy to local " + url  + " " + filename,to)
+    #tracemsg (token,"copy to local " + url  + " " + filename,to)
     try:
         urllib.request.urlretrieve(url, filename)
-        tracemsg(token,"download " + url   + " to " + filename ,to )
+        #tracemsg(token,"download " + url   + " to " + filename ,to )
         #print("文件已成功复制到本地")
     except urllib.error.URLError as e:
         tracemsg(token,"download " + url   + " fail  " + e ,to )
