@@ -327,17 +327,22 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     # 發送郵件
         wserr = 'N'
         seq = j
+        send_heartbeat()
         try:
+            send_heartbeat()
             server = smtplib.SMTP(smtp_server, smtp_port)
             server.starttls()
             wk_addr="$$$$$"
+            send_heartbeat()
             server.login(smtp_username,       smtp_password)
-            time.sleep(1)
+            time.sleep(0.5)
 
             wk_addr = to_addr 
-            #tracemsg(line_access_token,"server.sendmail " ,user_id)     
+            #tracemsg(line_access_token,"server.sendmail " ,user_id)    
+            send_heartbeat() 
             server.sendmail(smtp_username,  wk_addr  , message.as_string())
             server.quit()
+            send_heartbeat()
             wssendcounter = wssendcounter + 1
         #except Exception as e:
         except :
@@ -368,7 +373,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
                 message = TextSendMessage(text="累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送" )
                 line_bot_api.push_message(push_to, message)
                 sendcnt = 0
-     
+        send_heartbeat()
         if counter   >= targetno    :
             print(f"{targetno} emails complete " + push_to)  
         #    wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
@@ -386,7 +391,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
         message = TextSendMessage(text= "trace message" )
         line_bot_api.push_message(push_to, message)
-
+        send_heartbeat()
         print("sleep佛如nextprocess")
         message = TextSendMessage(text= str(counter) )
         line_bot_api.push_message(push_to, message)            
@@ -404,6 +409,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         message = TextSendMessage(text= " sleep 0.5 sec contiue" )
         #line_bot_api.push_message(push_to, message)
         print(" sleep 0.5 sec contiue")
+        send_heartbeat()
 
     message = TextSendMessage(text=" raise send post msg " + wstr  )
     line_bot_api = LineBotApi(line_access_token)
@@ -577,6 +583,15 @@ def tracemsg(line_access_token,msg,to ):
     line_bot_api = LineBotApi(line_access_token)
     message = TextSendMessage(text=msg )
     line_bot_api.push_message(to , message)
+def send_heartbeat():
+    # 发送心跳请求
+    response = requests.get('https://mdcbot9.onrender.com/heartbeat')  # 替换为你的应用程序的 URL
+    
+    # 检查响应状态码
+    if response.status_code == 200:
+        print('Heartbeat sent successfully')
+    else:
+        print('Failed to send heartbeat')
 
 def check_line_id(ftpurl ,lineid):
      
