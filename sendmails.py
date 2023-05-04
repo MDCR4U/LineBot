@@ -344,26 +344,18 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             #print("Exception Value:", exc_value)
             #print("Traceback Object:", exc_traceback)
             print("第 " + str( seq  + 1) + " 封郵件發送失敗 ：" +  smtp_username )
-            wserrmsg = "第 " +  str(counter) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
-            #tracemsg(line_access_token,wserrmsg,push_to)
-            return(wserrmsg)
+            wserr = 'Y'
             
          
         #loopidx = loopidx + 1
         sendcnt = sendcnt + 1
-    #    if wserr == 'N':
-        print (" 第 " + str(counter) + "發送成功")
-    #        line_bot_api = LineBotApi(line_access_token)
-    #        message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt))
-        wsmessage =  "發送   :" +  str(counter) + "封 信件發送"  + " ==> " +  wsemail 
-    #        #line_bot_api.push_message(push_to, message)
-    #    else:
-    #        line_bot_api = LineBotApi(line_access_token)
-    #        message = TextSendMessage(text= "continue 發送   :")
-            #line_bot_api.push_message(push_to, message)            
-            
-    #    if sendcnt >= wspush :
-        line_bot_api = LineBotApi(line_access_token)
+        if wserr == 'N':
+            print (" 第 " + str(counter) + "發送成功")
+            wsmessage =  "發送   :" +  str(counter) + "封 信件發送"  + " ==> " +  wsemail 
+        else:
+            wsmessage = "第 " +  str(counter) + " 信件發送失敗 " + "\n\n  信箱 " + smtp_username + "  可能暫時被封鎖 ，請使用 outlook.com 登入，並依照指示作解鎖\n"
+
+#        line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送" )
         wsmessage = wsmessage + "\n"  + "累計已完成   :" +  str(counter) + "-" + str(targetno) + " 封 信件發送"
                 #line_bot_api.push_message(push_to, message)
@@ -375,12 +367,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
             
             message = TextSendMessage(text="發送完成  累計發送   :" +  str(targetno)  + " 封信件" )
             wsmessage = wsmessage + "\n" + "發送完成  累計發送   :" +  str(targetno)  + " 封信件"
-            #line_bot_api = LineBotApi(line_access_token)
-            #line_bot_api.push_message(push_to, message)
-        #    return(wsmessage) 
-       
-
-      
          
         counter = counter +1
   
@@ -392,10 +378,6 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         f.close()
   
         time.sleep(0.5)
-  
-    #message = TextSendMessage(text=" raise send post msg " + wstr  )
-    ##line_bot_api = LineBotApi(line_access_token)
-    #line_bot_api.push_message(push_to, message)
     
     # 記錄已發送的郵件
     #    sent_list.append(f"{to_addr},{subject}")
