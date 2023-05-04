@@ -610,7 +610,7 @@ def send_heartbeat1(line_access_token, to):
     if response.status_code == 200:
         response_text = response.text
         line_bot_api = LineBotApi(line_access_token)
-        message = TextSendMessage(text=response_text)
+        message = TextSendMessage(text="heartbeat1 : " + response_text)
         line_bot_api.push_message(to, message)
     else:
         error_message = "Failed to send heartbeat"
