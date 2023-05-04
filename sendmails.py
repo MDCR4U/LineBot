@@ -384,7 +384,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         counter = counter +1
   
         wstr = mailfn + "," + str(counter) + "," + str(smtp_idx) + "," + str(sendcnt) 
-        wsmessage = wsmessage + "\n" + str(counter) + "," + str(smtp_idx) + "," + str(sendcnt) 
+        #wsmessage = wsmessage + "\n" + str(counter) + "," + str(smtp_idx) + "," + str(sendcnt) 
         with open("sendmail.log", "w", encoding="utf-8") as f:            
                 f.write(wstr) 
         print (wstr)   
