@@ -281,7 +281,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     #sendcnt = 0
     loopidx = 0 
     wsmail_cnt = len(rows)
-    
+    wsemail = ''
     for j, row in enumerate(rows):    #rows : mail.csv
          
         if smtp_idx >= len (smtp_list) :
@@ -292,6 +292,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         smtp_password = smtp_list[smtp_idx][1]
         
         to_addr = row[0]
+        wsemail = to_addr
+        wsemail[1:2] = 'xx'
 
         #cc_addrs = [x for x in row[1:batch_size+1] if x and "@" in x]
         #print(cc_addrs)
@@ -349,10 +351,10 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #loopidx = loopidx + 1
         sendcnt = sendcnt + 1
     #    if wserr == 'N':
-    #        print (" 第 " + str(counter) + "發送成功")
+         print (" 第 " + str(counter) + "發送成功")
     #        line_bot_api = LineBotApi(line_access_token)
     #        message = TextSendMessage(text= "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt))
-    #        wsmessage =  "發送   :" +  str(counter) + "封 信件發送"  + smtp_sender + " <" + smtp_username +">   ==> " +  to_addr + " " + str(wspush) + " " + str(sendcnt)
+        wsmessage =  "發送   :" +  str(counter) + "封 信件發送"  + " ==> " +  wsemail 
     #        #line_bot_api.push_message(push_to, message)
     #    else:
     #        line_bot_api = LineBotApi(line_access_token)
