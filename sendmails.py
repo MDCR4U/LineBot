@@ -285,6 +285,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     loopidx = 0 
     wsmail_cnt = len(rows)
     wsemail = ''
+    if counter   > targetno  :
+        return()
+    
     for j, row in enumerate(rows):    #rows : mail.csv
          
         if smtp_idx >= len (smtp_list) :
@@ -369,7 +372,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #    wssenddetail = wssenddetail + str(loopidx)  + ",  "   + " " + smtp_username + "=> " + to_addr   + "\n"
             
             message = TextSendMessage(text="發送完成  累計發送   :" +  str(targetno)  + " 封信件" )
-            wsmessage = wsmessage + "\n" + "發送完成  累計發送   :" +  str(targetno)  + " 封信件"
+            wsmessage = wsmessage + "\n\n" + "發送完成  累計發送   :" +  str(targetno)  + " 封信件"
          
         counter = counter +1
   

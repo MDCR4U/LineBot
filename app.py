@@ -273,7 +273,7 @@ def handle_message(event):
          
         print("send mail complete #############################################")
         line_bot_api = LineBotApi(line_access_token)
-        message = TextSendMessage(text="task complete :\n"+ wshow )
+        message = TextSendMessage(text="發送紀錄 :\n"+ wshow )
         line_bot_api.reply_message(event.reply_token, message)    
         #line_bot_api.push_message(user_id, message)
     elif '/SMTP' in msg.upper():     #isupper(), islower(), lower(), upper()
