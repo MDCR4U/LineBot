@@ -286,7 +286,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wsmail_cnt = len(rows)
     wsemail = ''
     if counter   > targetno  :
-        return()
+        return( "\n\n" + "發送完成  累計發送   :" +  str(targetno)  + " 封信件"  )
     
     for j, row in enumerate(rows):    #rows : mail.csv
          
@@ -363,7 +363,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
 
 #        line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="累計已完成:" +  str(counter) + "-" + str(targetno) + "封 發送" )
-        wsmessage = wsmessage + "\n"  + "    累計已完成 :" +  str(counter) + "-" + str(targetno) + " 封 發送"
+        wsmessage = wsmessage + "\n"  + "    累計已完成 :" +  str(counter) + "-" + str(targetno) + " 封 發送\n"
                 #line_bot_api.push_message(push_to, message)
     #            sendcnt = 0
          
