@@ -109,8 +109,8 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     file = open('sendmail.log','r',encoding="utf-8")
     wslog  = file.readline()
     wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8') 
-   # wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
- 
+    wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
+    tracemsg(line_access_token,wserrmsg,push_to)
    
     if wslogs[0] != mailfn  :
         wslogs[1] = mailidx
@@ -141,7 +141,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     
     smtp_server = "smtp.office365.com"
     smtp_port = 587
-
+    noMails = 0
     
     if isnew == 'Y' :
         
@@ -206,6 +206,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #rows = [row for i, row in enumerate(reader) if i >= n]
         rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
         wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
+        noMails = len(row)
         #tracemsg(line_access_token,wsstr ,push_to)
 
     if 1 ==2 :       # url file
@@ -287,6 +288,9 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wsemail = ''
     if counter   > targetno  :
         return( "\n\n" + "發送完成  累計發送   :" +  str(targetno)  + " 封信件"  )
+    
+    if noMails == 0  :
+        return( "\n\n" + "名單已全部發送完成 累計發送   :" +  str(targetno)  + " 封信件，\n 請從新上傳名單檔案"  )
     
     for j, row in enumerate(rows):    #rows : mail.csv
          
