@@ -206,7 +206,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         #rows = [row for i, row in enumerate(reader) if i >= n]
         rows = [row for i, row in enumerate(reader) if i == n]   # 只得取  第 n筆
         wsstr = ' '.join (str(e) for e in rows)  + '----' + str(counter)
-        noMails = len(row)
+        noMails = len(rows)
         tracemsg(line_access_token,str(noMails)  ,push_to)
         return ('')
 
