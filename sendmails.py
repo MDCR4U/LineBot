@@ -110,7 +110,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     wslog  = file.readline()
     wslogs = wslog.split(',') #subject = wsubject #.decode('utf-8') 
     wserrmsg =  ' '.join (str(e) for e in wslogs)  + " sendmail.log " + wslogs[0] + ' ' + mailfn 
-    tracemsg(line_access_token,wserrmsg,push_to)
+    
    
     if wslogs[0] != mailfn  :
         wslogs[1] = mailidx
@@ -118,7 +118,7 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
         wslogs[3] = '0'
         wstr = mailfn + "," + mailidx + "," + smtpidx + "," + '0'
         isnew = 'Y'
-        
+        tracemsg(line_access_token,wserrmsg,push_to)
         with open("sendmail.log", "w", encoding="utf-8") as f:            
             f.write(wstr) 
             f.close()

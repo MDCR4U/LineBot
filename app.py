@@ -269,13 +269,13 @@ def handle_message(event):
             wshow = wshow + sendlog + "\n" 
             time.sleep(0.5)
             j = j + 1
-
+        wshow = wshow + "\ｎ請稍後  繼續發送．．．．．"
          
-        print("send mail complete #############################################")
+         
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text="發送紀錄 :\n"+ wshow )
         line_bot_api.reply_message(event.reply_token, message)    
-        #line_bot_api.push_message(user_id, message)
+
     elif '/SMTP' in msg.upper():     #isupper(), islower(), lower(), upper()
         print (" CALL CHECK SMTP ")
         #if userFolder == '' :
@@ -342,13 +342,7 @@ def handle_message(event):
         message = TextSendMessage(text=" 您說 " + msg  )
         line_bot_api.reply_message(event.reply_token,  message )
         return('')
-    
-
-        print(reply_text)    
-        message = TextSendMessage(text= reply_text) # + "\您是說 : " + msg + "嗎? " )
-        print("message \n" + message.text)
-        line_bot_api.reply_message(event.reply_token,  message )
-
+  
     
      
     
