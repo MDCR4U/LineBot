@@ -146,18 +146,18 @@ def send_mail(lineid,wmsg,userFolder, user_id,group_id):
     
     if isnew == 'Y' :
         
-        tracemsg(line_access_token," 等候 環境建立" ,push_to)
+        #tracemsg(line_access_token," 等候 環境建立" ,push_to)
         url = wsftpflr + userFolder.strip('\n') + "/" + smtpfn   #"/smtp.csv"
         
-        tracemsg(line_access_token," copy from url*" + url + "*" ,push_to)
+        #tracemsg(line_access_token," copy from url*" + url + "*" ,push_to)
         copy_to_local(url ,  smtpfn,line_access_token,push_to  )
         
         url = wsftpflr + userFolder.strip('\n') +"/" + mailfn #'/mail.csv'
-        tracemsg(line_access_token," copy from url*" + url + "*" ,push_to)
+        #tracemsg(line_access_token," copy from url*" + url + "*" ,push_to)
         copy_to_local(url , mailfn,line_access_token,push_to )
         
         url = wsftpflr + userFolder.strip('\n') + "/" + bodyfn # '/body.txt'
-        tracemsg(line_access_token," copy from url " + url ,push_to)
+        #tracemsg(line_access_token," copy from url " + url ,push_to)
         copy_to_local(url , bodyfn,line_access_token,push_to)
         
         url = wsftpflr + userFolder.strip('\n') +  "/" + subjectfn #'/subject.txt'
