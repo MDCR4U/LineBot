@@ -99,7 +99,7 @@ ispostback = 'N'
 
 # 读取环境变量的值
 ftpurl = os.environ.get('linebot_ftpurl')
-
+print("ftpurl = " + ftpurl)
 
 # 确保当前目录下存在 "admin" 文件夹
 if not os.path.exists("admin"):
@@ -110,19 +110,22 @@ if not os.path.exists("admin"):
 # Channel Secret
 
 line_access_token = os.environ.get('line_Token')
+print("token " + line_access_token)
 line_channel_secret = os.environ.get('line_Channel_Secret')
+print(line_channel_secret)
+print ('87a7dbb8ab1d83d9ce6786ecdeaedf26')
 
 line_bot_api = LineBotApi(line_access_token)
-handler = WebhookHandler(line_channel_secret)
+handler = WebhookHandler('87a7dbb8ab1d83d9ce6786ecdeaedf26') #line_channel_secret)
 
-
+print("finished")
 
 
 # 監聽所有來自 /callback 的 Post Request
 @app.route("/rich4u", methods=['POST'])
 def callback():
 
-    # print(" 0000 - 開始 call back 處理")
+    print(" 0000 - 開始 call back 處理")
     # get X-Line-Signature header value
     signature = request.headers['X-Line-Signature']
     # get request body as text
@@ -130,11 +133,11 @@ def callback():
     app.logger.info("Request body: " + body)
   
     try:
-        #print(" handle webhook body")
+        print(" handle webhook body")
         handler.handle(body, signature)
     except InvalidSignatureError:
         abort(400)
-   #print("0000 - CALL BACK 處理結束 ")
+    print("0000 - CALL BACK 處理結束 ")
     return 'OK'  #ok(200)
 
 
@@ -143,7 +146,7 @@ def callback():
 def handle_message(event):
 
 
-    #print("  0010 - 開始 處理 handle message entry")
+    print("  0010 - 開始 處理 handle message entry")
     user_id = ""
     group_id = ""
     usr =event.source.user_id
@@ -244,6 +247,7 @@ def handle_message(event):
     #        print("Traceback Object:", exc_traceback)
     
     if '/SMAIL' in msg.upper():     #isupper(), islower(), lower(), upper()
+        #tracemsg(line_access_token,"start send mail",wsid)
         print (" CALL Send Mail")
         if userFolder == '' :
             message = TextSendMessage(text= "找不到 發送信件的授權資料，請記住您的代碼 " + usr +"\n與 系統管理員聯絡申請授權 " )
@@ -256,7 +260,7 @@ def handle_message(event):
         mailconfig= "/mailconfig.json"
         wsftpflr =  os.environ.get('linebot_ftpurl')
         url = wsftpflr + userFolder + mailconfig #http://www.abc.com/cust.json"
-        #tracemsg(line_access_token,url,wsid)
+        #tracemsg(line_access_token,url + "*" + userFolder + "*" ,wsid)
         response = urllib.request.urlopen(url)
         data = response.read().decode("utf-8")
         js_dta = json.loads(data)
@@ -265,11 +269,12 @@ def handle_message(event):
         j = 1
         wshow = ''
         while j <= int(batch) :
+            #tracemsg(line_access_token,url + "call send_mail" ,wsid)
             sendlog = send_mail(usr,msg,userFolder,user_id, group_id)
             wshow = wshow + sendlog + "\n" 
             time.sleep(0.5)
             j = j + 1
-        wshow = wshow + "\ｎ請稍後  繼續發送．．．．．"
+        wshow = wshow + "\n請稍後  繼續發送．．．．．"
          
          
         line_bot_api = LineBotApi(line_access_token)
@@ -334,9 +339,7 @@ def handle_message(event):
         #    reply_text = "您是在群組或聊天室中"
 
         #print(line_access_token)
-        channel_access_token = "gd2k8snxpn3PP+nC+spxDIgQF6ZTtjfS/vHmqOIEJ8W/B1bryahPh61EfFIepnHqfjTQ4zhc29120TvtHVjk4dMB5vkrJFtvcjO07389gomlkggI/rMJCoid9PCCr6O3v0dTY2R3n4FFA6IMr1D5twdB04t89/1O/w1cDnyilFU="
-      #  print("channel_access_token *" + channel_access_token + "*")
-       # print("   line_access_token *" + line_access_token + "*")
+         
 # 建立 LineBotApi 物件
         line_bot_api = LineBotApi(line_access_token)
         message = TextSendMessage(text=" 您說 " + msg  )
