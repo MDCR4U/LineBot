@@ -116,7 +116,7 @@ print(line_channel_secret)
 print ('87a7dbb8ab1d83d9ce6786ecdeaedf26')
 
 line_bot_api = LineBotApi(line_access_token)
-handler = WebhookHandler('87a7dbb8ab1d83d9ce6786ecdeaedf26') #line_channel_secret)
+handler = WebhookHandler(line_channel_secret)
 
 print("finished")
 
